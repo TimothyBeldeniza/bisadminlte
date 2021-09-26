@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="{{ asset('plugins/jqvmap/jqvmap.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  {{-- <link rel="stylesheet" href="dist/css/adminlte.min.css"> --}}
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
   <!-- Daterange picker -->
@@ -203,6 +203,16 @@
               <p>Barangay</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">
+              <i class="nav-icon fas fa-power-off"></i>
+              <p>Logout</p>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -264,7 +274,7 @@
 <!-- overlayScrollbars -->
 <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte.js"></script>
+{{-- <script src="dist/js/adminlte.js"></script> --}}
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('dist/js/demo.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
