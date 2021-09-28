@@ -10,7 +10,8 @@
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Add Officials</li>
+                <li class="breadcrumb-item"><a href="{{ route('officials.index') }}">Officials</a></li>
+                <li class="breadcrumb-item active">Add Official</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -20,15 +21,25 @@
     <div class="content">
         <div class="container-fluid">
             <div class="card card-info">
+                
                 <div class="card-header">
-                  <h3 class="card-title">Add Officials</h3>
+                <h3 class="card-title">Add Officials</h3>
                 </div>
                 <div class="card-body">
-                  {{-- <h4>With icons</h4> --}}
                     <form method="POST" action="{{ route('officials.store') }}" enctype="multipart/form-data">
                         @csrf
+
                         <div class="row">
-                           
+                            <div class="col">
+                                <label>Picture</label>
+                            </div>
+                            <div class="col">
+                                <label>Last Name</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                        
                             {{-- <label class="font-weight-bold">Image</label> --}}
                             
                             <div class="input-group col mb-3">
@@ -45,21 +56,31 @@
                                         </span>
                                 @enderror
                             </div>
-                   
-                      
+                
+                            
+
                             {{-- <label class="font-weight-bold">Last Name</label> --}}
                             <div class="input-group col mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                                 </div>
 
-                                <input type="text" class="form-control @error('image') is-invalid @enderror" name="lastName" required placeholder="Last Name">
+                                <input type="text" class="form-control @error('lastName') is-invalid @enderror" name="lastName" required placeholder="Last Name">
                                 
                                 @error('lastName')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <label>First Name</label>
+                            </div>
+                            <div class="col">
+                                <label>Middle Name</label>
                             </div>
                         </div>
 
@@ -71,7 +92,7 @@
                                     <span class="input-group-text"><i class="fas fa-user"></i></i></span>
                                 </div>
                                 
-                                <input type="text" class="form-control @error('image') is-invalid @enderror" name="firstName" required placeholder="First Name">
+                                <input type="text" class="form-control @error('firstName') is-invalid @enderror" name="firstName" required placeholder="First Name">
 
                                 @error('firstName')
                                         <span class="invalid-feedback" role="alert">
@@ -79,15 +100,15 @@
                                         </span>
                                 @enderror
                             </div>
-                   
-                      
+                
+                    
                             {{-- <label class="font-weight-bold">Middle Name</label> --}}
                             <div class="input-group col mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-user"></i></i></span>
                                 </div>
 
-                                <input type="text" class="form-control @error('image') is-invalid @enderror" placeholder="Middle Name">
+                                <input type="text" class="form-control @error('middleName') is-invalid @enderror" name="middleName"placeholder="Middle Name">
                                 
                                 @error('middleName')
                                     <span class="invalid-feedback" role="alert">
@@ -96,13 +117,17 @@
                                 @enderror
                             </div>
                         </div>
-                            
+                        <div class="row">
+                            <div class="col">
+                                <label for="position">Position</label>
+                            </div>
                         </div>
+                        <div class="row">
+                            <div class="input-group col mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></i></span>
+                                </div>
 
-                            <div class="col-md-4">
-                              <!-- select -->
-                              <div class="form-group">
-                                <label>Position</label>
                                 <select class="custom-select" name="position" id="position" required>
                                     <option value="" selected>--Choose Position--</option>
                                     <option @if($officials['cm'] == 1) return disabled @endif>Chairman</option>
@@ -111,22 +136,31 @@
                                     <option @if($officials['sec'] == 1) return disabled @endif>Secretary</option>
                                     <option @if($officials['tre'] == 1) return disabled @endif>Treasurer</option>
                                 </select>
-                              </div>
                             </div>
-                        
-                        
+
+                            <div class="input-group col mb-3">
+                                <div>
+                                    <button onclick="return confirm('Are your inputs correct?')" type="submit" class="btn btn-success fw-bold">
+                                        {{ __('Submit') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
 
                     </form>
+                
                 </div>
-                <!-- /.card-body -->
-              </div>
-              <!-- /.card -->
-        </div>
+                <!-- /.card-body -->    
+                
+            </div>
+        </div>  
     </div>
+    <!-- /.card -->
 
 
 
-    <div class="row justify-content-center">
+    {{-- <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="row">
                 <div class="col-lg-12 margin-tb">
@@ -229,5 +263,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </x-layout>
