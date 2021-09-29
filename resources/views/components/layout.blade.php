@@ -208,7 +208,7 @@
           </li>
           <li class="nav-header">S E T T I N G S</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('barangay.index') }}" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>
               <p>Barangay</p>
             </a>

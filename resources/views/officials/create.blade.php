@@ -1,4 +1,10 @@
 <x-layout>
+    <style>
+        .required:after {
+          content:" *";
+          color: red;
+        }
+      </style>
     @section('title', 'Register Official')
 
     <div class="content-header">
@@ -31,10 +37,10 @@
 
                         <div class="row">
                             <div class="col">
-                                <label>Picture</label>
+                                <label class="required">Profile Picture</label>
                             </div>
                             <div class="col">
-                                <label>Last Name</label>
+                                <label class="required">Last Name</label>
                             </div>
                         </div>
 
@@ -77,10 +83,10 @@
 
                         <div class="row">
                             <div class="col">
-                                <label>First Name</label>
+                                <label class="required">First Name</label>
                             </div>
                             <div class="col">
-                                <label>Middle Name</label>
+                                <label class="required">Middle Name</label>
                             </div>
                         </div>
 
@@ -119,7 +125,7 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <label for="position">Position</label>
+                                <label class="required" for="position">Position</label>
                             </div>
                         </div>
                         <div class="row">
