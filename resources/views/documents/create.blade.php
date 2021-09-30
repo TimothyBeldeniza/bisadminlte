@@ -9,7 +9,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Document</a></li>
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item active">Request Document</li>
                     </ol>
                 </div><!-- /.col -->
@@ -63,6 +63,7 @@
                                 <input readonly type="text" class="form-control font-weight-bold" value="{{ Auth::user()->street }}" name="street" id="street" required>
                             </div>
                         </div>
+<<<<<<< HEAD
                         <div class="form-group row mb-3">
                           <div class="col-sm">
                               <label for="docType">Document Type</label>
@@ -101,6 +102,54 @@
                             <button onclick="return confirm('Are your inputs correct?')" type="submit" class="btn btn-success font-weight-bold" >Submit</button>
                             <button onclick="history.back()" type="button" class="btn btn-dark font-weight-bold" >Back</button>
                           </div>
+=======
+
+                        <div class="form-group row my-1">
+                            <label for="docType" class="col-md-4 col-form-label text-md-right fw-bold">{{ __('Document Type *') }}</label>
+                            
+                            <div class="col-md-6">
+                                <select class="form-select" name="docType" id="docType" required>
+                                        <option value>--Select Document Type--</option>
+                                @foreach ($doctypes as $doctype) 
+                                        <option value="{{ $doctype->id }}">{{ $doctype->docType }} - ₱{{ $doctype->price }}</option>
+                                @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row my-1">
+                            <label for="purpose" class="col-md-4 col-form-label text-md-right fw-bold">{{ __('Purpose *') }}</label>
+                            
+                            <div class="col-md-6">
+                                <select class="form-select" name="purpose" id="purpose" onchange="showDiv('others', this)" required>
+                                    <option value>--Select Purpose--</option>
+                                    <option>Personal Identification and Residence Status</option>
+                                    <option>Good Standing in the Community</option>
+                                    <option>No pending case filed in the barangay</option>
+                                    <option>Employment (Local)</option>
+                                    <option>Employment (Abroad)</option>
+                                    <option>Enrollment</option>
+                                    <option>Scholarship</option>
+                                    <option>Senior Citizens & Solo Parent</option>
+                                    <option>Marriage (Local)</option>
+                                    <option>Marriage (Abroad)</option>
+                                    <option>Construction Permit</option>
+                                    <option>Construction Excavaion Permit</option>
+                                    <option value="others">Other Purpose</option>
+                                </select>
+                                <div class="my-1" id="others" style="display: none">
+                                  <input type="text" class="form-control" name="others" placeholder="Enter Other Purpose...">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row my-1">
+                            <div class="col-md-6 offset-md-4">
+                                <button onclick="return confirm('Are your inputs correct?')" type="submit" class="btn btn-success fw-bold" >
+                                    {{ __('Submit') }}
+                                </button>
+                            </div>
+>>>>>>> 51838264c0755275893879a71372a685633bd30d
                         </div>
                     </form>     
                 </div>

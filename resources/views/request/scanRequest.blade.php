@@ -8,7 +8,64 @@
     @endsection
 
     @section('title', 'QR Scanner')
-    <div class="container" id="main-container">
+
+    <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Scan Request</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Scan Request</a></li>
+
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+
+
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    {{-- <h1 class="text-center">Scan Request QR</h1> --}}
+                    <a href="/home">
+                        <button class="btn btn-secondary col-md-12 btn-lg mb-2">Go back</button>
+                    </a>
+                        <div class="card">
+                            <div class="card-header text-center">{{ __('Scan Here') }}</div>
+                            <div class="card-body text-center">
+                                <video id="preview" width="600" height="400"></video>
+                                <hr>
+                                    <button class="btn btn-primary mx-auto" id="cameraFinder" onclick="getCameras();" style="display: block;">Get Cameras</button>
+                                    <button class="btn btn-success mx-auto" id="cameraToggle" onclick="openCamera();" style="display: none; disabled: true;">Turn ON Camera</button>
+                                <hr>
+                                <h5>Camera Details</h5>
+                                <label for="videoSource" class="mr-1">Video Source</label>
+                                <select class="custom-select" id='videoSource'></select>
+                                <small id="videoSourceHelper" class="form-text text-muted">
+                                    If there is a newly-connected camera, please refresh the page.
+                                </small>
+                                <br>
+                                <h6 id="cameraName">Camera Name:</h6>
+                                <h6 id="cameraId">Camera ID:</h6>
+    
+                                <form id="foo" action="/documents/checkReq/" method="GET">
+                                    @csrf
+    
+                                    <input class="text-center" id="code" name="code" rows="2" cols="33" readonly style="border:0; background-color: transparent;"/>
+                                </form>                   
+                            </div>
+                        </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- <div class="container" id="main-container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <h1 class="text-center">Scan Request QR</h1>
@@ -32,31 +89,18 @@
                             <br>
                             <h6 id="cameraName">Camera Name:</h6>
                             <h6 id="cameraId">Camera ID:</h6>
-                            {{-- <hr> --}}
-                            {{-- <h5 id="codeIndicator">Code</h5> --}}
+
                             <form id="foo" action="/documents/checkReq/" method="GET">
                                 @csrf
-                                {{-- @method('POST') --}}
+
                                 <input class="text-center" id="code" name="code" rows="2" cols="33" readonly style="border:0; background-color: transparent;"/>
-                            </form>
-                            {{-- <textarea class="text-center" id="code" name="code" value="" rows="2" cols="33" placeholder="Code Appears Here..." readonly style="border:0; background-color: transparent;">
-                            
-                            </textarea> --}}
-                            
-                    
-                            
-                            {{-- <a id="detailsRedirect" href="#" style="display: none;">
-                                <button class="btn btn-success">See Details</button>
-                            </a> --}}
-                            {{-- <br> --}}
-                            {{-- <small id="qrCodeHelper" class="form-text text-muted">Valid QR Code format:<br> '/orders/o/0X0X0X0X-0X0X-0X0X-0X0X-0X0X0X0X0X0X'</small> --}}
+                            </form>                   
                         </div>
                     </div>
                 <hr>
-                
             </div>
         </div>
-    </div>
+    </div> --}}
 
     @section('custom-scripts')
         @if($instascanJS ?? false)
