@@ -16,7 +16,7 @@ class ReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    function __construct()
+    public function __construct()
     {
         $this->middleware(['auth','verified']);
         $this->middleware('permission:module-reports',['only' => 'index']);

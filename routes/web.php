@@ -92,7 +92,7 @@ Route::post('complaints/show/hearing/{compId}/{transId}', [ComplaintsController:
 //Processing of Blotters
 Route::get('blotters/note/{transId}/{userId}', [BlottersController::class,'noted']);
 
-Route::group(['middleware' => ['auth']], function() {
+Route::group(['middleware' => ['auth','verified']], function() {
     Route::resource('users', UserController::class);
     Route::resource('profiles', ProfileController::class);
     Route::resource('documents', DocumentsController::class);

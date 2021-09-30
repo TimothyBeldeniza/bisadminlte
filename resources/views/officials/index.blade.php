@@ -2,7 +2,7 @@
 <x-layout>
  
     <style>
-        .float-end:hover
+        .float-right:hover
         {
             color:maroon;
         }
@@ -48,11 +48,11 @@
                 <div style="display: flex; justify-content:space-between">
 
                     <div>
-                        <div class="float-start" style="margin-right: 50px">
+                        <div class="float-left" style="margin-right: 50px">
                             <img style="height: 200px !important; width: 200px !important;"src="{{ asset('images/officials/' . $official->imagePath) }}" alt="">
                         </div>
 
-                        <div class="float-end">
+                        <div class="float-right">
                             <h4>
                                 {{ $official->firstName . ' ' . $official->middleName . ' ' . $official->lastName }}
                             </h4>
@@ -67,7 +67,7 @@
                     
                         
                         @if (Auth::user()->hasRole('Admin'))
-                            <div class="float-end"> 
+                            <div class="float-right"> 
                                 <a class="@if (!Auth::user()->can('barangay-official-edit'))
                                     return btn disabled
                                 @endif" style="margin-left: 13px" href="{{ route('officials.edit',$official->id) }}">

@@ -27,10 +27,15 @@
   <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
-  
-  <!-- Theme style -->
-  {{-- <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}"> --}}
-  @yield('styles')
+  {{-- DataTables --}}
+  <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+  {{-- Select 2 --}}
+  <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.css') }}">
+
+  @yield('scripts')
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed accent-navy ">
@@ -81,10 +86,10 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4 bg-navy">
+  <aside style="background-color: maroon !important"class="main-sidebar sidebar-dark-primary elevation-4 bg-navy">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-      <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="{{ asset('images/brgy-logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">B I S</span>
     </a>
 
@@ -94,7 +99,6 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           <img src="{{ asset('images/users/' . Auth::user()->profilePath) }}" class="img-circle elevation-2" alt="User Image">
-          {{-- <img src="{{ asset('images/users/9932db6a393d29ff8ca032b46b50bbaa5039d16a-Bartolome,Jon Jeremiah.Espinajpg' }}" class="img-circle elevation-2" alt="User Image"> --}}
         </div>
         <div class="info">
           <a href="#" class="d-block ">Welcome, {{ Auth::user()->firstName }}</a>
@@ -170,7 +174,7 @@
                     </li>
                 </ul>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('users.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-users-cog"></i>
                     <p>User</p>
                     </a>
@@ -203,7 +207,7 @@
           </li>
           <li class="nav-header">S E T T I N G S</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('barangay.index') }}" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>
               <p>Barangay</p>
             </a>
@@ -286,8 +290,23 @@
 <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
 <!-- bs-custom-file-input -->
 <script src="{{ asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
-@yield('scripts')
-<!-- Page specific script -->
+<!-- DataTables  & Plugins -->
+<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
+<script src="{{ asset('plugins/pdfmake/pdfmake.min.js') }}"></script>
+<script src="{{ asset('plugins/pdfmake/vfs_fonts.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+
+
+@yield('custom-scripts')
+
 <script>
   $(function () {
     bsCustomFileInput.init();
