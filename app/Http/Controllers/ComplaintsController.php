@@ -135,7 +135,7 @@ class ComplaintsController extends Controller
                 'complaints_transactions.respondents', 'complaints_transactions.respondentsAdd','complaints_transactions.reason',
                 'complaints_transactions.compDetails','users.lastName', 'users.firstName', 'users.houseNo', 'users.street','transactions.unique_code')
         ->first();
-
+        // dd($transId,$userId);
         $brgy = DB::table('barangay')
         ->select('id', 'name', 'zipCode', 'city', 'province', 'region', 
                 'logoPath', 'cityLogoPath')
@@ -154,12 +154,13 @@ class ComplaintsController extends Controller
         $td = $document['td'];
         $officials = $document['officials'];
         $brgy = $document['brgy'];
+        // dd($document);
         return view('complaints.form')->with('td', $td)->with('officials', $officials)->with('brgy', $brgy);
     }
 
     public function pdfSaveComplaint($transId, $userId) 
     {
-        $document = $this->getDocData($transId, $userId);
+        $document = $this->getDocData($transId, $userId); 
         $td = $document['td'];
         $officials = $document['officials'];
         $brgy = $document['brgy'];

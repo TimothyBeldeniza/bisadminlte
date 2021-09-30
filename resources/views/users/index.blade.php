@@ -20,21 +20,20 @@
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
-
-    <div class="content mb-3">
-        <div class="container-fluid">
-            <span class="input-group-btn">
-                <a class="btn btn-success ms-3 px-3 text-light" href="{{ route('users.create') }}"><i class="fas fa-plus-circle"></i> Add new user</a>
-            </span>
-        </div>
-    </div>
     <section class="content">
         <div class="container-fluid">
           <div class="row">
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">List of Users</h3>
+                    <div class="float-left">
+                        <h3 class="card-title">List of Users</h3>
+                    </div>
+                    <div class="float-right">
+                        <span class="input-group-btn">
+                            <a class="btn btn-success ms-3 px-3 text-light" href="{{ route('users.create') }}"><i class="fas fa-plus-circle"></i> Add new user</a>
+                        </span>
+                    </div>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">

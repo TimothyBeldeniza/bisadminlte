@@ -1,5 +1,23 @@
 <x-layout>
     @section('title', 'Complaint Details')
+
+    <div class="content-header">
+      <div class="container-fluid">
+          <div class="row mb-2">
+              <div class="col-sm-6">
+                  <h1 class="m-0">Complaint Details</h1>
+              </div><!-- /.col -->
+              <div class="col-sm-6">
+                  <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active">Complaint Details</li>
+                  </ol>
+              </div><!-- /.col -->
+          </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+  </div>
+
+
     <div class="container">
         <div class="row justify-content-center">
           @if ($message = Session::get('success'))
@@ -38,14 +56,14 @@
                       <b class="text-dark">{{ $td->status }}</b>
                     @endif
                     </p>
-                    <button type="button" class="btn btn-warning fw-bold"  data-bs-toggle="modal" data-bs-target="#compDetails{{$td->id}}">Show Complain Details</button>
+                    <button type="button" class="btn btn-warning fw-bold"  data-toggle="modal" data-target="#compDetails{{$td->id}}">Show Complain Details</button>
                     <!-- Modal -->
                     <div class="modal fade" id="compDetails{{$td->id}}" tabindex="-1" aria-labelledby="compDetailsLabel" aria-hidden="true">
                         <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header bg-warning">
                             <h5 class="modal-title text-dark" id="compDetailsLabel">Complaint Details</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                             </button>
                             </div>
             
@@ -55,7 +73,7 @@
                             </div>
             
                             <div class="modal-footer">
-                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             </div>
                         </div>
                         </div>
@@ -63,7 +81,7 @@
                     <!-- End of Modal -->    
                   <hr>
                   @role('Admin')
-                    <a class="btn @if ( $hearingCounts == 3 || $td->status == 'Dismissed' || $td->status == 'Escalated' || $td->status == 'Settled') return disabled @endif btn-success fw-bold float-start" data-bs-toggle="modal" data-bs-target="#record-hearing">Record Hearing</a>
+                    <a class="btn @if ( $hearingCounts == 3 || $td->status == 'Dismissed' || $td->status == 'Escalated' || $td->status == 'Settled') return disabled @endif btn-success fw-bold float-start" data-toggle="modal" data-target="#record-hearing">Record Hearing</a>
                   @endrole
                   @role('Resident')
                     <a onclick="history.back()" class="btn btn-primary fw-bold float-end">Back</a>
@@ -79,7 +97,7 @@
                   <div class="modal-content">
                     <div class="modal-header bg-success">
                       <h5 class="modal-title text-light" id="recordhearingLabel">Hearing Details</h5>
-                      <button type="button" class="btn-close btn-light" data-bs-dismiss="modal" aria-label="Close"></button>
+                      <button type="button" class="btn-close btn-light" data-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                       <form method="POST" action="{{ url('/complaints/show/hearing/'.$td->id.'/'.$td->transId) }}">
@@ -108,14 +126,14 @@
                   @if ($td->reason == Null)
                     <b class="text-danger">No Final Decisions made</b>
                   @else
-                    <a class="btn btn-warning fw-bold my-2" data-bs-toggle="modal" data-bs-target="#view-condition">Show Conditions</a>
+                    <a class="btn btn-warning fw-bold my-2" data-toggle="modal" data-target="#view-condition">Show Conditions</a>
                     <!-- Conditions View Modal -->
                     <div class="modal fade" id="view-condition" tabindex="-1" aria-labelledby="conditionLabel" aria-hidden="true">
                       <div class="modal-dialog modal-lg modal-dialog-scrollable">
                         <div class="modal-content">
                           <div class="modal-header bg-warning">
                             <h5 class="modal-title text-dark" id="conditionLabel">Conditions Details</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                             </button>
                           </div>          
                           <div class="modal-body">
@@ -125,7 +143,7 @@
                             <p>{{ Carbon\Carbon::parse($td->condition_date)->format('jS F, Y')}}</b>
                           </div>          
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                           </div>
                         </div>
                       </div>
@@ -144,22 +162,22 @@
                     <b class="text-danger"> fw-boldNo Measures Required</b>
                   @elseif ($hearingCounts == 3)
                     @role('Admin')
-                      <a class="btn btn-success fw-bold my-2" title="Settle the Complaint" data-bs-toggle="modal" data-bs-target="#record-settle">Settle</a>
-                      <a class="btn btn-warning fw-bold my-2" title="Escalate the Complaint" data-bs-toggle="modal" data-bs-target="#record-escalate">Escalate</a>
-                      <a class="btn btn-danger fw-bold my-2" title="Dismiss the Complaint" data-bs-toggle="modal" data-bs-target="#record-dismiss">Dismiss</a><br>
+                      <a class="btn btn-success fw-bold my-2" title="Settle the Complaint" data-toggle="modal" data-target="#record-settle">Settle</a>
+                      <a class="btn btn-warning fw-bold my-2" title="Escalate the Complaint" data-toggle="modal" data-target="#record-escalate">Escalate</a>
+                      <a class="btn btn-danger fw-bold my-2" title="Dismiss the Complaint" data-toggle="modal" data-target="#record-dismiss">Dismiss</a><br>
                     @endrole 
                     <a class="btn btn-primary fw-bold my-2" href="{{ url('/complaints/show/view-complaint-pdf/'.$td->id.'/'.$td->transId) }}" target="_blank">View Complaint Form</a><br> 
                     <a class="btn btn-secondary fw-bold my-2" href="{{ url('/complaints/show/generate-complaint-pdf/'.$td->id.'/'.$td->transId) }}">Save Complaint Form</a><br> 
                   @elseif($hearingCounts == 0)
                     @role('Admin')
-                      <a class="btn btn-danger fw-bold my-2" title="Dismiss the Complaint" data-bs-toggle="modal" data-bs-target="#record-dismiss">Dismiss</a><br>
+                      <a class="btn btn-danger fw-bold my-2" title="Dismiss the Complaint" data-toggle="modal" data-target="#record-dismiss">Dismiss</a><br>
                     @endrole 
                     <a class="btn btn-primary fw-bold my-2" href="{{ url('/complaints/show/view-complaint-pdf/'.$td->id.'/'.$td->transId) }}" target="_blank">View Complaint Form</a><br> 
                     <a class="btn btn-secondary fw-bold my-2" href="{{ url('/complaints/show/generate-complaint-pdf/'.$td->id.'/'.$td->transId) }}">Save Complaint Form</a><br> 
                   @else
                   @role('Admin')
-                    <a class="btn btn-success fw-bold my-2" title="Settle the Complaint" data-bs-toggle="modal" data-bs-target="#record-settle">Settle</a>
-                    <a class="btn btn-danger fw-bold my-2" title="Dismiss the Complaint" data-bs-toggle="modal" data-bs-target="#record-dismiss">Dismiss</a><br>
+                    <a class="btn btn-success fw-bold my-2" title="Settle the Complaint" data-toggle="modal" data-target="#record-settle">Settle</a>
+                    <a class="btn btn-danger fw-bold my-2" title="Dismiss the Complaint" data-toggle="modal" data-target="#record-dismiss">Dismiss</a><br>
                   @endrole 
                     <a class="btn btn-primary fw-bold my-2" href="{{ url('/complaints/show/view-complaint-pdf/'.$td->id.'/'.$td->transId) }}" target="_blank">View Complaint Form</a><br> 
                     <a class="btn btn-secondary fw-bold my-2" href="{{ url('/complaints/show/generate-complaint-pdf/'.$td->id.'/'.$td->transId) }}">Save Complaint Form</a><br>
@@ -170,14 +188,14 @@
                     <b class="text-danger">No Hearings Conducted</b>
                   @endif
                   @for ($ctr = 1; $ctr <= $hearingCounts; $ctr++)
-                    <button type="button" class="btn btn-outline-info fw-bold my-2" data-bs-toggle="modal" data-bs-target="#hearing-{{$ctr}}">Hearing No. {{ $ctr }}</button>
+                    <button type="button" class="btn btn-outline-info fw-bold my-2" data-toggle="modal" data-target="#hearing-{{$ctr}}">Hearing No. {{ $ctr }}</button>
                       <!-- Hearing View Modal -->
                       <div class="modal fade" id="hearing-{{$ctr}}" tabindex="-1" aria-labelledby="hearingLabel" aria-hidden="true">
                       <div class="modal-dialog modal-lg modal-dialog-scrollable">
                         <div class="modal-content">
                           <div class="modal-header bg-info">
                             <h5 class="modal-title" id="hearingLabel">Hearing No. {{ $ctr }} Details</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                           </div>          
                           <div class="modal-body">
                             <b>Hearing Details:</b><br>
@@ -187,7 +205,7 @@
                             <p>{{ Carbon\Carbon::parse($hearings[$ctr - 1]->date)->format('jS F, Y')}}</b>
                           </div>          
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                           </div>
                         </div>
                       </div>
@@ -205,7 +223,7 @@
         <div class="modal-content">
             <div class="modal-header bg-success">
             <h5 class="modal-title text-light" id="recordhearingLabel">Settlement Details</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </button>
             </div>
             <div class="modal-body">
@@ -231,7 +249,7 @@
         <div class="modal-content">
             <div class="modal-header bg-danger">
             <h5 class="modal-title text-light" id="recordhearingLabel">Dismissal Details</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </button>
             </div>
             <div class="modal-body">
@@ -257,7 +275,7 @@
       <div class="modal-content">
           <div class="modal-header bg-warning">
           <h5 class="modal-title text-dark" id="recordhearingLabel">Escalate Details</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
           </button>
           </div>
           <div class="modal-body">

@@ -144,7 +144,7 @@
     
           <li class="nav-header">M A N A G E M E N T S</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('documents.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-folder-open"></i>
               <p>
                 Document
@@ -162,13 +162,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('complaints.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-sign-in-alt"></i>
                             <p>Residential</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('complaints.outsider') }}" class="nav-link">
                             <i class="nav-icon fas fa-sign-out-alt"></i>
                             <p>Non-residential</p>
                         </a>
@@ -195,13 +195,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ url('/documents/scan') }}" class="nav-link">
               <i class="nav-icon fas fa-qrcode"></i>
               <p>Scan Document</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ url('/documents/scanReq') }}" class="nav-link">
                <i class="nav-icon fas fa-qrcode"></i>
               <p>Scan Request</p>
             </a>
@@ -211,6 +211,12 @@
             <a href="{{ route('barangay.index') }}" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>
               <p>Barangay</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('profiles.edit', Auth::user()->id) }}" class="nav-link">
+              <i class="nav-icon fas fa-user-edit"></i>
+              <p>Edit Profile</p>
             </a>
           </li>
           <li class="nav-item">
