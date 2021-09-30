@@ -214,7 +214,7 @@ class ComplaintsController extends Controller
      */
     public function create()
     {
-        $users = User::all()->where('id', '>', 1);
+        $users = User::all()->where('id', '>', 1)->sortBy('lastName');
         return view('complaints.create', ['users' => $users]);
     }
 

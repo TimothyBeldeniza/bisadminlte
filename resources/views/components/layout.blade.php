@@ -27,6 +27,10 @@
   <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
+  
+  <!-- Theme style -->
+  {{-- <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}"> --}}
+  @yield('styles')
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed accent-navy ">
@@ -89,7 +93,8 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ asset('images/users/' . Auth::user()->profilePath) }}" class="img-circle elevation-2" alt="User Image">
+          {{-- <img src="{{ asset('images/users/9932db6a393d29ff8ca032b46b50bbaa5039d16a-Bartolome,Jon Jeremiah.Espinajpg' }}" class="img-circle elevation-2" alt="User Image"> --}}
         </div>
         <div class="info">
           <a href="#" class="d-block ">Welcome, {{ Auth::user()->firstName }}</a>
@@ -173,7 +178,7 @@
           </li>
           <li class="nav-header">S E R V I C E S</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('complaints.create') }}" class="nav-link">
               <i class="nav-icon fas fa-file-signature"></i>
               <p>Record Complaint</p>
             </a>
@@ -281,7 +286,8 @@
 <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
 <!-- bs-custom-file-input -->
 <script src="{{ asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
-
+@yield('scripts')
+<!-- Page specific script -->
 <script>
   $(function () {
     bsCustomFileInput.init();
