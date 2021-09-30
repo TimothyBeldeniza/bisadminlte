@@ -23,7 +23,7 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">List of Requested Documents</h3>
+            <h3 class="card-title">List of Residential Complaints</h3>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
