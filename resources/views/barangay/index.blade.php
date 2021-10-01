@@ -46,11 +46,11 @@
           <div class="card">
             <div style="background-color: maroon;" class="card-header text-light"><b>Edit Barangay Information</b></div>
             <div class="card-body">
-                @if ($message = Session::get('success'))
+                {{-- @if ($message = Session::get('success'))
                   <div class="alert alert-success" role="alert">
                     <b>{{ $message }}</b>
                   </div>
-                @endif
+                @endif --}}
                 <form method="POST" action="{{ route('barangay.update', $brgy->id) }}" enctype="multipart/form-data">
                   @csrf
                   @method('put')

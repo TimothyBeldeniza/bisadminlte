@@ -34,6 +34,7 @@ class CreateAdminUserSeeder extends Seeder
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
             'deleted_at' => NULL,
+            'profilePath' => 'default.png'
         ]);
 
         $timots = User::create([
@@ -54,6 +55,7 @@ class CreateAdminUserSeeder extends Seeder
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
             'deleted_at' => NULL,
+            'profilePath' => 'default.png'
         ]);
 
         $barts = User::create([
@@ -73,6 +75,7 @@ class CreateAdminUserSeeder extends Seeder
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
             'deleted_at' => NULL,
+            'profilePath' => 'default.png'
         ]);
 
         $baste = User::create([
@@ -92,6 +95,7 @@ class CreateAdminUserSeeder extends Seeder
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
             'deleted_at' => NULL,
+            'profilePath' => 'default.png'
         ]);
   
         $role = Role::create(['name' => 'Admin']);
@@ -101,7 +105,7 @@ class CreateAdminUserSeeder extends Seeder
         Role::create(['name' => 'Councilor']);
         Role::create(['name' => 'Secretary']);
         Role::create(['name' => 'Chairman']);
-
+        Role::create(['name' => 'Zone Leader']);
         $permissions = Permission::pluck('id','id')->all();
   
         // $role->syncPermissions($permissions);

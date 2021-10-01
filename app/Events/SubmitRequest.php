@@ -15,16 +15,18 @@ class SubmitRequest
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $email;
     public $unique_code;
+    public $brgyName;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($email,$unique_code,$name)
+    public function __construct($email,$unique_code,$name,$brgyName)
     {
         $this->email = $email;
         $this->unique_code = $unique_code;
         $this->name = $name;
+        $this->brgyName = $brgyName;
     }
 
     /**

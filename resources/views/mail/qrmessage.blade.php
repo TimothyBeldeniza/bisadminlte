@@ -36,8 +36,9 @@
         <br>
     </div>
     <p>
-        Thank you and God bless. 
+        Thank you and God bless, 
         <br>
+        Barangay {{ $brgyName }}
         <br>
     </p>
     
@@ -48,7 +49,7 @@
         Tel. No. 838-3910/839-2296 <br>
     </p> --}}
     
-    <img id="brgy-logo" src="{{ url('https://bis.test/images/brgy-logo.png') }}" alt="brgy-logo" style="height: 100px; width: auto;">
+    {{-- <img id="brgy-logo" src="{{ url('https://bis.test/images/brgy-logo.png') }}" alt="brgy-logo" style="height: 100px; width: auto;"> --}}
     <br>
     <b>***DO NOT REPLY TO THIS EMAIL***</b>
 

@@ -81,22 +81,38 @@ class BarangayOfficialsController extends Controller
             'firstName' => ['required','regex:/^[a-zA-ZñÑ\s]+$/','string', 'max:255'],
             'middleName' => ['nullable','regex:/^[a-zA-ZñÑ\s]+$/', 'string', 'max:255'],
             'position' => ['nullable','regex:/^[a-zA-Z\sñÑ]+$/', 'string', 'max:255'],
-            'image' => 'required|mimes:jpg,png,jpeg|max:5048',
+            'image' => 'mimes:jpg,png,jpeg|max:5048',
         ]);
 
-        $newImageName = time() . '-' . $request->lastName . '.' . $request->firstName . '.' . $request->middleName . '.' .$request->image->extension();
+        if($request->image)
+        {
+            $newImageName = time() . '-' . $request->lastName . '.' . $request->firstName . '.' . $request->middleName . '.' .$request->image->extension();
         
-        $request->image->move(public_path('images/officials'), $newImageName);
-            
-        $official = BarangayOfficials::create([
-            'lastName' => $request->input('lastName'),
-            'firstName' => $request->input('firstName'),
-            'middleName' => $request->input('middleName'),
-            'position' => $request->input('position'),
-            'imagePath' => $newImageName,
-            // 'user_id' => auth()->user()->id
+            $request->image->move(public_path('images/officials'), $newImageName);
+                
+            $official = BarangayOfficials::create([
+                'lastName' => $request->input('lastName'),
+                'firstName' => $request->input('firstName'),
+                'middleName' => $request->input('middleName'),
+                'position' => $request->input('position'),
+                'imagePath' => $newImageName,
+                // 'user_id' => auth()->user()->id
+    
+            ]);
+        }
+        else 
+        {
+            $official = BarangayOfficials::create([
+                'lastName' => $request->input('lastName'),
+                'firstName' => $request->input('firstName'),
+                'middleName' => $request->input('middleName'),
+                'position' => $request->input('position'),
+                'imagePath' => 'default.png',
+                // 'user_id' => auth()->user()->id
+    
+            ]);
+        }
 
-        ]);
         return redirect('/officials')->with('success', 'Official added!');
     }
 

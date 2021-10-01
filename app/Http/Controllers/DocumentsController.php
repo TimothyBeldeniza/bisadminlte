@@ -195,9 +195,9 @@ class DocumentsController extends Controller
         $userId = Auth::User()->id;
         $email = Auth::User()->email;
         $name  = Auth::User()->firstName . ' ' . Auth::User()->lastName;
-
+        $brgyName = Barangay::find(1)->pluck('name')->first(); 
         $unique_code = sha1(time());
-
+        // dd($brgyName);
         // dd($email);
 
         $serviceId = 1;
@@ -243,7 +243,7 @@ class DocumentsController extends Controller
 
             }
             
-            event(new SubmitRequest($email,$unique_code,$name));
+            event(new SubmitRequest($email,$unique_code,$name,$brgyName));
             return redirect('home')->with('success', 'Document requested successfully!');
         }
         else
@@ -267,7 +267,7 @@ class DocumentsController extends Controller
                 ]);
             }
 
-            event(new SubmitRequest($email,$unique_code,$name));
+            event(new SubmitRequest($email,$unique_code,$name,$brgyName));
             return redirect('home')->with('success', 'Document requested successfully!');
         }
         

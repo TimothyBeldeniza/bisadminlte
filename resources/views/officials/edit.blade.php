@@ -119,7 +119,7 @@
 
                             <div class="row">
                                 <div class="col">
-                                    <label class="required">Middle Name</label>
+                                    <label>Middle Name</label>
                                 </div>
                             </div>
 

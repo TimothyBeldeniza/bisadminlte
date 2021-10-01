@@ -129,6 +129,7 @@ class UserController extends Controller
             'gender' => $request->input('gender'),
             'civilStatus' => $request->input('civilStatus'),
             'citizenship' => $request->input('citizenship'),
+            'profilePath' => 'default.png',
           ]);
         }
         

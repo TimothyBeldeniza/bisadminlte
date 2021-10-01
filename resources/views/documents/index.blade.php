@@ -64,7 +64,7 @@
                                                   <div class="modal-content">
                                                   <div class="modal-header bg-primary">
                                                       <h5 class="modal-title text-light" id="bargyIdLabel">Barangay ID of {{ $trans->firstName. ' ' .$trans->lastName}}</h5>
-                                                      <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                                      {{-- <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button> --}}
                                                   </div>
                               
                                                   <div class="modal-body" style="display: flex; justify-content:center">
@@ -96,7 +96,7 @@
                             <a class="btn btn-danger fw-bold" data-toggle="modal" data-target="#disapprove{{ $trans->id }}">Disapprove</a>
                         @elseif($trans->status == 'Ready to Claim')
                             <a class="btn btn-primary fw-bold" onclick="return confirm('Are yousure to proceed?')" href="documents/paid/{{ $trans->transId }}">Paid</a>
-                            {{-- <a class="btn btn-secondary fw-bold" onclick="window.print()" href="documents/view-document-pdf/{{ $trans->id }}/{{ $trans->userId }}" target="_blank">View</a> --}}
+                            {{-- <a class="btn btn-secondary fw-bold" href="documents/view-document-pdf/{{ $trans->id }}/{{ $trans->userId }}" target="_blank">View</a> --}}
                             <a class="btn btn-success fw-bold" href="documents/generate-document-pdf/{{ $trans->id }}/{{ $trans->userId }}">Save PDF</a>
                         @elseif($trans->status == 'Paid')
                             <a class="btn btn-secondary fw-bold" href="documents/view-document-pdf/{{ $trans->id }}/{{ $trans->userId }}" target="_blank">View</a>
@@ -108,9 +108,9 @@
                                 <div class="modal-content">
                                     <div class="modal-header bg-primary">
                                         <h5 class="modal-title text-light" id="processLabel">Processing</h5>
-                                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                        {{-- <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button> --}}
                                     </div>
-                                    <div class="modal-body text-start">
+                                    <div class="modal-body text-left">
                                         <form action="documents/process/{{ $trans->id }}/{{ $trans->transId }}/{{ $trans->userId }}" method="POST">
                                             <b>Reason to Process</b><br>
                                             @csrf

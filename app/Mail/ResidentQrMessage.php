@@ -16,10 +16,11 @@ class ResidentQrMessage extends Mailable
      *
      * @return void
      */
-    public function __construct($ub,$name)
+    public function __construct($ub,$name,$brgyName)
     {
         $this->ub = $ub;
         $this->name = $name;
+        $this->brgyName = $brgyName;
     }
 
     /**
@@ -32,8 +33,8 @@ class ResidentQrMessage extends Mailable
 
         return $this->view('mail.qrmessage')->with([
             'ub' => $this->ub,
-            'name' => $this->name
-        
+            'name' => $this->name,
+            'brgyName' => $this->brgyName,
         ]);
     }
 }

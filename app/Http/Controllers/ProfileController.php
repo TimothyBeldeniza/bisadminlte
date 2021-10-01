@@ -122,6 +122,7 @@ class ProfileController extends Controller
                 'dob' => $request->input('dob'),
                 'civilStatus' => $request->input('civilStatus'),
                 'citizenship' => $request->input('citizenship'),
+                'profilePath' => 'default.png',
             ]);
         }
 

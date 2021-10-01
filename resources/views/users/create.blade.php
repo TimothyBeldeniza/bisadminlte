@@ -303,7 +303,7 @@
                                 
                                 <div class="col-md-6">
                                     {{-- {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!} --}}
-                                    <select name="roles" class="form-select form-select-md mb-3">
+                                    <select name="roles" class="form-control form-control-md mb-3">
                                         @foreach ($roles as $role)
                                             <option value="{{ $role }}">{{ $role }}</option>
                                         @endforeach

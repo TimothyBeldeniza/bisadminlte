@@ -10,5 +10,5 @@
     Regards,
     <br>
     Barangay Information System
-    <img src="{{ asset('images/brgy-logo.png') }}" style="height: 100px; width: auto;">
+    {{-- <img src="{{ asset('images/brgy-logo.png') }}" style="height: 100px; width: auto;"> --}}
 </p>

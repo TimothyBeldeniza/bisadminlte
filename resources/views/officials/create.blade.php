@@ -25,7 +25,7 @@
     </div>
     
     <div class="content">
-        <div class="container-fluid">
+        <div class="container">
             <div class="card card-info">
                 
                 <div class="card-header">
@@ -36,25 +36,21 @@
                         @csrf
 
                         <div class="row">
+
                             <div class="col">
-                                <label class="required">Profile Picture</label>
+                                <label>Profile Picture</label>
                             </div>
-                            <div class="col">
-                                <label class="required">Last Name</label>
-                            </div>
+
                         </div>
 
                         <div class="row">
-                        
-                            {{-- <label class="font-weight-bold">Image</label> --}}
-                            
                             <div class="input-group col mb-3">
 
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-image"></i></span>
                                 </div>
                                 
-                                <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" required placeholder="Choose File">
+                                <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" placeholder="Choose File">
 
                                 @error('image')
                                         <span class="invalid-feedback" role="alert">
@@ -62,9 +58,19 @@
                                         </span>
                                 @enderror
                             </div>
-                
-                            
+                        </div>
 
+                        <div class="row">
+                            <div class="col">
+                                <label class="required">Last Name</label>
+                            </div>
+
+                            <div class="col">
+                                <label class="required">First Name</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
                             {{-- <label class="font-weight-bold">Last Name</label> --}}
                             <div class="input-group col mb-3">
                                 <div class="input-group-prepend">
@@ -79,19 +85,7 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-                                <label class="required">First Name</label>
-                            </div>
-                            <div class="col">
-                                <label class="required">Middle Name</label>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            {{-- <label class="font-weight-bold">First Name</label> --}}
+                            
                             <div class="input-group col mb-3">
 
                                 <div class="input-group-prepend">
@@ -106,6 +100,21 @@
                                         </span>
                                 @enderror
                             </div>
+                            
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <label>Middle Name</label>
+                            </div>
+
+                            <div class="col">
+                                <label class="required" for="position">Position</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            
                 
                     
                             {{-- <label class="font-weight-bold">Middle Name</label> --}}
@@ -122,13 +131,8 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label class="required" for="position">Position</label>
-                            </div>
-                        </div>
-                        <div class="row">
+
+                            
                             <div class="input-group col mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-user"></i></i></span>
@@ -143,8 +147,13 @@
                                     <option @if($officials['tre'] == 1) return disabled @endif>Treasurer</option>
                                 </select>
                             </div>
+    
+                          
+                        </div>
 
-                            <div class="input-group col mb-3">
+                        
+                        <div class="row">
+                            <div class="input-group col-sm mb-3">
                                 <div>
                                     <button onclick="return confirm('Are your inputs correct?')" type="submit" class="btn btn-success fw-bold">
                                         {{ __('Submit') }}
