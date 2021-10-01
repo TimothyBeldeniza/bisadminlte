@@ -19,22 +19,8 @@
 
 
     <div class="container">
+      <div class="container-fluid">
         <div class="row justify-content-center">
-          @if ($message = Session::get('success'))
-            <div class="alert alert-success" role="alert">
-              <b>{{ $message }}</b>
-            </div>
-           @endif
-          @if ($message = Session::get('warning'))
-            <div class="alert alert-warning" role="alert">
-              <b>{{ $message }}</b>
-            </div>
-           @endif
-          @if ($message = Session::get('danger'))
-            <div class="alert alert-danger" role="alert">
-              <b>{{ $message }}</b>
-            </div>
-          @endif
           <div class="col-sm-6">
               <div class="card">
                 <div style="background-color: maroon;" class="card-header text-light"><b>Complaint Details</b></div>
@@ -216,6 +202,7 @@
               </div>
             </div>              
         </div>
+      </div>
     </div>
     {{-- Modal for Record Settlement --}}
     <div class="modal fade" id="record-settle" tabindex="-1" aria-labelledby="recordhearingLabel" aria-hidden="true">

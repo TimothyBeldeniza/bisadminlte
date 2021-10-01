@@ -127,7 +127,6 @@
               <i class="nav-icon fas fa-home"></i>
               <p>
                 Dashboard
-                <span class="right badge badge-danger">New</span>
               </p>
             </a>
           </li>
@@ -136,26 +135,39 @@
               <i class="nav-icon fas fa-user-tie"></i>
               <p>
                 Officials
-                <span class="right badge badge-danger">New</span>
               </p>
             </a>
           </li>
     
           <li class="nav-header">M A N A G E M E N T S</li>
           <li class="nav-item">
-            <a href="{{ route('documents.index') }}" class="nav-link">
+            <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-folder-open"></i>
               <p>
-                Document
-                <span class="badge badge-info right">2</span>
+                Documents
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+               <li class="nav-item">
+                   <a href="{{ route('documents.index') }}" class="nav-link">
+                     <i class="nav-icon fas fa-file"></i>
+                       <p>Requested Documents</p>
+                   </a>
+               </li>
+               <li class="nav-item">
+                   <a href="{{ route('doctypes.index') }}" class="nav-link">
+                     <i class="nav-icon fas fa-file-medical"></i>
+                       <p>Document Types</p>
+                   </a>
+               </li>
+           </ul>
           </li>
           <li class="nav-item">
               <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-file-contract"></i>
                   <p>
-                      Complaint
+                      Complaints
                       <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>

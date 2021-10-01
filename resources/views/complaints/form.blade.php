@@ -30,7 +30,7 @@
 
     .cr{
 		font-size: 100%;
-		margin-top: 25px;
+		margin: 25px;
 	}
 
 	.body{

@@ -124,13 +124,13 @@ class ComplaintsController extends Controller
         ->with('i', ($request->input('page', 1) - 1) * 6);
     }
 
-    public function getDocData($transId, $userId)
+    public function getDocData($compId, $transId)
     {
         $td = DB::table('complaints_transactions')
         ->join('transactions', 'complaints_transactions.transId', '=', 'transactions.id')
         ->join('users', 'users.id', '=', 'transactions.userId')
-        ->where('users.id', $userId)
-        ->where('complaints_transactions.id', $transId)
+        ->where('transactions.id', $transId)
+        ->where('complaints_transactions.id', $compId)
         ->select('complaints_transactions.id', DB::raw('date(complaints_transactions.created_at) as "date"'), 
                 'complaints_transactions.respondents', 'complaints_transactions.respondentsAdd','complaints_transactions.reason',
                 'complaints_transactions.compDetails','users.lastName', 'users.firstName', 'users.houseNo', 'users.street','transactions.unique_code')
@@ -148,19 +148,18 @@ class ComplaintsController extends Controller
         return compact('td', 'officials', 'brgy');
     }
 
-    public function pdfViewComplaint($transId, $userId) 
+    public function pdfViewComplaint($compId, $transId) 
     {
-        $document = $this->getDocData($transId, $userId);
+        $document = $this->getDocData($compId, $transId);
         $td = $document['td'];
         $officials = $document['officials'];
         $brgy = $document['brgy'];
-        // dd($document);
         return view('complaints.form')->with('td', $td)->with('officials', $officials)->with('brgy', $brgy);
     }
 
-    public function pdfSaveComplaint($transId, $userId) 
+    public function pdfSaveComplaint($compId, $transId) 
     {
-        $document = $this->getDocData($transId, $userId); 
+        $document = $this->getDocData($compId, $transId); 
         $td = $document['td'];
         $officials = $document['officials'];
         $brgy = $document['brgy'];
@@ -169,9 +168,9 @@ class ComplaintsController extends Controller
         return $pdf->download($td->lastName.'-'.'Complaint-Form.pdf');
     }
 
-    public function pdfViewEscalate($transId, $userId)
+    public function pdfViewEscalate($compId, $transId)
     {
-        $document = $this->getDocData($transId, $userId);
+        $document = $this->getDocData($compId, $transId);
         $td = $document['td'];
         $officials = $document['officials'];
         $brgy = $document['brgy'];
@@ -179,9 +178,9 @@ class ComplaintsController extends Controller
         // return view('complaints.escalate', compact('data', 'td', 'officials'));
     }
 
-    public function pdfSaveEscalate($transId, $userId)
+    public function pdfSaveEscalate($compId, $transId)
     {
-        $document = $this->getDocData($transId, $userId);
+        $document = $this->getDocData($compId, $transId);
         $td = $document['td'];
         $officials = $document['officials'];
         $brgy = $document['brgy'];
@@ -189,18 +188,18 @@ class ComplaintsController extends Controller
         return $pdf->download($td->lastName.$td->firstName.'-'.'Escalation-Form.pdf');
     }
 
-    public function pdfViewSettle($transId, $userId)
+    public function pdfViewSettle($compId, $transId)
     {
-        $document = $this->getDocData($transId, $userId);
+        $document = $this->getDocData($compId, $transId);
         $td = $document['td'];
         $officials = $document['officials'];
         $brgy = $document['brgy'];
         return view('complaints.settle')->with('td', $td)->with('officials', $officials)->with('brgy', $brgy);
     }
 
-    public function pdfSaveSettle($transId, $userId)
+    public function pdfSaveSettle($compId, $transId)
     {
-        $document = $this->getDocData($transId, $userId);
+        $document = $this->getDocData($compId, $transId);
         $td = $document['td'];
         $officials = $document['officials'];
         $brgy = $document['brgy'];

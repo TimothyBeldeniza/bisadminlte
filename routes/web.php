@@ -41,16 +41,16 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 //PDFs
 //Documents
-Route::get('documents/view-document-pdf/{transId}/{userId}',[DocumentsController::class, 'pdfViewDocument']);
-Route::get('documents/generate-document-pdf/{transId}/{userId}',[DocumentsController::class, 'pdfSaveDocument']);
+Route::get('documents/view-document-pdf/{compId}/{transId}',[DocumentsController::class, 'pdfViewDocument']);
+Route::get('documents/generate-document-pdf/{compId}/{transId}',[DocumentsController::class, 'pdfSaveDocument']);
 
 //Complaints
-Route::get('complaints/show/view-complaint-pdf/{transId}/{userId}',[ComplaintsController::class, 'pdfViewComplaint']);
-Route::get('complaints/show/generate-complaint-pdf/{transId}/{userId}',[ComplaintsController::class, 'pdfSaveComplaint']);
-Route::get('complaints/show/view-settle-pdf/{transId}/{userId}',[ComplaintsController::class, 'pdfViewSettle']);
-Route::get('complaints/show/generate-settle-pdf/{transId}/{userId}',[ComplaintsController::class, 'pdfSaveSettle']);
-Route::get('complaints/show/view-escalate-pdf/{transId}/{userId}',[ComplaintsController::class, 'pdfViewEscalate']);
-Route::get('complaints/show/generate-escalate-pdf/{transId}/{userId}',[ComplaintsController::class, 'pdfSaveEscalate']);
+Route::get('complaints/show/view-complaint-pdf/{compId}/{transId}',[ComplaintsController::class, 'pdfViewComplaint']);
+Route::get('complaints/show/generate-complaint-pdf/{compId}/{transId}',[ComplaintsController::class, 'pdfSaveComplaint']);
+Route::get('complaints/show/view-settle-pdf/{compId}/{transId}',[ComplaintsController::class, 'pdfViewSettle']);
+Route::get('complaints/show/generate-settle-pdf/{compId}/{transId}',[ComplaintsController::class, 'pdfSaveSettle']);
+Route::get('complaints/show/view-escalate-pdf/{compId}/{transId}',[ComplaintsController::class, 'pdfViewEscalate']);
+Route::get('complaints/show/generate-escalate-pdf/{compId}/{transId}',[ComplaintsController::class, 'pdfSaveEscalate']);
 Route::get('autocomplete', [ComplaintsController::class, 'autocomplete'])->name('autocomplete');
 
 //Non-Residential Complainant
