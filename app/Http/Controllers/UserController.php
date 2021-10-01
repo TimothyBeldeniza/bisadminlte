@@ -138,7 +138,91 @@ class UserController extends Controller
         // dd($input);
         // $user = User::create($input);
         $user->assignRole($request->input('roles'));
-        
+
+        if($request->input('roles') == 'Councilor')
+        {
+            $user->syncPermissions([
+                'module-filed-complaints',
+                'complaint-show-details',
+                'complaint-settle',
+                'complaint-view-settle-form',
+                'complaint-save-settle-form',
+                'complaint-escalate',
+                'complaint-view-complaint-form',
+                'complaint-save-complaint-form',
+                'complaint-view-escalation-form',
+                'complaint-save-escalation-form',
+                'complaint-reject',
+
+                'res-barangay-official-list',
+            ]);
+            
+        }
+        else if($request->input('roles') == 'Secretary')
+        {
+            $user->syncPermissions([
+
+                'module-requested-documents',
+                'documents-show-ID',
+                'documents-process',
+                'documents-view',
+                'documents-save-PDF',
+                'documents-disapprove',
+                
+                'module-filed-complaints',
+                'complaint-show-details',
+                'complaint-view-settle-form',
+                'complaint-save-settle-form',
+                'complaint-view-complaint-form',
+                'complaint-save-complaint-form',
+                'complaint-view-escalation-form',
+                'complaint-save-escalation-form',
+
+                'res-barangay-official-list',
+            ]);
+        }
+        else if($request->input('roles') == 'Treasurer')
+        {
+            $user->syncPermissions([
+                'module-requested-documents',
+                'module-filed-complaints',
+                'res-barangay-official-list',
+            ]);
+        }
+
+        else if($request->input('roles') == 'Clerk')
+        {
+            $user->syncPermissions([
+                'module-requested-documents',
+                'documents-show-ID',
+                'documents-process',
+                'documents-view',
+                'documents-save-PDF',
+                'documents-disapprove',
+               
+                'res-barangay-official-list',
+            ]);
+        }
+        else if($request->input('roles') == 'Chairman')
+        {
+            $user->syncPermissions([
+                'module-requested-documents',
+                'res-barangay-official-list',
+                'module-filed-complaints',
+                'complaint-show-details',
+                'complaint-view-settle-form',
+                'complaint-save-settle-form',
+                'complaint-view-complaint-form',
+                'complaint-save-complaint-form',
+                'complaint-view-escalation-form',
+                'complaint-save-escalation-form',
+            ]);
+        }
+        else if($request->input('roles') == 'Resident')
+        {
+      
+            $user->syncPermissions(DB::table('permissions')->where('name', 'like', '%res%')->pluck('name'));
+        }
         return redirect()->route('users.index')->with('success','User created successfully');
     }
 

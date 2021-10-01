@@ -105,6 +105,7 @@ class CreateAdminUserSeeder extends Seeder
         Role::create(['name' => 'Councilor']);
         Role::create(['name' => 'Secretary']);
         Role::create(['name' => 'Chairman']);
+        Role::create(['name' => 'Treasurer']);
         Role::create(['name' => 'Zone Leader']);
         $permissions = Permission::pluck('id','id')->all();
   
