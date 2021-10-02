@@ -138,7 +138,7 @@
         </div>
     </div>
 
-    
+    @section('custom-scripts')
     <script>
 
         $(document).on('click', '#largeButton', function(event) {
@@ -192,7 +192,7 @@
                 timeout: 8000
             })
         });
-        
+
         // Page specific script
         $(function () {
             $("#example1").DataTable({
@@ -211,5 +211,6 @@
         });
 
     </script>
+    @endsection
 </x-layout>
 

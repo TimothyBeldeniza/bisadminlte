@@ -66,8 +66,8 @@ class ComplaintsController extends Controller
                     DB::raw('date(complaints_transactions.created_at) as "date"'),
                     'users.firstName','users.lastName', 'users.houseNo', 'users.street', 
                     'transactions.status','transactions.userId')
-            ->paginate(6);
-            $data->appends($request->all());
+            ->get();
+            // $data->appends($request->all());
 
         }else if(!$request->input('term')){
             $data = DB::table('complaints_transactions')
@@ -80,10 +80,10 @@ class ComplaintsController extends Controller
                     DB::raw('date(complaints_transactions.created_at) as "date"'),
                     'users.firstName','users.lastName', 'users.houseNo', 'users.street',
                     'transactions.status','transactions.userId')
-            ->paginate(6);
+            ->get();
         }
         return view('complaints.index', compact('data'))
-        ->with('i', ($request->input('page', 1) - 1) * 6);
+        ->with('i', ($request->input('page', 1) - 1) * 10);
     }
 
     public function outsider(Request $request)
@@ -325,6 +325,10 @@ class ComplaintsController extends Controller
         elseif($request->respondentId == null && $request->complainantId == null)
         {
           return redirect('complaints/create')->with('danger', 'Must contain insider complainant or respondent!');
+        }
+        elseif($request->cName != null && $request->respondent != null)
+        {
+         return redirect('complaints/create')->with('danger', 'The complaint must have at least one insider!');
         }
  
         

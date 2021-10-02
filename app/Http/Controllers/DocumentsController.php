@@ -66,8 +66,8 @@ class DocumentsController extends Controller
                     'documents_transactions.barangayIdPath', DB::raw('date(documents_transactions.created_at) as "date"'),
                     'users.firstName', 'users.lastName', 'users.email', 
                     'transactions.status', 'transactions.userId', 'document_types.docType')
-            ->paginate(8);
-            $data->appends($request->all());
+            ->get();
+            // $data->appends($request->all());
             // dd($data);
         }
         else if(!$request->input('term'))
@@ -82,11 +82,11 @@ class DocumentsController extends Controller
                     'documents_transactions.barangayIdPath', DB::raw('date(documents_transactions.created_at) as "date"'),
                     'users.firstName', 'users.lastName', 'users.email', 
                     'transactions.status', 'transactions.userId', 'document_types.docType')
-            ->paginate(8);
+            ->get();
         }
            
         return view('documents.index', compact('data'))
-        ->with('i', ($request->input('page', 1) - 1) * 8);
+        ->with('i', ($request->input('page', 1) - 1) * 10);
     }
 
     public function getDocData($transId, $userId)

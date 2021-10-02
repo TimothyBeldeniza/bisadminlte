@@ -150,11 +150,13 @@
             {
                 document.getElementById('complainant').style.display = 'block';
                 document.getElementById('otherComplainant').style.display = 'none';
+                document.getElementById('outsideR').disabled = false;
             }
             else if (document.getElementById('outsideC').checked) 
             {
                 document.getElementById('otherComplainant').style.display = 'block';
                 document.getElementById('complainant').style.display = 'none';
+                document.getElementById('outsideR').disabled = true;
             }
        }  
        function showRespondent() {
@@ -162,11 +164,13 @@
             {
                 document.getElementById('respondent').style.display = 'block';
                 document.getElementById('otherRespondent').style.display = 'none';
+                document.getElementById('outsideC').disabled = false;
             }
             else if (document.getElementById('outsideR').checked) 
             {
                 document.getElementById('otherRespondent').style.display = 'block';
                 document.getElementById('respondent').style.display = 'none';
+                document.getElementById('outsideC').disabled = true;
             }
        }  
     </script>

@@ -39,10 +39,10 @@ class UserController extends Controller
             $data = User::where('firstName', 'Like', '%' . request('term') . '%')
             ->orWhere('lastName', 'Like', '%' . request('term') . '%')
             ->orWhere('middleName', 'Like', '%' . request('term') . '%')
-            ->paginate(5);
+            ->get();
 
         }else if(!$request->input('term')){
-            $data = User::orderBy('id','ASC')->paginate(10);
+            $data = User::orderBy('id','ASC')->get();
         }
 
         
@@ -143,6 +143,7 @@ class UserController extends Controller
         {
             $user->syncPermissions([
                 'module-filed-complaints',
+                'res-module-file-complaint',
                 'complaint-show-details',
                 'complaint-settle',
                 'complaint-view-settle-form',
