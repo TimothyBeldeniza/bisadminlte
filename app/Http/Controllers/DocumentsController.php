@@ -69,13 +69,8 @@ class DocumentsController extends Controller
                     'users.firstName', 'users.lastName', 'users.email', 
                     'transactions.status', 'transactions.userId', 'document_types.docType')
             ->get();
-<<<<<<< HEAD
-
-            // dd($fromDate);
-=======
             // $data->appends($request->all());
             // dd($data);
->>>>>>> 03b506c7b0cbda73adf114ace8bfa9a91e485d8c
         }
         else 
         {

@@ -74,16 +74,9 @@ class ComplaintsController extends Controller
                     'users.firstName','users.lastName', 'users.houseNo', 'users.street', 
                     'transactions.status','transactions.userId')
             ->get();
-<<<<<<< HEAD
-            
-            // dd($fromDate);
-        }else 
-        {
-=======
             // $data->appends($request->all());
 
         }else if(!$request->input('term')){
->>>>>>> 03b506c7b0cbda73adf114ace8bfa9a91e485d8c
             $data = DB::table('complaints_transactions')
             ->join('transactions', 'complaints_transactions.transId', '=', 'transactions.id')
             ->join('users', 'transactions.userId', '=', 'users.id')
