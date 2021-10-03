@@ -24,6 +24,9 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-12">
+                <span class="input-group-btn">
+                    <a class="btn btn-success mb-2 text-light" href="{{ route('users.create') }}"><i class="fas fa-plus-circle"></i> Add new user</a>
+                </span>
               <div class="card">
                 <div class="card-header">
                     <div class="float-left">
@@ -47,9 +50,6 @@
                                         <span class="fas fa-sync-alt"></span>
                                     </button>
                                 </a>
-                                {{-- <span class="input-group-btn">
-                                    <a class="btn btn-success ms-3 px-3 text-light" href="{{ route('users.create') }}"><i class="fas fa-plus-circle"></i> Add new user</a>
-                                </span> --}}
                             </div>      
                         </form>
                     </div>

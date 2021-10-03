@@ -13,7 +13,7 @@ class Transactions extends Model
 
     protected $fillable = [
         'userId',
-        'serviceId',
+        // 'serviceId',
         'status',
         'unique_code',
     ];

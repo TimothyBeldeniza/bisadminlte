@@ -16,17 +16,12 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('userId');
-            $table->unsignedInteger('serviceId');
             $table->string('status');
             $table->timestamps();
             $table->string('unique_code')->unique();
             $table->foreign('userId')
             ->references('id') 
             ->on('users') 
-            ->onDelete('cascade');
-            $table->foreign('serviceId')
-            ->references('id') 
-            ->on('services') 
             ->onDelete('cascade');
 
         });

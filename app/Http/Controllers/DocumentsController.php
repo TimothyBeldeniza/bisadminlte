@@ -224,7 +224,7 @@ class DocumentsController extends Controller
         // dd($brgyName);
         // dd($email);
 
-        $serviceId = 1;
+        // $serviceId = 1;
         $request->validate([
             'docType' => 'required', 'integer',
             'purpose' => 'required', 'string',
@@ -234,7 +234,7 @@ class DocumentsController extends Controller
 
         $transId = Transactions::create([
           'userId' => $userId,
-          'serviceId' => $serviceId,
+        //   'serviceId' => $serviceId,
           'status' => 'Unpaid',
           'unique_code' => sha1(time()),
         ]);

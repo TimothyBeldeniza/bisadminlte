@@ -244,7 +244,7 @@ class ComplaintsController extends Controller
      */
     public function store(Request $request)
     {
-        $serviceId = 2;
+        // $serviceId = 2;
         $request->validate([
             'complainantId' => ['nullable', 'integer'],
             'cName' => ['nullable', 'regex:/^[a-zA-ZñÑ\s]+$/','string'],
@@ -268,7 +268,7 @@ class ComplaintsController extends Controller
 
           $transId = Transactions::create([
             'userId' => $request->complainantId,
-            'serviceId' => $serviceId,
+            // 'serviceId' => $serviceId,
             'status' => 'Unsettled',
             'unique_code' => sha1(time()),               
           ]);
@@ -292,7 +292,7 @@ class ComplaintsController extends Controller
         { // Complainant Inside / Respondent Outside
           $transId = Transactions::create([
             'userId' => $request->complainantId,
-            'serviceId' => $serviceId,
+            // 'serviceId' => $serviceId,
             'status' => 'Unsettled',
             'unique_code' => sha1(time()),               
           ]);
@@ -317,7 +317,7 @@ class ComplaintsController extends Controller
 
           $transId = Transactions::create([
             'userId' => $request->respondentId,
-            'serviceId' => $serviceId,
+            // 'serviceId' => $serviceId,
             'status' => 'Unsettled',
             'unique_code' => sha1(time()),               
           ]);

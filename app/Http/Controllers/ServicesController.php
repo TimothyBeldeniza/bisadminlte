@@ -61,14 +61,14 @@ class ServicesController extends Controller
         if($request->serviceType == 1)
         {
             ServiceMaintenances::create([
-                'serviceId' => $request->serviceType,
+                // 'serviceId' => $request->serviceType,
                 'docType' => $request->serviceName
             ]);
         }
         else
         {
             ServiceMaintenances::create([
-                'serviceId' => $request->serviceType,
+                // 'serviceId' => $request->serviceType,
                 'complainType' => $request->serviceName
             ]);
         }
