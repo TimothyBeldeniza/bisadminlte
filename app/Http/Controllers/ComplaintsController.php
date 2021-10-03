@@ -50,26 +50,33 @@ class ComplaintsController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->input('term')){
+        if($request->input('from') && $request->input('to')){
+
+            $fromDate = $request->input('from') . ' 00:00:00';
+            $toDate = $request->input('to') . ' 23:59:59';
+
             $data = DB::table('complaints_transactions')
             ->join('transactions', 'complaints_transactions.transId', '=', 'transactions.id')
             ->join('users', 'transactions.userId', '=', 'users.id')
             ->orderBy('complaints_transactions.id','DESC')
             ->where('complaints_transactions.compType', 1)
-            ->where('users.lastName', 'Like', '%' . request('term') . '%')
-            ->orWhere('users.firstName', 'Like', '%' . request('term') . '%')
-            ->orWhere('complaints_transactions.respondents', 'Like', '%' . request('term') . '%')
-            ->orWhere('transactions.status', 'Like', '%' . request('term') . '%')
-            ->orWhere('complaints_transactions.respondents', 'Like', '%' . request('term') . '%')
+            ->where('complaints_transactions.created_at', '>=', $fromDate)
+            ->where('complaints_transactions.created_at', '<=', $toDate)
+            // ->where('users.lastName', 'Like', '%' . request('term') . '%')
+            // ->orWhere('users.firstName', 'Like', '%' . request('term') . '%')
+            // ->orWhere('complaints_transactions.respondents', 'Like', '%' . request('term') . '%')
+            // ->orWhere('transactions.status', 'Like', '%' . request('term') . '%')
+            // ->orWhere('complaints_transactions.respondents', 'Like', '%' . request('term') . '%')
             ->select('complaints_transactions.id', 'complaints_transactions.transId', 
                     'complaints_transactions.compDetails','complaints_transactions.respondents', 'complaints_transactions.respondentsAdd',
                     DB::raw('date(complaints_transactions.created_at) as "date"'),
                     'users.firstName','users.lastName', 'users.houseNo', 'users.street', 
                     'transactions.status','transactions.userId')
-            ->paginate(6);
-            $data->appends($request->all());
-
-        }else if(!$request->input('term')){
+            ->get();
+            
+            // dd($fromDate);
+        }else 
+        {
             $data = DB::table('complaints_transactions')
             ->join('transactions', 'complaints_transactions.transId', '=', 'transactions.id')
             ->join('users', 'transactions.userId', '=', 'users.id')
@@ -80,7 +87,7 @@ class ComplaintsController extends Controller
                     DB::raw('date(complaints_transactions.created_at) as "date"'),
                     'users.firstName','users.lastName', 'users.houseNo', 'users.street',
                     'transactions.status','transactions.userId')
-            ->paginate(6);
+            ->get();
         }
         return view('complaints.index', compact('data'))
         ->with('i', ($request->input('page', 1) - 1) * 6);
@@ -88,25 +95,27 @@ class ComplaintsController extends Controller
 
     public function outsider(Request $request)
     {
-        if($request->input('term')){
+        if($request->input('from') && $request->input('to')){
+            $fromDate = $request->input('from') . ' 00:00:00';
+            $toDate = $request->input('to') . ' 23:59:59';
+
             $data = DB::table('complaints_transactions')
             ->join('transactions', 'complaints_transactions.transId', '=', 'transactions.id')
             ->join('users', 'transactions.userId', '=', 'users.id')
             ->join('outside_complainants', 'complaints_transactions.id', '=', 'outside_complainants.compId')
             ->orderBy('complaints_transactions.id','DESC')
             ->where('complaints_transactions.compType', 0)
-            ->where('outside_complainants.complainant', 'Like', '%' . request('term') . '%')
-            ->orWhere('complaints_transactions.respondents', 'Like', '%' . request('term') . '%')
-            ->orWhere('transactions.status', 'Like', '%' . request('term') . '%')
+            ->where('complaints_transactions.created_at', '>=', $fromDate)
+            ->where('complaints_transactions.created_at', '<=', $toDate)
             ->select('complaints_transactions.id', 'complaints_transactions.transId', 
                     'complaints_transactions.compDetails','complaints_transactions.respondents', 'complaints_transactions.respondentsAdd',
                     DB::raw('date(complaints_transactions.created_at) as "date"'),
                     'outside_complainants.complainant','outside_complainants.address',  
                     'transactions.status','transactions.userId')
-            ->paginate(6);
-            $data->appends($request->all());
-
-        }else if(!$request->input('term')){
+            ->get();
+        }
+        else
+        {
           $data = DB::table('complaints_transactions')
           ->join('transactions', 'complaints_transactions.transId', '=', 'transactions.id')
           ->join('users', 'transactions.userId', '=', 'users.id')
@@ -118,7 +127,7 @@ class ComplaintsController extends Controller
                   DB::raw('date(complaints_transactions.created_at) as "date"'),
                   'outside_complainants.complainant', 'outside_complainants.address',
                   'transactions.status','transactions.userId')
-          ->paginate(6);
+          ->get();
         }
         return view('complaints.outsider', compact('data'))
         ->with('i', ($request->input('page', 1) - 1) * 6);

@@ -30,9 +30,28 @@
                         <h3 class="card-title">List of Users</h3>
                     </div>
                     <div class="float-right">
-                        <span class="input-group-btn">
-                            <a class="btn btn-success ms-3 px-3 text-light" href="{{ route('users.create') }}"><i class="fas fa-plus-circle"></i> Add new user</a>
-                        </span>
+
+                        <form style="display: inline" action="{{ route('users.index') }}" method="GET" role="search">
+                            <div class="row">
+                                <label for="date" class="col-form-label">From</label>
+                                <div class="col-sm-4">
+                                    <input type="date" class="form-control input-sm" id="from" name="from" required>
+                                </div>
+                                <label for="date" class="col-form-label">To</label>
+                                <div class="col-sm-4">
+                                <input type="date" class="form-control input-sm" id="to" name="to" required>
+                                </div>        
+                                <button type="submit" name="search" title="Search" class="btn btn-success">Range</button>
+                                <a href="{{ route('users.index') }}">
+                                    <button class="btn btn-success ml-2" type="button" title="Refresh page">
+                                        <span class="fas fa-sync-alt"></span>
+                                    </button>
+                                </a>
+                                {{-- <span class="input-group-btn">
+                                    <a class="btn btn-success ms-3 px-3 text-light" href="{{ route('users.create') }}"><i class="fas fa-plus-circle"></i> Add new user</a>
+                                </span> --}}
+                            </div>      
+                        </form>
                     </div>
                 </div>
                 <!-- /.card-header -->

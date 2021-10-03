@@ -35,14 +35,20 @@ class UserController extends Controller
 
     public function index(Request $request)
     {   
-        if($request->input('term')){
-            $data = User::where('firstName', 'Like', '%' . request('term') . '%')
-            ->orWhere('lastName', 'Like', '%' . request('term') . '%')
-            ->orWhere('middleName', 'Like', '%' . request('term') . '%')
-            ->paginate(5);
+        if($request->input('from') && $request->input('to')){
+            $fromDate = $request->input('from') . ' 00:00:00';
+            $toDate = $request->input('to') . ' 23:59:59';
 
-        }else if(!$request->input('term')){
-            $data = User::orderBy('id','ASC')->paginate(10);
+            $data = User::whereBetween('created_at', [$fromDate, $toDate])->get();
+            // $data = User::where('firstName', 'Like', '%' . request('term') . '%')
+            // ->orWhere('lastName', 'Like', '%' . request('term') . '%')
+            // ->orWhere('middleName', 'Like', '%' . request('term') . '%')
+            // ->paginate(5);
+            
+        }
+        else
+        {
+            $data = User::orderBy('id','ASC')->get();
         }
 
         

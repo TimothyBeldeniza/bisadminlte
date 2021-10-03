@@ -49,28 +49,30 @@ class DocumentsController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->input('term'))
-        {
+        
+
+        if($request->input('from') && $request->input('to') ){
+
+            $fromDate = $request->input('from') . ' 00:00:00';
+            $toDate = $request->input('to') . ' 23:59:59';
+
             $data = DB::table('documents_transactions')
             ->join('transactions', 'documents_transactions.transId', '=', 'transactions.id')
             ->join('document_types', 'documents_transactions.dmId', '=', 'document_types.id')
-            ->join('users', 'transactions.userId', '=', 'users.id')
+            ->join('users', 'users.id', '=', 'transactions.userId')
             ->whereNull('document_types.deleted_at')
-            ->where('users.firstName', 'Like', '%' . request('term') . '%')
-            ->orwhere('users.lastName', 'Like', '%' . request('term') . '%')
-            ->orWhere('document_types.docType', 'Like', '%' . request('term') . '%')
-            ->orWhere('documents_transactions.purpose', 'Like', '%' . request('term') . '%')
-            ->orWhere('transactions.status', 'Like', '%' . request('term') . '%')
+            ->where('documents_transactions.created_at', '>=', $fromDate)
+            ->where('documents_transactions.created_at', '<=', $toDate)
             ->orderBy('documents_transactions.id','DESC')
             ->select('documents_transactions.id', 'documents_transactions.transId', 'documents_transactions.purpose', 
                     'documents_transactions.barangayIdPath', DB::raw('date(documents_transactions.created_at) as "date"'),
                     'users.firstName', 'users.lastName', 'users.email', 
                     'transactions.status', 'transactions.userId', 'document_types.docType')
-            ->paginate(8);
-            $data->appends($request->all());
-            // dd($data);
+            ->get();
+
+            // dd($fromDate);
         }
-        else if(!$request->input('term'))
+        else 
         {
             $data = DB::table('documents_transactions')
             ->join('transactions', 'documents_transactions.transId', '=', 'transactions.id')
@@ -84,6 +86,8 @@ class DocumentsController extends Controller
                     'transactions.status', 'transactions.userId', 'document_types.docType')
             ->paginate(8);
         }
+
+        
            
         return view('documents.index', compact('data'))
         ->with('i', ($request->input('page', 1) - 1) * 8);

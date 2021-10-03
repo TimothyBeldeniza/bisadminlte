@@ -24,7 +24,30 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">List of Non-residential Complaints</h3>
+            <div class="float-left">
+              <h3 class="card-title">List of Non-residential Complaints</h3>
+            </div>
+            <div class="float-right">
+              <form style="display: inline" action="{{ route('complaints.outsider') }}" method="GET" role="search">
+                  <div class="row">
+                      <label for="date" class="col-form-label">From</label>
+                      <div class="col-sm-4">
+                          <input type="date" class="form-control input-sm" id="from" name="from" required>
+                      </div>
+                      <label for="date" class="col-form-label">To</label>
+                      <div class="col-sm-4">
+                      <input type="date" class="form-control input-sm" id="to" name="to" required>
+                      </div>        
+                      <button type="submit" name="search" title="Search" class="btn btn-success">Range</button>
+                      <a href="{{ route('complaints.outsider') }}">
+                          <button class="btn btn-success ml-2" type="button" title="Refresh page">
+                              <span class="fas fa-sync-alt"></span>
+                          </button>
+                      </a>
+                      
+                  </div>      
+              </form>
+            </div>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
