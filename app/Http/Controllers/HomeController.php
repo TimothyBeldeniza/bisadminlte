@@ -77,8 +77,16 @@ class HomeController extends Controller
                 'document_types.docType','transactions.status')
         ->get();
 
+        $stats = [
+            'settled' => Transactions::where('status', '=' ,'Settled')->count(),
+            'escalated' => Transactions::where('status', '=' ,'Escalated')->count(),
+            'unsettled' => Transactions::where('status', '=' ,'Unsettled')->count(),
+            'onGoing' => Transactions::where('status', '=' ,'On Going')->count(),
+            'dismissed' => Transactions::where('status', '=' ,'Dismissed')->count(),
+        ];
         
-        return view('home', compact('documents', 'complaints', 'residents', 'nonresidents', 'xdocus'));
+        // dd($stats);
+        return view('home', compact('documents', 'complaints', 'residents', 'nonresidents', 'xdocus', 'stats'));
     }
 
     /**
