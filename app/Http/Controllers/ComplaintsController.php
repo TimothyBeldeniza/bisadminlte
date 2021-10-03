@@ -9,6 +9,7 @@ use App\Models\User;
 // use App\Models\AvailedServices;
 use App\Models\ComplaintsTransactions;
 use App\Models\OutsideComplainants;
+use App\Models\InsideRespondents;
 use App\Models\Hearings;
 use App\Models\ServiceMaintenances;
 use App\Models\Services;
@@ -264,13 +265,19 @@ class ComplaintsController extends Controller
             'unique_code' => sha1(time()),               
           ]);
 
-          ComplaintsTransactions::create([  
+          $compId = ComplaintsTransactions::create([  
             'transId' => $transId->id,
             'compType' => '1',
             'compDetails' => $request->compDetails,
             'respondents' => $respondentInfo->name,
             'respondentsAdd' => $respondentInfo->address,
           ]);
+
+          InsideRespondents::create([
+             'compId' => $compId->id,
+             'userId' => $request->respondentId,
+          ]);
+
           return redirect('home')->with('success', 'Complaint filed successfully!');
         }
         elseif($request->complainantId != null && $request->respondents != null && $request->respondentsAdd != null)
@@ -320,17 +327,18 @@ class ComplaintsController extends Controller
             'complainant' => $request->cName,
             'address' => $request->cAddress,
           ]);
+
+          InsideRespondents::create([
+            'compId' => $compId->id,
+            'userId' => $request->respondentId,
+          ]);
+
           return redirect('home')->with('success', 'Complaint filed successfully!');
         }
         elseif($request->respondentId == null && $request->complainantId == null)
         {
           return redirect('complaints/create')->with('danger', 'Must contain insider complainant or respondent!');
         }
-        elseif($request->cName != null && $request->respondent != null)
-        {
-         return redirect('complaints/create')->with('danger', 'The complaint must have at least one insider!');
-        }
- 
         
     }
 

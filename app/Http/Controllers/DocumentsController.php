@@ -177,11 +177,31 @@ class DocumentsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {  
+    {   
+        $currentUser = Auth::user()->id;
         $doctypes = DocumentTypes::select('id','docType', 'price')->get();
+        $case = DB::table('complaints_transactions')
+                  ->join('transactions', 'complaints_transactions.transId', '=', 'transactions.id') 
+                  ->join('inside_respondents', 'inside_respondents.compId', '=', 'complaints_transactions.id')
+                  ->where('inside_respondents.userId', $currentUser)
+                  ->select('transactions.status')
+                  ->get();
+      //   dd($case); 
+        if($case->count() > 0)
+        {   
+           if($case[0]->status == "Unsettled" || $case[0]->status == "On Going")
+           {
+              $hasCase = true;
+              return view('documents.create', compact('doctypes'))->with('hasCase', $hasCase);
+           }
+        }
+        else
+        {
+           $hasCase = false;
+           return view('documents.create', compact('doctypes'))->with('hasCase', $hasCase);
+        }
         // dd($data);
         // exit;
-        return view('documents.create', compact('doctypes'));
     }
 
     /**

@@ -26,13 +26,14 @@
 
     <!-- Main content -->
     <section class="content">
-        <div class="card">
+      <div class="container-fluid">
+        <div class="card collapsed-card">
             <div class="card-header">
-              <h3 class="card-title">Requested Documents</h3>
+              <h3 class="card-title font-weight-bold">Requested Documents</h3>
              
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                  <i class="fas fa-minus"></i>
+                  <i class="fas fa-plus"></i>
                 </button>
               </div>
             </div>
@@ -53,7 +54,7 @@
                               Status
                           </th>
                           <th style="width: 8%" class="text-center">
-                                Action
+                              Action
                           </th>
                           <th style="width: 20%" class="text-center">
                             Reason
@@ -90,18 +91,16 @@
 
                                     
                                     <td class="project-actions text-center">
-                                        <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancel{{ $docu->transId }}">
-                                            <i class="fas fa-times-circle"></i>
-                                        </i>
-                                            Cancel
-                                        </a>
+                                          <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancel{{ $docu->transId }}">
+                                             <i class="fas fa-times-circle"></i>
+                                             Cancel
+                                          </a>
                                     </td>
                                     <div class="modal fade" id="cancel{{ $docu->transId }}" tabindex="-1" aria-labelledby="cancelLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
-                                                <div class="modal-header">
+                                                <div class="modal-header bg-danger">
                                                     <h5 class="modal-title" id="cancelLabel">Cancellation</h5>
-                                                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <form action="documents/process/{{ $docu->id }}/{{ $docu->transId }}/{{ $docu->userId }}" method="POST">
@@ -131,7 +130,7 @@
                                                             <label for="otherReason" class="my-1">Specify other reason:</label>
                                                             <input type="text" class="form-control" id="otherReason" name="otherReason" placeholder="Input reason here...">
                                                         </div>
-                                                        <div class="float-end my-1">
+                                                        <div class="float-right my-1">
                                                             <button type="submit" name="submit" value="cancel" onclick="return confirm('Are your sure to cancel request?')" class="btn btn-danger">Cancel Request</button>
                                                         </div>
                                                     </form>
@@ -187,13 +186,13 @@
           </div>
           <!-- /.card -->
 
-          <div class="card">
+          <div class="card collapsed-card">
             <div class="card-header">
-              <h3 class="card-title">All Filed Complaints</h3>
+              <h3 class="card-title font-weight-bold">Filed Complaints</h3>
     
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                  <i class="fas fa-minus"></i>
+                  <i class="fas fa-plus"></i>
                 </button>
               </div>
             </div>
@@ -246,7 +245,7 @@
                                   <span class="badge badge-danger">{{ $comp->status }}</span>
                                 </td>
                               @endif
-                              <td><a class="btn btn-primary my-2" href="complaints/show/{{ $comp->id }}/{{ $comp->userId }}">View</a></td>
+                              <td class="text-center"><a class="btn btn-primary my-2" href="complaints/show/{{ $comp->id }}/{{ $comp->userId }}">View</a></td>
                             </tr>
                         @endforeach
                     @else
@@ -259,13 +258,157 @@
           </div>
           <!-- /.card -->
 
-          <div class="card">
+          <div class="card collapsed-card">
             <div class="card-header">
-              <h3 class="card-title">Cancelled Document Requests</h3>
+              <h3 class="card-title font-weight-bold">Complaints Against You (Residential)</h3>
     
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                  <i class="fas fa-minus"></i>
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <table class="table table-striped projects">
+                  <thead>
+                      <tr>
+                          <th class="text-center">
+                              Date Filed
+                          </th>
+                          <th class="text-center">
+                              Complainant
+                          </th>
+                          <th class="text-center">
+                              Status
+                          </th>
+                          <th class="text-center">
+                              Action
+                          </th>
+                      </tr>
+                  </thead>
+                  <tbody>
+
+                    @if($residents->count() > 0)                                       
+                        @foreach ($residents as $comp)
+                            <tr>
+
+                                <td class="text-center">
+                                    <a>
+                                        {{ $comp->date }}
+                                    </a>
+                                </td>
+
+                                <td class="text-center">
+                                    <a>
+                                        {{ $comp->firstName. ' ' .$comp->lastName }}
+                                    </a>
+                                </td>
+
+                              @if ($comp->status == "Settled")
+                                <td class="project-state text-center">
+                                  <span class="badge badge-success">{{ $comp->status }}</span>
+                                </td>
+                              @elseif ($comp->status == "Escalated")
+                                <td class="project-state text-center">
+                                  <span class="badge badge-warning">{{ $comp->status }}</span>
+                                </td>
+                              @else
+                                <td class="project-state text-center">
+                                  <span class="badge badge-danger">{{ $comp->status }}</span>
+                                </td>
+                              @endif
+                              <td class="text-center"><a class="btn btn-primary my-2" href="complaints/show/{{ $comp->id }}/{{ $comp->userId }}">View</a></td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <td class="text-center" colspan="4"><b class="text-danger">No available data</b></td>
+                    @endif
+                  </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+
+          <div class="card collapsed-card">
+            <div class="card-header">
+              <h3 class="card-title font-weight-bold">Complaints Against You (Non-Residential)</h3>
+    
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <table class="table table-striped projects">
+                  <thead>
+                      <tr>
+                          <th class="text-center">
+                              Date Filed
+                          </th>
+                          <th class="text-center">
+                              Complainant
+                          </th>
+                          <th class="text-center">
+                              Status
+                          </th>
+                          <th class="text-center">
+                              Action
+                          </th>
+                      </tr>
+                  </thead>
+                  <tbody>
+
+                    @if($nonresidents->count() > 0)                                       
+                        @foreach ($nonresidents as $comp)
+                            <tr>
+
+                                <td class="text-center">
+                                    <a>
+                                        {{ $comp->date }}
+                                    </a>
+                                </td>
+
+                                <td class="text-center">
+                                    <a>
+                                        {{ $comp->complainant }}
+                                    </a>
+                                </td>
+
+                              @if ($comp->status == "Settled")
+                                <td class="project-state text-center">
+                                  <span class="badge badge-success">{{ $comp->status }}</span>
+                                </td>
+                              @elseif ($comp->status == "Escalated")
+                                <td class="project-state text-center">
+                                  <span class="badge badge-warning">{{ $comp->status }}</span>
+                                </td>
+                              @else
+                                <td class="project-state text-center">
+                                  <span class="badge badge-danger">{{ $comp->status }}</span>
+                                </td>
+                              @endif
+                              <td class="text-center"><a class="btn btn-primary my-2" href="{{ route('complaints.showoutsider', $comp->id) }}">View</a></td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <td class="text-center" colspan="4"><b class="text-danger">No available data</b></td>
+                    @endif
+                  </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+
+          <div class="card collapsed-card">
+            <div class="card-header">
+              <h3 class="card-title font-weight-bold">Cancelled Document Requests</h3>
+    
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-plus"></i>
                 </button>
               </div>
             </div>
@@ -343,7 +486,7 @@
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
-
+      </div>
     </section>
     <!-- /.content -->
     

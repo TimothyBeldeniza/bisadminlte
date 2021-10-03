@@ -34,7 +34,7 @@
     
                 <div class="col-md-8">
                     <div class="card">
-                        <div class="card-header text-light fw-bold" style="background-color: maroon">{{ __('Edit Account Details') }}</div>
+                        <div class="card-header text-light font-weight-bold" style="background-color: maroon">{{ __('Edit Account Details') }}</div>
         
                         <div class="card-body">
                             <form method="POST" action="{{ route('profiles.update', $user->id) }}" enctype="multipart/form-data">
