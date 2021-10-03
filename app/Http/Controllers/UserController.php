@@ -35,6 +35,7 @@ class UserController extends Controller
 
     public function index(Request $request)
     {   
+<<<<<<< HEAD
         if($request->input('from') && $request->input('to')){
             $fromDate = $request->input('from') . ' 00:00:00';
             $toDate = $request->input('to') . ' 23:59:59';
@@ -48,6 +49,15 @@ class UserController extends Controller
         }
         else
         {
+=======
+        if($request->input('term')){
+            $data = User::where('firstName', 'Like', '%' . request('term') . '%')
+            ->orWhere('lastName', 'Like', '%' . request('term') . '%')
+            ->orWhere('middleName', 'Like', '%' . request('term') . '%')
+            ->get();
+
+        }else if(!$request->input('term')){
+>>>>>>> 03b506c7b0cbda73adf114ace8bfa9a91e485d8c
             $data = User::orderBy('id','ASC')->get();
         }
 
@@ -149,6 +159,7 @@ class UserController extends Controller
         {
             $user->syncPermissions([
                 'module-filed-complaints',
+                'res-module-file-complaint',
                 'complaint-show-details',
                 'complaint-settle',
                 'complaint-view-settle-form',

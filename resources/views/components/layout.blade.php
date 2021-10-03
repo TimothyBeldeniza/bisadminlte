@@ -62,7 +62,7 @@
     </ul>
 
     <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
+    {{-- <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
@@ -72,7 +72,7 @@
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
           <i class="fas fa-th-large"></i>
         </a>
-      </li>
+      </li> --}}
 
       <ul class="nav-item dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDarkDropdownMenuLink">
         <li><a class="dropdown-item" href="{{ route('logout')}}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Logout') }}</a></li>
@@ -90,7 +90,7 @@
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
       <img src="{{ asset('images/brgy-logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">B I S</span>
+      <span class="brand-text font-weight-light">BIS</span>
     </a>
 
     <!-- Sidebar -->
@@ -138,8 +138,10 @@
               </p>
             </a>
           </li>
-    
-          <li class="nav-header">M A N A G E M E N T S</li>
+
+          @hasanyrole('Admin|Chairman|Councilor|Secretary|Treasurer|Clerk')
+          <li class="nav-header">M A N A G E M E N T S</li>   
+          @hasanyrole('Chairman|Secretary|Treasurer|Clerk')
           <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-folder-open"></i>
@@ -155,15 +157,20 @@
                        <p>Requested Documents</p>
                    </a>
                </li>
+               @role('Admin|Secretary')
                <li class="nav-item">
                    <a href="{{ route('doctypes.index') }}" class="nav-link">
                      <i class="nav-icon fas fa-file-medical"></i>
                        <p>Document Types</p>
                    </a>
                </li>
+               @endrole
            </ul>
           </li>
+          @endhasanyrole
+
           <li class="nav-item">
+             @hasanyrole('Admin|Chairman|Councilor|Secretary')
               <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-file-contract"></i>
                   <p>
@@ -185,45 +192,58 @@
                         </a>
                     </li>
                 </ul>
+                @endhasanyrole
+                @role('Admin')
                 <li class="nav-item">
                     <a href="{{ route('users.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-users-cog"></i>
                     <p>Users</p>
                     </a>
                 </li>
+                @endrole
           </li>
+          @endhasanyrole
+
           <li class="nav-header">S E R V I C E S</li>
+          @hasanyrole('Admin|Councilor|Secretary')
           <li class="nav-item">
             <a href="{{ route('complaints.create') }}" class="nav-link">
               <i class="nav-icon fas fa-file-signature"></i>
               <p>Record Complaint</p>
             </a>
           </li>
+          @endhasanyrole
           <li class="nav-item">
             <a href="{{ route('documents.create') }}" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>Request Document</p>
             </a>
           </li>
+          @role('Resident')
           <li class="nav-item">
             <a href="{{ url('/documents/scan') }}" class="nav-link">
               <i class="nav-icon fas fa-qrcode"></i>
               <p>Scan Document</p>
             </a>
           </li>
+          @endrole
+          @hasanyrole('Clerk|Secretary')
           <li class="nav-item">
             <a href="{{ url('/documents/scanReq') }}" class="nav-link">
                <i class="nav-icon fas fa-qrcode"></i>
               <p>Scan Request</p>
             </a>
           </li>
+          @endhasanyrole
           <li class="nav-header">S E T T I N G S</li>
+          @role('Admin')
           <li class="nav-item">
             <a href="{{ route('barangay.index') }}" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>
               <p>Barangay</p>
             </a>
           </li>
+          @endrole
           <li class="nav-item">
             <a href="{{ route('profiles.edit', Auth::user()->id) }}" class="nav-link">
               <i class="nav-icon fas fa-user-edit"></i>

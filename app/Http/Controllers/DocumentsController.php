@@ -69,8 +69,13 @@ class DocumentsController extends Controller
                     'users.firstName', 'users.lastName', 'users.email', 
                     'transactions.status', 'transactions.userId', 'document_types.docType')
             ->get();
+<<<<<<< HEAD
 
             // dd($fromDate);
+=======
+            // $data->appends($request->all());
+            // dd($data);
+>>>>>>> 03b506c7b0cbda73adf114ace8bfa9a91e485d8c
         }
         else 
         {
@@ -84,13 +89,13 @@ class DocumentsController extends Controller
                     'documents_transactions.barangayIdPath', DB::raw('date(documents_transactions.created_at) as "date"'),
                     'users.firstName', 'users.lastName', 'users.email', 
                     'transactions.status', 'transactions.userId', 'document_types.docType')
-            ->paginate(8);
+            ->get();
         }
 
         
            
         return view('documents.index', compact('data'))
-        ->with('i', ($request->input('page', 1) - 1) * 8);
+        ->with('i', ($request->input('page', 1) - 1) * 10);
     }
 
     public function getDocData($transId, $userId)
@@ -181,11 +186,31 @@ class DocumentsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {  
+    {   
+        $currentUser = Auth::user()->id;
         $doctypes = DocumentTypes::select('id','docType', 'price')->get();
+        $case = DB::table('complaints_transactions')
+                  ->join('transactions', 'complaints_transactions.transId', '=', 'transactions.id') 
+                  ->join('inside_respondents', 'inside_respondents.compId', '=', 'complaints_transactions.id')
+                  ->where('inside_respondents.userId', $currentUser)
+                  ->select('transactions.status')
+                  ->get();
+      //   dd($case); 
+        if($case->count() > 0)
+        {   
+           if($case[0]->status == "Unsettled" || $case[0]->status == "On Going")
+           {
+              $hasCase = true;
+              return view('documents.create', compact('doctypes'))->with('hasCase', $hasCase);
+           }
+        }
+        else
+        {
+           $hasCase = false;
+           return view('documents.create', compact('doctypes'))->with('hasCase', $hasCase);
+        }
         // dd($data);
         // exit;
-        return view('documents.create', compact('doctypes'));
     }
 
     /**

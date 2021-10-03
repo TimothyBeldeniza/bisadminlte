@@ -9,6 +9,7 @@ use App\Models\User;
 // use App\Models\AvailedServices;
 use App\Models\ComplaintsTransactions;
 use App\Models\OutsideComplainants;
+use App\Models\InsideRespondents;
 use App\Models\Hearings;
 use App\Models\ServiceMaintenances;
 use App\Models\Services;
@@ -73,10 +74,16 @@ class ComplaintsController extends Controller
                     'users.firstName','users.lastName', 'users.houseNo', 'users.street', 
                     'transactions.status','transactions.userId')
             ->get();
+<<<<<<< HEAD
             
             // dd($fromDate);
         }else 
         {
+=======
+            // $data->appends($request->all());
+
+        }else if(!$request->input('term')){
+>>>>>>> 03b506c7b0cbda73adf114ace8bfa9a91e485d8c
             $data = DB::table('complaints_transactions')
             ->join('transactions', 'complaints_transactions.transId', '=', 'transactions.id')
             ->join('users', 'transactions.userId', '=', 'users.id')
@@ -90,7 +97,7 @@ class ComplaintsController extends Controller
             ->get();
         }
         return view('complaints.index', compact('data'))
-        ->with('i', ($request->input('page', 1) - 1) * 6);
+        ->with('i', ($request->input('page', 1) - 1) * 10);
     }
 
     public function outsider(Request $request)
@@ -273,13 +280,19 @@ class ComplaintsController extends Controller
             'unique_code' => sha1(time()),               
           ]);
 
-          ComplaintsTransactions::create([  
+          $compId = ComplaintsTransactions::create([  
             'transId' => $transId->id,
             'compType' => '1',
             'compDetails' => $request->compDetails,
             'respondents' => $respondentInfo->name,
             'respondentsAdd' => $respondentInfo->address,
           ]);
+
+          InsideRespondents::create([
+             'compId' => $compId->id,
+             'userId' => $request->respondentId,
+          ]);
+
           return redirect('home')->with('success', 'Complaint filed successfully!');
         }
         elseif($request->complainantId != null && $request->respondents != null && $request->respondentsAdd != null)
@@ -329,13 +342,18 @@ class ComplaintsController extends Controller
             'complainant' => $request->cName,
             'address' => $request->cAddress,
           ]);
+
+          InsideRespondents::create([
+            'compId' => $compId->id,
+            'userId' => $request->respondentId,
+          ]);
+
           return redirect('home')->with('success', 'Complaint filed successfully!');
         }
         elseif($request->respondentId == null && $request->complainantId == null)
         {
           return redirect('complaints/create')->with('danger', 'Must contain insider complainant or respondent!');
         }
- 
         
     }
 

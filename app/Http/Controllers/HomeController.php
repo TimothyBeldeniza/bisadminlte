@@ -34,36 +34,34 @@ class HomeController extends Controller
         $complaints = DB::table('complaints_transactions')
         ->join('transactions', 'complaints_transactions.transId', '=', 'transactions.id')
         ->join('users', 'users.id', '=', 'transactions.userId')
-        ->where('users.id', $userId)
+        ->where('transactions.userId', $userId)
+        ->where('complaints_transactions.compType', '1')
         ->orderBy('complaints_transactions.id','DESC')
         ->select('complaints_transactions.id', DB::raw('date(complaints_transactions.created_at) as "date"'), 
-                'complaints_transactions.respondents','complaints_transactions.compDetails', 
+                'complaints_transactions.respondents', 
                 'transactions.status', 'transactions.userId')
         ->get();
 
-        $fcomplaints = DB::table('complaints_transactions')
-        ->join('transactions', 'complaints_transactions.transId', '=', 'transactions.id')
-        ->join('users', 'users.id', '=', 'transactions.userId')
-        ->join('outside_complainants', 'complaints_transactions.id', '=', 'outside_complainants.compId')
-        ->where('users.id', $userId)
-        ->where('complaints_transactions.compType', 0)
-        ->orderBy('complaints_transactions.id','DESC')
+        $residents = DB::table('complaints_transactions')
+        ->join('transactions', 'complaints_transactions.transId', '=', 'transactions.id') 
+        ->join('users', 'transactions.userId', '=', 'users.id') 
+        ->join('inside_respondents', 'inside_respondents.compId', '=', 'complaints_transactions.id')
+        ->where('inside_respondents.userId', $userId)
         ->select('complaints_transactions.id', DB::raw('date(complaints_transactions.created_at) as "date"'), 
-                'complaints_transactions.respondents','complaints_transactions.compDetails', 
+                'users.lastName', 'users.firstName',
+                'transactions.status', 'transactions.userId')
+        ->get();
+
+        $nonresidents = DB::table('complaints_transactions')
+        ->join('transactions', 'complaints_transactions.transId', '=', 'transactions.id') 
+        ->join('outside_complainants', 'outside_complainants.compId', '=', 'complaints_transactions.id') 
+        ->join('inside_respondents', 'inside_respondents.compId', '=', 'complaints_transactions.id')
+        ->where('inside_respondents.userId', $userId)
+        ->select('complaints_transactions.id', DB::raw('date(complaints_transactions.created_at) as "date"'), 
                 'outside_complainants.complainant',
                 'transactions.status', 'transactions.userId')
         ->get();
 
-
-        $blotters = DB::table('blotters_transactions')
-        ->join('transactions', 'blotters_transactions.transId', '=', 'transactions.id')
-        ->join('users', 'users.id', '=', 'transactions.userId')
-        ->where('users.id', $userId)
-        ->orderBy('blotters_transactions.id','DESC')
-        ->select('blotters_transactions.id', DB::raw('date(blotters_transactions.created_at) as "date"'), 
-                'blotters_transactions.respondents','blotters_transactions.blotDetails', 
-                'transactions.status')
-        ->get();
         
         $xdocus = DB::table('documents_transactions')
         ->join('transactions', 'documents_transactions.transId', '=', 'transactions.id')
@@ -80,7 +78,7 @@ class HomeController extends Controller
         ->get();
 
         
-        return view('home', compact('documents', 'complaints', 'fcomplaints', 'blotters', 'xdocus'));
+        return view('home', compact('documents', 'complaints', 'residents', 'nonresidents', 'xdocus'));
     }
 
     /**
