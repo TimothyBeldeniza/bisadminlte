@@ -65,7 +65,7 @@
                                     <label for="lastName" class="col-md-4 col-form-label text-md-right fw-bold required">{{ __('Last Name') }}</label>
                                     
                                     <div class="col-md-6">
-                                        <input @role('Admin') readonly @endrole id="lastName" type="text" class="form-control @error('lastName') is-invalid @enderror" name="lastName" value="{{$user->lastName }}" placeholder="Enter Last Name..." required autocomplete="lastName">
+                                        <input readonly @role('Admin')  @endrole id="lastName" type="text" class="form-control @error('lastName') is-invalid @enderror" name="lastName" value="{{$user->lastName }}" placeholder="Enter Last Name..." required autocomplete="lastName">
                                         
                                         @error('lastName')
                                         <span class="invalid-feedback" role="alert">
@@ -79,7 +79,7 @@
                                     <label for="firstName" class="col-md-4 col-form-label text-md-right fw-bold required">{{ __('First Name') }}</label>
                                     
                                     <div class="col-md-6">
-                                        <input @role('Admin') readonly @endrole id="firstName" type="text" class="form-control @error('firstName') is-invalid @enderror" name="firstName" value="{{ $user->firstName }}" placeholder="Enter First Name..." required autocomplete="firstName">
+                                        <input readonly @role('Admin')  @endrole id="firstName" type="text" class="form-control @error('firstName') is-invalid @enderror" name="firstName" value="{{ $user->firstName }}" placeholder="Enter First Name..." required autocomplete="firstName">
                                         
                                         @error('firstName')
                                         <span class="invalid-feedback" role="alert">
@@ -93,7 +93,7 @@
                                     <label for="middleName" class="col-md-4 col-form-label text-md-right fw-bold required">{{ __('Middle Name') }}</label>
                                     
                                     <div class="col-md-6">
-                                        <input @role('Admin') readonly @endrole id="middleName" type="text" class="form-control @error('middleName') is-invalid @enderror" name="middleName" value="{{ $user->middleName }}" placeholder="Enter Middle Name..." autocomplete="middleName">
+                                        <input readonly @role('Admin')  @endrole id="middleName" type="text" class="form-control @error('middleName') is-invalid @enderror" name="middleName" value="{{ $user->middleName }}" placeholder="Enter Middle Name..." autocomplete="middleName">
                                         
                                         @error('middleName')
                                         <span class="invalid-feedback" role="alert">
