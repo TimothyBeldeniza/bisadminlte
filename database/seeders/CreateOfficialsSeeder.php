@@ -87,7 +87,7 @@ class CreateOfficialsSeeder extends Seeder
             'firstName' => 'Cyril',
             'lastName' => 'Papa', 
             'middleName' => null, 
-            'position' => 'Tresurer', 
+            'position' => 'Treasurer', 
             'imagePath' => 'default.png',
         ]);
     }
