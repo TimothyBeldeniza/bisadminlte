@@ -66,13 +66,13 @@
                     </div>
                     <!-- End of Modal -->    
                   <hr>
-                  @role('Admin')
+                  @role('Admin|Chairman|Councilor')
                     <a class="btn @if ( $hearingCounts == 3 || $td->status == 'Dismissed' || $td->status == 'Escalated' || $td->status == 'Settled') return disabled @endif btn-success fw-bold float-start" data-toggle="modal" data-target="#record-hearing">Record Hearing</a>
                   @endrole
                   @role('Resident')
                     <a onclick="history.back()" class="btn btn-primary fw-bold float-end">Back</a>
                   @endrole
-                  @role('Admin')
+                  @role('Admin|Chairman|Councilor')
                     <a href="{{ route('complaints.index') }}" class="btn btn-primary fw-bold float-end">Back</a>
                   @endrole
                 </div>

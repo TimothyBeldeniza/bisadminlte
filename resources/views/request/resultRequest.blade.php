@@ -23,7 +23,7 @@
       <div class="row justify-content-center">
         <div class="col-sm-6" style="width: 400px">
           <div class="card">
-            <div style="background-color: maroon;" class="card-header text-light"><b>Profile</b></div>
+            <div style="background-color: #f6f7cd;" class="card-header font-weight-bold"><b>Profile</b></div>
                 <div class="card-body">
                   <p class="text-center"><img src="{{ asset('images/users/'.$data->profilePath) }}" style="height: 288px; width: auto;"></p>
                   <p class="text-center text-start card-text"><b>Requisitioner:</b> {{ $data->lastName . ' ' . $data->firstName}}</p>
@@ -43,7 +43,7 @@
 
         <div class="col-sm-6" >
             <div class="card">
-              <div style="background-color: maroon;" class="card-header text-light"><b>Request Details</b></div>
+              <div style="background-color: #f6f7cd;" class="card-header font-weight-bold"><b>Request Details</b></div>
                   <div class="card-body">
                       @if ($message = Session::get('success'))
                         <div class="alert alert-success" role="alert">
@@ -96,106 +96,104 @@
                         </div>
                   </div>
             </div>
-            <div class="col-sm-6" style="width:70%; margin-top: 4%;">
-              <div class="card">
-                <div style="background-color: maroon" class="card-header text-light"><b>Actions</b></div>
-                <div class="card-body">
-                        @if($data->status == 'Due')
-                            <a class="btn btn-primary" data-toggle="modal" data-target="#process{{ $data->id }}">Process</a>
-                            <a class="btn btn-danger" data-toggle="modal" data-target="#disapprove{{ $data->id }}">Disapprove</a>
-                        @elseif($data->status == 'Ready to Claim')
-                            <a class="btn btn-primary" onclick="return confirm('Are yousure to proceed?')" href="/documents/paid/{{ $data->transId }}">Paid</a>
-                            <a class="btn btn-secondary" href="/documents/view-document-pdf/{{ $data->id }}/{{ $data->userId }}" target="_blank">View</a>
-                            <a class="btn btn-success" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
-                        @elseif($data->status == 'Paid')
-                            <a class="btn btn-secondary" href="/documents/view-document-pdf/{{ $data->id }}/{{ $data->userId }}" target="_blank">View</a>
-                            <a class="btn btn-success" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
-                        @else
-                            <b class="text-danger">Document Cancelled</b>
-                        @endif
-                        {{-- Process Reason Modal --}}
-                        <div class="modal fade" id="process{{ $data->id }}" tabindex="-1" aria-labelledby="processLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header bg-primary">
-                                        <h5 class="modal-title text-light" id="processLabel">Processing</h5>
-                                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="/documents/process/{{ $data->id }}/{{ $data->transId }}/{{ $data->userId }}" method="POST">
-                                            <b>Reason to Process</b><br>
-                                            @csrf
+            <div style="width:50%" class="card">
+              <div style="background-color: #f6f7cd;" class="card-header font-weight-bold"><b>Actions</b></div>
+              <div class="card-body">
+                      @if($data->status == 'Due')
+                          <a class="btn btn-primary" data-toggle="modal" data-target="#process{{ $data->id }}">Process</a>
+                          <a class="btn btn-danger" data-toggle="modal" data-target="#disapprove{{ $data->id }}">Disapprove</a>
+                      @elseif($data->status == 'Ready to Claim')
+                          <a class="btn btn-primary" onclick="return confirm('Are yousure to proceed?')" href="/documents/paid/{{ $data->transId }}">Paid</a>
+                          <a class="btn btn-secondary" href="/documents/view-document-pdf/{{ $data->id }}/{{ $data->userId }}" target="_blank">View</a>
+                          <a class="btn btn-success" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
+                      @elseif($data->status == 'Paid')
+                          <a class="btn btn-secondary" href="/documents/view-document-pdf/{{ $data->id }}/{{ $data->userId }}" target="_blank">View</a>
+                          <a class="btn btn-success" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
+                      @else
+                          <b class="text-danger">Document Cancelled</b>
+                      @endif
+                      {{-- Process Reason Modal --}}
+                      <div class="modal fade" id="process{{ $data->id }}" tabindex="-1" aria-labelledby="processLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                              <div class="modal-content">
+                                  <div class="modal-header bg-primary">
+                                      <h5 class="modal-title text-light" id="processLabel">Processing</h5>
+                                      <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                      <form action="/documents/process/{{ $data->id }}/{{ $data->transId }}/{{ $data->userId }}" method="POST">
+                                          <b>Reason to Process</b><br>
+                                          @csrf
 
-                                            <div class="form-group my-1"> 
-                                                <input type="radio" id="vId" name="reason" value="Valid ID" onclick="processOthers{{ $data->id }}()">
-                                                <label>Valid ID</label>
-                                            </div>
+                                          <div class="form-group my-1"> 
+                                              <input type="radio" id="vId" name="reason" value="Valid ID" onclick="processOthers{{ $data->id }}()">
+                                              <label>Valid ID</label>
+                                          </div>
 
-                                            <div class="form-group my-1"> 
-                                                <input type="radio" id="sp" name="reason" value="Sufficient Purpose" onclick="processOthers{{ $data->id }}()">
-                                                <label>Sufficient Purpose</label>
-                                            </div>
+                                          <div class="form-group my-1"> 
+                                              <input type="radio" id="sp" name="reason" value="Sufficient Purpose" onclick="processOthers{{ $data->id }}()">
+                                              <label>Sufficient Purpose</label>
+                                          </div>
 
-                                            <div class="form-group my-1">
-                                                <input type="radio" id="otherP{{ $data->id }}" name="reason" value="Other" onclick="processOthers{{ $data->id }}()">
-                                                <label>Other</label>
-                                            </div>  
+                                          <div class="form-group my-1">
+                                              <input type="radio" id="otherP{{ $data->id }}" name="reason" value="Other" onclick="processOthers{{ $data->id }}()">
+                                              <label>Other</label>
+                                          </div>  
 
-                                            <div class="form-group my-1" style="display:none;" id="othersP{{ $data->id }}">
-                                                <label for="otherReason" class="my-1">Specify other reason:</label>
-                                                <input type="text" class="form-control" id="otherReason" name="otherReason" placeholder="Input reason here...">
-                                            </div>
-                                            <div class="float-end my-1">
-                                                <button type="submit" name="submit" value="process" onclick="return confirm('Are your sure to proceed?')" class="btn btn-primary">Save Reason</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {{-- End of Process Reason Modal --}}
-                        {{-- Disapprove Reason Modal --}}
-                        <div class="modal fade" id="disapprove{{ $data->id }}" tabindex="-1" aria-labelledby="disapproveLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header bg-danger">
-                                        <h5 class="modal-title text-light" id="disapproveLabel">Disapproving</h5>
-                                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="/documents/process/{{ $data->id }}/{{ $data->transId }}/{{ $data->userId }}" method="POST">
-                                            <b>Reason to Disapprove</b><br>
-                                            @csrf
+                                          <div class="form-group my-1" style="display:none;" id="othersP{{ $data->id }}">
+                                              <label for="otherReason" class="my-1">Specify other reason:</label>
+                                              <input type="text" class="form-control" id="otherReason" name="otherReason" placeholder="Input reason here...">
+                                          </div>
+                                          <div class="float-end my-1">
+                                              <button type="submit" name="submit" value="process" onclick="return confirm('Are your sure to proceed?')" class="btn btn-primary">Save Reason</button>
+                                          </div>
+                                      </form>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      {{-- End of Process Reason Modal --}}
+                      {{-- Disapprove Reason Modal --}}
+                      <div class="modal fade" id="disapprove{{ $data->id }}" tabindex="-1" aria-labelledby="disapproveLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                              <div class="modal-content">
+                                  <div class="modal-header bg-danger">
+                                      <h5 class="modal-title text-light" id="disapproveLabel">Disapproving</h5>
+                                      <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                      <form action="/documents/process/{{ $data->id }}/{{ $data->transId }}/{{ $data->userId }}" method="POST">
+                                          <b>Reason to Disapprove</b><br>
+                                          @csrf
 
-                                            <div class="form-group my-1"> 
-                                                <input type="radio" id="vId" name="reason" value="Invalid ID" onclick="disapproveOthers{{ $data->id }}()">
-                                                <label>Invalid ID</label>
-                                            </div>
+                                          <div class="form-group my-1"> 
+                                              <input type="radio" id="vId" name="reason" value="Invalid ID" onclick="disapproveOthers{{ $data->id }}()">
+                                              <label>Invalid ID</label>
+                                          </div>
 
-                                            <div class="form-group my-1"> 
-                                                <input type="radio" id="sp" name="reason" value="Inufficient Purpose" onclick="disapproveOthers{{ $data->id }}()">
-                                                <label>Insufficient Purpose</label>
-                                            </div>
+                                          <div class="form-group my-1"> 
+                                              <input type="radio" id="sp" name="reason" value="Inufficient Purpose" onclick="disapproveOthers{{ $data->id }}()">
+                                              <label>Insufficient Purpose</label>
+                                          </div>
 
-                                            <div class="form-group my-1">
-                                                <input type="radio" id="otherD{{ $data->id }}" name="reason" value="Other" onclick="disapproveOthers{{ $data->id }}()">
-                                                <label>Other</label>
-                                            </div>  
+                                          <div class="form-group my-1">
+                                              <input type="radio" id="otherD{{ $data->id }}" name="reason" value="Other" onclick="disapproveOthers{{ $data->id }}()">
+                                              <label>Other</label>
+                                          </div>  
 
-                                            <div class="form-group my-1" style="display:none;" id="othersD{{ $data->id }}">
-                                                <label for="otherReason" class="my-1">Specify other reason:</label>
-                                                <input type="text" class="form-control" id="otherReason" name="otherReason" placeholder="Input reason here...">
-                                            </div>
-                                            <div class="float-end my-1">
-                                                <button type="submit" name="submit" value="disapprove" onclick="return confirm('Are your sure to proceed?')" class="btn btn-primary">Save Reason</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {{-- End of Disapprove Reason Modal --}}
-                </div>
+                                          <div class="form-group my-1" style="display:none;" id="othersD{{ $data->id }}">
+                                              <label for="otherReason" class="my-1">Specify other reason:</label>
+                                              <input type="text" class="form-control" id="otherReason" name="otherReason" placeholder="Input reason here...">
+                                          </div>
+                                          <div class="float-end my-1">
+                                              <button type="submit" name="submit" value="disapprove" onclick="return confirm('Are your sure to proceed?')" class="btn btn-primary">Save Reason</button>
+                                          </div>
+                                      </form>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      {{-- End of Disapprove Reason Modal --}}
               </div>
             </div>
           </div>

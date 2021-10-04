@@ -21,13 +21,21 @@ class PermissionTableSeeder extends Seeder
             'barangay-official-edit',
             'barangay-official-delete',
  
-            
             'documents-show-ID',
             'documents-process',
             'documents-view',
             'documents-save-PDF',
             'documents-disapprove',
-            
+
+            'documents-types',
+            'documents-types-create',
+            'documents-types-edit',
+            'documents-types-delete',
+
+            //Scanner
+            'res-documents-scan-document',
+            'documents-scan-request',
+
             'complaint-show-details',
             'complaint-settle',
             'complaint-view-settle-form',
@@ -39,9 +47,6 @@ class PermissionTableSeeder extends Seeder
             'complaint-save-escalation-form',
             'complaint-reject',
             
-            'blotter-note',
-            'blotter-show',
-            
             'usrmngmnt-show',
             'usrmngmnt-edit',
             'usrmngmnt-delete',
@@ -49,18 +54,16 @@ class PermissionTableSeeder extends Seeder
             //Modules/pages
 
             'res-module-request-document',
-            'res-module-file-complaint',
-            'res-module-file-blotter',
-
-            'module-service-management',
+            'module-file-complaint',
+            // 'module-service-management',
             
             'module-requested-documents',
             'module-filed-complaints',
-            'module-filed-blotters',
             
             'module-usrmngmnt',
 
-            'module-reports',
+
+
 
         ];
 

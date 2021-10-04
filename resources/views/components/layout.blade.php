@@ -160,12 +160,14 @@
                        <p>Requested Documents</p>
                    </a>
                </li>
+               @can('documents-types')
                <li class="nav-item">
-                   <a href="{{ route('doctypes.index') }}" class="nav-link">
-                     <i class="nav-icon fas fa-file-medical"></i>
-                       <p>Document Types</p>
-                   </a>
-               </li>  
+                 <a href="{{ route('doctypes.index') }}" class="nav-link">
+                  <i class="nav-icon fas fa-file-medical"></i>
+                  <p>Document Types</p>
+                </a>
+              </li>  
+              @endcan
            </ul>
           </li>
           @endcan
@@ -206,7 +208,7 @@
           @endhasanyrole
 
           <li class="nav-header">S E R V I C E S</li>
-             @can('res-module-file-complaint')
+             @can('module-file-complaint')
           <li class="nav-item">
             <a href="{{ route('complaints.create') }}" class="nav-link">
               <i class="nav-icon fas fa-file-signature"></i>
@@ -222,22 +224,22 @@
             </a>
           </li>
           @endcan
-          @role('Resident')
+          @can('res-documents-scan-document') 
           <li class="nav-item">
             <a href="{{ url('/documents/scan') }}" class="nav-link">
               <i class="nav-icon fas fa-qrcode"></i>
               <p>Scan Document</p>
             </a>
           </li>
-          @endrole
-          @hasanyrole('Clerk|Secretary')
+          @endcan
+          @can('documents-scan-request')
           <li class="nav-item">
             <a href="{{ url('/documents/scanReq') }}" class="nav-link">
                <i class="nav-icon fas fa-qrcode"></i>
               <p>Scan Request</p>
             </a>
           </li>
-          @endhasanyrole
+          @endcan
           <li class="nav-header">S E T T I N G S</li>
           @role('Admin')
           <li class="nav-item">

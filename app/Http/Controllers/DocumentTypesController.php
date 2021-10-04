@@ -8,11 +8,21 @@ use App\Models\DocumentTypes;
 
 class DocumentTypesController extends Controller
 {
+  
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+        $this->middleware(['auth','verified']);
+        $this->middleware('permission:documents-types',['only' => 'index']);
+        $this->middleware('permission:documents-types-create', ['only' => ['create','store']]);
+        $this->middleware('permission:documents-types-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:documents-types-delete', ['only' => ['destroy']]);
+        // $this->middleware();
+    }
     public function index(Request $request)
     {
         $td = DB::table('document_types')

@@ -21,7 +21,7 @@
          <div class="row">
             <div class="col-md-3">
                <div class="card">
-                  <div class="card-header text-light font-weight-bold" style="background-color: maroon;">{{ __('Legend') }}</div>
+                  <div class="card-header text-dark font-weight-bold" style="background-color: #f6f7cd;">{{ __('Legend') }}</div>
                   <div class="card-body">
                      <ul>
                         <li><p><b>&lt;&lt;lastName&gt;&gt;</b> - Resident's Last Name</p></li>
@@ -40,7 +40,7 @@
             </div>
             <div class="col-md-9">
                <div class="card">
-                  <div class="card-header text-light font-weight-bold" style="background-color: maroon;">{{ __('Document Type Form') }}</div>
+                  <div class="card-header text-dark font-weight-bold" style="background-color: #f6f7cd;">{{ __('Document Type Form') }}</div>
                   <div class="card-body">
                     <form method="POST" action="{{ route('doctypes.update', $td->id) }}">
                       @method('PUT')

@@ -110,7 +110,7 @@
       </div>
    @endhasanyrole
 
-   @hasanyrole('Secretary|Clerk|Treasurer')
+   @hasanyrole('Admin|Chairman|Secretary|Clerk|Treasurer')
       {{-- Documents  --}}
       <div class="content">
         <div class="container-fluid">

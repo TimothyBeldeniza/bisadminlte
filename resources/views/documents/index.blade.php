@@ -60,6 +60,7 @@
                       <th>Date Requested</th>
                       <th>Email</th>
                       <th>Document</th>
+                      <th>Price</th>
                       <th>Purpose</th>
                       <th>Barangay ID</th>
                       <th>Status</th>
@@ -77,6 +78,7 @@
                                     <td>{{ $trans->date}}</td>
                                     <td>{{ $trans->email }}</td>
                                     <td>{{ $trans->docType }}</td>
+                                    <td>{{ '₱' . $trans->price }}</td>
                                     <td>{{ $trans->purpose }}</td>
                                     <td class="text-center">
                                         @if ($trans->barangayIdPath != null)
@@ -231,7 +233,7 @@
                             @endforeach
                         @else
                             <tr>
-                            <td colspan="9" class="text-center"><b class="text-danger">No Data Available</b></td>
+                            <td colspan="10" class="text-center"><b class="text-danger">No Data Available</b></td>
                             </tr>
                         @endif
                     </tbody>

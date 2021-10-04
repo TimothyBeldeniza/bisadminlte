@@ -37,9 +37,8 @@ class DocumentsController extends Controller
         $this->middleware('permission:documents-view', ['only' => 'pdfViewDocument']);
         $this->middleware('permission:documents-save-PDF',['only' => 'pdfSaveDocument']);
         $this->middleware('permission:documents-disapprove',['only' => 'disapproved']);
-
-
-
+        $this->middleware('permission:res-documents-scan-document',['only' => 'scan']);
+        $this->middleware('permission:documents-scan-request',['only' => 'scanReq']);
         // $this->middleware();
     }
     /**
@@ -67,7 +66,7 @@ class DocumentsController extends Controller
             ->select('documents_transactions.id', 'documents_transactions.transId', 'documents_transactions.purpose', 
                     'documents_transactions.barangayIdPath', DB::raw('date(documents_transactions.created_at) as "date"'),
                     'users.firstName', 'users.lastName', 'users.email', 
-                    'transactions.status', 'transactions.userId', 'document_types.docType')
+                    'transactions.status', 'transactions.userId', 'document_types.docType','document_types.price')
             ->get();
             // $data->appends($request->all());
             // dd($data);
@@ -83,7 +82,7 @@ class DocumentsController extends Controller
             ->select('documents_transactions.id', 'documents_transactions.transId', 'documents_transactions.purpose', 
                     'documents_transactions.barangayIdPath', DB::raw('date(documents_transactions.created_at) as "date"'),
                     'users.firstName', 'users.lastName', 'users.email', 
-                    'transactions.status', 'transactions.userId', 'document_types.docType')
+                    'transactions.status', 'transactions.userId', 'document_types.docType','document_types.price')
             ->get();
         }
 

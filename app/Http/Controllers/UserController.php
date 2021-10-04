@@ -151,7 +151,7 @@ class UserController extends Controller
         {
             $user->syncPermissions([
                 'module-filed-complaints',
-                'res-module-file-complaint',
+                'module-file-complaint',
                 'complaint-show-details',
                 'complaint-settle',
                 'complaint-view-settle-form',
@@ -165,6 +165,7 @@ class UserController extends Controller
 
                 'res-barangay-official-list',
                 'res-module-request-document',
+                'res-documents-scan-document',
             ]);
             
         }
@@ -178,7 +179,15 @@ class UserController extends Controller
                 'documents-view',
                 'documents-save-PDF',
                 'documents-disapprove',
-                
+                'documents-types',
+                'documents-types-create',
+                'documents-types-edit',
+                'documents-types-delete',
+
+                'res-documents-scan-document',
+                'documents-scan-request',
+
+                'module-file-complaint',
                 'module-filed-complaints',
                 'complaint-show-details',
                 'complaint-view-settle-form',
@@ -190,14 +199,17 @@ class UserController extends Controller
 
                 'res-barangay-official-list',
                 'res-module-request-document',
+                'res-documents-scan-document',
             ]);
         }
         else if($request->input('roles') == 'Treasurer')
         {
             $user->syncPermissions([
                 'module-requested-documents',
-                'module-filed-complaints',
+                // 'module-filed-complaints',
                 'res-barangay-official-list',
+                'res-documents-scan-document',
+                'res-module-request-document',
             ]);
         }
 
@@ -210,7 +222,8 @@ class UserController extends Controller
                 'documents-view',
                 'documents-save-PDF',
                 'documents-disapprove',
-               
+                'res-documents-scan-document',
+                'documents-scan-request',
                 'res-barangay-official-list',
                 'res-module-request-document',
             ]);
@@ -228,8 +241,9 @@ class UserController extends Controller
                 'complaint-save-complaint-form',
                 'complaint-view-escalation-form',
                 'complaint-save-escalation-form',
-
+                
                 'res-module-request-document',
+                'res-documents-scan-document',
             ]);
         }
         else if($request->input('roles') == 'Resident')

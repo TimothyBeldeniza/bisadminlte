@@ -28,7 +28,7 @@ class ComplaintsController extends Controller
     function __construct()
     {
         $this->middleware(['auth','verified']);
-        $this->middleware('permission:res-module-file-complaint', ['only' => ['create','store']]);
+        $this->middleware('permission:module-file-complaint', ['only' => ['create','store']]);
         $this->middleware('permission:module-filed-complaints', ['only' => 'index']);
         $this->middleware('permission:complaint-view-complaint-form', ['only' => 'pdfViewComplaint']);
         $this->middleware('permission:complaint-save-complaint-form', ['only' => 'pdfSaveComplaint']);
