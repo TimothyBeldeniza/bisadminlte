@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             CreateAdminUserSeeder::class,
             DocumentTypesSeeder::class,
             BarangaySeeder::class,
+            CreateOfficialsSeeder::class,
         ]);
     }
 }

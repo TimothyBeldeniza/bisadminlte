@@ -4,7 +4,7 @@
     <style>
         .float-right:hover
         {
-            color:maroon;
+            color:#264e2c;
         }
     </style>
 
