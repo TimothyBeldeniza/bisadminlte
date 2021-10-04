@@ -23,6 +23,7 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+    @hasanyrole('Admin|Chairman|Councilor|Secretary')
     <div class="content">
         <div class="container-fluid">
             <h4>Complaints</h4>
@@ -106,7 +107,7 @@
 
         </div><!-- /.container-fluid -->
       </div>
-    
+    @endhasrole
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
