@@ -164,6 +164,7 @@ class UserController extends Controller
                 'complaint-reject',
 
                 'res-barangay-official-list',
+                'res-module-request-document',
             ]);
             
         }
@@ -188,6 +189,7 @@ class UserController extends Controller
                 'complaint-save-escalation-form',
 
                 'res-barangay-official-list',
+                'res-module-request-document',
             ]);
         }
         else if($request->input('roles') == 'Treasurer')
@@ -210,6 +212,7 @@ class UserController extends Controller
                 'documents-disapprove',
                
                 'res-barangay-official-list',
+                'res-module-request-document',
             ]);
         }
         else if($request->input('roles') == 'Chairman')
@@ -225,6 +228,8 @@ class UserController extends Controller
                 'complaint-save-complaint-form',
                 'complaint-view-escalation-form',
                 'complaint-save-escalation-form',
+
+                'res-module-request-document',
             ]);
         }
         else if($request->input('roles') == 'Resident')
