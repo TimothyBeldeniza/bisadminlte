@@ -62,7 +62,7 @@
                                 </div>
     
                                 <div class="form-group row my-1">
-                                    <label for="lastName" class="col-md-4 col-form-label text-md-right fw-bold required">{{ __('Last Name') }}</label>
+                                    <label for="lastName" class="col-md-4 col-form-label text-md-right fw-bold ">{{ __('Last Name') }}</label>
                                     
                                     <div class="col-md-6">
                                         <input readonly @role('Admin')  @endrole id="lastName" type="text" class="form-control @error('lastName') is-invalid @enderror" name="lastName" value="{{$user->lastName }}" placeholder="Enter Last Name..." required autocomplete="lastName">
@@ -76,7 +76,7 @@
                                 </div>
                                 
                                 <div class="form-group row my-1">
-                                    <label for="firstName" class="col-md-4 col-form-label text-md-right fw-bold required">{{ __('First Name') }}</label>
+                                    <label for="firstName" class="col-md-4 col-form-label text-md-right fw-bold ">{{ __('First Name') }}</label>
                                     
                                     <div class="col-md-6">
                                         <input readonly @role('Admin')  @endrole id="firstName" type="text" class="form-control @error('firstName') is-invalid @enderror" name="firstName" value="{{ $user->firstName }}" placeholder="Enter First Name..." required autocomplete="firstName">
@@ -90,7 +90,7 @@
                                 </div>
                                 
                                 <div class="form-group row my-1">
-                                    <label for="middleName" class="col-md-4 col-form-label text-md-right fw-bold required">{{ __('Middle Name') }}</label>
+                                    <label for="middleName" class="col-md-4 col-form-label text-md-right fw-bold">{{ __('Middle Name') }}</label>
                                     
                                     <div class="col-md-6">
                                         <input readonly @role('Admin')  @endrole id="middleName" type="text" class="form-control @error('middleName') is-invalid @enderror" name="middleName" value="{{ $user->middleName }}" placeholder="Enter Middle Name..." autocomplete="middleName">
@@ -104,7 +104,7 @@
                                 </div>
                                 
                                 <div class="form-group row my-1">
-                                    <label for="email" class="col-md-4 col-form-label text-md-right fw-bold required">{{ __('E-Mail Address') }}</label>
+                                    <label for="email" class="col-md-4 col-form-label text-md-right fw-bold ">{{ __('E-Mail Address') }}</label>
                                     
                                     <div class="col-md-6">
                                         <input disabled id="email" placeholder="example@gmail.com" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" placeholder="Enter Email Address..." required autocomplete="email">
@@ -216,7 +216,7 @@
                                 </div>
         
                                 <div class="form-group row my-1">
-                                    <label for="citizenship" class="col-md-4 col-form-label text-md-right fw-bold">{{ __('Citizenship') }}</label>
+                                    <label for="citizenship" class="col-md-4 col-form-label text-md-right fw-bold required">{{ __('Citizenship') }}</label>
                                     
                                     <div class="col-md-6">
                                         <input id="citizenship" type="text" class="form-control @error('citizenship') is-invalid @enderror" name="citizenship" value="{{ $user->citizenship }}" placeholder="Enter Citizenship..." required autocomplete="citizenship">

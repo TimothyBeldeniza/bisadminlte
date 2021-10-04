@@ -87,7 +87,7 @@ class ProfileController extends Controller
             'dob' => ['required', 'date'],  
             // 'gender' => ['required', 'string'],
             'civilStatus' => ['required', 'string'],
-            'citizenship' => ['regex:/^[a-zA-ZñÑ\s]+$/','required', 'string', 'max:255'],
+            'citizenship' => ['regex:/^[a-zA-ZñÑ\s]+$/', 'string', 'max:255'],
             'image' => 'mimes:jpg,png,jpeg|max:5048',
 
         ]);
