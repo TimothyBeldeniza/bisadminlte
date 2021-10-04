@@ -78,7 +78,17 @@
                                             @foreach($user->getRoleNames() as $v)
                                                 @if ($v == 'Admin')
                                                     <label class="badge bg-success">{{ $v }}</label>
-                                                @else
+                                                @elseif ($v == 'Chairman')
+                                                    <label class="badge bg-primary">{{ $v }}</label>
+                                                @elseif ($v == 'Councilor')
+                                                    <label class="badge bg-danger">{{ $v }}</label>
+                                                @elseif ($v == 'Secretary')
+                                                    <label class="badge bg-warning">{{ $v }}</label>
+                                                @elseif ($v == 'Treasurer')
+                                                    <label class="badge bg-info">{{ $v }}</label>
+                                                @elseif ($v == 'Clerk')
+                                                    <label class="badge bg-dark">{{ $v }}</label>
+                                                @elseif ($v == 'Resident')
                                                     <label class="badge bg-secondary">{{ $v }}</label>
                                                 @endif
                                             @endforeach

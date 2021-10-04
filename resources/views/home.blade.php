@@ -108,7 +108,9 @@
 
         </div><!-- /.container-fluid -->
       </div>
+   @endhasanyrole
 
+   @hasanyrole('Secretary|Clerk|Treasurer')
       {{-- Documents  --}}
       <div class="content">
         <div class="container-fluid">
@@ -304,7 +306,7 @@
                                         </a>
                                     </td>
 
-                                @elseif($docu->status == "Disapproved")
+                                @elseif($docu->status == "Disapproved" || $docu->status == "Due")
                                     <td class="project-state text-center">
                                         <span class="badge badge-danger">{{ $docu->status }}</span>
                                     </td>

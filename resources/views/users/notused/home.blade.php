@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, maximum-scale=1">
 <title>Barangay Information System</title>
-<link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png">
+<link rel="icon" href="{{ asset('images/brgy-logo.png') }}" type="image/png">
 <link href="{{ asset('css/home-css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('css/home-css/style.css') }}" rel="stylesheet" type="text/css"> 
 <link href="{{ asset('css/home-css/font-awesome.css') }}" rel="stylesheet" type="text/css"> 

@@ -61,7 +61,7 @@
                 <h3 class="text-start ms-3" for="role" >{{ __('Role') }}</h3>
                 <div class="flex-box-container-1">
                     <div>
-                        <select name="roles" multiple="multiple" class="form-select form-select-md mb-2">
+                        <select multiple name="roles" class="form-control">
                             @foreach ( $roles as $role )
                                 <option @if ($userRole[0] == $role) return selected @endif value="{{ $role }}">{{ $role }}</option>                                            
                             @endforeach
@@ -88,7 +88,7 @@
             <div class="container-3">
                 <div class="flex-box-container-3">
                     <div>
-                        <button  type="submit" class="btn btn-success" >
+                        <button  type="submit" class="btn btn-primary" >
                             {{ __('Submit') }}
                         </button>
                     </div>

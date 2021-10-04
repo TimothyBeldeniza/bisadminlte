@@ -23,7 +23,7 @@
         <div class="row justify-content-center">
           <div class="col-sm-6">
               <div class="card">
-                <div style="background-color: maroon;" class="card-header text-light"><b>Complaint Details</b></div>
+               <div style="background-color: #f6f7cd" class="card-header text-dark font-weight-bold"><b>Complaint Details</b></div>
                 <div class="card-body">
                     <p class="card-text"><b>Date Filed:</b> {{ Carbon\Carbon::parse($td->date)->format('jS F, Y') }} </p>
                     <p class="card-text"><b>Complainant:</b> {{ $td->firstName . ' ' . $td->lastName }}</p>
@@ -106,7 +106,7 @@
             </div>
             <div class="col-sm-6" style="width: 500px">
               <div class="card">
-                <div style="background-color: maroon" class="card-header text-light"><b>Actions</b></div>
+                <div style="background-color: #f6f7cd" class="card-header text-dark font-weight-bold"><b>Actions</b></div>
                 <div class="card-body">
                   <h5 class="card-text">Conditions</h5>
                   @if ($td->reason == Null)
@@ -147,7 +147,7 @@
                   @elseif ($td->status == "Dismissed") 
                     <b class="text-danger"> fw-boldNo Measures Required</b>
                   @elseif ($hearingCounts == 3)
-                    @role('Admin')
+                    @role('Admin|Chairman|Councilor')
                       <a class="btn btn-success fw-bold my-2" title="Settle the Complaint" data-toggle="modal" data-target="#record-settle">Settle</a>
                       <a class="btn btn-warning fw-bold my-2" title="Escalate the Complaint" data-toggle="modal" data-target="#record-escalate">Escalate</a>
                       <a class="btn btn-danger fw-bold my-2" title="Dismiss the Complaint" data-toggle="modal" data-target="#record-dismiss">Dismiss</a><br>
@@ -155,13 +155,13 @@
                     <a class="btn btn-primary fw-bold my-2" href="{{ url('/complaints/show/view-complaint-pdf/'.$td->id.'/'.$td->transId) }}" target="_blank">View Complaint Form</a><br> 
                     <a class="btn btn-secondary fw-bold my-2" href="{{ url('/complaints/show/generate-complaint-pdf/'.$td->id.'/'.$td->transId) }}">Save Complaint Form</a><br> 
                   @elseif($hearingCounts == 0)
-                    @role('Admin')
+                    @role('Admin|Chairman|Councilor')
                       <a class="btn btn-danger fw-bold my-2" title="Dismiss the Complaint" data-toggle="modal" data-target="#record-dismiss">Dismiss</a><br>
                     @endrole 
                     <a class="btn btn-primary fw-bold my-2" href="{{ url('/complaints/show/view-complaint-pdf/'.$td->id.'/'.$td->transId) }}" target="_blank">View Complaint Form</a><br> 
                     <a class="btn btn-secondary fw-bold my-2" href="{{ url('/complaints/show/generate-complaint-pdf/'.$td->id.'/'.$td->transId) }}">Save Complaint Form</a><br> 
                   @else
-                  @role('Admin')
+                  @role('Admin|Chairman|Councilor')
                     <a class="btn btn-success fw-bold my-2" title="Settle the Complaint" data-toggle="modal" data-target="#record-settle">Settle</a>
                     <a class="btn btn-danger fw-bold my-2" title="Dismiss the Complaint" data-toggle="modal" data-target="#record-dismiss">Dismiss</a><br>
                   @endrole 

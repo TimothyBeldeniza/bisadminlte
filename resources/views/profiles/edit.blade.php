@@ -232,7 +232,7 @@
         
                                 <div class="form-group row my-1">
                                     <div class="col-md-6 offset-md-4 ">
-                                        <button onclick="return confirm('Are your inputs correct?')" type="submit" class="btn btn-success fw-bold">
+                                        <button onclick="return confirm('Are your inputs correct?')" type="submit" class="btn btn-primary">
                                             {{ __('Submit') }}
                                         </button>
                                     </div>

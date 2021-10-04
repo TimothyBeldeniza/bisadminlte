@@ -143,7 +143,7 @@
 
           @hasanyrole('Admin|Chairman|Councilor|Secretary|Treasurer|Clerk')
           <li class="nav-header">M A N A G E M E N T S</li>   
-          @hasanyrole('Chairman|Secretary|Treasurer|Clerk')
+          @can('module-requested-documents')
           <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-folder-open"></i>
@@ -159,20 +159,18 @@
                        <p>Requested Documents</p>
                    </a>
                </li>
-               @role('Admin|Secretary')
                <li class="nav-item">
                    <a href="{{ route('doctypes.index') }}" class="nav-link">
                      <i class="nav-icon fas fa-file-medical"></i>
                        <p>Document Types</p>
                    </a>
-               </li>
-               @endrole
+               </li>  
            </ul>
           </li>
-          @endhasanyrole
+          @endcan
 
           <li class="nav-item">
-             @hasanyrole('Admin|Chairman|Councilor|Secretary')
+             @can('module-filed-complaints')
               <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-file-contract"></i>
                   <p>
@@ -194,33 +192,35 @@
                         </a>
                     </li>
                 </ul>
-                @endhasanyrole
-                @role('Admin')
+                @endcan
+                @can('module-usrmngmnt')
                 <li class="nav-item">
                     <a href="{{ route('users.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-users-cog"></i>
                     <p>Users</p>
                     </a>
                 </li>
-                @endrole
+                @endcan
           </li>
           @endhasanyrole
 
           <li class="nav-header">S E R V I C E S</li>
-          @hasanyrole('Admin|Councilor|Secretary')
+             @can('res-module-file-complaint')
           <li class="nav-item">
             <a href="{{ route('complaints.create') }}" class="nav-link">
               <i class="nav-icon fas fa-file-signature"></i>
               <p>Record Complaint</p>
             </a>
           </li>
-          @endhasanyrole
+          @endcan
+          @can('res-module-request-document') 
           <li class="nav-item">
             <a href="{{ route('documents.create') }}" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>Request Document</p>
             </a>
           </li>
+          @endcan
           @role('Resident')
           <li class="nav-item">
             <a href="{{ url('/documents/scan') }}" class="nav-link">
