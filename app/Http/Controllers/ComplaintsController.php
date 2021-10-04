@@ -269,7 +269,7 @@ class ComplaintsController extends Controller
           $transId = Transactions::create([
             'userId' => $request->complainantId,
             // 'serviceId' => $serviceId,
-            'status' => 'Unsettled',
+            'status' => 'Unresolved',
             'unique_code' => sha1(time()),               
           ]);
 
@@ -293,7 +293,7 @@ class ComplaintsController extends Controller
           $transId = Transactions::create([
             'userId' => $request->complainantId,
             // 'serviceId' => $serviceId,
-            'status' => 'Unsettled',
+            'status' => 'Unresolved',
             'unique_code' => sha1(time()),               
           ]);
         
@@ -318,7 +318,7 @@ class ComplaintsController extends Controller
           $transId = Transactions::create([
             'userId' => $request->respondentId,
             // 'serviceId' => $serviceId,
-            'status' => 'Unsettled',
+            'status' => 'Unresolved',
             'unique_code' => sha1(time()),               
           ]);
 

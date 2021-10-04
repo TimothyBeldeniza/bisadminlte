@@ -108,13 +108,13 @@
          
                                     @if ($trans->status == "Disapproved" || $trans->status == "Cancelled")
                         <td class="text-danger"><b>{{ $trans->status }}</b></td>
-                        @elseif ($trans->status == "Unpaid")
+                        @elseif ($trans->status == "Due")
                             <td class="text-warning"><b>{{ $trans->status }}</b></td>
                         @else
                             <td class="text-success"><b>{{ $trans->status }}</b></td>    
                     @endif
                     <td class="text-center">
-                        @if($trans->status == 'Unpaid')
+                        @if($trans->status == 'Due')
                             <a class="btn btn-primary fw-bold" data-toggle="modal" data-target="#process{{ $trans->id }}">Process</a>
                             <a class="btn btn-danger fw-bold" data-toggle="modal" data-target="#disapprove{{ $trans->id }}">Disapprove</a>
                         @elseif($trans->status == 'Ready to Claim')

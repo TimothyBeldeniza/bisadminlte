@@ -86,7 +86,7 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside style="background-color: maroon !important"class="main-sidebar sidebar-dark-primary elevation-4 bg-navy">
+  <aside style="background-color: #264e2c;" class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
       <img src="{{ asset('images/brgy-logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -130,6 +130,7 @@
               </p>
             </a>
           </li>
+          @can('res-barangay-official-list')
           <li class="nav-item">
             <a href="{{ route('officials.index') }}" class="nav-link">
               <i class="nav-icon fas fa-user-tie"></i>
@@ -138,6 +139,7 @@
               </p>
             </a>
           </li>
+          @endcan
 
           @hasanyrole('Admin|Chairman|Councilor|Secretary|Treasurer|Clerk')
           <li class="nav-header">M A N A G E M E N T S</li>   

@@ -193,7 +193,7 @@ class DocumentsController extends Controller
       //   dd($case); 
         if($case->count() > 0)
         {   
-           if($case[0]->status == "Unsettled" || $case[0]->status == "On Going")
+           if($case[0]->status == "Unresolved" || $case[0]->status == "On Going")
            {
               $hasCase = true;
               return view('documents.create', compact('doctypes'))->with('hasCase', $hasCase);
@@ -235,7 +235,7 @@ class DocumentsController extends Controller
         $transId = Transactions::create([
           'userId' => $userId,
         //   'serviceId' => $serviceId,
-          'status' => 'Unpaid',
+          'status' => 'Due',
           'unique_code' => sha1(time()),
         ]);
 

@@ -1,5 +1,10 @@
 <x-layout>
-
+  <style>
+    .required:after {
+    content:" *";
+    color: red;
+   }
+</style>
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <div class="container-fluid">
@@ -20,7 +25,7 @@
   <section class="content">
     <div class="container">
        <div class="card">
-        <div class="card-header text-light font-weight-bold" style="background-color: maroon;">{{ __('Complaint Form') }}</div>
+        <div class="card-header text-dark font-weight-bold" style="background-color: #f6f7cd;">{{ __('Complaint Form') }}</div>
         <div class="card-body">
           @if ($message = Session::get('success'))
             <div class="alert alert-success">
@@ -39,7 +44,7 @@
                 <div id="complainant" style="display: block">
                   <b>Inside</b><br>
                   <div class="form-group row my-1">
-                      <label for="complainantId" class="col-md-4 col-form-label">{{ __('Complainant Name*') }}</label>
+                      <label for="complainantId" class="col-md-4 col-form-label required">{{ __('Complainant Name') }}</label>
                       <div class="col-md-6">
                           <select id="complainantId" name="complainantId" class="form-control select2bs4" onfocus="this.value=''">
                               <option value>--Select Registered User--</option>
@@ -55,7 +60,7 @@
                     <b>Outside</b><br>
                     <div class="form-group row my-1">
                        <div class="col-sm">
-                           <label for="name">{{ __('Complainant Full Name*') }}</label>
+                           <label class="required" for="name">{{ __('Complainant Full Name') }}</label>
                            <input id="cName" type="text" class="form-control" @error('cName') is-invalid @enderror name="cName" placeholder="Enter Complainant Full Name..." onfocus="this.value=''">
                            @error('cName')
                            <span class="invalid-feedback" role="alert">
@@ -64,7 +69,7 @@
                            @enderror
                        </div>
                        <div class="col-sm">
-                           <label for="cAddress">{{ __('Complainant Address*') }}</label>
+                           <label class="required" for="cAddress">{{ __('Complainant Address') }}</label>
                            <textarea class="form-control" name="cAddress" id="cAddress" cols="30" rows="3" placeholder="Enter Complainant's Address here..."></textarea>
                        </div>
                     </div>
@@ -81,7 +86,7 @@
                 <div id="respondent" style="display: block">
                   <b>Inside</b><br>
                   <div class="form-group row my-1">
-                      <label for="respondentId" class="col-md-4 col-form-label">{{ __('Respondent Name*') }}</label>
+                      <label for="respondentId" class="col-md-4 col-form-label required">{{ __('Respondent Name') }}</label>
                       <div class="col-md-6">
                           <select id="respondentId" name="respondentId" class="form-control select2bs4" onfocus="this.value=''">
                               <option value>--Select Registered User--</option>
@@ -96,7 +101,7 @@
                 <div id="otherRespondent" style="display: none">
                   <div class="form-group row my-1">
                      <div class="col-sm">
-                        <label for="respondents" class="col-md-4 col-form-label font-weight-normal">{{ __('Respondent Name') }}</label>
+                        <label for="respondents" class="required">{{ __('Respondent Name') }}</label>
                         <input id="respondents" type="text" class="form-control" @error('respondents') is-invalid @enderror placeholder="Enter Respondent Full Name here..." name="respondents" onfocus="this.value=''">
                         @error('respondents')
                             <span class="invalid-feedback" role="alert">
@@ -105,7 +110,7 @@
                         @enderror
                      </div>
                      <div class="col-sm">
-                        <label for="respondentsAdd" class="col-md-4 col-form-label font-weight-normal">{{ __("Respondents Address*") }}</label>
+                        <label for="respondentsAdd" class="required">{{ __("Respondents Address") }}</label>
                         <textarea class="form-control" name="respondentsAdd" id="respondentsAdd" cols="30" rows="3" placeholder="Enter Respondent's Address here..."></textarea>
                      </div>
                   </div>
@@ -114,18 +119,15 @@
                 <hr>
                 <div class="form-group row my-1">
                    <div class="col-sm">
-                     <label for="complainDetails">{{ __('Complaint Details*') }}</label>
+                     <label class="required" for="complainDetails">{{ __('Complaint Details') }}</label>
                      <textarea class="form-control" placeholder="Enter details here..." name="compDetails" id="compDetails" cols="30" rows="3" required></textarea>
                    </div>
                 </div>
                 
-                <div class="form-group row py-1">
-                    <div class="col-sm">
-                        <button onclick="return confirm('Are your inputs correct?')" type="submit" class="btn btn-success" >
+                <div class="form-group py-1">
+                    <div class="float-right ">
+                        <button onclick="return confirm('Are your inputs correct?')" type="submit" class="btn btn-primary" >
                             {{ __('Submit') }}
-                        </button>
-                        <button onclick="history.back()" type="submit" class="btn btn-dark" >
-                            {{ __('Back') }}
                         </button>
                     </div>
                 </div>

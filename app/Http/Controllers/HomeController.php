@@ -80,10 +80,15 @@ class HomeController extends Controller
         $stats = [
             'settled' => Transactions::where('status', '=' ,'Settled')->count(),
             'escalated' => Transactions::where('status', '=' ,'Escalated')->count(),
-            'unsettled' => Transactions::where('status', '=' ,'Unsettled')->count(),
+            'unresolved' => Transactions::where('status', '=' ,'Unresolved')->count(),
             'onGoing' => Transactions::where('status', '=' ,'On Going')->count(),
             'dismissed' => Transactions::where('status', '=' ,'Dismissed')->count(),
+            'due' => Transactions::where('status', '=' ,'Due')->count(),
+            'readyToClaim' => Transactions::where('status', '=' ,'Ready To Claim')->count(),
+            'paid' => Transactions::where('status', '=' ,'Paid')->count(),
+            'cancelled' => Transactions::where('status', '=' ,'Cancelled')->count(),
         ];
+
         
         // dd($stats);
         return view('home', compact('documents', 'complaints', 'residents', 'nonresidents', 'xdocus', 'stats'));

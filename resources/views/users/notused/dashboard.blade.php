@@ -65,7 +65,7 @@
                                             <td>{{ $docu->date }}</td>
                                             <td>{{ $docu->docType }}</td>
                                             <td>{{ $docu->purpose }}</td>
-                                            @if ($docu->status == "Unpaid")
+                                            @if ($docu->status == "Due")
                                                 <td class="text-danger"><b>{{ $docu->status }}</b></td>
                                                 <td><button data-toggle="modal" data-target="#cancel{{ $docu->transId }}" class="btn btn-danger">Cancel</button></td>
                                                 {{-- Cancel Reason Modal --}}

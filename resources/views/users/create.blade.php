@@ -1,4 +1,10 @@
 <x-layout>
+    <style>
+        .required:after {
+        content:" *";
+        color: red;
+       }
+  </style>
   @section('title', 'Register User')
 
     <!-- Content Header (Page header) -->
@@ -89,19 +95,17 @@
     {{-- @role('Resident') --}}
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="row">
                 <div class="col-lg-12 margin-tb">
                     {{-- <div class="float-left">
                         <h2>Register User</h2>
                     </div> --}}
-                    <div class="float-right">
-                        <a class="btn btn-dark fw-bold" href="{{ route('users.index') }}">Back</a>
-                    </div>
+
                 </div>
                 </div>
                 <div class="card">
-                    <div class="card-header text-light fw-bold"style="background-color: maroon">{{ __('Create New User') }}</div>
+                    <div style="background-color: #f6f7cd" class="card-header text-dark font-weight-bold">{{ __('Register User') }}</div>
     
                     <div class="card-body">
                         <form method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data">
@@ -121,7 +125,7 @@
                                 </div>
                             </div>
                             <div class="form-group row my-1">
-                                <label for="lastName" class="col-md-4 col-form-label text-md-right">{{ __('Last Name*') }}</label>
+                                <label for="lastName" class="col-md-4 col-form-label text-md-right required">{{ __('Last Name') }}</label>
                                 
                                 <div class="col-md-6">
                                     <input id="lastName" type="text" class="form-control @error('lastName') is-invalid @enderror" name="lastName" value="{{ old('lastName') }}" placeholder="Enter Last Name..." required autocomplete="lastName" autofocus>
@@ -135,7 +139,7 @@
                             </div>
                             
                             <div class="form-group row my-1">
-                                <label for="firstName" class="col-md-4 col-form-label text-md-right">{{ __('First Name*') }}</label>
+                                <label for="firstName" class="col-md-4 col-form-label text-md-right required">{{ __('First Name') }}</label>
                                 
                                 <div class="col-md-6">
                                     <input id="firstName" type="text" class="form-control @error('firstName') is-invalid @enderror" name="firstName" value="{{ old('firstName') }}" placeholder="Enter First Name..." required autocomplete="firstName" autofocus>
@@ -149,7 +153,7 @@
                             </div>
                             
                             <div class="form-group row my-1">
-                                <label for="middleName" class="col-md-4 col-form-label text-md-right">{{ __('Middle Name') }}</label>
+                                <label for="middleName" class="col-md-4 col-form-label text-md-right required">{{ __('Middle Name') }}</label>
                                 
                                 <div class="col-md-6">
                                     <input id="middleName" type="text" class="form-control @error('middleName') is-invalid @enderror" name="middleName" value="{{ old('middleName') }}" placeholder="Enter Middle Name..." autocomplete="middleName" autofocus>
@@ -163,7 +167,7 @@
                             </div>
                             
                             <div class="form-group row my-1">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address*') }}</label>
+                                <label for="email" class="col-md-4 col-form-label text-md-right required">{{ __('E-Mail Address') }}</label>
                                 
                                 <div class="col-md-6">
                                     <input id="email" placeholder="example@gmail.com" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -177,7 +181,7 @@
                             </div>
                             
                             <div class="form-group row my-1">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password*') }}</label>
+                                <label for="password" class="col-md-4 col-form-label text-md-right required">{{ __('Password') }}</label>
                                 
                                 <div class="col-md-6">
                                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Enter Password.." required autocomplete="new-password">
@@ -191,7 +195,7 @@
                             </div>
                             
                             <div class="form-group row my-1">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password*') }}</label>
+                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right required">{{ __('Confirm Password') }}</label>
                                 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password..." required autocomplete="new-password">
@@ -199,7 +203,7 @@
                             </div>
                             
                             <div class="form-group row my-1">
-                                <label for="contactNo" class="col-md-4 col-form-label text-md-right">{{ __('Contact Number*') }}</label>
+                                <label for="contactNo" class="col-md-4 col-form-label text-md-right required">{{ __('Contact Number') }}</label>
                                 
                                 <div class="col-md-6">
                                     <input id="contactNo" type="tel" pattern="[0-9]{11}" placeholder="09123456789" class="form-control @error('contactNo') is-invalid @enderror" name="contactNo" value="{{ old('contactNo') }}" required autocomplete="contactNo">
@@ -213,7 +217,7 @@
                             </div>
                             
                             <div class="form-group row my-1">
-                                <label for="houseNo" class="col-md-4 col-form-label text-md-right">{{ __('House Number*') }}</label>
+                                <label for="houseNo" class="col-md-4 col-form-label text-md-right required">{{ __('House Number') }}</label>
                                 
                                 <div class="col-md-6">
                                     <input id="houseNo" type="text" class="form-control @error('houseNo') is-invalid @enderror" name="houseNo" value="{{ old('houseNo') }}" placeholder="Enter House No..." required autocomplete="houseNo">
@@ -227,7 +231,7 @@
                             </div>
                             
                             <div class="form-group row my-1">
-                                <label for="street" class="col-md-4 col-form-label text-md-right">{{ __('Street*') }}</label>
+                                <label for="street" class="col-md-4 col-form-label text-md-right required">{{ __('Street') }}</label>
                                 
                                 <div class="col-md-6">
                                     <input id="street" type="text" class="form-control @error('street') is-invalid @enderror" name="street" value="{{ old('street') }}" placeholder="Enter Street..." required autocomplete="street">
@@ -241,7 +245,7 @@
                             </div>
                             
                             <div class="form-group row my-1">
-                                <label for="dob" class="col-md-4 col-form-label text-md-right">{{ __('Date of Birth*') }}</label>
+                                <label for="dob" class="col-md-4 col-form-label text-md-right required">{{ __('Date of Birth') }}</label>
                                 
                                 <div class="col-md-6">
                                     <input id="dob" type="date" max='2003-12-31' data-date-format="YYYY MM DD" class="form-control  @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}" required autocomplete="dob">
@@ -250,7 +254,7 @@
                             </div>
                             
                             <div class="form-group row my-1">
-                                <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Gender*') }}</label>
+                                <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
                                 
                                 <div class="col-md-6">
                                     
@@ -266,7 +270,7 @@
                             </div>
                             
                             <div class="form-group row my-1">
-                                <label for="civilStatus" class="col-md-4 col-form-label text-md-right">{{ __('Civil Status*') }}</label>
+                                <label for="civilStatus" class="col-md-4 col-form-label text-md-right required">{{ __('Civil Status') }}</label>
                                 
                                 <div class="col-md-6">
                                     
@@ -285,7 +289,7 @@
                             </div>
     
                             <div class="form-group row my-1">
-                                <label for="citizenship" class="col-md-4 col-form-label text-md-right">{{ __('Citizenship*') }}</label>
+                                <label for="citizenship" class="col-md-4 col-form-label text-md-right required">{{ __('Citizenship') }}</label>
                                 
                                 <div class="col-md-6">
                                     <input id="citizenship" type="text" class="form-control @error('citizenship') is-invalid @enderror" name="citizenship" value="{{ old('citizenship') }}" placeholder="Enter Citizenship..." required autocomplete="citizenship">
@@ -299,7 +303,7 @@
                             </div>
                             
                             <div class="form-group row my-1">
-                                <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role*') }}</label>
+                                <label for="role" class="col-md-4 col-form-label text-md-right required">{{ __('Role') }}</label>
                                 
                                 <div class="col-md-6">
                                     {{-- {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!} --}}
@@ -314,7 +318,7 @@
     
                             <div class="form-group row my-1">
                                 <div class="col-md-6 offset-md-4 ">
-                                    <button  type="submit" class="btn btn-success fw-bold">
+                                    <button  type="submit" class="btn btn-primary fw-bold">
                                         {{ __('Submit') }}
                                     </button>
                                 </div>

@@ -26,11 +26,9 @@
     
     <div class="content">
         <div class="container">
-            <div class="card card-info">
+            <div class="card">
                 
-                <div class="card-header">
-                <h3 class="card-title">Add Officials</h3>
-                </div>
+                <div style="background-color: #f6f7cd;" class="card-header font-weight-bold">Add Officials</div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('officials.store') }}" enctype="multipart/form-data">
                         @csrf
@@ -153,9 +151,9 @@
 
                         
                         <div class="row">
-                            <div class="input-group col-sm mb-3">
+                            <div class="d-flex justify-content-end input-group col-sm mb-3">
                                 <div>
-                                    <button onclick="return confirm('Are your inputs correct?')" type="submit" class="btn btn-success fw-bold">
+                                    <button onclick="return confirm('Are your inputs correct?')" type="submit" class="btn btn-primary fw-bold">
                                         {{ __('Submit') }}
                                     </button>
                                 </div>

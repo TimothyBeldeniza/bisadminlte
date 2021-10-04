@@ -28,7 +28,7 @@
       <div class="row">
         <div class="col-3">
           <div class="card">
-            <div style="background-color: maroon;" class="card-header text-light"><b>Barangay Logo</b></div>
+            <div style="background-color: #f6f7cd" class="card-header text-dark font-weight-bold"><b>Barangay Logo</b></div>
             <div class="card-body">
               <p class="text-center"><img src="{{ url('images/'.$brgy->cityLogoPath) }}" style="height: 150px; width: auto;"></p>
               <p class="text-center font-weight-bold">City Logo</p>
@@ -44,7 +44,7 @@
         </div>
         <div class="col-9">
           <div class="card">
-            <div style="background-color: maroon;" class="card-header text-light"><b>Edit Barangay Information</b></div>
+            <div style="background-color: #f6f7cd" class="card-header text-dark font-weight-bold"><b>Edit Barangay Information</b></div>
             <div class="card-body">
                 {{-- @if ($message = Session::get('success'))
                   <div class="alert alert-success" role="alert">
@@ -103,9 +103,9 @@
                     <input id="zipCode" type="number" class="form-control" value="{{ $brgy->zipCode }}" name="zipCode" placeholder="Enter Zip Code..." required>
                   </div>
 
-                  <div class="form-group row mt-2 float-end">
+                  <div class="form-group row float-right">
                     <div class="col-md-6">
-                        <button type="submit" class="btn btn-success font-weight-bold" onclick="return confirm('Are your inputs correct?')">{{ __('Submit') }}</button>
+                        <button type="submit" class="btn btn-primary font-weight-bold" onclick="return confirm('Are your inputs correct?')">{{ __('Submit') }}</button>
                     </div>
                   </div>
                 </form>

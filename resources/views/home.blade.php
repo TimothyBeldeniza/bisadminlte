@@ -31,14 +31,14 @@
           <div class="row">
             <div class="col">
               <!-- small box -->
-              <div class="small-box bg-info">
+              <div class="small-box bg-danger">
                 <div class="inner">
                   <h3>{{ $stats['dismissed'] }}</h3>
   
                   <p>Dismissed</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-bag"></i>
+                  <i class="ion ion-close-circled"></i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
@@ -46,14 +46,14 @@
             <!-- ./col -->
             <div class="col">
               <!-- small box -->
-              <div class="small-box bg-success">
+              <div class="small-box bg-maroon">
                 <div class="inner">
-                  <h3>{{ $stats['escalated'] }}</h3>
+                  <h3>{{ $stats['onGoing'] }}</h3>
   
-                  <p>Escalated</p>
+                  <p>On Going</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-stats-bars"></i>
+                  <i class="ion ion-load-a"></i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
@@ -63,12 +63,13 @@
               <!-- small box -->
               <div class="small-box bg-warning">
                 <div class="inner">
-                  <h3>{{ $stats['onGoing'] }}</h3>
+                  <h3>{{ $stats['escalated'] }}</h3>
   
-                  <p>On Going</p>
+                  <p>Escalated</p>
+
                 </div>
                 <div class="icon">
-                  <i class="ion ion-person-add"></i>
+                  <i class="ion ion-alert-circled"></i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
@@ -76,14 +77,87 @@
             <!-- ./col -->
             <div class="col">
               <!-- small box -->
-              <div class="small-box bg-danger">
+              <div class="small-box bg-success">
                 <div class="inner">
                   <h3>{{ $stats['settled'] }}</h3>
   
                   <p>Settled</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-pie-graph"></i>
+                  <i class="ion ion-thumbsup"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <div class="col">
+              <!-- small box -->
+              <div class="small-box bg-dark">
+                <div class="inner">
+                  <h3>{{ $stats['unresolved'] }}</h3>
+  
+                  <p>Unresolved</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-thumbsdown"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
+          </div>
+
+        </div><!-- /.container-fluid -->
+      </div>
+
+      {{-- Documents  --}}
+      <div class="content">
+        <div class="container-fluid">
+            <h4>Documents</h4>
+          <!-- Small boxes (Stat box) -->
+          <div class="row">
+            
+            <!-- ./col -->
+            <div class="col">
+              <!-- small box -->
+              <div class="small-box bg-dark">
+                <div class="inner">
+                  <h3>{{ $stats['due'] }}</h3>
+  
+                  <p>Due</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-ios-pricetags"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                <div class="inner">
+                  <h3>{{ $stats['readyToClaim'] }}</h3>
+  
+                  <p>Ready To Claim</p>
+
+                </div>
+                <div class="icon">
+                  <i class="ion ion-android-hand"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col">
+              <!-- small box -->
+              <div class="small-box bg-success">
+                <div class="inner">
+                  <h3>{{ $stats['paid'] }}</h3>
+  
+                  <p>Paid</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-android-done-all"></i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
@@ -92,12 +166,12 @@
               <!-- small box -->
               <div class="small-box bg-danger">
                 <div class="inner">
-                  <h3>{{ $stats['unsettled'] }}</h3>
+                  <h3>{{ $stats['cancelled'] }}</h3>
   
-                  <p>Unsettled</p>
+                  <p>Cancelled</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-pie-graph"></i>
+                  <i class="ion ion-close-round"></i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
@@ -108,6 +182,7 @@
         </div><!-- /.container-fluid -->
       </div>
     @endhasrole
+    
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
@@ -167,7 +242,7 @@
                                         {{ $docu->purpose }}
                                     </a>
                                 </td>
-                                @if ($docu->status == "Unpaid")
+                                @if ($docu->status == "Due")
 
                                     <td class="project-state text-center">
                                         <span class="badge badge-danger">{{ $docu->status }}</span>

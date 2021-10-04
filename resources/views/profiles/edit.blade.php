@@ -1,4 +1,10 @@
 <x-layout>
+    <style>
+        .required:after {
+        content:" *";
+        color: red;
+       }
+  </style>
     @section('title', 'Edit Profile')
     <div class="content-header">
         <div class="container-fluid">
@@ -21,7 +27,7 @@
             <div class="row justify-content-center">
                 <div class="col-4">
                     <div class="card">
-                      <div style="background-color: maroon;" class="card-header text-light"><b>Profile Picture</b></div>
+                        <div style="background-color: #f6f7cd" class="card-header text-dark font-weight-bold"><b>Profile Picture</b></div>
                           <div class="card-body">
                             <p class="text-center"><img src="{{ asset('images/users/'.$user->profilePath) }}" style="height: 288px; width: auto;"></p>
                             <hr>
@@ -34,7 +40,7 @@
     
                 <div class="col-md-8">
                     <div class="card">
-                        <div class="card-header text-light font-weight-bold" style="background-color: maroon">{{ __('Edit Account Details') }}</div>
+                        <div style="background-color: #f6f7cd" class="card-header text-dark font-weight-bold">{{ __('Edit Account Details') }}</div>
         
                         <div class="card-body">
                             <form method="POST" action="{{ route('profiles.update', $user->id) }}" enctype="multipart/form-data">
@@ -56,7 +62,7 @@
                                 </div>
     
                                 <div class="form-group row my-1">
-                                    <label for="lastName" class="col-md-4 col-form-label text-md-right fw-bold">{{ __('Last Name *') }}</label>
+                                    <label for="lastName" class="col-md-4 col-form-label text-md-right fw-bold required">{{ __('Last Name') }}</label>
                                     
                                     <div class="col-md-6">
                                         <input @role('Admin') readonly @endrole id="lastName" type="text" class="form-control @error('lastName') is-invalid @enderror" name="lastName" value="{{$user->lastName }}" placeholder="Enter Last Name..." required autocomplete="lastName">
@@ -70,7 +76,7 @@
                                 </div>
                                 
                                 <div class="form-group row my-1">
-                                    <label for="firstName" class="col-md-4 col-form-label text-md-right fw-bold">{{ __('First Name *') }}</label>
+                                    <label for="firstName" class="col-md-4 col-form-label text-md-right fw-bold required">{{ __('First Name') }}</label>
                                     
                                     <div class="col-md-6">
                                         <input @role('Admin') readonly @endrole id="firstName" type="text" class="form-control @error('firstName') is-invalid @enderror" name="firstName" value="{{ $user->firstName }}" placeholder="Enter First Name..." required autocomplete="firstName">
@@ -84,7 +90,7 @@
                                 </div>
                                 
                                 <div class="form-group row my-1">
-                                    <label for="middleName" class="col-md-4 col-form-label text-md-right fw-bold">{{ __('Middle Name') }}</label>
+                                    <label for="middleName" class="col-md-4 col-form-label text-md-right fw-bold required">{{ __('Middle Name') }}</label>
                                     
                                     <div class="col-md-6">
                                         <input @role('Admin') readonly @endrole id="middleName" type="text" class="form-control @error('middleName') is-invalid @enderror" name="middleName" value="{{ $user->middleName }}" placeholder="Enter Middle Name..." autocomplete="middleName">
@@ -98,7 +104,7 @@
                                 </div>
                                 
                                 <div class="form-group row my-1">
-                                    <label for="email" class="col-md-4 col-form-label text-md-right fw-bold">{{ __('E-Mail Address *') }}</label>
+                                    <label for="email" class="col-md-4 col-form-label text-md-right fw-bold required">{{ __('E-Mail Address') }}</label>
                                     
                                     <div class="col-md-6">
                                         <input disabled id="email" placeholder="example@gmail.com" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" placeholder="Enter Email Address..." required autocomplete="email">
@@ -112,7 +118,7 @@
                                 </div>
                                 
                                 {{-- <div class="form-group row my-1">
-                                    <label for="password" class="col-md-4 col-form-label text-md-right fw-bold">{{ __('Password *') }}</label>
+                                    <label for="password" class="col-md-4 col-form-label text-md-right fw-bold">{{ __('Password') }}</label>
                                     
                                     <div class="col-md-6">
                                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -126,7 +132,7 @@
                                 </div>
                                 
                                 <div class="form-group row my-1">
-                                    <label for="password-confirm" class="col-md-4 col-form-label text-md-right fw-bold">{{ __('Confirm Password *') }}</label>
+                                    <label for="password-confirm" class="col-md-4 col-form-label text-md-right fw-bold">{{ __('Confirm Password') }}</label>
                                     
                                     <div class="col-md-6">
                                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -134,7 +140,7 @@
                                 </div> --}}
                                 
                                 <div class="form-group row my-1">
-                                    <label for="contactNo" class="col-md-4 col-form-label text-md-right fw-bold">{{ __('Contact Number *') }}</label>
+                                    <label for="contactNo" class="col-md-4 col-form-label text-md-right fw-bold required">{{ __('Contact Number') }}</label>
                                     
                                     <div class="col-md-6">
                                         <input id="contactNo" type="tel" pattern="[0-9]{10}" placeholder="9123456789" class="form-control @error('contactNo') is-invalid @enderror" name="contactNo" value="{{ $user->contactNo }}" placeholder="Enter Contact No..." required autocomplete="contactNo">
@@ -148,7 +154,7 @@
                                 </div>
                                 
                                 <div class="form-group row my-1">
-                                    <label for="houseNo" class="col-md-4 col-form-label text-md-right fw-bold">{{ __('House Number *') }}</label>
+                                    <label for="houseNo" class="col-md-4 col-form-label text-md-right fw-bold required">{{ __('House Number') }}</label>
                                     
                                     <div class="col-md-6">
                                         <input id="houseNo" type="text" class="form-control @error('houseNo') is-invalid @enderror" name="houseNo" value="{{ $user->houseNo }}" placeholder="Enter House No..." required autocomplete="houseNo">
@@ -162,7 +168,7 @@
                                 </div>
                                 
                                 <div class="form-group row my-1">
-                                    <label for="street" class="col-md-4 col-form-label text-md-right fw-bold">{{ __('Street *') }}</label>
+                                    <label for="street" class="col-md-4 col-form-label text-md-right fw-bold required">{{ __('Street') }}</label>
                                     
                                     <div class="col-md-6">
                                         <input id="street" type="text" class="form-control @error('street') is-invalid @enderror" name="street" value="{{ $user->street }}" placeholder="Enter Street..." required autocomplete="street">
@@ -176,7 +182,7 @@
                                 </div>
                                 
                                 <div class="form-group row my-1">
-                                    <label for="dob" class="col-md-4 col-form-label text-md-right fw-bold">{{ __('Date of birth *') }}</label>
+                                    <label for="dob" class="col-md-4 col-form-label text-md-right fw-bold required">{{ __('Date of birth') }}</label>
                                     
                                     <div class="col-md-6">
                                         <input id="dob" type="date" max='2003-12-31' data-date-format="YYYY MM DD" class="form-control  @error('dob') is-invalid @enderror" name="dob" value="{{ $user->dob }}" required autocomplete="dob">
@@ -191,7 +197,7 @@
                                 </div>
                                 
                                 <div class="form-group row my-1">
-                                    <label for="civilStatus" class="col-md-4 col-form-label text-md-right fw-bold">{{ __('Civil Status *') }}</label>
+                                    <label for="civilStatus" class="col-md-4 col-form-label text-md-right fw-bold required">{{ __('Civil Status') }}</label>
                                     
                                     <div class="col-md-6">
                                         {{--   <input @if ($user->civilStatus == 'Single') return checked @endif id="civilStatus" type="radio" value="Single" class=" @error('civilStatus') is-invalid @enderror" name="civilStatus" value="{{ old('civilStatus') }}" required autocomplete="civilStatus"> --}}

@@ -68,7 +68,7 @@
                       @if ($data->status == "Disapproved" || $data->status == "Cancelled")
                         <p class="card-text"><b>Status of Request:</b> <b class="text-danger">{{ $data->status }}</b></p>
                         {{-- <td class="text-danger"><b>{{ $data->status }}</b></td> --}}
-                      @elseif ($data->status == "Unpaid")
+                      @elseif ($data->status == "Due")
                         <p class="card-text"><b>Status of Request: </b> <b class="text-warning">{{ $data->status }}</b> </p>
                         {{-- <td class="text-warning"><b>{{ $data->status }}</b></td> --}}
                       @else
@@ -100,7 +100,7 @@
               <div class="card">
                 <div style="background-color: maroon" class="card-header text-light"><b>Actions</b></div>
                 <div class="card-body">
-                        @if($data->status == 'Unpaid')
+                        @if($data->status == 'Due')
                             <a class="btn btn-primary" data-toggle="modal" data-target="#process{{ $data->id }}">Process</a>
                             <a class="btn btn-danger" data-toggle="modal" data-target="#disapprove{{ $data->id }}">Disapprove</a>
                         @elseif($data->status == 'Ready to Claim')

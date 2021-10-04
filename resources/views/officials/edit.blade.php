@@ -30,10 +30,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-3">
-                <div class="card card-info">
-                    <div class="card-header">
-                        <h3 class="card-title">Profile</h3>
-                    </div>
+                <div class="card">
+                    <div style="background-color: #f6f7cd;" class="card-header font-weight-bold">Profile</div>
                     <div class="card-body">
                         <p class="text-center"><img src="{{ url('images/officials/'.$officials->imagePath) }}" style="height: 235px; width: auto;"></p>
                         <p class="text-center card-text"> <b>{{ $officials->position . ' ' . $officials->firstName . ' ' . $officials->lastName}}</b></p>
@@ -41,10 +39,8 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card card-info">
-                    <div class="card-header">
-                    <h3 class="card-title">Edit Official</h3>
-                    </div>
+                <div class="card">
+                    <div style="background-color: #f6f7cd;" class="card-header font-weight-bold">Edit Official</div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('officials.update', $officials->id) }}" enctype="multipart/form-data">
                             @csrf
@@ -140,9 +136,9 @@
                             </div>
 
                             <div class="row">
-                                <div class="d-flex justify-content-center input-group col mb-3">
+                                <div class="d-flex justify-content-end input-group col mb-3">
                                     <div>
-                                        <button onclick="return confirm('Are your inputs correct?')" type="submit" class="btn btn-success fw-bold">
+                                        <button onclick="return confirm('Are your inputs correct?')" type="submit" class="btn btn-primary fw-bold">
                                             {{ __('Submit') }}
                                         </button>
                                     </div>
