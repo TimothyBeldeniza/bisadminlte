@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
+   function __construct()
+   {
+      $this->middleware(['auth','verified']);
+   }
     /**
      * Display a listing of the resource.
      *
@@ -47,6 +51,8 @@ class HomeController extends Controller
         ->join('users', 'transactions.userId', '=', 'users.id') 
         ->join('inside_respondents', 'inside_respondents.compId', '=', 'complaints_transactions.id')
         ->where('inside_respondents.userId', $userId)
+        ->where('complaints_transactions.compType', '1')
+        ->orderBy('complaints_transactions.id','DESC')
         ->select('complaints_transactions.id', DB::raw('date(complaints_transactions.created_at) as "date"'), 
                 'users.lastName', 'users.firstName',
                 'transactions.status', 'transactions.userId')
@@ -57,6 +63,8 @@ class HomeController extends Controller
         ->join('outside_complainants', 'outside_complainants.compId', '=', 'complaints_transactions.id') 
         ->join('inside_respondents', 'inside_respondents.compId', '=', 'complaints_transactions.id')
         ->where('inside_respondents.userId', $userId)
+        ->where('complaints_transactions.compType', '0')
+        ->orderBy('complaints_transactions.id','DESC')
         ->select('complaints_transactions.id', DB::raw('date(complaints_transactions.created_at) as "date"'), 
                 'outside_complainants.complainant',
                 'transactions.status', 'transactions.userId')

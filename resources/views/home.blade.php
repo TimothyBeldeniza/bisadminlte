@@ -125,7 +125,7 @@
                 <div class="inner">
                   <h3>{{ $stats['due'] }}</h3>
   
-                  <p>Due</p>
+                  <p>Still in Review</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-ios-pricetags"></i>
@@ -244,10 +244,10 @@
                                         {{ $docu->purpose }}
                                     </a>
                                 </td>
-                                @if ($docu->status == "Due")
+                                @if ($docu->status == "Still in Review")
 
                                     <td class="project-state text-center">
-                                        <span class="badge badge-danger">{{ $docu->status }}</span>
+                                        <span class="badge badge-dark">{{ $docu->status }}</span>
                                     </td>
 
                                     
@@ -279,7 +279,7 @@
 
                                                         <div class="form-group my-1"> 
                                                             <input type="radio" name="reason" value="Changed my mind" onclick="cancelOthers{{ $docu->id }}()">
-                                                            <label>Change my mind</label>
+                                                            <label>Changed my mind</label>
                                                         </div>
 
                                                         <div class="form-group my-1">
@@ -302,17 +302,16 @@
 
                                     <td class="text-center">
                                         <a>
-                                            {{ $docu->reason }}
+                                            None
                                         </a>
                                     </td>
 
-                                @elseif($docu->status == "Disapproved" || $docu->status == "Due")
+                                @elseif($docu->status == "Disapproved")
                                     <td class="project-state text-center">
                                         <span class="badge badge-danger">{{ $docu->status }}</span>
                                     </td>
                                     
                                     <td class="project-actions text-center"><b>None</b></td>
-                                    
                                     <td class="text-center">
                                         <a>
                                             {{ $docu->reason }}

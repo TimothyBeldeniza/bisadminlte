@@ -38,7 +38,7 @@
 				<form method="POST" action="{{ route('login') }}" class="login100-form validate-form">
 					@csrf
 
-          <p class="text-center"><img src="{{ asset('images/city-logo.png') }}" width="100px" height="100px"></p>
+          <p class="text-center"><img src="{{ asset('images/city-logo.png') }}" width="100px" height="100px"></p><br>
 
           <span class="login100-form-title p-b-43">
 						<b><u>Barangay Information System</u></b>

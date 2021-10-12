@@ -16,7 +16,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
                     <li class="breadcrumb-item active">Request Document</li>
                     </ol>
                 </div><!-- /.col -->
@@ -28,22 +28,23 @@
         <div class="container">
            @if ($hasCase == true)
               <div class="card">
-               <div style="font-size: 130%; background-color: #f6f7cd" class="card-header text-dark font-weight-bold"><i class="fas fa-exclamation-circle"></i> Warning</div>
+               <div style="font-size: 130%" class="card-header text-light font-weight-bold bg-danger"><i class="fas fa-exclamation-circle"></i> Warning</div>
                   <div class="card-body">
                      <p class="card-text" style="font-size: 130%">You, <b>{{ Auth::user()->firstName.' '.Auth::user()->lastName }}</b> have <b class="text-danger">Unresolved</b> or <b class="text-danger">On Going</b> cases. </p>
                      <p class="card-text" style="font-size: 130%">Please get them processed to be able to Request Documents once again.</p>
-                     <button class="btn btn-dark" onclick="history.back()">Back</button>
+                     <button class="btn btn-primary" onclick="history.back()">Back</button>
                   </div>
               </div>
-           @else
+           @elseif ($hasCase == false)
             <div class="card">
                <div class="card-header font-weight-bold text-dark" style="background-color: #f6f7cd;">Document Request Form</div>
                <div class="card-body">
                   <form method="POST" action="{{ route('documents.store') }}" enctype="multipart/form-data">
                      @csrf
-                     <label class="required" for="image">Barangay ID</label>
+                     <label class="required" for="image">Valid ID</label>
                      <div class="form-group mb-3">
                            <input type="file" class="form-control" name="image" id="image" required>
+                           <span><b>Image must be .jpg / .jpeg / .png</b></span>
                      </div>
                      <div class="form-group row mb-3">
                            <div class="col-sm">

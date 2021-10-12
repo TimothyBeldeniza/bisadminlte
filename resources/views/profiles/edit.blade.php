@@ -52,7 +52,7 @@
                                     
                                     <div class="col-md-6">
                                         <input type="file"  class="form-control @error('image') is-invalid @enderror" name="image">
-                                        
+                                        <span><b>Image must be .jpg / .jpeg / .png</b></span>
                                         @error('image')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -93,7 +93,7 @@
                                     <label for="middleName" class="col-md-4 col-form-label text-md-right fw-bold">{{ __('Middle Name') }}</label>
                                     
                                     <div class="col-md-6">
-                                        <input readonly @role('Admin')  @endrole id="middleName" type="text" class="form-control @error('middleName') is-invalid @enderror" name="middleName" value="{{ $user->middleName }}" placeholder="Enter Middle Name..." autocomplete="middleName">
+                                        <input @role('Admin')  @endrole id="middleName" type="text" class="form-control @error('middleName') is-invalid @enderror" name="middleName" value="{{ $user->middleName }}" placeholder="Enter Middle Name..." autocomplete="middleName">
                                         
                                         @error('middleName')
                                         <span class="invalid-feedback" role="alert">
@@ -209,6 +209,9 @@
                                         
                                           <input {{ $user->civilStatus == "Widowed" ? 'checked' : '' }} id="civilStatus" type="radio" value="Widowed" class=" @error('civilStatus') is-invalid @enderror" name="civilStatus" value="Widowed" required autocomplete="civilStatus">
                                           <label for="Widowed">Widowed</label>
+
+                                          <input {{ $user->civilStatus == "Widower" ? 'checked' : '' }} id="civilStatus" type="radio" value="Widower" class=" @error('civilStatus') is-invalid @enderror" name="civilStatus" value="Widowed" required autocomplete="civilStatus">
+                                          <label for="Widowed">Widower</label>
         
                                           <input {{ $user->civilStatus == "Divorced" ? 'checked' : '' }} id="civilStatus" type="radio" value="Divorced" class=" @error('civilStatus') is-invalid @enderror" name="civilStatus" value="Divorced" required autocomplete="civilStatus">
                                           <label for="Divorce">Divorced</label>

@@ -49,7 +49,7 @@
                         <div class="modal-content">
                             <div class="modal-header bg-warning">
                             <h5 class="modal-title text-dark" id="compDetailsLabel">Complaint Details</h5>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+               
                             </button>
                             </div>
             
@@ -72,7 +72,7 @@
                   @role('Resident')
                     <a onclick="history.back()" class="btn btn-primary fw-bold float-end">Back</a>
                   @endrole
-                  @role('Admin|Chairman|Councilor')
+                  @role('Admin|Chairman|Councilor|Secretary')
                     <a href="{{ route('complaints.index') }}" class="btn btn-primary fw-bold float-end">Back</a>
                   @endrole
                 </div>
@@ -90,9 +90,9 @@
                         @csrf
                         <div class="my-1">
                           <label for="details" class="col-form-label"><b>Input Hearing Details:</b></label>
-                          <textarea class="form-control" name="details" id="details" rows="10" placeholder="Input details here..."></textarea>
+                          <textarea class="form-control" name="details" id="details" rows="10" placeholder="Input details here..." required></textarea>
                           {{-- <div id="summernote"></div> --}}
-                          {{-- <textarea id="details" name="details"></textarea> --}}
+                          {{-- <textarea id="details" name="details" required></textarea> --}}
                         </div>
                         <div class="float-end my-2">
                           <button type="submit" class="btn btn-primary">Save Details</button>
@@ -119,7 +119,7 @@
                         <div class="modal-content">
                           <div class="modal-header bg-warning">
                             <h5 class="modal-title text-dark" id="conditionLabel">Conditions Details</h5>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+               
                             </button>
                           </div>          
                           <div class="modal-body">
@@ -145,7 +145,7 @@
                     <a class="btn btn-secondary fw-bold my-2" href="{{ url('/complaints/show/view-escalate-pdf/'.$td->id.'/'.$td->transId) }}" target="_blank">View Escalation Form</a><br>
                     <a class="btn btn-primary fw-bold my-2" href="{{ url('/complaints/show/generate-escalate-pdf/'.$td->id.'/'.$td->transId) }}">Save Escalation Form</a><br>
                   @elseif ($td->status == "Dismissed") 
-                    <b class="text-danger"> fw-boldNo Measures Required</b>
+                    <b class="text-danger">No Measures Required</b>
                   @elseif ($hearingCounts == 3)
                     @role('Admin|Chairman|Councilor')
                       <a class="btn btn-success fw-bold my-2" title="Settle the Complaint" data-toggle="modal" data-target="#record-settle">Settle</a>
@@ -181,7 +181,7 @@
                         <div class="modal-content">
                           <div class="modal-header bg-info">
                             <h5 class="modal-title" id="hearingLabel">Hearing No. {{ $ctr }} Details</h5>
-                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+               
                           </div>          
                           <div class="modal-body">
                             <b>Hearing Details:</b><br>
@@ -210,7 +210,6 @@
         <div class="modal-content">
             <div class="modal-header bg-success">
             <h5 class="modal-title text-light" id="recordhearingLabel">Settlement Details</h5>
-            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </button>
             </div>
             <div class="modal-body">
@@ -219,7 +218,7 @@
                 @csrf
                 <div class="my-1">
                 <label for="details" class="col-form-label"><b>Input Settlement Details:</b></label>
-                <textarea class="form-control" name="reason" id="reason" rows="10" placeholder="Input details here..."></textarea>
+                <textarea class="form-control" name="reason" id="reason" rows="10" placeholder="Input details here..." required></textarea>
                 </div>
                 <div class="float-end my-3">
                 <button type="submit" class="btn btn-primary">Save Settlement Details</button>
@@ -236,7 +235,6 @@
         <div class="modal-content">
             <div class="modal-header bg-danger">
             <h5 class="modal-title text-light" id="recordhearingLabel">Dismissal Details</h5>
-            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </button>
             </div>
             <div class="modal-body">
@@ -245,7 +243,7 @@
                 @csrf
                 <div class="my-1">
                 <label for="details" class="col-form-label"><b>Input Dismissal Details:</b></label>
-                <textarea class="form-control" name="reason" id="reason" rows="10" placeholder="Input details here..."></textarea>
+                <textarea class="form-control" name="reason" id="reason" rows="10" placeholder="Input details here..." required></textarea>
                 </div>
                 <div class="float-end my-3">
                 <button type="submit" class="btn btn-primary">Save Dismissal Details</button>
@@ -262,7 +260,6 @@
       <div class="modal-content">
           <div class="modal-header bg-warning">
           <h5 class="modal-title text-dark" id="recordhearingLabel">Escalate Details</h5>
-          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
           </button>
           </div>
           <div class="modal-body">
@@ -271,7 +268,7 @@
               @csrf
               <div class="my-1">
               <label for="details" class="col-form-label"><b>Input Escalation Details:</b></label>
-              <textarea class="form-control" name="reason" id="reason" rows="10" placeholder="Input details here..."></textarea>
+              <textarea class="form-control" name="reason" id="reason" rows="10" placeholder="Input details here..." required></textarea>
               </div>
               <div class="float-end my-3">
               <button type="submit" class="btn btn-primary">Save Escalation Details</button>

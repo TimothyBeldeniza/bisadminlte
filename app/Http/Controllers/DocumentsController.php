@@ -187,14 +187,21 @@ class DocumentsController extends Controller
                   ->join('transactions', 'complaints_transactions.transId', '=', 'transactions.id') 
                   ->join('inside_respondents', 'inside_respondents.compId', '=', 'complaints_transactions.id')
                   ->where('inside_respondents.userId', $currentUser)
+                  ->where('transactions.status', 'Unresolved')
+                  ->orWhere('transactions.status', 'On Going')
                   ->select('transactions.status')
                   ->get();
-      //   dd($case); 
+      //   dd($case);
         if($case->count() > 0)
         {   
            if($case[0]->status == "Unresolved" || $case[0]->status == "On Going")
            {
               $hasCase = true;
+              return view('documents.create', compact('doctypes'))->with('hasCase', $hasCase);
+           }
+           elseif($case[0]->status == "Dismissed" || $case[0]->status == "Settled" || $case[0]->status == "Escalated")
+           {
+              $hasCase = false;
               return view('documents.create', compact('doctypes'))->with('hasCase', $hasCase);
            }
         }
@@ -203,8 +210,7 @@ class DocumentsController extends Controller
            $hasCase = false;
            return view('documents.create', compact('doctypes'))->with('hasCase', $hasCase);
         }
-        // dd($data);
-        // exit;
+      //   dd($case, $hasCase); 
     }
 
     /**
@@ -234,7 +240,7 @@ class DocumentsController extends Controller
         $transId = Transactions::create([
           'userId' => $userId,
         //   'serviceId' => $serviceId,
-          'status' => 'Due',
+          'status' => 'Still in Review',
           'unique_code' => sha1(time()),
         ]);
 
@@ -250,7 +256,6 @@ class DocumentsController extends Controller
                     'dmId' => $request->docType,
                     'purpose' => $request->others,
                     'barangayIdPath' => $newImageName,
-                    'reason' => 'Still in Review',
                 ]);
             }
             else
@@ -260,7 +265,6 @@ class DocumentsController extends Controller
                     'dmId' => $request->docType,
                     'purpose' => $request->purpose,
                     'barangayIdPath' => $newImageName,
-                    'reason' => 'Still in Review',
                 ]);
 
 
@@ -277,7 +281,6 @@ class DocumentsController extends Controller
                     'transId' => $transId->id,
                     'dmId' => $request->docType,
                     'purpose' => $request->others,
-                    'reason' => 'Still in Review',
                 ]);
             }
             else
@@ -286,7 +289,6 @@ class DocumentsController extends Controller
                     'transId' => $transId->id,
                     'dmId' => $request->docType,
                     'purpose' => $request->purpose,
-                    'reason' => 'Still in Review',
                 ]);
             }
 
@@ -352,17 +354,17 @@ class DocumentsController extends Controller
         if($request->submit == 'process')
         {
             $this->process($transId, $userId);
-            return redirect()->back()->with('success', 'Document is ready to claim and user emailed!');
+            return redirect()->back()->with('success', 'Document is ready to claim and User is emailed!');
         }
         else if($request->submit == 'disapprove')
         {
             $this->disapproved($transId);
-            return redirect()->back()->with('danger', 'Document diapproved!');
+            return redirect()->back()->with('error', 'Document diapproved!');
         }
         else if($request->submit == 'cancel')
         {
             $this->cancel($transId);
-            return redirect('home')->with('danger', 'Document Request Cancelled!');
+            return redirect('home')->with('error', 'Document Request Cancelled!');
         } 
     }
 
