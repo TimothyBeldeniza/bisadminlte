@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Transactions;
+use App\Models\User;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -20,6 +22,7 @@ class HomeController extends Controller
      */
     public function index(Request $request, Transactions $transaction)
     {
+        
         $userId = Auth::user()->id;
     
         $documents = DB::table('documents_transactions')
@@ -95,10 +98,14 @@ class HomeController extends Controller
             'readyToClaim' => Transactions::where('status', '=' ,'Ready To Claim')->count(),
             'paid' => Transactions::where('status', '=' ,'Paid')->count(),
             'cancelled' => Transactions::where('status', '=' ,'Cancelled')->count(),
+            'male' => User::whereHas("roles", function($q){ $q->where("name", "Resident"); })->where('gender','Male')->count(),
+            'female' => User::whereHas("roles", function($q){ $q->where("name", "Resident"); })->where('gender','Female')->count(),
+            'senior' => User::whereHas("roles", function($q){ $q->where("name", "Resident"); })->where('dob', '<=', Carbon::now()->subDecades(6)->format('Y-m-d'))->count(),
+            'totalRes' =>  User::whereHas("roles", function($q){ $q->where("name", "Resident"); })->count(),
+            
         ];
 
-        
-        // dd($stats);
+
         return view('home', compact('documents', 'complaints', 'residents', 'nonresidents', 'xdocus', 'stats'));
     }
 

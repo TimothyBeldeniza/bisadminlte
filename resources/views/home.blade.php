@@ -26,7 +26,7 @@
     @hasanyrole('Admin|Chairman|Councilor|Secretary')
     <div class="content">
         <div class="container-fluid">
-            <h4>Complaints</h4>
+            <h5>Complaints</h5>
           <!-- Small boxes (Stat box) -->
           <div class="row">
             <div class="col">
@@ -114,7 +114,7 @@
       {{-- Documents  --}}
       <div class="content">
         <div class="container-fluid">
-            <h4>Documents</h4>
+            <h5>Documents</h5>
           <!-- Small boxes (Stat box) -->
           <div class="row">
             
@@ -183,6 +183,65 @@
 
         </div><!-- /.container-fluid -->
       </div>
+
+      <section class="content">
+        <div class="container-fluid">
+          <h5 class="mb-2">Residents Infomartion</h5>
+          <div class="row">
+            <div class="col-md-3 col-sm-6 col-12">
+              <div class="info-box">
+                <span class="info-box-icon bg-info"><i class="fas fa-male"></i></span>
+  
+                <div class="info-box-content">
+                  <span class="info-box-text">Male</span>
+                  <span class="info-box-number">{{ $stats['male'] }}</span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-12">
+              <div class="info-box">
+                <span class="info-box-icon bg-pink"><i class="fas fa-female"></i></span>
+  
+                <div class="info-box-content">
+                  <span class="info-box-text">Female</span>
+                  <span class="info-box-number">{{ $stats['female'] }}</span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-12">
+              <div class="info-box">
+                <span class="info-box-icon bg-gray"><i class="fas fa-blind"></i></span>
+  
+                <div class="info-box-content">
+                  <span class="info-box-text">Senior Citizen</span>
+                  <span class="info-box-number">{{ $stats['senior'] }}</span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-12">
+              <div class="info-box">
+                <span class="info-box-icon bg-success"><i class="fas fa-users"></i></span>
+  
+                <div class="info-box-content">
+                  <span class="info-box-text">Total Residents</span>
+                  <span class="info-box-number">{{ $stats['totalRes'] }}</span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+          </div>
+        </div>
+      </section>
     @endhasrole
     
     <!-- Main content -->
@@ -649,7 +708,6 @@
       </div>
     </div>
     <!-- /.content -->
-    
 </x-layout>
 
 
