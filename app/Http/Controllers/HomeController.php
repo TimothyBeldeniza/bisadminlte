@@ -98,10 +98,10 @@ class HomeController extends Controller
             'readyToClaim' => Transactions::where('status', '=' ,'Ready To Claim')->count(),
             'paid' => Transactions::where('status', '=' ,'Paid')->count(),
             'cancelled' => Transactions::where('status', '=' ,'Cancelled')->count(),
-            'male' => User::whereHas("roles", function($q){ $q->where("name", "Resident"); })->where('gender','Male')->count(),
-            'female' => User::whereHas("roles", function($q){ $q->where("name", "Resident"); })->where('gender','Female')->count(),
-            'senior' => User::whereHas("roles", function($q){ $q->where("name", "Resident"); })->where('dob', '<=', Carbon::now()->subDecades(6)->format('Y-m-d'))->count(),
-            'totalRes' =>  User::whereHas("roles", function($q){ $q->where("name", "Resident"); })->count(),
+            'male' => User::whereHas("roles", function($q){ $q->where("name", "!=", "Admin"); })->where('gender','Male')->count(),
+            'female' => User::whereHas("roles", function($q){ $q->where("name","!=", "Admin"); })->where('gender','Female')->count(),
+            'senior' => User::whereHas("roles", function($q){ $q->where("name", "!=", "Admin"); })->where('dob', '<=', Carbon::now()->subDecades(6)->format('Y-m-d'))->count(),
+            'totalRes' =>  User::whereHas("roles", function($q){ $q->where("name", "!=", "Admin"); })->count(),
             
         ];
 

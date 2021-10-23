@@ -18,6 +18,7 @@ use App\Http\Controllers\BarangayController;
 use App\Http\Controllers\DocumentTypesController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\UsersImportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,6 +92,10 @@ Route::post('complaints/show/hearing/{compId}/{transId}', [ComplaintsController:
 
 //Processing of Blotters
 Route::get('blotters/note/{transId}/{userId}', [BlottersController::class,'noted']);
+
+//Import Users
+Route::get('/users/import', [UsersImportController::class,'show']);
+Route::post('/users/import', [UsersImportController::class,'store']);
 
 Route::group(['middleware' => ['auth','verified']], function() {
     Route::resource('users', UserController::class);

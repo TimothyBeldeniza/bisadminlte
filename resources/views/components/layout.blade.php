@@ -39,7 +39,7 @@
   @yield('scripts')
 
 </head>
-<body class="hold-transition sidebar-mini layout-fixed accent-olive ">
+<body class="hold-transition sidebar-mini layout-fixed accent-navy ">
 <div class="wrapper">
 
   <!-- Preloader -->

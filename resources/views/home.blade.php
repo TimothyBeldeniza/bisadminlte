@@ -183,10 +183,12 @@
 
         </div><!-- /.container-fluid -->
       </div>
-
+      @endhasrole
+      
+      @role('Chairman|Secretary')
       <section class="content">
         <div class="container-fluid">
-          <h5 class="mb-2">Residents Infomartion</h5>
+          <h5 class="mb-2">Residents Information</h5>
           <div class="row">
             <div class="col-md-3 col-sm-6 col-12">
               <div class="info-box">
@@ -242,7 +244,7 @@
           </div>
         </div>
       </section>
-    @endhasrole
+    @endrole
     
     <!-- Main content -->
     <div class="content">
