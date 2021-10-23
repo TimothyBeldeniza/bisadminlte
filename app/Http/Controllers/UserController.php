@@ -248,7 +248,6 @@ class UserController extends Controller
         }
         else if($request->input('roles') == 'Resident')
         {
-      
             $user->syncPermissions(DB::table('permissions')->where('name', 'like', '%res%')->pluck('name'));
         }
         return redirect()->route('users.index')->with('success','User created successfully');

@@ -26,7 +26,7 @@
             <div style="background-color: #f6f7cd;" class="card-header font-weight-bold"><b>Profile</b></div>
                 <div class="card-body">
                   <p class="text-center"><img src="{{ asset('images/users/'.$data->profilePath) }}" style="height: 288px; width: auto;"></p>
-                  <p class="text-center text-start card-text"><b>Requisitioner:</b> {{ $data->lastName . ' ' . $data->firstName}}</p>
+                  <p class="text-center text-start card-text"><b>Requisitioner:</b> {{ $data->lastName . ', ' . $data->firstName}}</p>
                   <p class="text-center text-start card-text"><b>Email:</b> {{ $data->email}}</p>
                 </div>
           </div>
@@ -45,7 +45,7 @@
             <div class="card">
               <div style="background-color: #f6f7cd;" class="card-header font-weight-bold"><b>Request Details</b></div>
                   <div class="card-body">
-                      @if ($message = Session::get('success'))
+                      {{-- @if ($message = Session::get('success'))
                         <div class="alert alert-success" role="alert">
                           <b>{{ $message }}</b>
                         </div>
@@ -59,7 +59,7 @@
                         <div class="alert alert-danger" role="alert">
                           <b>{{ $message }}</b>
                         </div>
-                      @endif
+                      @endif --}}
                       <p class="card-text"><b>Requested Document:</b> {{ $data->docType }}</p>
                       <p class="card-text"><b>Purpose of Request:</b> {{ $data->purpose }}</p>
                       <p class="card-text"><b>Date Requested:</b> {{ Carbon\Carbon::parse($data->date)->format('jS F, Y') }}</p>
@@ -68,8 +68,8 @@
                       @if ($data->status == "Disapproved" || $data->status == "Cancelled")
                         <p class="card-text"><b>Status of Request:</b> <b class="text-danger">{{ $data->status }}</b></p>
                         {{-- <td class="text-danger"><b>{{ $data->status }}</b></td> --}}
-                      @elseif ($data->status == "Due")
-                        <p class="card-text"><b>Status of Request: </b> <b class="text-warning">{{ $data->status }}</b> </p>
+                      @elseif ($data->status == "Still in Review")
+                        <p class="card-text"><b>Status of Request: </b> <b class="text-dark">{{ $data->status }}</b> </p>
                         {{-- <td class="text-warning"><b>{{ $data->status }}</b></td> --}}
                       @else
                         <p class="card-text"><b>Status of Request:</b> <b class="text-success">{{ $data->status }}</b></p>
@@ -81,7 +81,6 @@
                               <div class="modal-content">
                               <div class="modal-header bg-primary">
                                   <h5 class="modal-title text-light" id="bargyIdLabel">Barangay ID of {{ $data->firstName. ' ' .$data->lastName}}</h5>
-                                  <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                               </div>
           
                               <div class="modal-body" style="display: flex; justify-content:center">
@@ -99,15 +98,15 @@
             <div style="width:50%" class="card">
               <div style="background-color: #f6f7cd;" class="card-header font-weight-bold"><b>Actions</b></div>
               <div class="card-body">
-                      @if($data->status == 'Due')
+                      @if($data->status == 'Still in Review')
                           <a class="btn btn-primary" data-toggle="modal" data-target="#process{{ $data->id }}">Process</a>
                           <a class="btn btn-danger" data-toggle="modal" data-target="#disapprove{{ $data->id }}">Disapprove</a>
                       @elseif($data->status == 'Ready to Claim')
                           <a class="btn btn-primary" onclick="return confirm('Are yousure to proceed?')" href="/documents/paid/{{ $data->transId }}">Paid</a>
-                          <a class="btn btn-secondary" href="/documents/view-document-pdf/{{ $data->id }}/{{ $data->userId }}" target="_blank">View</a>
+                          {{-- <a class="btn btn-secondary" href="/documents/view-document-pdf/{{ $data->id }}/{{ $data->userId }}" target="_blank">View</a>  --}}
                           <a class="btn btn-success" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
                       @elseif($data->status == 'Paid')
-                          <a class="btn btn-secondary" href="/documents/view-document-pdf/{{ $data->id }}/{{ $data->userId }}" target="_blank">View</a>
+                          {{-- <a class="btn btn-secondary" href="/documents/view-document-pdf/{{ $data->id }}/{{ $data->userId }}" target="_blank">View</a> --}}
                           <a class="btn btn-success" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
                       @else
                           <b class="text-danger">Document Cancelled</b>
@@ -118,7 +117,6 @@
                               <div class="modal-content">
                                   <div class="modal-header bg-primary">
                                       <h5 class="modal-title text-light" id="processLabel">Processing</h5>
-                                      <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                                   </div>
                                   <div class="modal-body">
                                       <form action="/documents/process/{{ $data->id }}/{{ $data->transId }}/{{ $data->userId }}" method="POST">
@@ -144,7 +142,7 @@
                                               <label for="otherReason" class="my-1">Specify other reason:</label>
                                               <input type="text" class="form-control" id="otherReason" name="otherReason" placeholder="Input reason here...">
                                           </div>
-                                          <div class="float-end my-1">
+                                          <div class="float-right my-1">
                                               <button type="submit" name="submit" value="process" onclick="return confirm('Are your sure to proceed?')" class="btn btn-primary">Save Reason</button>
                                           </div>
                                       </form>
@@ -159,7 +157,6 @@
                               <div class="modal-content">
                                   <div class="modal-header bg-danger">
                                       <h5 class="modal-title text-light" id="disapproveLabel">Disapproving</h5>
-                                      <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                                   </div>
                                   <div class="modal-body">
                                       <form action="/documents/process/{{ $data->id }}/{{ $data->transId }}/{{ $data->userId }}" method="POST">
@@ -185,7 +182,7 @@
                                               <label for="otherReason" class="my-1">Specify other reason:</label>
                                               <input type="text" class="form-control" id="otherReason" name="otherReason" placeholder="Input reason here...">
                                           </div>
-                                          <div class="float-end my-1">
+                                          <div class="float-right my-1">
                                               <button type="submit" name="submit" value="disapprove" onclick="return confirm('Are your sure to proceed?')" class="btn btn-primary">Save Reason</button>
                                           </div>
                                       </form>

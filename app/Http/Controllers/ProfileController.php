@@ -87,7 +87,7 @@ class ProfileController extends Controller
             'dob' => ['required', 'date'],  
             // 'gender' => ['required', 'string'],
             'civilStatus' => ['required', 'string'],
-            'citizenship' => ['regex:/^[a-zA-ZñÑ\s]+$/','required', 'string', 'max:255'],
+            'citizenship' => ['regex:/^[a-zA-ZñÑ\s]+$/', 'string', 'max:255'],
             'image' => 'mimes:jpg,png,jpeg|max:5048',
 
         ]);
@@ -122,7 +122,6 @@ class ProfileController extends Controller
                 'dob' => $request->input('dob'),
                 'civilStatus' => $request->input('civilStatus'),
                 'citizenship' => $request->input('citizenship'),
-                'profilePath' => 'default.png',
             ]);
         }
 
@@ -143,8 +142,7 @@ class ProfileController extends Controller
     
         // $user->assignRole($request->input('roles'));
     
-        return redirect()->route('home')
-                        ->with('success','Profile updated successfully');
+        return back()->with('success','Profile updated successfully');
     }
 
     /**

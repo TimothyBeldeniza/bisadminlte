@@ -110,13 +110,13 @@
          
                                     @if ($trans->status == "Disapproved" || $trans->status == "Cancelled")
                                        <td class="text-danger"><b>{{ $trans->status }}</b></td>
-                                       @elseif ($trans->status == "Due")
-                                          <td class="text-warning"><b>{{ $trans->status }}</b></td>
+                                       @elseif ($trans->status == "Still in Review")
+                                          <td class="text-dark"><b>{{ $trans->status }}</b></td>
                                        @else
                                           <td class="text-success"><b>{{ $trans->status }}</b></td>    
                                     @endif
                                     <td class="text-center">
-                                          @if($trans->status == 'Due')
+                                          @if($trans->status == 'Still in Review')
                                              @can('documents-process')
                                                 <a class="btn btn-primary fw-bold" data-toggle="modal" data-target="#process{{ $trans->id }}">Process</a>
                                              @endcan

@@ -192,6 +192,6 @@ class BarangayOfficialsController extends Controller
                 //
         // $car = Car::find($id);
         $official->delete();
-        return redirect('/officials');
+        return redirect('/officials')->with('success', 'Official Deleted Successfully!');
     }
 }

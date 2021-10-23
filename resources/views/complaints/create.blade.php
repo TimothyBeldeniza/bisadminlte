@@ -35,13 +35,13 @@
             <form method="POST" action="{{ route('complaints.store') }}" enctype="multipart/form-data">
                 @csrf
                 <b>Complainant</b><br>
-                <input type="radio" id="insideC" name="fromC" onclick="showComplainant()" checked>
-                <label>Within the barangay</label>
+                <input type="radio" id="insideC" name="fromC" onclick="showComplainant()">
+                <label>Residential</label>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="radio" id="outsideC" name="fromC" onclick="showComplainant()">
-                <label>Outside the barangay</label>
+                <label>Non-Residential</label>
 
-                <div id="complainant" style="display: block">
+                <div id="complainant" style="display: none">
                   <b>Inside</b><br>
                   <div class="form-group row my-1">
                       <label for="complainantId" class="col-md-4 col-form-label required">{{ __('Complainant Name') }}</label>
@@ -61,7 +61,7 @@
                     <div class="form-group row my-1">
                        <div class="col-sm">
                            <label class="required" for="name">{{ __('Complainant Full Name') }}</label>
-                           <input id="cName" type="text" class="form-control" @error('cName') is-invalid @enderror name="cName" placeholder="Enter Complainant Full Name..." onfocus="this.value=''">
+                           <input id="cName" type="text" class="form-control" @error('cName') is-invalid @enderror name="cName" id="cName" placeholder="Enter Complainant Full Name..." onfocus="this.value=''">
                            @error('cName')
                            <span class="invalid-feedback" role="alert">
                               <strong>{{ $message }}</strong>
@@ -70,20 +70,20 @@
                        </div>
                        <div class="col-sm">
                            <label class="required" for="cAddress">{{ __('Complainant Address') }}</label>
-                           <textarea class="form-control" name="cAddress" id="cAddress" cols="30" rows="3" placeholder="Enter Complainant's Address here..."></textarea>
+                           <textarea class="form-control" name="cAddress" id="cAddress" cols="30" rows="3" id="cAddress" placeholder="Enter Complainant's Address here..."></textarea>
                        </div>
                     </div>
                 </div>
                     
                 <hr>
                 <b>Respondents</b><br>
-                <input type="radio" id="insideR" name="fromR" onclick="showRespondent()" checked>
-                <label>Within the barangay</label>
+                <input type="radio" id="insideR" name="fromR" onclick="showRespondent()">
+                <label>Residential</label>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="radio" id="outsideR" name="fromR" onclick="showRespondent()">
-                <label>Outside the barangay</label>
+                <label>Non-Residential</label>
 
-                <div id="respondent" style="display: block">
+                <div id="respondent" style="display: none">
                   <b>Inside</b><br>
                   <div class="form-group row my-1">
                       <label for="respondentId" class="col-md-4 col-form-label required">{{ __('Respondent Name') }}</label>
@@ -153,12 +153,16 @@
                 document.getElementById('complainant').style.display = 'block';
                 document.getElementById('otherComplainant').style.display = 'none';
                 document.getElementById('outsideR').disabled = false;
+                $("#complainantId").attr('required', '');
             }
             else if (document.getElementById('outsideC').checked) 
             {
                 document.getElementById('otherComplainant').style.display = 'block';
                 document.getElementById('complainant').style.display = 'none';
                 document.getElementById('outsideR').disabled = true;
+                $("#cName").attr('required', '');
+                $("#cAddress").attr('required', '');
+                $("#complainantId").removeAttr('required');
             }
        }  
        function showRespondent() {
@@ -167,12 +171,16 @@
                 document.getElementById('respondent').style.display = 'block';
                 document.getElementById('otherRespondent').style.display = 'none';
                 document.getElementById('outsideC').disabled = false;
+                $("#respondentId").attr('required', '');
             }
             else if (document.getElementById('outsideR').checked) 
             {
                 document.getElementById('otherRespondent').style.display = 'block';
                 document.getElementById('respondent').style.display = 'none';
                 document.getElementById('outsideC').disabled = true;
+                $("#respondents").attr('required', '');
+                $("#respondentsAdd").attr('required', '');
+                $("#respondentId").removeAttr('required');
             }
        }  
     </script>
