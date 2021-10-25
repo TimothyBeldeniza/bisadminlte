@@ -34,7 +34,12 @@ class UsersImport implements ToModel, WithHeadingRow
         ]);
 
         $user->assignRole('Resident');
-        $user->syncPermissions(DB::table('permissions')->where('name', 'like', '%res%')->pluck('name'));
+        $user->syncPermissions([
+            'barangay-official-list',
+            'documents-scan-document',
+            'module-request-document',
+
+        ]);
 
         // dd($user->toArray());
 

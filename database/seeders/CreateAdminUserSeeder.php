@@ -216,7 +216,7 @@ class CreateAdminUserSeeder extends Seeder
         $chairman->assignRole('Chairman');
         $chairman->syncPermissions([
             'module-requested-documents',
-            'res-barangay-official-list',
+            'barangay-official-list',
             'module-filed-complaints',
             'complaint-show-details',
             'complaint-view-settle-form',
@@ -226,8 +226,8 @@ class CreateAdminUserSeeder extends Seeder
             'complaint-view-escalation-form',
             'complaint-save-escalation-form',
             
-            'res-module-request-document',
-            'res-documents-scan-document',
+            'module-request-document',
+            'documents-scan-document',
         ]);
         $sec->assignRole('Secretary');
         $sec->syncPermissions([
@@ -242,7 +242,7 @@ class CreateAdminUserSeeder extends Seeder
             'documents-types-edit',
             'documents-types-delete',
 
-            'res-documents-scan-document',
+            'documents-scan-document',
             'documents-scan-request',
 
             'module-file-complaint',
@@ -255,9 +255,9 @@ class CreateAdminUserSeeder extends Seeder
             'complaint-view-escalation-form',
             'complaint-save-escalation-form',
 
-            'res-barangay-official-list',
-            'res-module-request-document',
-            'res-documents-scan-document',
+            'barangay-official-list',
+            'module-request-document',
+            'documents-scan-document',
         ]);
         $coun->assignRole('Councilor');
         $coun->syncPermissions([
@@ -274,17 +274,17 @@ class CreateAdminUserSeeder extends Seeder
             'complaint-save-escalation-form',
             'complaint-reject',
 
-            'res-barangay-official-list',
-            'res-module-request-document',
-            'res-documents-scan-document',
+            'barangay-official-list',
+            'module-request-document',
+            'documents-scan-document',
         ]);
         $trea->assignRole('Treasurer');
         $trea->syncPermissions([
             'module-requested-documents',
             // 'module-filed-complaints',
-            'res-barangay-official-list',
-            'res-documents-scan-document',
-            'res-module-request-document',
+            'barangay-official-list',
+            'documents-scan-document',
+            'module-request-document',
         ]);
         $clerk->assignRole('Clerk');
         $clerk->syncPermissions([
@@ -294,19 +294,34 @@ class CreateAdminUserSeeder extends Seeder
             'documents-view',
             'documents-save-PDF',
             'documents-disapprove',
-            'res-documents-scan-document',
+            'documents-scan-document',
             'documents-scan-request',
-            'res-barangay-official-list',
-            'res-module-request-document',
+            'barangay-official-list',
+            'module-request-document',
         ]);
 
         $timots->assignRole('Resident');
-        $timots->syncPermissions(DB::table('permissions')->where('name', 'like', '%res%')->pluck('name'));
+        $timots->syncPermissions([
+            'barangay-official-list',
+            'documents-scan-document',
+            'module-request-document',
+
+        ]);
 
         $barts->assignRole('Resident');
-        $barts->syncPermissions(DB::table('permissions')->where('name', 'like', '%res%')->pluck('name'));
+        $barts->syncPermissions([
+            'barangay-official-list',
+            'documents-scan-document',
+            'module-request-document',
+
+        ]);
 
         $baste->assignRole('Resident');
-        $baste->syncPermissions(DB::table('permissions')->where('name', 'like', '%res%')->pluck('name'));
+        $baste->syncPermissions([
+            'barangay-official-list',
+            'documents-scan-document',
+            'module-request-document',
+
+        ]);
     }
 }

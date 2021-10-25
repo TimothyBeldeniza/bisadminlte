@@ -131,7 +131,7 @@
               </p>
             </a>
           </li>
-          @can('res-barangay-official-list')
+          @can('barangay-official-list')
           <li class="nav-item">
             <a href="{{ route('officials.index') }}" class="nav-link">
               <i class="nav-icon fas fa-user-tie"></i>
@@ -216,7 +216,7 @@
             </a>
           </li>
           @endcan
-          @can('res-module-request-document') 
+          @can('module-request-document') 
           <li class="nav-item">
             <a href="{{ route('documents.create') }}" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
@@ -224,7 +224,7 @@
             </a>
           </li>
           @endcan
-          @can('res-documents-scan-document') 
+          @can('documents-scan-document') 
           <li class="nav-item">
             <a href="{{ url('/documents/scan') }}" class="nav-link">
               <i class="nav-icon fas fa-qrcode"></i>
