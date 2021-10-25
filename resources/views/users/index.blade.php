@@ -24,34 +24,37 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-12">
-                <span class="input-group-btn">
-                    <a class="btn btn-success mb-2 text-light" href="{{ route('users.create') }}"><i class="fas fa-plus-circle"></i> Add new user</a>
-                </span>
+                @hasanyrole('Admin|Secretary')
+                    <span class="input-group-btn">
+                        <a class="btn btn-success mb-2 text-light" href="{{ route('users.create') }}"><i class="fas fa-plus-circle"></i> Add new user</a>
+                    </span>
+                @endhasanyrole
               <div class="card">
                 <div class="card-header">
                     <div class="float-left">
                         <h3 class="card-title">List of Users</h3>
                     </div>
                     <div class="float-right">
-
-                        <form style="display: inline" action="{{ route('users.index') }}" method="GET" role="search">
-                            <div class="row">
-                                <label for="date" class="col-form-label">From</label>
-                                <div class="col-sm-4">
-                                    <input type="date" class="form-control input-sm" id="from" name="from" required>
-                                </div>
-                                <label for="date" class="col-form-label">To</label>
-                                <div class="col-sm-4">
-                                <input type="date" class="form-control input-sm" id="to" name="to" required>
-                                </div>        
-                                <button type="submit" name="search" title="Search" class="btn btn-success">Range</button>
-                                <a href="{{ route('users.index') }}">
-                                    <button class="btn btn-success ml-2" type="button" title="Refresh page">
-                                        <span class="fas fa-sync-alt"></span>
-                                    </button>
-                                </a>
-                            </div>      
-                        </form>
+                        @hasanyrole('Admin|Secretary')
+                            <form style="display: inline" action="{{ route('users.index') }}" method="GET" role="search">
+                                <div class="row">
+                                    <label for="date" class="col-form-label">From</label>
+                                    <div class="col-sm-4">
+                                        <input type="date" class="form-control input-sm" id="from" name="from" required>
+                                    </div>
+                                    <label for="date" class="col-form-label">To</label>
+                                    <div class="col-sm-4">
+                                    <input type="date" class="form-control input-sm" id="to" name="to" required>
+                                    </div>        
+                                    <button type="submit" name="search" title="Search" class="btn btn-success">Range</button>
+                                    <a href="{{ route('users.index') }}">
+                                        <button class="btn btn-success ml-2" type="button" title="Refresh page">
+                                            <span class="fas fa-sync-alt"></span>
+                                        </button>
+                                    </a>
+                                </div>      
+                            </form>
+                        @endhasanyrole
                     </div>
                 </div>
                 <!-- /.card-header -->
@@ -62,8 +65,15 @@
                       <th>No</th>
                       <th>Name</th>
                       <th>Email</th>
-                      <th>Role</th>
-                      <th>Action</th>
+                      @hasanyrole('Admin|Secretary')
+                        <th>Role</th>
+                        <th>Action</th>
+                      @endhasanyrole
+
+                      @role('Chairman')
+                        <th>Contact No.</th>
+                        <th>Address</th>
+                      @endrole
                     </tr>
                     </thead>
                     <tbody>
@@ -73,44 +83,51 @@
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $user->lastName. ', ' .$user->firstName. ' ' .$user->middleName  }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td>
-                                        @if(!empty($user->getRoleNames()))
-                                            @foreach($user->getRoleNames() as $v)
-                                                @if ($v == 'Admin')
-                                                    <label class="badge bg-success">{{ $v }}</label>
-                                                @elseif ($v == 'Chairman')
-                                                    <label class="badge bg-primary">{{ $v }}</label>
-                                                @elseif ($v == 'Councilor')
-                                                    <label class="badge bg-danger">{{ $v }}</label>
-                                                @elseif ($v == 'Secretary')
-                                                    <label class="badge bg-warning">{{ $v }}</label>
-                                                @elseif ($v == 'Treasurer')
-                                                    <label class="badge bg-info">{{ $v }}</label>
-                                                @elseif ($v == 'Clerk')
-                                                    <label class="badge bg-dark">{{ $v }}</label>
-                                                @elseif ($v == 'Resident')
-                                                    <label class="badge bg-secondary">{{ $v }}</label>
-                                                @endif
-                                            @endforeach
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-link px-0" data-toggle="modal" id="mediumButton" data-target="#mediumModal"
-                                        data-attr="{{ route('users.show', $user->id) }}" title="show">
-                                        <i class="fas fa-eye fa-lg text-success"></i>
-                                        </a>
-                            
-                                        <a class="btn btn-link" data-toggle="modal" id="largeButton" data-target="#largeModal"
-                                        data-attr="{{ route('users.edit', $user->id) }}" title="edit">
-                                        <i class="fas fa-edit fa-lg"></i>
-                                        </a>
-                            
-                                        <form action="{{ route('users.destroy', $user->id) }}" method="post" style="display:inline">
-                                            @csrf
-                                            @method('delete')
-                                            <button  class="btn btn-link px-0" onclick="return confirm('Are you sure you want to delete this user?')" type="submit"><i class="fas fa-trash-alt text-danger fa-lg" ></i></button>
-                                        </form>
-                                    </td>
+                                    @hasanyrole('Admin|Secretary')
+                                        <td>
+                                            @if(!empty($user->getRoleNames()))
+                                                @foreach($user->getRoleNames() as $v)
+                                                    @if ($v == 'Admin')
+                                                        <label class="badge bg-success">{{ $v }}</label>
+                                                    @elseif ($v == 'Chairman')
+                                                        <label class="badge bg-primary">{{ $v }}</label>
+                                                    @elseif ($v == 'Councilor')
+                                                        <label class="badge bg-danger">{{ $v }}</label>
+                                                    @elseif ($v == 'Secretary')
+                                                        <label class="badge bg-warning">{{ $v }}</label>
+                                                    @elseif ($v == 'Treasurer')
+                                                        <label class="badge bg-info">{{ $v }}</label>
+                                                    @elseif ($v == 'Clerk')
+                                                        <label class="badge bg-dark">{{ $v }}</label>
+                                                    @elseif ($v == 'Resident')
+                                                        <label class="badge bg-secondary">{{ $v }}</label>
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-link px-0" data-toggle="modal" id="mediumButton" data-target="#mediumModal"
+                                            data-attr="{{ route('users.show', $user->id) }}" title="show">
+                                            <i class="fas fa-eye fa-lg text-success"></i>
+                                            </a>
+                                
+                                            <a class="btn btn-link" data-toggle="modal" id="largeButton" data-target="#largeModal"
+                                            data-attr="{{ route('users.edit', $user->id) }}" title="edit">
+                                            <i class="fas fa-edit fa-lg"></i>
+                                            </a>
+                                
+                                            <form action="{{ route('users.destroy', $user->id) }}" method="post" style="display:inline">
+                                                @csrf
+                                                @method('delete')
+                                                <button  class="btn btn-link px-0" onclick="return confirm('Are you sure you want to delete this user?')" type="submit"><i class="fas fa-trash-alt text-danger fa-lg" ></i></button>
+                                            </form>
+                                        </td>
+                                    @endhasanyrole
+
+                                    @role('Chairman')
+                                        <td>{{ $user->contactNo }}</td>
+                                        <td>{{ $user->houseNo . ' ' . $user->street }}</td>
+                                    @endrole
                                 </tr>
                             @endforeach
                         @else

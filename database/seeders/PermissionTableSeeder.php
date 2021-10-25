@@ -57,7 +57,6 @@ class PermissionTableSeeder extends Seeder
             'module-file-complaint',
             'module-requested-documents',
             'module-filed-complaints',
-            
             'module-usrmngmnt',
 
             //Resident 
