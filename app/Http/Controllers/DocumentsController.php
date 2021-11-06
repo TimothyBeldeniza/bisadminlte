@@ -233,6 +233,7 @@ class DocumentsController extends Controller
         $wname = $walkinUser->firstName . ' ' . $walkinUser->lastName;
         $brgyName = Barangay::find(1)->pluck('name')->first(); 
         $unique_code = sha1(time());
+        
         // dd($brgyName);
         // dd($email);
         
@@ -264,16 +265,17 @@ class DocumentsController extends Controller
 
         if($request->image)
         {
-            $newImageName = time() . '-' . $request->lastName . '.' . $request->firstName . '.' . $request->middleName . '.' .$request->image->extension();
-            $request->image->move(public_path('images/barangayId'), $newImageName);
-            
+            // $newImageName = time() . '-' . $request->lastName . '.' . $request->firstName . '.' . $request->middleName . '.' .$request->image->extension();
+            // $request->image->move(public_path('images/barangayId'), $newImageName);
+            $barangayIdPath = $request->image->store('barangay_id','public');
+            // dd($barangayIdPath);
             if($request->others != null)
             {
                 DocumentsTransactions::create([
                     'transId' => $transId->id,
                     'dmId' => $request->docType,
                     'purpose' => $request->others,
-                    'barangayIdPath' => $newImageName,
+                    'barangayIdPath' => $barangayIdPath,
                 ]);
             }
             else
@@ -282,7 +284,7 @@ class DocumentsController extends Controller
                     'transId' => $transId->id,
                     'dmId' => $request->docType,
                     'purpose' => $request->purpose,
-                    'barangayIdPath' => $newImageName,
+                    'barangayIdPath' => $barangayIdPath,
                 ]);
             }
             
