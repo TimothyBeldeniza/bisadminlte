@@ -99,7 +99,7 @@ Route::get('blotters/note/{transId}/{userId}', [BlottersController::class,'noted
 
 //Import Users
 Route::get('/users/import', [UsersImportController::class,'show']);
-Route::post('/users/import', [UsersImportController::class,'store']);
+Route::post('/users/import/store', [UsersImportController::class,'store']);
 
 Route::group(['middleware' => ['auth','verified']], function() {
     Route::resource('users', UserController::class);
