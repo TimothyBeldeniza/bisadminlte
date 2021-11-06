@@ -60,10 +60,10 @@
                       <th>Date Requested</th>
                       <th>Email</th>
                       <th>Document</th>
-                      <th>Price</th>
                       <th>Purpose</th>
                       <th>Barangay ID</th>
                       <th>Status</th>
+                      <th>Price</th>
                       @hasanyrole('Admin|Clerk|Secretary')
                       <th>Action</th>
                       @endhasanyrole
@@ -80,7 +80,6 @@
                                     <td>{{ $trans->date}}</td>
                                     <td>{{ $trans->email }}</td>
                                     <td>{{ $trans->docType }}</td>
-                                    <td>{{ '₱' . $trans->price }}</td>
                                     <td>{{ $trans->purpose }}</td>
                                     <td class="text-center">
                                         @if ($trans->barangayIdPath != null)
@@ -117,6 +116,7 @@
                                        @else
                                           <td class="text-success"><b>{{ $trans->status }}</b></td>    
                                     @endif
+                                    <td>{{ '₱' . $trans->price }}</td>
                                     @hasanyrole('Admin|Clerk|Secretary')
                                     <td class="text-center">
                                           @if($trans->status == 'Due')
@@ -127,11 +127,17 @@
                                                 <a class="btn btn-danger fw-bold" data-toggle="modal" data-target="#disapprove{{ $trans->id }}">Disapprove</a>
                                              @endcan
                                           @elseif($trans->status == 'Ready to Claim')
-                                             <a class="btn btn-primary fw-bold" onclick="return confirm('Are yousure to proceed?')" href="documents/paid/{{ $trans->transId }}">Paid</a>
-                                             <a class="btn btn-success fw-bold" href="documents/generate-document-pdf/{{ $trans->id }}/{{ $trans->userId }}">Save PDF</a>
+                                             @if($trans->price == 0)
+                                                <a class="btn btn-success fw-bold" href="documents/generate-document-pdf/{{ $trans->id }}/{{ $trans->userId }}">Save PDF</a>
+                                                <a class="btn btn-dark fw-bold" onclick="return confirm('Are yousure to proceed?')" href="documents/release/{{ $trans->id }}">Release</a>
+                                             @else
+                                                <a class="btn btn-primary fw-bold" onclick="return confirm('Are yousure to proceed?')" href="documents/paid/{{ $trans->transId }}">Paid</a>
+                                             @endif
                                           @elseif($trans->status == 'Paid')
-                                             {{-- <a class="btn btn-secondary fw-bold" href="documents/view-document-pdf/{{ $trans->id }}/{{ $trans->userId }}" target="_blank">View</a> --}}
                                              <a class="btn btn-success fw-bold" href="documents/generate-document-pdf/{{ $trans->id }}/{{ $trans->userId }}">Save PDF</a>
+                                             <a class="btn btn-dark fw-bold" onclick="return confirm('Are yousure to proceed?')" href="documents/release/{{ $trans->id }}">Release</a>
+                                          @elseif($trans->status == 'Released')
+                                             <b>None</b>
                                           @endif
                                     </td>
                                     @endhasanyrole
@@ -241,6 +247,30 @@
                             </tr>
                         @endif
                     </tbody>
+                    @hasanyrole('Chairman|Treasurer')
+                    <tfoot>
+                       <tr> 
+                          {{-- <th colspan="10" rowspan="1">Total Revenue: P 100,000</th> --}}
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          @if ($totalRevenue['due']->totalDue == 0)
+                             <th>Total Due: ₱0</th>
+                          @else
+                             <th>Total Paid: {{ '₱' . $totalRevenue['due']->totalDue }}</th>
+                          @endif
+                          @if ($totalRevenue['paid']->totalPaid == 0)
+                             <th>Total Paid: ₱0</th>
+                          @else
+                             <th>Total Paid: {{ '₱' . $totalRevenue['paid']->totalPaid }}</th>
+                          @endif
+                          <th>Total Revenue: {{ '₱' . $totalRevenue['revenue']->revenue }}</th>
+                       </tr>
+                    </tfoot>
+                    @endhasanyrole
                   </table>
                 </div>
                 <!-- /.card-body -->
@@ -261,7 +291,7 @@
             $(function () {
     $("#example1").DataTable({
       "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      "buttons": ["copy", "csv", "excel", "pdf", {extend:"print", footer: true}, "colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,

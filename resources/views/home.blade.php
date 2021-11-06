@@ -22,11 +22,71 @@
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
+      @role('Chairman|Secretary')
+      <section class="content">
+         <div class="container-fluid">
+         <h5 class="font-weight-bold">Residents Information</h5>
+         <div class="row">
+            <div class="col-md-3 col-sm-6 col-12">
+               <div class="info-box">
+               <span class="info-box-icon bg-info"><i class="fas fa-male"></i></span>
+
+               <div class="info-box-content">
+                  <span class="info-box-text">Male</span>
+                  <span class="info-box-number">{{ $stats['male'] }}</span>
+               </div>
+               <!-- /.info-box-content -->
+               </div>
+               <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-12">
+               <div class="info-box">
+               <span class="info-box-icon bg-pink"><i class="fas fa-female"></i></span>
+
+               <div class="info-box-content">
+                  <span class="info-box-text">Female</span>
+                  <span class="info-box-number">{{ $stats['female'] }}</span>
+               </div>
+               <!-- /.info-box-content -->
+               </div>
+               <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-12">
+               <div class="info-box">
+               <span class="info-box-icon bg-gray"><i class="fas fa-blind"></i></span>
+
+               <div class="info-box-content">
+                  <span class="info-box-text">Senior Citizen</span>
+                  <span class="info-box-number">{{ $stats['senior'] }}</span>
+               </div>
+               <!-- /.info-box-content -->
+               </div>
+               <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-12">
+               <div class="info-box">
+               <span class="info-box-icon bg-success"><i class="fas fa-users"></i></span>
+
+               <div class="info-box-content">
+                  <span class="info-box-text">Total Residents</span>
+                  <span class="info-box-number">{{ $stats['totalRes'] }}</span>
+               </div>
+               <!-- /.info-box-content -->
+               </div>
+               <!-- /.info-box -->
+            </div>
+         </div>
+         </div>
+      </section>
+   @endrole    
     <!-- /.content-header -->
     @hasanyrole('Admin|Chairman|Councilor|Secretary')
     <div class="content">
         <div class="container-fluid">
-            <h5>Complaints</h5>
+            <h5 class="font-weight-bold">Complaints</h5>
           <!-- Small boxes (Stat box) -->
           <div class="row">
             <div class="col">
@@ -40,7 +100,7 @@
                 <div class="icon">
                   <i class="ion ion-close-circled"></i>
                 </div>
-                {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+                <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
@@ -55,7 +115,7 @@
                 <div class="icon">
                   <i class="ion ion-load-a"></i>
                 </div>
-                {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+                <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
@@ -71,7 +131,7 @@
                 <div class="icon">
                   <i class="ion ion-alert-circled"></i>
                 </div>
-                {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+                <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
@@ -86,7 +146,7 @@
                 <div class="icon">
                   <i class="ion ion-thumbsup"></i>
                 </div>
-                {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+                <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <div class="col">
@@ -100,7 +160,7 @@
                 <div class="icon">
                   <i class="ion ion-thumbsdown"></i>
                 </div>
-                {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+                <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
@@ -114,7 +174,7 @@
       {{-- Documents  --}}
       <div class="content">
         <div class="container-fluid">
-            <h5>Documents</h5>
+            <h5 class="font-weight-bold">Documents</h5>
           <!-- Small boxes (Stat box) -->
           <div class="row">
             
@@ -130,7 +190,7 @@
                 <div class="icon">
                   <i class="ion ion-ios-pricetags"></i>
                 </div>
-                {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+                <a href="{{ route('documents.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
@@ -146,7 +206,7 @@
                 <div class="icon">
                   <i class="ion ion-android-hand"></i>
                 </div>
-                {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+                <a href="{{ route('documents.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
@@ -161,7 +221,21 @@
                 <div class="icon">
                   <i class="ion ion-android-done-all"></i>
                 </div>
-                {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+                <a href="{{ route('documents.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <div class="col">
+              <!-- small box -->
+              <div class="small-box bg-teal">
+                <div class="inner">
+                  <h3>{{ $stats['released'] }}</h3>
+  
+                  <p>Released</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-checkmark-circled"></i>
+                </div>
+                <a href="{{ route('documents.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <div class="col">
@@ -175,76 +249,14 @@
                 <div class="icon">
                   <i class="ion ion-close-round"></i>
                 </div>
-                {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+                <a href="{{ route('documents.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
           </div>
-
         </div><!-- /.container-fluid -->
       </div>
       @endhasrole
-      
-      @role('Chairman|Secretary')
-      <section class="content">
-        <div class="container-fluid">
-          <h5 class="mb-2">Residents Information</h5>
-          <div class="row">
-            <div class="col-md-3 col-sm-6 col-12">
-              <div class="info-box">
-                <span class="info-box-icon bg-info"><i class="fas fa-male"></i></span>
-  
-                <div class="info-box-content">
-                  <span class="info-box-text">Male</span>
-                  <span class="info-box-number">{{ $stats['male'] }}</span>
-                </div>
-                <!-- /.info-box-content -->
-              </div>
-              <!-- /.info-box -->
-            </div>
-            <!-- /.col -->
-            <div class="col-md-3 col-sm-6 col-12">
-              <div class="info-box">
-                <span class="info-box-icon bg-pink"><i class="fas fa-female"></i></span>
-  
-                <div class="info-box-content">
-                  <span class="info-box-text">Female</span>
-                  <span class="info-box-number">{{ $stats['female'] }}</span>
-                </div>
-                <!-- /.info-box-content -->
-              </div>
-              <!-- /.info-box -->
-            </div>
-            <!-- /.col -->
-            <div class="col-md-3 col-sm-6 col-12">
-              <div class="info-box">
-                <span class="info-box-icon bg-gray"><i class="fas fa-blind"></i></span>
-  
-                <div class="info-box-content">
-                  <span class="info-box-text">Senior Citizen</span>
-                  <span class="info-box-number">{{ $stats['senior'] }}</span>
-                </div>
-                <!-- /.info-box-content -->
-              </div>
-              <!-- /.info-box -->
-            </div>
-            <!-- /.col -->
-            <div class="col-md-3 col-sm-6 col-12">
-              <div class="info-box">
-                <span class="info-box-icon bg-success"><i class="fas fa-users"></i></span>
-  
-                <div class="info-box-content">
-                  <span class="info-box-text">Total Residents</span>
-                  <span class="info-box-number">{{ $stats['totalRes'] }}</span>
-                </div>
-                <!-- /.info-box-content -->
-              </div>
-              <!-- /.info-box -->
-            </div>
-          </div>
-        </div>
-      </section>
-    @endrole
     
     <!-- Main content -->
     <div class="content">
