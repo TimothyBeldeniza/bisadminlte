@@ -125,7 +125,7 @@
                 <div class="inner">
                   <h3>{{ $stats['due'] }}</h3>
   
-                  <p>Still in Review</p>
+                  <p>Due</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-ios-pricetags"></i>

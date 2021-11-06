@@ -48,8 +48,6 @@ class DocumentsController extends Controller
      */
     public function index(Request $request)
     {
-        
-
         if($request->input('from') && $request->input('to') ){
 
             $fromDate = $request->input('from') . ' 00:00:00';
@@ -86,8 +84,6 @@ class DocumentsController extends Controller
             ->get();
         }
 
-        
-           
         return view('documents.index', compact('data'))
         ->with('i', ($request->input('page', 1) - 1) * 10);
     }
@@ -213,6 +209,15 @@ class DocumentsController extends Controller
       //   dd($case, $hasCase); 
     }
 
+    public function walkin()
+    {
+         $users = User::all()->where('id', '>', 1)->sortBy('lastName');
+         $doctypes = DocumentTypes::select('id','docType', 'price')->get();
+
+         return view('documents.walkin', compact('doctypes', 'users'));
+
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -221,28 +226,41 @@ class DocumentsController extends Controller
      */
     public function store(Request $request)
     {
+        $walkinUser = User::find($request->user);
         $userId = Auth::User()->id;
         $email = Auth::User()->email;
         $name  = Auth::User()->firstName . ' ' . Auth::User()->lastName;
+        $wname = $walkinUser->firstName . ' ' . $walkinUser->lastName;
         $brgyName = Barangay::find(1)->pluck('name')->first(); 
         $unique_code = sha1(time());
         // dd($brgyName);
         // dd($email);
-
+        
         // $serviceId = 1;
         $request->validate([
-            'docType' => 'required', 'integer',
-            'purpose' => 'required', 'string',
-            'others' => 'nullable', 'string',
-            'image' => 'mimes:jpg,png,jpeg|max:5048',
+           'docType' => 'required', 'integer',
+           'user' => 'nullable', 'integer',
+           'purpose' => 'required', 'string',
+           'others' => 'nullable', 'string',
+           'image' => 'mimes:jpg,png,jpeg|max:5048',
         ]);
-
-        $transId = Transactions::create([
-          'userId' => $userId,
-        //   'serviceId' => $serviceId,
-          'status' => 'Still in Review',
-          'unique_code' => sha1(time()),
-        ]);
+        
+        if($request->user != null)
+        {
+            $transId = Transactions::create([
+               'userId' => $request->user,
+               'status' => 'Due',
+               'unique_code' => sha1(time()),
+            ]);
+        }
+        else
+        {
+           $transId = Transactions::create([
+             'userId' => $userId,
+             'status' => 'Due',
+             'unique_code' => sha1(time()),
+           ]);
+        }
 
         if($request->image)
         {
@@ -266,8 +284,6 @@ class DocumentsController extends Controller
                     'purpose' => $request->purpose,
                     'barangayIdPath' => $newImageName,
                 ]);
-
-
             }
             
             event(new SubmitRequest($email,$unique_code,$name,$brgyName));
@@ -292,7 +308,10 @@ class DocumentsController extends Controller
                 ]);
             }
 
-            event(new SubmitRequest($email,$unique_code,$name,$brgyName));
+            if($request->user != null)
+               event(new SubmitRequest($walkinUser->email,$unique_code,$wname,$brgyName));
+            else
+               event(new SubmitRequest($email,$unique_code,$name,$brgyName));
             return redirect('home')->with('success', 'Document requested successfully!');
         }
         

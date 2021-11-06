@@ -64,7 +64,9 @@
                       <th>Purpose</th>
                       <th>Barangay ID</th>
                       <th>Status</th>
+                      @hasanyrole('Admin|Clerk|Secretary')
                       <th>Action</th>
+                      @endhasanyrole
                     </tr>
                     </thead>
                     <tbody>
@@ -103,20 +105,21 @@
                                               </div>
                                           </div>
                                         @else
-                                          <b>No ID Uploaded</b>
+                                          <b>Walk In Request</b>
                                         @endif
                                         
                                     </td>
          
                                     @if ($trans->status == "Disapproved" || $trans->status == "Cancelled")
                                        <td class="text-danger"><b>{{ $trans->status }}</b></td>
-                                       @elseif ($trans->status == "Still in Review")
+                                       @elseif ($trans->status == "Due")
                                           <td class="text-dark"><b>{{ $trans->status }}</b></td>
                                        @else
                                           <td class="text-success"><b>{{ $trans->status }}</b></td>    
                                     @endif
+                                    @hasanyrole('Admin|Clerk|Secretary')
                                     <td class="text-center">
-                                          @if($trans->status == 'Still in Review')
+                                          @if($trans->status == 'Due')
                                              @can('documents-process')
                                                 <a class="btn btn-primary fw-bold" data-toggle="modal" data-target="#process{{ $trans->id }}">Process</a>
                                              @endcan
@@ -131,6 +134,7 @@
                                              <a class="btn btn-success fw-bold" href="documents/generate-document-pdf/{{ $trans->id }}/{{ $trans->userId }}">Save PDF</a>
                                           @endif
                                     </td>
+                                    @endhasanyrole
                                     {{-- Process Reason Modal --}}
                                     <div class="modal fade" id="process{{ $trans->id }}" tabindex="-1" aria-labelledby="processLabel" aria-hidden="true">
                                        <div class="modal-dialog">
