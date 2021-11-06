@@ -16,7 +16,7 @@ class PermissionTableSeeder extends Seeder
     {
         $permissions = [
             //admin only
-            'res-barangay-official-list',
+            
             'barangay-official-create',
             'barangay-official-edit',
             'barangay-official-delete',
@@ -33,7 +33,7 @@ class PermissionTableSeeder extends Seeder
             'documents-types-delete',
 
             //Scanner
-            'res-documents-scan-document',
+            
             'documents-scan-request',
 
             'complaint-show-details',
@@ -53,16 +53,16 @@ class PermissionTableSeeder extends Seeder
 
             //Modules/pages
 
-            'res-module-request-document',
-            'module-file-complaint',
-            // 'module-service-management',
             
+            'module-file-complaint',
             'module-requested-documents',
             'module-filed-complaints',
-            
             'module-usrmngmnt',
 
-
+            //Resident 
+            'barangay-official-list',
+            'documents-scan-document',
+            'module-request-document',
 
 
         ];

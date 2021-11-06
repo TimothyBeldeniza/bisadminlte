@@ -51,6 +51,7 @@ class UserController extends Controller
         else
         {
             $data = User::orderBy('id','ASC')->get();
+
         }
 
         
@@ -163,9 +164,9 @@ class UserController extends Controller
                 'complaint-save-escalation-form',
                 'complaint-reject',
 
-                'res-barangay-official-list',
-                'res-module-request-document',
-                'res-documents-scan-document',
+                'barangay-official-list',
+                'module-request-document',
+                'documents-scan-document',
             ]);
             
         }
@@ -184,7 +185,7 @@ class UserController extends Controller
                 'documents-types-edit',
                 'documents-types-delete',
 
-                'res-documents-scan-document',
+                'documents-scan-document',
                 'documents-scan-request',
 
                 'module-file-complaint',
@@ -197,9 +198,9 @@ class UserController extends Controller
                 'complaint-view-escalation-form',
                 'complaint-save-escalation-form',
 
-                'res-barangay-official-list',
-                'res-module-request-document',
-                'res-documents-scan-document',
+                'barangay-official-list',
+                'module-request-document',
+                'documents-scan-document',
             ]);
         }
         else if($request->input('roles') == 'Treasurer')
@@ -207,9 +208,9 @@ class UserController extends Controller
             $user->syncPermissions([
                 'module-requested-documents',
                 // 'module-filed-complaints',
-                'res-barangay-official-list',
-                'res-documents-scan-document',
-                'res-module-request-document',
+                'barangay-official-list',
+                'documents-scan-document',
+                'module-request-document',
             ]);
         }
 
@@ -222,17 +223,17 @@ class UserController extends Controller
                 'documents-view',
                 'documents-save-PDF',
                 'documents-disapprove',
-                'res-documents-scan-document',
+                'documents-scan-document',
                 'documents-scan-request',
-                'res-barangay-official-list',
-                'res-module-request-document',
+                'barangay-official-list',
+                'module-request-document',
             ]);
         }
         else if($request->input('roles') == 'Chairman')
         {
             $user->syncPermissions([
                 'module-requested-documents',
-                'res-barangay-official-list',
+                'barangay-official-list',
                 'module-filed-complaints',
                 'complaint-show-details',
                 'complaint-view-settle-form',
@@ -242,13 +243,18 @@ class UserController extends Controller
                 'complaint-view-escalation-form',
                 'complaint-save-escalation-form',
                 
-                'res-module-request-document',
-                'res-documents-scan-document',
+                'module-request-document',
+                'documents-scan-document',
             ]);
         }
         else if($request->input('roles') == 'Resident')
         {
-            $user->syncPermissions(DB::table('permissions')->where('name', 'like', '%res%')->pluck('name'));
+            $user->syncPermissions([
+                'barangay-official-list',
+                'documents-scan-document',
+                'module-request-document',
+    
+            ]);
         }
         return redirect()->route('users.index')->with('success','User created successfully');
     }

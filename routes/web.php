@@ -67,11 +67,15 @@ Route::get('complaints/show/dismiss/{compId}/{transId}', [ComplaintsController::
 Route::get('documents/process/{transId}/{userId}', [DocumentsController::class,'process']);
 Route::get('documents/disapprove/{transId}', [DocumentsController::class,'disapproved']);
 Route::get('documents/paid/{transId}', [DocumentsController::class,'paid']);
+Route::get('documents/release/{transId}', [DocumentsController::class,'release']);
+
+//Walk-In Request Document
+Route::get('documents/create/walkin', [DocumentsController::class,'walkin'])->name('documents.walkin');
 
 //Reason for Documents
 Route::post('documents/process/{docId}/{transId}/{userId}', [DocumentsController::class,'reason']);
-Route::get('documents/disapprove/{transId}/{userId}', [DocumentsController::class,'disapproved']);
-Route::get('documents/paid/{transId}/{userId}', [DocumentsController::class,'paid']);
+// Route::get('documents/disapprove/{transId}/{userId}', [DocumentsController::class,'disapproved']);
+// Route::get('documents/paid/{transId}/{userId}', [DocumentsController::class,'paid']);
 
 //Scan Documents
 Route::get('documents/scan', [DocumentsController::class,'scan']);

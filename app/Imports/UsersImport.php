@@ -5,11 +5,25 @@ namespace App\Imports;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\SkipsErrors;
+use Maatwebsite\Excel\Concerns\SkipsFailures;
+use Maatwebsite\Excel\Concerns\SkipsOnError;
+use Maatwebsite\Excel\Concerns\SkipsOnFailure;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
+use Maatwebsite\Excel\Validators\Failure;
+use Throwable;
 
-class UsersImport implements ToModel, WithHeadingRow
+class UsersImport implements 
+    ToModel, 
+    WithHeadingRow, 
+    SkipsOnError, 
+    WithValidation,
+    SkipsOnFailure
 {
+    use Importable, SkipsErrors, SkipsFailures;
     /**
     * @param array $row
     *
@@ -18,8 +32,8 @@ class UsersImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         $user = new User([
-            'lastName' => $row['first_name'],
-            'firstName' => $row['last_name'],
+            'lastName' => $row['last_name'],
+            'firstName' => $row['first_name'],
             'middleName' => $row['middle_name'],
             'email' => $row['email'],
             'password' => Hash::make('password'),
@@ -34,10 +48,34 @@ class UsersImport implements ToModel, WithHeadingRow
         ]);
 
         $user->assignRole('Resident');
-        $user->syncPermissions(DB::table('permissions')->where('name', 'like', '%res%')->pluck('name'));
+        $user->syncPermissions([
+            'barangay-official-list',
+            'documents-scan-document',
+            'module-request-document',
+
+        ]);
 
         // dd($user->toArray());
-
+        // dd($row['dob']);
         return $user;
     }
+
+    public function rules(): array
+    {
+        return [
+            '*.email' => ['email', 'unique:users,email'],
+            '*.last_name' => ['required', 'regex:/^[a-zA-ZñÑ\s]+$/','string', 'max:255'],
+            '*.first_name' => ['required','regex:/^[a-zA-ZñÑ\s]+$/', 'string', 'max:255'],
+            '*.middle_name' => ['nullable','regex:/^[a-zA-ZñÑ\s]+$/', 'string', 'max:255'],
+            '*.email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            '*.contact_no' => ['required','digits:10'],
+            '*.house_no' => ['required', 'string'],
+            '*.street' => ['required', 'string'],
+            '*.dob' => ['required'],  
+            '*.gender' => ['required', 'string'],
+            '*.civil_status' => ['required', 'string'],
+            '*.citizenship' => ['required','regex:/^[a-zA-ZñÑ\s]+$/', 'string'],
+        ];
+    }
+
 }
