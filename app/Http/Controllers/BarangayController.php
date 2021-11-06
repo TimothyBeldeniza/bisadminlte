@@ -79,8 +79,8 @@ class BarangayController extends Controller
       $request->validate([
         'cityLogoPath' => 'mimes:png|max:5048',
         'logoPath' => 'mimes:png|max:5048',
-        'region' => ['required', 'regex:/^[a-zA-ZñÑ\s]+$/','string'],
-        'province' => ['required', 'regex:/^[a-zA-ZñÑ\s]+$/','string'],
+        'region' => ['required','string'],
+        'province' => ['required','string'],
         'city' => ['required', 'regex:/^[a-zA-ZñÑ\s]+$/','string'],
         'name' => ['required', 'regex:/^[a-zA-ZñÑ\s]+$/','string'],
         'zipCode' => 'required', 'integer',

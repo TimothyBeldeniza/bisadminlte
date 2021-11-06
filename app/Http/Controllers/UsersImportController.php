@@ -18,7 +18,7 @@ class UsersImportController extends Controller
     public function store(Request $request)
     {   
         $file = $request->file('file')->store('import');
-        dd($file);
+        // dd($file);
         $import = new UsersImport;
         $import->import($file);
         

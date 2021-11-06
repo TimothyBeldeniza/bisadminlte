@@ -46,11 +46,7 @@
           <div class="card">
             <div style="background-color: #f6f7cd" class="card-header text-dark font-weight-bold"><b>Edit Barangay Information</b></div>
             <div class="card-body">
-                {{-- @if ($message = Session::get('success'))
-                  <div class="alert alert-success" role="alert">
-                    <b>{{ $message }}</b>
-                  </div>
-                @endif --}}
+
                 <form method="POST" action="{{ route('barangay.update', $brgy->id) }}" enctype="multipart/form-data">
                   @csrf
                   @method('put')
@@ -68,33 +64,25 @@
 
                   <div class="form-group">
                     <label for="region" class="text-md font-weight-bold required">{{ __('Region') }}</label> 
-                    {{-- <select class="form-select" value="{{ $brgy->region }}" name="region" id="region" required>
-                      <option value>--Select Region--</option>
-                    </select> --}}
+
                     <input id="region" type="text" class="form-control" value="{{ $brgy->region }}" name="region" placeholder="Enter Region..." required>
                   </div>
 
                   <div class="form-group">
                     <label for="province" class="text-md font-weight-bold required">{{ __('Province') }}</label> 
-                    {{-- <select class="form-select" value="{{ $brgy->province }}" name="province" id="province" required>
-                      <option value>--Select Province--</option>
-                    </select> --}}
+
                     <input id="province" type="text" class="form-control" value="{{ $brgy->province }}" name="province" placeholder="Enter Province..." required>
                   </div>
 
                   <div class="form-group">
                     <label for="city" class="text-md font-weight-bold required">{{ __('City') }}</label> 
-                    {{-- <select class="form-select" value="{{ $brgy->city }}" name="city" id="city" required>
-                      <option value>--Select City--</option>
-                    </select> --}}
+      
                     <input id="city" type="text" class="form-control" value="{{ $brgy->city }}" name="city" placeholder="Enter City..." required>
                   </div>
 
                   <div class="form-group">
                     <label for="name" class="text-md font-weight-bold required">{{ __('Barangay') }}</label> 
-                    {{-- <select class="form-select" value="{{ $brgy->name }}" name="name" id="barangay" required>
-                      <option value>--Select Barangay--</option>
-                    </select> --}}
+           
                     <input id="name" type="text" class="form-control" value="{{ $brgy->name }}" name="name" placeholder="Enter Barangay Name..." required>
                   </div>
 
@@ -116,6 +104,9 @@
 
     </div>
   </div>
+
+
+
 {{-- Previous Code --}}
   {{-- <div class="container">
     <div class="row justify-content-center">
@@ -209,16 +200,11 @@
         </div>
       </div>
     </div> --}}
-
+    
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.js"></script>
   <script type="text/javascript" src="https://f001.backblazeb2.com/file/buonzz-assets/jquery.ph-locations.js"></script>
+  
   <script type="text/javascript">
-
-    // $("option:selected", "#region").text();
-    // $("option:selected", "#province").text();
-    // $("option:selected", "#city").text();
-    // $("option:selected", "#barangay").text();
-
     $("#region option:selected").text();
     $("#province option:selected").text();
     $("#city option:selected").text();
@@ -259,6 +245,5 @@
 
         $('#region').ph_locations('fetch_list');
       });
-
   </script>
 </x-layout>

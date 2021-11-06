@@ -28,6 +28,9 @@
                     <span class="input-group-btn">
                         <a class="btn btn-success mb-2 text-light" href="{{ route('users.create') }}"><i class="fas fa-plus-circle"></i> Add new user</a>
                     </span>
+                    <span class="input-group-btn">
+                        <a class="btn btn-success mb-2 text-light" href="users/import"><i class="fas fa-plus-circle"></i> Import Residents</a>
+                    </span>
                 @endhasanyrole
               <div class="card">
                 <div class="card-header">
