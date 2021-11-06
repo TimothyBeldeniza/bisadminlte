@@ -41,7 +41,7 @@
                         </select>
                     </div>
                     <div class="col">
-                        <p>This inludes information about the user specifically the: <br> <b>Last Name, First Name, Middle Name,</b> <br> <b>Citizenship, Civil Status, Address</b> </p>
+                        <p>This includes information about the user specifically the: <br> <b>Last Name, First Name, Middle Name,</b> <br> <b>Citizenship, Civil Status, Address</b> </p>
                     </div>
                  </div>
                  <hr>
