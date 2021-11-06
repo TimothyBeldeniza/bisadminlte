@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\ProcessRequestedDocument;
+use App\Jobs\RequestedDocumentJob;
 use App\Mail\RequestedDocument;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -28,6 +29,8 @@ class ProcessRequestedDocumentMessage
      */
     public function handle(ProcessRequestedDocument $event)
     {
-        Mail::to($event->email)->send(new RequestedDocument);
+        // dd($event->email[0]);
+        // Mail::to($event->email)->send(new RequestedDocument);
+        dispatch(new RequestedDocumentJob());
     }
 }

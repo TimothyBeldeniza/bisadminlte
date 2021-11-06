@@ -93,7 +93,7 @@
                                                   </div>
                               
                                                   <div class="modal-body" style="display: flex; justify-content:center">
-                                                      <img style="margin:auto; width: 75%;"src="{{ asset('images/barangayId/'.$trans->barangayIdPath) }}" alt="brgyId" style="height: 300px">
+                                                      <img style="margin:auto; width: 75%;"src="{{  asset('storage/'.$trans->barangayIdPath) }}" alt="brgyId" style="height: 300px">
                                                   </div>
                               
                                                   <div class="modal-footer">
