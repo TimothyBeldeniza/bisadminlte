@@ -520,7 +520,7 @@ class DocumentsController extends Controller
             ->select('documents_transactions.id', 'documents_transactions.transId', 'documents_transactions.purpose', 
                     'documents_transactions.barangayIdPath', DB::raw('date(documents_transactions.created_at) as "date"'),
                     'users.firstName', 'users.lastName', 'users.email', 'users.profilePath', 
-                    'transactions.status', 'transactions.userId', 'document_types.docType')
+                    'transactions.status', 'transactions.userId', 'document_types.docType', 'document_types.price')
             ->first();
         
         // dd($data);

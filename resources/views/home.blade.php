@@ -263,7 +263,11 @@
       <div class="container-fluid">
         <div class="card collapsed-card">
             <div class="card-header">
-              <h3 class="card-title font-weight-bold">Requested Documents</h3>
+              <h3 class="card-title font-weight-bold">Requested Documents
+                 @if($count['dues'] > 0)
+                  <span class="badge badge-danger">{{ $count['dues'] }}</span>
+                 @endif
+              </h3>
              
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -317,7 +321,7 @@
                                         {{ $docu->purpose }}
                                     </a>
                                 </td>
-                                @if ($docu->status == "Still in Review")
+                                @if ($docu->status == "Due")
 
                                     <td class="project-state text-center">
                                         <span class="badge badge-dark">{{ $docu->status }}</span>
@@ -421,7 +425,11 @@
 
           <div class="card collapsed-card">
             <div class="card-header">
-              <h3 class="card-title font-weight-bold">Filed Complaints</h3>
+              <h3 class="card-title font-weight-bold">Filed Complaints 
+               @if($count['comps'] > 0)
+                  <span class="badge badge-danger">{{ $count['comps'] }}</span>
+               @endif
+              </h3>
     
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -493,7 +501,11 @@
 
           <div class="card collapsed-card">
             <div class="card-header">
-              <h3 class="card-title font-weight-bold">Complaints Against You (Residential)</h3>
+              <h3 class="card-title font-weight-bold">Complaints Against You (Residential) 
+               @if($count['res'] > 0)
+                  <span class="badge badge-danger">{{ $count['res'] }}</span>
+               @endif
+              </h3>
     
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -565,7 +577,11 @@
 
           <div class="card collapsed-card">
             <div class="card-header">
-              <h3 class="card-title font-weight-bold">Complaints Against You (Non-Residential)</h3>
+              <h3 class="card-title font-weight-bold">Complaints Against You (Non-Residential)
+               @if($count['nonr'] > 0)
+                  <span class="badge badge-danger">{{ $count['nonr'] }}</span>
+               @endif
+              </h3>
     
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
