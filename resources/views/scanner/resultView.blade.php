@@ -9,7 +9,7 @@
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
                 <li class="breadcrumb-item active">Scan Result</a></li>
 
               </ol>
@@ -50,6 +50,7 @@
                               @endif
                           <hr>
                           <a onclick="history.back()" class="btn btn-primary float-end">Back</a>
+                          <a href="/documents/scan" class="btn btn-primary float-end">Scan Another Document</a>
                           </div>
                       </div>
                   </div>
