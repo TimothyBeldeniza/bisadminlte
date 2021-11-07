@@ -21,7 +21,7 @@ class CreateOfficialsSeeder extends Seeder
             'imagePath' => 'default.png',
         ]);
         BarangayOfficials::create([
-            'firstName' => 'Gemman',
+            'firstName' => 'Gemma',
             'lastName' => 'Espejon', 
             'middleName' => null, 
             'position' => 'Councilor', 

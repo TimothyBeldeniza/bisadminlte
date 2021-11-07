@@ -63,11 +63,6 @@ class ComplaintsController extends Controller
             ->where('complaints_transactions.compType', 1)
             ->where('complaints_transactions.created_at', '>=', $fromDate)
             ->where('complaints_transactions.created_at', '<=', $toDate)
-            // ->where('users.lastName', 'Like', '%' . request('term') . '%')
-            // ->orWhere('users.firstName', 'Like', '%' . request('term') . '%')
-            // ->orWhere('complaints_transactions.respondents', 'Like', '%' . request('term') . '%')
-            // ->orWhere('transactions.status', 'Like', '%' . request('term') . '%')
-            // ->orWhere('complaints_transactions.respondents', 'Like', '%' . request('term') . '%')
             ->select('complaints_transactions.id', 'complaints_transactions.transId', 
                     'complaints_transactions.compDetails','complaints_transactions.respondents', 'complaints_transactions.respondentsAdd',
                     DB::raw('date(complaints_transactions.created_at) as "date"'),
@@ -95,6 +90,7 @@ class ComplaintsController extends Controller
 
     public function outsider(Request $request)
     {
+      //Non-Residential Function
         if($request->input('from') && $request->input('to')){
             $fromDate = $request->input('from') . ' 00:00:00';
             $toDate = $request->input('to') . ' 23:59:59';
@@ -157,6 +153,34 @@ class ComplaintsController extends Controller
         return compact('td', 'officials', 'brgy');
     }
 
+    public function getOutsideDocData($compId, $transId)
+    {
+      //Non-Residential Function
+      $td = DB::table('complaints_transactions')
+      ->join('transactions', 'complaints_transactions.transId', '=', 'transactions.id')
+      ->join('users', 'users.id', '=', 'transactions.userId')
+      ->join('outside_complainants', 'outside_complainants.compId', '=', 'complaints_transactions.id')
+      ->where('transactions.id', $transId)
+      ->where('complaints_transactions.id', $compId)
+      ->select('complaints_transactions.id', DB::raw('date(complaints_transactions.created_at) as "date"'), 
+              'complaints_transactions.respondents', 'complaints_transactions.respondentsAdd','complaints_transactions.reason',
+              'complaints_transactions.compDetails', 
+              'outside_complainants.complainant', 'outside_complainants.address',
+              'transactions.unique_code')
+      ->first();
+      
+      $brgy = DB::table('barangay')
+      ->select('id', 'name', 'zipCode', 'city', 'province', 'region', 
+              'logoPath', 'cityLogoPath')
+      ->first();
+      
+      $officials = DB::table('barangay_officials')
+      ->select(DB::raw('concat(firstName, " ", lastName) as "name"'), 'position')
+      ->get();
+
+      return compact('td', 'officials', 'brgy');
+    }
+
     public function pdfViewComplaint($compId, $transId) 
     {
         $document = $this->getDocData($compId, $transId);
@@ -166,15 +190,35 @@ class ComplaintsController extends Controller
         return view('complaints.form')->with('td', $td)->with('officials', $officials)->with('brgy', $brgy);
     }
 
+    public function pdfViewOutsideComplaint($compId, $transId) 
+    {
+      //Non-Residential Function
+        $document = $this->getOutsideDocData($compId, $transId);
+        $td = $document['td'];
+        $officials = $document['officials'];
+        $brgy = $document['brgy'];
+        return view('complaints.oform')->with('td', $td)->with('officials', $officials)->with('brgy', $brgy);
+    }
+
     public function pdfSaveComplaint($compId, $transId) 
     {
         $document = $this->getDocData($compId, $transId); 
         $td = $document['td'];
         $officials = $document['officials'];
         $brgy = $document['brgy'];
-        // $pdf = PDF::loadView('complaints.form', compact('data', 'td', 'officials'));
         $pdf = PDF::loadView('complaints.form', ['td' => $td,  'officials' => $officials, 'brgy' => $brgy])->setPaper('a4', 'portrait');
         return $pdf->download($td->lastName.'-'.'Complaint-Form.pdf');
+    }
+
+    public function pdfSaveOutsideComplaint($compId, $transId) 
+    {
+      //Non-Residential Function
+        $document = $this->getOutsideDocData($compId, $transId); 
+        $td = $document['td'];
+        $officials = $document['officials'];
+        $brgy = $document['brgy'];
+        $pdf = PDF::loadView('complaints.oform', ['td' => $td,  'officials' => $officials, 'brgy' => $brgy])->setPaper('a4', 'portrait');
+        return $pdf->download($td->complainant.'-'.'Complaint-Form.pdf');
     }
 
     public function pdfViewEscalate($compId, $transId)
@@ -184,7 +228,15 @@ class ComplaintsController extends Controller
         $officials = $document['officials'];
         $brgy = $document['brgy'];
         return view('complaints.escalate')->with('td', $td)->with('officials', $officials)->with('brgy', $brgy);
-        // return view('complaints.escalate', compact('data', 'td', 'officials'));
+    }
+
+    public function pdfViewOutsideEscalate($compId, $transId)
+    {
+        $document = $this->getOutsideDocData($compId, $transId);
+        $td = $document['td'];
+        $officials = $document['officials'];
+        $brgy = $document['brgy'];
+        return view('complaints.oescalate')->with('td', $td)->with('officials', $officials)->with('brgy', $brgy);
     }
 
     public function pdfSaveEscalate($compId, $transId)
@@ -197,6 +249,17 @@ class ComplaintsController extends Controller
         return $pdf->download($td->lastName.$td->firstName.'-'.'Escalation-Form.pdf');
     }
 
+    public function pdfSaveOutsideEscalate($compId, $transId)
+    {
+       //Non-Residential Function
+        $document = $this->getOutsideDocData($compId, $transId);
+        $td = $document['td'];
+        $officials = $document['officials'];
+        $brgy = $document['brgy'];
+        $pdf = PDF::loadView('complaints.oescalate', ['td' => $td,  'officials' => $officials, 'brgy' => $brgy])->setPaper('a4', 'portrait');
+        return $pdf->download($td->complainant.'-'.'Escalation-Form.pdf');
+    }
+
     public function pdfViewSettle($compId, $transId)
     {
         $document = $this->getDocData($compId, $transId);
@@ -204,6 +267,16 @@ class ComplaintsController extends Controller
         $officials = $document['officials'];
         $brgy = $document['brgy'];
         return view('complaints.settle')->with('td', $td)->with('officials', $officials)->with('brgy', $brgy);
+    }
+
+    public function pdfViewOutsideSettle($compId, $transId)
+    {
+       //Non-Residential Function
+        $document = $this->getOutsideDocData($compId, $transId);
+        $td = $document['td'];
+        $officials = $document['officials'];
+        $brgy = $document['brgy'];
+        return view('complaints.osettle')->with('td', $td)->with('officials', $officials)->with('brgy', $brgy);
     }
 
     public function pdfSaveSettle($compId, $transId)
@@ -214,6 +287,17 @@ class ComplaintsController extends Controller
         $brgy = $document['brgy'];
         $pdf = PDF::loadView('complaints.settle', ['td' => $td,  'officials' => $officials, 'brgy' => $brgy])->setPaper('a4', 'portrait');
         return $pdf->download($td->lastName.'-'.'Settlement-Form.pdf');
+    }
+
+    public function pdfSaveOutsideSettle($compId, $transId)
+    {
+       //Non-Residential Function
+        $document = $this->getOutsideDocData($compId, $transId);
+        $td = $document['td'];
+        $officials = $document['officials'];
+        $brgy = $document['brgy'];
+        $pdf = PDF::loadView('complaints.osettle', ['td' => $td,  'officials' => $officials, 'brgy' => $brgy])->setPaper('a4', 'portrait');
+        return $pdf->download($td->complainant.'-'.'Settlement-Form.pdf');
     }
 
     /**

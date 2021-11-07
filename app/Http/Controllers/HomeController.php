@@ -38,6 +38,7 @@ class HomeController extends Controller
                 'documents_transactions.reason', 'transactions.status', 'transactions.userId')
         ->get();
 
+
         $complaints = DB::table('complaints_transactions')
         ->join('transactions', 'complaints_transactions.transId', '=', 'transactions.id')
         ->join('users', 'users.id', '=', 'transactions.userId')
@@ -103,11 +104,18 @@ class HomeController extends Controller
             'female' => User::whereHas("roles", function($q){ $q->where("name","!=", "Admin"); })->where('gender','Female')->count(),
             'senior' => User::whereHas("roles", function($q){ $q->where("name", "!=", "Admin"); })->where('dob', '<=', Carbon::now()->subDecades(6)->format('Y-m-d'))->count(),
             'totalRes' =>  User::whereHas("roles", function($q){ $q->where("name", "!=", "Admin"); })->count(),
-            
+        ];
+
+        $count = [
+            'dues' => $documents->where('status', 'Due')->count(),
+            'comps' => $complaints->where('status', 'Unresolved')->count(),
+            'res' => $residents->where('status', 'Unresolved')->count(),
+            'nonr' => $nonresidents->where('status', 'Unresolved')->count(),
+            'cancel' => $xdocus->where('status', 'Cancelled')->count(),
         ];
 
 
-        return view('home', compact('documents', 'complaints', 'residents', 'nonresidents', 'xdocus', 'stats'));
+        return view('home', compact('documents', 'complaints', 'residents', 'nonresidents', 'xdocus', 'stats', 'count'));
     }
 
     /**
