@@ -240,13 +240,14 @@ class CreateAdminUserSeeder extends Seeder
             'documents-view',
             'documents-save-PDF',
             'documents-disapprove',
+            'documents-scan-document',
+            'documents-scan-request',
+            'documents-walk-in',
+
             'documents-types',
             'documents-types-create',
             'documents-types-edit',
             'documents-types-delete',
-
-            'documents-scan-document',
-            'documents-scan-request',
 
             'module-file-complaint',
             'module-filed-complaints',
@@ -260,7 +261,6 @@ class CreateAdminUserSeeder extends Seeder
 
             'barangay-official-list',
             'module-request-document',
-            'documents-scan-document',
         ]);
 
         $coun->assignRole('Councilor');
@@ -301,6 +301,7 @@ class CreateAdminUserSeeder extends Seeder
             'documents-disapprove',
             'documents-scan-document',
             'documents-scan-request',
+            'documents-walk-in',
             'barangay-official-list',
             'module-request-document',
         ]);

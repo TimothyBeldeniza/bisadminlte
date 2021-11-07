@@ -19,7 +19,7 @@
 
 
   <div class="content">
-    <div class="container-fluid">
+    <div class="container">
       <div class="row justify-content-center">
         <div class="col-sm-6" style="width: 400px">
           <div class="card">
@@ -45,36 +45,23 @@
             <div class="card">
               <div style="background-color: #f6f7cd;" class="card-header font-weight-bold"><b>Request Details</b></div>
                   <div class="card-body">
-                      {{-- @if ($message = Session::get('success'))
-                        <div class="alert alert-success" role="alert">
-                          <b>{{ $message }}</b>
-                        </div>
-                      @endif
-                      @if ($message = Session::get('warning'))
-                        <div class="alert alert-warning" role="alert">
-                          <b>{{ $message }}</b>
-                        </div>
-                      @endif
-                      @if ($message = Session::get('danger'))
-                        <div class="alert alert-danger" role="alert">
-                          <b>{{ $message }}</b>
-                        </div>
-                      @endif --}}
                       <p class="card-text"><b>Requested Document:</b> {{ $data->docType }}</p>
+                      <p class="card-text"><b>Document Price:</b> {{ '₱' . $data->price }}</p>
                       <p class="card-text"><b>Purpose of Request:</b> {{ $data->purpose }}</p>
                       <p class="card-text"><b>Date Requested:</b> {{ Carbon\Carbon::parse($data->date)->format('jS F, Y') }}</p>
                       
                       <hr>
                       @if ($data->status == "Disapproved" || $data->status == "Cancelled")
                         <p class="card-text"><b>Status of Request:</b> <b class="text-danger">{{ $data->status }}</b></p>
-                        {{-- <td class="text-danger"><b>{{ $data->status }}</b></td> --}}
-                      @elseif ($data->status == "Still in Review")
+                      @elseif ($data->status == "Due")
                         <p class="card-text"><b>Status of Request: </b> <b class="text-dark">{{ $data->status }}</b> </p>
-                        {{-- <td class="text-warning"><b>{{ $data->status }}</b></td> --}}
                       @else
                         <p class="card-text"><b>Status of Request:</b> <b class="text-success">{{ $data->status }}</b></p>
-                        {{-- <td class="text-success"><b>{{ $data->status }}</b></td> --}}
                       @endif
+                      @if ($data->barangayIdPath == null)
+                        <p class="card-text"><b>Valid ID: Presented ID to authenticated personnel</b></p>
+                      @else
+                      <p class="card-text"><b>Valid ID:</b></p>
                       <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#bargyId{{$data->id}}">Show ID</button>
                         <div class="modal fade" id="bargyId{{$data->id}}" tabindex="-1" aria-labelledby="bargyIdLabel" aria-hidden="true">
                           <div class="modal-dialog modal-lg">
@@ -84,7 +71,7 @@
                               </div>
           
                               <div class="modal-body" style="display: flex; justify-content:center">
-                                  <img style="margin:auto; width: 75%;"src="{{ asset('images/barangayId/'.$data->barangayIdPath) }}" alt="brgyId" style="height: 300px">
+                                  <img style="margin:auto; width: 75%;"src="{{ asset('storage/'.$data->barangayIdPath) }}" alt="brgyId" style="height: 300px">
                               </div>
           
                               <div class="modal-footer">
@@ -93,21 +80,27 @@
                               </div>
                           </div>
                         </div>
+                      @endif
                   </div>
             </div>
             <div style="width:50%" class="card">
               <div style="background-color: #f6f7cd;" class="card-header font-weight-bold"><b>Actions</b></div>
               <div class="card-body">
-                      @if($data->status == 'Still in Review')
+                      @if($data->status == 'Due')
                           <a class="btn btn-primary" data-toggle="modal" data-target="#process{{ $data->id }}">Process</a>
                           <a class="btn btn-danger" data-toggle="modal" data-target="#disapprove{{ $data->id }}">Disapprove</a>
                       @elseif($data->status == 'Ready to Claim')
-                          <a class="btn btn-primary" onclick="return confirm('Are yousure to proceed?')" href="/documents/paid/{{ $data->transId }}">Paid</a>
-                          {{-- <a class="btn btn-secondary" href="/documents/view-document-pdf/{{ $data->id }}/{{ $data->userId }}" target="_blank">View</a>  --}}
-                          <a class="btn btn-success" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
+                        @if($data->price == 0)
+                           <a class="btn btn-success fw-bold" href="documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
+                           <a class="btn btn-dark fw-bold" onclick="return confirm('Are yousure to proceed?')" href="documents/release/{{ $data->id }}">Release</a>
+                        @else
+                           <a class="btn btn-primary fw-bold" onclick="return confirm('Are yousure to proceed?')" href="documents/paid/{{ $data->transId }}">Paid</a>
+                        @endif
                       @elseif($data->status == 'Paid')
-                          {{-- <a class="btn btn-secondary" href="/documents/view-document-pdf/{{ $data->id }}/{{ $data->userId }}" target="_blank">View</a> --}}
-                          <a class="btn btn-success" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
+                           <a class="btn btn-success fw-bold" href="documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
+                           <a class="btn btn-dark fw-bold" onclick="return confirm('Are yousure to proceed?')" href="documents/release/{{ $data->id }}">Release</a>
+                      @elseif($data->status == 'Released')
+                           <b class="text-success">Document Released</b>
                       @else
                           <b class="text-danger">Document Cancelled</b>
                       @endif
