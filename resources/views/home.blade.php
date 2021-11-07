@@ -653,11 +653,7 @@
 
           <div class="card collapsed-card">
             <div class="card-header">
-              <h3 class="card-title font-weight-bold">Cancelled Document Requests
-               @if($count['cancel'] > 0)
-                  <span class="badge badge-danger">{{ $count['cancel'] }}</span>
-               @endif
-              </h3>
+              <h3 class="card-title font-weight-bold">Cancelled Document Requests</h3>
     
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">

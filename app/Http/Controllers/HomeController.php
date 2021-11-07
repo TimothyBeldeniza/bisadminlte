@@ -111,7 +111,6 @@ class HomeController extends Controller
             'comps' => $complaints->where('status', 'Unresolved')->count(),
             'res' => $residents->where('status', 'Unresolved')->count(),
             'nonr' => $nonresidents->where('status', 'Unresolved')->count(),
-            'cancel' => $xdocus->where('status', 'Cancelled')->count(),
         ];
 
 
