@@ -41,7 +41,7 @@
                   <b class="text-dark">{{ $td->status }}</b>
                 @endif
                 </p>
-                <button type="button" class="btn btn-warning fw-bold"  data-toggle="modal" data-target="#compDetails{{$td->id}}">Show Complain Details</button>
+                <button type="button" class="btn btn-warning fw-bold"  data-toggle="modal" data-target="#compDetails{{$td->id}}">Show Complaint Details</button>
                 <!-- Modal -->
                 <div class="modal fade" id="compDetails{{$td->id}}" tabindex="-1" aria-labelledby="compDetailsLabel" aria-hidden="true">
                     <div class="modal-dialog">
