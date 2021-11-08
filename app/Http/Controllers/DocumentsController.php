@@ -285,6 +285,7 @@ class DocumentsController extends Controller
     public function walkin()
     { 
          $users = User::all()->where('id', '>', 1)->sortBy('lastName');
+         
          $doctypes = DocumentTypes::select('id','docType', 'price')->get();
 
          return view('documents.walkin', compact('doctypes', 'users'));
@@ -354,7 +355,13 @@ class DocumentsController extends Controller
             else
             {
                $hasCase = false;
-               return view('documents.create', compact('doctypes'))->with('hasCase', $hasCase);
+               $walkinUser = User::find($request->user);
+               $wname = $walkinUser->firstName . ' ' . $walkinUser->lastName;
+               $transId = Transactions::create([
+                  'userId' => $request->user,
+                  'status' => 'Due',
+                  'unique_code' => sha1(time()),
+               ]);
             }
             
         }

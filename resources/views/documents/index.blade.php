@@ -104,7 +104,7 @@
                                               </div>
                                           </div>
                                         @else
-                                          <b>Walk In Request</b>
+                                          <b>Presented to Staff</b>
                                         @endif
                                         
                                     </td>

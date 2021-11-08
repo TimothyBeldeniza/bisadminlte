@@ -91,14 +91,14 @@
                           <a class="btn btn-danger" data-toggle="modal" data-target="#disapprove{{ $data->id }}">Disapprove</a>
                       @elseif($data->status == 'Ready to Claim')
                         @if($data->price == 0)
-                           <a class="btn btn-success fw-bold" href="documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
+                           <a class="btn btn-success fw-bold" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
                            <a class="btn btn-dark fw-bold" onclick="return confirm('Are yousure to proceed?')" href="documents/release/{{ $data->id }}">Release</a>
                         @else
-                           <a class="btn btn-primary fw-bold" onclick="return confirm('Are yousure to proceed?')" href="documents/paid/{{ $data->transId }}">Paid</a>
+                           <a class="btn btn-primary fw-bold" onclick="return confirm('Are yousure to proceed?')" href="/documents/paid/{{ $data->transId }}">Paid</a>
                         @endif
                       @elseif($data->status == 'Paid')
-                           <a class="btn btn-success fw-bold" href="documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
-                           <a class="btn btn-dark fw-bold" onclick="return confirm('Are yousure to proceed?')" href="documents/release/{{ $data->id }}">Release</a>
+                           <a class="btn btn-success fw-bold" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
+                           <a class="btn btn-dark fw-bold" onclick="return confirm('Are yousure to proceed?')" href="/documents/release/{{ $data->id }}">Release</a>
                       @elseif($data->status == 'Released')
                            <b class="text-success">Document Released</b>
                       @else
