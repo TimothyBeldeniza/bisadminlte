@@ -256,6 +256,12 @@ class UserController extends Controller
                 'documents-scan-document',
                 'module-request-document',
                 'module-request-appointment',
+                'complaint-view-settle-form',
+                'complaint-save-settle-form',
+                'complaint-view-complaint-form',
+                'complaint-save-complaint-form',
+                'complaint-view-escalation-form',
+                'complaint-save-escalation-form',
     
             ]);
         }
