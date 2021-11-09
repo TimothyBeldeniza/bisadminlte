@@ -240,12 +240,14 @@
             </a>
           </li>
           @endcan
+          @can('documents-walk-in')
           <li class="nav-item">
             <a href="{{ route('documents.walkin') }}" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>WI Request Document</p>
             </a>
           </li>
+          @endcan
           @can('documents-scan-document') 
           <li class="nav-item">
             <a href="{{ url('/documents/scan') }}" class="nav-link">

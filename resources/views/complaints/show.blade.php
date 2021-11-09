@@ -42,7 +42,7 @@
                       <b class="text-dark">{{ $td->status }}</b>
                     @endif
                     </p>
-                    <button type="button" class="btn btn-warning fw-bold"  data-toggle="modal" data-target="#compDetails{{$td->id}}">Show Complain Details</button>
+                    <button type="button" class="btn btn-warning fw-bold"  data-toggle="modal" data-target="#compDetails{{$td->id}}">Show Complaint Details</button>
                     <!-- Modal -->
                     <div class="modal fade" id="compDetails{{$td->id}}" tabindex="-1" aria-labelledby="compDetailsLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -70,7 +70,7 @@
                     <a class="btn @if ( $hearingCounts == 3 || $td->status == 'Dismissed' || $td->status == 'Escalated' || $td->status == 'Settled') return disabled @endif btn-success fw-bold float-start" data-toggle="modal" data-target="#record-hearing">Record Hearing</a>
                   @endrole
                   @role('Resident')
-                    <a onclick="history.back()" class="btn btn-primary fw-bold float-end">Back</a>
+                    <a onclick="{{ route('home') }}" class="btn btn-primary fw-bold float-end">Back</a>
                   @endrole
                   @role('Admin|Chairman|Councilor|Secretary')
                     <a href="{{ route('complaints.index') }}" class="btn btn-primary fw-bold float-end">Back</a>

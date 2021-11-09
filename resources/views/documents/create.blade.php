@@ -58,7 +58,7 @@
                            </div>
 
                            <div class="col-sm">
-                              <label class="required" for="middleName">Middle Name</label>
+                              <label for="middleName">Middle Name</label>
                               @if (Auth::user()->middleName != null)                                  
                                  <input readonly type="text" class="form-control font-weight-bold" value="{{ Auth::user()->middleName }}" name="middleName" id="middleName" required>
                               @else

@@ -58,6 +58,12 @@ Route::get('autocomplete', [ComplaintsController::class, 'autocomplete'])->name(
 //Non-Residential Complainant
 Route::get('complaints/outsider',[ComplaintsController::class, 'outsider'])->name('complaints.outsider');
 Route::get('complaints/outsider/show/{compId}',[ComplaintsController::class, 'showOutsider'])->name('complaints.showoutsider');
+Route::get('complaints/outsider/show/view-o-complaint-pdf/{compId}/{transId}',[ComplaintsController::class, 'pdfViewOutsideComplaint']);
+Route::get('complaints/outsider/show/save-o-complaint-pdf/{compId}/{transId}',[ComplaintsController::class, 'pdfSaveOutsideComplaint']);
+Route::get('complaints/outsider/show/view-o-escalate-pdf/{compId}/{transId}',[ComplaintsController::class, 'pdfViewOutsideEscalate']);
+Route::get('complaints/outsider/show/save-o-escalate-pdf/{compId}/{transId}',[ComplaintsController::class, 'pdfSaveOutsideEscalate']);
+Route::get('complaints/outsider/show/view-o-settle-pdf/{compId}/{transId}',[ComplaintsController::class, 'pdfViewOutsideSettle']);
+Route::get('complaints/outsider/show/save-o-settle-pdf/{compId}/{transId}',[ComplaintsController::class, 'pdfSaveOutsideSettle']);
 
 //Processing of Complaint
 Route::get('complaints/show/settle/{compId}/{transId}', [ComplaintsController::class,'settle']);

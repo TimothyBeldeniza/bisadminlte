@@ -27,7 +27,7 @@
         <div class="card">
          <div class="card-header text-dark font-weight-bold" style="background-color: #f6f7cd;">{{ __('Document Request Form') }}</div>
          <div class="card-body">
-             <p class="text-danger font-weight-bold">Remember to ask first from Requestor for a Valid ID!</p>
+             <p class="text-danger font-weight-bold">Remember to ask first from the Requestor for a Valid ID!</p>
              <form method="POST" action="{{ route('documents.store') }}" enctype="multipart/form-data">
                  @csrf
                  <div class="form-group row my-1">

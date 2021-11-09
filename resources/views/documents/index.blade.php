@@ -61,7 +61,7 @@
                       <th>Email</th>
                       <th>Document</th>
                       <th>Purpose</th>
-                      <th>Barangay ID</th>
+                      <th>Valid ID</th>
                       <th>Status</th>
                       <th>Price</th>
                       @hasanyrole('Admin|Clerk|Secretary')
@@ -89,7 +89,7 @@
                                               <div class="modal-dialog modal-lg">
                                                   <div class="modal-content">
                                                   <div class="modal-header bg-primary">
-                                                      <h5 class="modal-title text-light" id="bargyIdLabel">Barangay ID of {{ $trans->firstName. ' ' .$trans->lastName}}</h5>
+                                                      <h5 class="modal-title text-light" id="bargyIdLabel">Valid ID of {{ $trans->firstName. ' ' .$trans->lastName}}</h5>
                                                       {{-- <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button> --}}
                                                   </div>
                               
@@ -104,7 +104,7 @@
                                               </div>
                                           </div>
                                         @else
-                                          <b>Walk In Request</b>
+                                          <b>Presented to Staff</b>
                                         @endif
                                         
                                     </td>

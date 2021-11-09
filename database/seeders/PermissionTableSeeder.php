@@ -25,16 +25,14 @@ class PermissionTableSeeder extends Seeder
             'documents-process',
             'documents-view',
             'documents-save-PDF',
-            'documents-disapprove',
+            'documents-disapprove', 
+            'documents-scan-request',
+            'documents-walk-in', 
 
             'documents-types',
             'documents-types-create',
             'documents-types-edit',
-            'documents-types-delete',
-
-            //Scanner
-            
-            'documents-scan-request',
+            'documents-types-delete',           
 
             'complaint-show-details',
             'complaint-settle',
@@ -53,7 +51,6 @@ class PermissionTableSeeder extends Seeder
 
             //Modules/pages
 
-            
             'module-file-complaint',
             'module-requested-documents',
             'module-filed-complaints',
@@ -65,7 +62,6 @@ class PermissionTableSeeder extends Seeder
             'documents-scan-document',
             'module-request-document',
             'module-request-appointment'
-
 
         ];
 

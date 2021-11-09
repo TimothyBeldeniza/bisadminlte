@@ -15,11 +15,11 @@ class BarangaySeeder extends Seeder
     public function run()
     {
         Barangay::create([
-          'name' => 'Barangay Name',
-          'zipCode' => 1111,
-          'city' => 'City',
-          'province' => 'Province',
-          'region' => 'Region',
+          'name' => 'Upper Bicutan',
+          'zipCode' => 1633,
+          'city' => 'Taguig City',
+          'province' => 'Metro Manila',
+          'region' => 'National Capital Region',
           'logoPath' => 'brgy-logo.png',
           'cityLogoPath' => 'city-logo.png',
         ]);

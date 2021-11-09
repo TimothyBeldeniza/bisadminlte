@@ -252,6 +252,7 @@ class DocumentsController extends Controller
     {   
         $currentUser = Auth::user()->id;
         $doctypes = DocumentTypes::select('id','docType', 'price')->get();
+
         $case = DB::table('complaints_transactions')
                   ->join('transactions', 'complaints_transactions.transId', '=', 'transactions.id') 
                   ->join('inside_respondents', 'inside_respondents.compId', '=', 'complaints_transactions.id')
@@ -260,7 +261,7 @@ class DocumentsController extends Controller
                   ->orWhere('transactions.status', 'On Going')
                   ->select('transactions.status')
                   ->get();
-      //   dd($case);
+
         if($case->count() > 0)
         {   
            if($case[0]->status == "Unresolved" || $case[0]->status == "On Going")
@@ -279,16 +280,15 @@ class DocumentsController extends Controller
            $hasCase = false;
            return view('documents.create', compact('doctypes'))->with('hasCase', $hasCase);
         }
-      //   dd($case, $hasCase); 
     }
 
     public function walkin()
-    {
+    { 
          $users = User::all()->where('id', '>', 1)->sortBy('lastName');
+         
          $doctypes = DocumentTypes::select('id','docType', 'price')->get();
 
          return view('documents.walkin', compact('doctypes', 'users'));
-
     }
 
     /**
@@ -306,10 +306,6 @@ class DocumentsController extends Controller
         $brgyName = Barangay::find(1)->pluck('name')->first(); 
         $unique_code = sha1(time());
         
-        // dd($brgyName);
-        // dd($email);
-        
-        // $serviceId = 1;
         $request->validate([
            'docType' => 'required', 'integer',
            'user' => 'nullable', 'integer',
@@ -320,13 +316,54 @@ class DocumentsController extends Controller
         
         if($request->user != null)
         {
-            $walkinUser = User::find($request->user);
-            $wname = $walkinUser->firstName . ' ' . $walkinUser->lastName;
-            $transId = Transactions::create([
-               'userId' => $request->user,
-               'status' => 'Due',
-               'unique_code' => sha1(time()),
-            ]);
+
+            // $walkinUser = User::find($request->user);
+            // $wname = $walkinUser->firstName . ' ' . $walkinUser->lastName;
+            // $transId = Transactions::create([
+            //    'userId' => $request->user,
+            //    'status' => 'Due',
+            //    'unique_code' => sha1(time()),
+            // ]);
+
+            $case = DB::table('complaints_transactions')
+            ->join('transactions', 'complaints_transactions.transId', '=', 'transactions.id') 
+            ->join('inside_respondents', 'inside_respondents.compId', '=', 'complaints_transactions.id')
+            ->where('inside_respondents.userId', $request->user)
+            ->where('transactions.status', 'Unresolved')
+            ->orWhere('transactions.status', 'On Going')
+            ->select('transactions.status')
+            ->get();
+
+            if($case->count() > 0)
+            {   
+               if($case[0]->status == "Unresolved" || $case[0]->status == "On Going")
+               {
+                  return redirect()->back()->with('warning', 'Resident have Unresolved or On Going Cases. Please get them to process them first.');
+               }
+               elseif($case[0]->status == "Dismissed" || $case[0]->status == "Settled" || $case[0]->status == "Escalated")
+               {
+                  $hasCase = false;
+                  $walkinUser = User::find($request->user);
+                  $wname = $walkinUser->firstName . ' ' . $walkinUser->lastName;
+                  $transId = Transactions::create([
+                     'userId' => $request->user,
+                     'status' => 'Due',
+                     'unique_code' => sha1(time()),
+                  ]);
+               }
+            }
+            else
+            {
+               $hasCase = false;
+               $walkinUser = User::find($request->user);
+               $wname = $walkinUser->firstName . ' ' . $walkinUser->lastName;
+               $transId = Transactions::create([
+                  'userId' => $request->user,
+                  'status' => 'Due',
+                  'unique_code' => sha1(time()),
+               ]);
+            }
+            
         }
         else
         {
@@ -520,7 +557,7 @@ class DocumentsController extends Controller
             ->select('documents_transactions.id', 'documents_transactions.transId', 'documents_transactions.purpose', 
                     'documents_transactions.barangayIdPath', DB::raw('date(documents_transactions.created_at) as "date"'),
                     'users.firstName', 'users.lastName', 'users.email', 'users.profilePath', 
-                    'transactions.status', 'transactions.userId', 'document_types.docType')
+                    'transactions.status', 'transactions.userId', 'document_types.docType', 'document_types.price')
             ->first();
         
         // dd($data);
