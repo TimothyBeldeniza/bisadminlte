@@ -128,14 +128,14 @@
                                              @endcan
                                           @elseif($trans->status == 'Ready to Claim')
                                              @if($trans->price == 0)
-                                                <a class="btn btn-success fw-bold" href="documents/generate-document-pdf/{{ $trans->id }}/{{ $trans->userId }}">Save PDF</a>
-                                                <a class="btn btn-dark fw-bold" onclick="return confirm('Are yousure to proceed?')" href="documents/release/{{ $trans->id }}">Release</a>
+                                                <a onclick="enableRelease{{ $trans->id }}()" class="btn btn-success fw-bold" onlclick="" href="documents/generate-document-pdf/{{ $trans->id }}/{{ $trans->userId }}">Save PDF</a>
+                                                <a id="release{{ $trans->id }}" class="btn btn-dark disabled fw-bold" onclick="return confirm('Are you sure to proceed?')" href="documents/release/{{ $trans->id }}">Release</a>
                                              @else
                                                 <a class="btn btn-primary fw-bold" onclick="return confirm('Are yousure to proceed?')" href="documents/paid/{{ $trans->transId }}">Paid</a>
                                              @endif
                                           @elseif($trans->status == 'Paid')
-                                             <a class="btn btn-success fw-bold" href="documents/generate-document-pdf/{{ $trans->id }}/{{ $trans->userId }}">Save PDF</a>
-                                             <a class="btn btn-dark fw-bold" onclick="return confirm('Are yousure to proceed?')" href="documents/release/{{ $trans->id }}">Release</a>
+                                             <a onclick="enableRelease{{ $trans->id }}()" class="btn btn-success fw-bold" onlclick="" href="documents/generate-document-pdf/{{ $trans->id }}/{{ $trans->userId }}">Save PDF</a>
+                                             <a id="release{{ $trans->id }}" class="btn btn-dark disabled fw-bold" onclick="return confirm('Are you sure to proceed?')" href="documents/release/{{ $trans->id }}">Release</a>
                                           @elseif($trans->status == 'Released')
                                              <b>None</b>
                                           @endif
@@ -237,6 +237,11 @@
                                              document.getElementById('othersD{{ $trans->id }}').style.display = 'block';
                                           }
                                           else document.getElementById('othersD{{ $trans->id }}').style.display = 'none';
+                                       }
+
+                                       function enableRelease{{ $trans->id }}()
+                                       {
+                                          document.getElementById('release{{ $trans->id }}').classList.remove('disabled');
                                        }
                                  </script>
                                 @endif

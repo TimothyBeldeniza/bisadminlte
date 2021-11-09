@@ -73,7 +73,7 @@
                           @if ($comp->status == "Settled") 
                             <td class="text-success"><b>{{ $comp->status }}</b></td>
                           @elseif ($comp->status == "Escalated" || $comp->status == "On Going")
-                            <td class="text-warning"><b>{{ $comp->status }}</b></td>
+                            <td class="text-orange"><b>{{ $comp->status }}</b></td>
                           @elseif ($comp->status == "Dismissed")
                             <td class="text-danger"><b>{{ $comp->status }}</b></td>
                           @else

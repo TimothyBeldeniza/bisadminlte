@@ -27,7 +27,7 @@
       
                   <div class="col-sm-6">
                       <div class="card">
-                          <div class="card-header" style="background-color: maroon"><b class="text-light">Request Information</b></div>
+                          <div class="card-header bg-danger"><b class="text-light">Request Information</b></div>
                           <div class="card-body">
                               <p class="card-text">
                                   <b class="text-danger">This request do not match any record from us.</b> 

@@ -45,7 +45,7 @@
                               @else 
                                   <p class="card-text">
                                       <b class="text-danger">This document does not match any record from us.</b> 
-                                      <i class="fas fa-exclamation-circle text-danger"></i>
+                                      <i class="fas fa-exclamation-circle text-danger"></i> 
                                   </p> 
                               @endif
                           <hr>

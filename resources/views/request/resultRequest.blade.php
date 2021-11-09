@@ -49,7 +49,6 @@
                       <p class="card-text"><b>Document Price:</b> {{ '₱' . $data->price }}</p>
                       <p class="card-text"><b>Purpose of Request:</b> {{ $data->purpose }}</p>
                       <p class="card-text"><b>Date Requested:</b> {{ Carbon\Carbon::parse($data->date)->format('jS F, Y') }}</p>
-                      
                       <hr>
                       @if ($data->status == "Disapproved" || $data->status == "Cancelled")
                         <p class="card-text"><b>Status of Request:</b> <b class="text-danger">{{ $data->status }}</b></p>
@@ -81,6 +80,11 @@
                           </div>
                         </div>
                       @endif
+                      @if ($data->reason == null)
+                        <p class="card-text"><b>Reason for Action: No Action taken yet</b></p>
+                      @else
+                        <p class="card-text"><b>Reason for Action: {{ $data->reason }}</b></p>
+                      @endif
                   </div>
             </div>
             <div style="width:50%" class="card">
@@ -91,16 +95,18 @@
                           <a class="btn btn-danger" data-toggle="modal" data-target="#disapprove{{ $data->id }}">Disapprove</a>
                       @elseif($data->status == 'Ready to Claim')
                         @if($data->price == 0)
-                           <a class="btn btn-success fw-bold" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
-                           <a class="btn btn-dark fw-bold" onclick="return confirm('Are yousure to proceed?')" href="documents/release/{{ $data->transId }}">Release</a>
+                           <a onclick="enableRelease{{ $data->id }}()" class="btn btn-success fw-bold" onlclick="" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
+                           <a id="release{{ $data->id }}" class="btn btn-dark disabled fw-bold" onclick="return confirm('Are you sure to proceed?')" href="/documents/release/{{ $data->id }}">Release</a>
                         @else
                            <a class="btn btn-primary fw-bold" onclick="return confirm('Are yousure to proceed?')" href="/documents/paid/{{ $data->transId }}">Paid</a>
                         @endif
                       @elseif($data->status == 'Paid')
-                           <a class="btn btn-success fw-bold" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
-                           <a class="btn btn-dark fw-bold" onclick="return confirm('Are yousure to proceed?')" href="/documents/release/{{ $data->transId }}">Release</a>
+                           <a onclick="enableRelease{{ $data->id }}()" class="btn btn-success fw-bold" onlclick="" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
+                           <a id="release{{ $data->id }}" class="btn btn-dark disabled fw-bold" onclick="return confirm('Are you sure to proceed?')" href="/documents/release/{{ $data->id }}">Release</a>
                       @elseif($data->status == 'Released')
                            <b class="text-success">Document Released</b>
+                      @elseif($data->status == 'Disapproved')
+                           <b class="text-success">Document Disapproved</b>
                       @else
                           <b class="text-danger">Document Cancelled</b>
                       @endif
@@ -204,6 +210,11 @@
               document.getElementById('othersD{{ $data->id }}').style.display = 'block';
           }
           else document.getElementById('othersD{{ $data->id }}').style.display = 'none';
+      }
+      
+      function enableRelease{{ $data->id }}()
+      {
+         document.getElementById('release{{ $data->id }}').classList.remove('disabled');
       }
     </script>
 </x-layout>
