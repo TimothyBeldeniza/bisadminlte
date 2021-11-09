@@ -1,8 +1,14 @@
 <x-layout>
+    <style>
+        .container{
+            text-align: center;
+            
+        }
+    </style>
     @section('title', 'Request Document')
     <!-- Content Header (Page header) -->
     <div class="content-header">
-        <div class="container-fluid">
+        {{-- <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0">Requested Appointments</h1>
@@ -14,12 +20,13 @@
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+        </div><!-- /.container-fluid --> --}}
     </div>
 
     <div class="content">
         <div class="container">
-            Appointment
+            {{-- Appointment --}}
+            <img class="" src="{{ asset('images/uc.png') }}" alt="">
         </div>
     </div>
 </x-layout>
