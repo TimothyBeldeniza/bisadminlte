@@ -145,12 +145,22 @@ class ComplaintsController extends Controller
         ->select('id', 'name', 'zipCode', 'city', 'province', 'region', 
                 'logoPath', 'cityLogoPath')
         ->first();
+
+        $path1 = base_path('public/images/'.$brgy->logoPath);
+        $type1 = pathinfo($path1, PATHINFO_EXTENSION);
+        $data1 = file_get_contents($path1);
+        $brgyLogo = 'data:image/' .$type1 . ';base64,' . base64_encode($data1);
+
+        $path2 = base_path('public/images/'.$brgy->cityLogoPath);
+        $type2 = pathinfo($path2, PATHINFO_EXTENSION);
+        $data2 = file_get_contents($path2);
+        $cityLogo = 'data:image/' .$type2 . ';base64,' . base64_encode($data2);
         
         $officials = DB::table('barangay_officials')
         ->select(DB::raw('concat(firstName, " ", lastName) as "name"'), 'position')
         ->get();
 
-        return compact('td', 'officials', 'brgy');
+        return compact('td', 'officials', 'brgy', 'brgyLogo', 'cityLogo');
     }
 
     public function getOutsideDocData($compId, $transId)
@@ -173,12 +183,22 @@ class ComplaintsController extends Controller
       ->select('id', 'name', 'zipCode', 'city', 'province', 'region', 
               'logoPath', 'cityLogoPath')
       ->first();
+
+      $path1 = base_path('public/images/'.$brgy->logoPath);
+      $type1 = pathinfo($path1, PATHINFO_EXTENSION);
+      $data1 = file_get_contents($path1);
+      $brgyLogo = 'data:image/' .$type1 . ';base64,' . base64_encode($data1);
+
+      $path2 = base_path('public/images/'.$brgy->cityLogoPath);
+      $type2 = pathinfo($path2, PATHINFO_EXTENSION);
+      $data2 = file_get_contents($path2);
+      $cityLogo = 'data:image/' .$type2 . ';base64,' . base64_encode($data2);
       
       $officials = DB::table('barangay_officials')
       ->select(DB::raw('concat(firstName, " ", lastName) as "name"'), 'position')
       ->get();
 
-      return compact('td', 'officials', 'brgy');
+      return compact('td', 'officials', 'brgy', 'brgyLogo', 'cityLogo');
     }
 
     public function pdfViewComplaint($compId, $transId) 
@@ -187,6 +207,7 @@ class ComplaintsController extends Controller
         $td = $document['td'];
         $officials = $document['officials'];
         $brgy = $document['brgy'];
+        
         return view('complaints.form')->with('td', $td)->with('officials', $officials)->with('brgy', $brgy);
     }
 
@@ -206,7 +227,10 @@ class ComplaintsController extends Controller
         $td = $document['td'];
         $officials = $document['officials'];
         $brgy = $document['brgy'];
-        $pdf = PDF::loadView('complaints.form', ['td' => $td,  'officials' => $officials, 'brgy' => $brgy])->setPaper('a4', 'portrait');
+        $brgyLogo = $document['brgyLogo'];
+        $cityLogo = $document['cityLogo'];
+        
+        $pdf = PDF::loadView('complaints.form', ['cityLogoPath' => $cityLogo,'brgyLogoPath' => $brgyLogo, 'td' => $td,  'officials' => $officials, 'brgy' => $brgy])->setPaper('a4', 'portrait');
         return $pdf->download($td->lastName.'-'.'Complaint-Form.pdf');
     }
 
@@ -217,7 +241,10 @@ class ComplaintsController extends Controller
         $td = $document['td'];
         $officials = $document['officials'];
         $brgy = $document['brgy'];
-        $pdf = PDF::loadView('complaints.oform', ['td' => $td,  'officials' => $officials, 'brgy' => $brgy])->setPaper('a4', 'portrait');
+        $brgyLogo = $document['brgyLogo'];
+        $cityLogo = $document['cityLogo'];
+
+        $pdf = PDF::loadView('complaints.oform', ['cityLogoPath' => $cityLogo,'brgyLogoPath' => $brgyLogo, 'td' => $td,  'officials' => $officials, 'brgy' => $brgy])->setPaper('a4', 'portrait');
         return $pdf->download($td->complainant.'-'.'Complaint-Form.pdf');
     }
 
@@ -245,7 +272,10 @@ class ComplaintsController extends Controller
         $td = $document['td'];
         $officials = $document['officials'];
         $brgy = $document['brgy'];
-        $pdf = PDF::loadView('complaints.escalate', ['td' => $td,  'officials' => $officials, 'brgy' => $brgy])->setPaper('a4', 'portrait');
+        $brgyLogo = $document['brgyLogo'];
+        $cityLogo = $document['cityLogo'];
+
+        $pdf = PDF::loadView('complaints.escalate', ['cityLogoPath' => $cityLogo,'brgyLogoPath' => $brgyLogo, 'td' => $td,  'officials' => $officials, 'brgy' => $brgy])->setPaper('a4', 'portrait');
         return $pdf->download($td->lastName.$td->firstName.'-'.'Escalation-Form.pdf');
     }
 
@@ -256,7 +286,10 @@ class ComplaintsController extends Controller
         $td = $document['td'];
         $officials = $document['officials'];
         $brgy = $document['brgy'];
-        $pdf = PDF::loadView('complaints.oescalate', ['td' => $td,  'officials' => $officials, 'brgy' => $brgy])->setPaper('a4', 'portrait');
+        $brgyLogo = $document['brgyLogo'];
+        $cityLogo = $document['cityLogo'];
+
+        $pdf = PDF::loadView('complaints.oescalate', ['cityLogoPath' => $cityLogo,'brgyLogoPath' => $brgyLogo, 'td' => $td,  'officials' => $officials, 'brgy' => $brgy])->setPaper('a4', 'portrait');
         return $pdf->download($td->complainant.'-'.'Escalation-Form.pdf');
     }
 
@@ -285,7 +318,10 @@ class ComplaintsController extends Controller
         $td = $document['td'];
         $officials = $document['officials'];
         $brgy = $document['brgy'];
-        $pdf = PDF::loadView('complaints.settle', ['td' => $td,  'officials' => $officials, 'brgy' => $brgy])->setPaper('a4', 'portrait');
+        $brgyLogo = $document['brgyLogo'];
+        $cityLogo = $document['cityLogo'];
+
+        $pdf = PDF::loadView('complaints.settle', ['cityLogoPath' => $cityLogo,'brgyLogoPath' => $brgyLogo, 'td' => $td,  'officials' => $officials, 'brgy' => $brgy])->setPaper('a4', 'portrait');
         return $pdf->download($td->lastName.'-'.'Settlement-Form.pdf');
     }
 
@@ -296,7 +332,10 @@ class ComplaintsController extends Controller
         $td = $document['td'];
         $officials = $document['officials'];
         $brgy = $document['brgy'];
-        $pdf = PDF::loadView('complaints.osettle', ['td' => $td,  'officials' => $officials, 'brgy' => $brgy])->setPaper('a4', 'portrait');
+        $brgyLogo = $document['brgyLogo'];
+        $cityLogo = $document['cityLogo'];
+
+        $pdf = PDF::loadView('complaints.osettle', ['cityLogoPath' => $cityLogo,'brgyLogoPath' => $brgyLogo, 'td' => $td, 'officials' => $officials, 'brgy' => $brgy])->setPaper('a4', 'portrait');
         return $pdf->download($td->complainant.'-'.'Settlement-Form.pdf');
     }
 
