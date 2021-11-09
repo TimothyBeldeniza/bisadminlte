@@ -231,9 +231,21 @@ class DocumentsController extends Controller
         $officials = $document['officials'];
         $template = $document['result'];
         $brgy = $document['brgy'];
+        
+        $path1 = base_path('public/images/'.$brgy->logoPath);
+        $type1 = pathinfo($path1, PATHINFO_EXTENSION);
+        $data1 = file_get_contents($path1);
+        $brgyLogo = 'data:image/' .$type1 . ';base64,' . base64_encode($data1);
+
+        $path2 = base_path('public/images/'.$brgy->cityLogoPath);
+        $type2 = pathinfo($path2, PATHINFO_EXTENSION);
+        $data2 = file_get_contents($path2);
+        $cityLogo = 'data:image/' .$type2 . ';base64,' . base64_encode($data2);
+
+        // dd($path);
         // dd($td);
         // $pdf = PDF::loadView('documents.document')->with('td', $td)->with('officials', $officials);
-        $pdf = PDF::loadView('documents.document', ['td' => $td,  'officials' => $officials, 'template' => $template, 'brgy' => $brgy])->setPaper('a4', 'portrait');
+        $pdf = PDF::loadView('documents.document', ['cityLogoPath' => $cityLogo,'brgyLogoPath' => $brgyLogo,'td' => $td,  'officials' => $officials, 'template' => $template, 'brgy' => $brgy])->setPaper('a4', 'portrait');
         return $pdf->download($td->lastName.'-'.$td->firstName.'-'.$td->docType.'-'.'Document.pdf');
     }
 

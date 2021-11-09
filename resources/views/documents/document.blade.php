@@ -67,8 +67,10 @@
 <body>
 	
 		<div class="header" align="center">
-			<p><img id="brgy-logo" src="{{ asset('images/'.$brgy->logoPath) }}" alt="brgy-logo" style="height: 100px; width: auto;"></p>
-      <p><img id="city-logo" src="{{ asset('images/'.$brgy->cityLogoPath) }}" alt="city-logo" style="height: 100px; width: auto;"></p>
+			{{-- <p><img id="brgy-logo" src="{{ asset('images/'.$brgy->logoPath) }}" alt="brgy-logo" style="height: 100px; width: auto;"></p> --}}
+			<p><img id="brgy-logo" src="<?php echo $brgyLogoPath ?>" alt="brgy-logo" style="height: 100px; width: auto;"></p>
+      		{{-- <p><img id="city-logo" src="{{ asset('images/'.$brgy->cityLogoPath) }}" alt="city-logo" style="height: 100px; width: auto;"></p> --}}
+      		<p><img id="city-logo" src="<?php echo $cityLogoPath ?>" alt="city-logo" style="height: 100px; width: auto;"></p>
 			<p>Republika ng Pilipinas <br>
 			{{-- Probinsya Ng {{ $brgy->province }} <br> --}}
 			Lungsod Ng {{ $brgy->city }}<br>
