@@ -47,16 +47,16 @@
                       @csrf
                       <div class="form-group my-1">
                         <label for="Image" class=" fw-bold">{{ __('Document Title*') }}</label>
-                        <input type="text" class="form-control" name="docType" value="{{ $td->docType }}" placeholder="Enter Document title here...">
+                        <input type="text" class="form-control" name="docType" value="{{ $td->docType }}" placeholder="Enter Document title here..." required>
                       </div>
                       <div class="form-group my-1">
                         <label for="Image" class=" fw-bold">{{ __('Document Content*') }}</label>
                           {{-- <textarea class="form-control" name="template" id="summernote">{{ $td->template }}</textarea> --}}
-                          <textarea class="form-control" rows="10" name="template">{{ $td->template }}</textarea>
+                          <textarea class="form-control" rows="10" name="template" required>{{ $td->template }}</textarea>
                       </div>
                       <div class="form-group my-1">
                         <label for="Image" class=" fw-bold">{{ __('Document Price*') }}</label>
-                          <input type="number" class="form-control" value="{{ $td->price }}" step="0.01" min="0" max="100" name="price" placeholder="ex. 50">
+                          <input type="number" class="form-control" value="{{ $td->price }}" step="0.01" min="0" max="100" name="price" placeholder="ex. 50" required>
                       </div>
                       <div class="form-group my-1">
                         <button type=”submit” class="btn btn-success fw-bold">Submit</button>

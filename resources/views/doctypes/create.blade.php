@@ -1,4 +1,10 @@
 <x-layout>
+   <style>
+      .required:after {
+      content:" *";
+      color: red;
+     }
+</style>
   @section('title', 'Create Document Types')
   <div class="content-header">
    <div class="container-fluid">
@@ -46,22 +52,22 @@
                         {{-- @method('POST') --}}
                         @csrf
                         <div class="form-group my-1">
-                        <label for="Image" class=" fw-bold">{{ __('Document Title*') }}</label>
-                        <input type="text" class="form-control" name="docType" placeholder="Enter Document title here...">
+                           <label for="Image" class="required fw-bold">{{ __('Document Title') }}</label>
+                           <input type="text" class="form-control" name="docType" placeholder="Enter Document title here..." required>
                         </div>
                         <div class="form-group my-1">
-                        <label for="Image" class=" fw-bold">{{ __('Document Content*') }}</label>
+                        <label for="Image" class="required fw-bold">{{ __('Document Content*') }}</label>
                            {{-- <textarea class="form-control" name="template" id="summernote"></textarea> --}}
                            <textarea class="form-control" rows="10" name="template" placeholder="Example: 
 This is to certify that <<lastName>>, <<firstName>>, of legal age, <<civilStatus>>, <<citizenship>> citizen, and resident of <<houseNo>>, <<street>>, <<brgy>>, <<city>>, <<province>>.
 
 Further, certify that the above-named person belongs to the Indigent Family in this Barangay.
                                       
-This certification is being issued upon the request of the interested party connection with the requirement for whatever legal purposes that may serve them best, in this case, it is a <<purpose>> requirement."></textarea>
+This certification is being issued upon the request of the interested party connection with the requirement for whatever legal purposes that may serve them best, in this case, it is a <<purpose>> requirement." required></textarea>
                         </div>
                         <div class="form-group my-1">
-                        <label for="price" class=" fw-bold">{{ __('Document Price*') }}</label>
-                           <input type="number" class="form-control" step="1" min="0" max="100" name="price" placeholder="ex. 50">
+                        <label for="price" class="required fw-bold">{{ __('Document Price') }}</label>
+                           <input type="number" class="form-control" step="1" min="0" max="100" name="price" placeholder="ex. 50" required> 
                         </div>
                         <div class="form-group my-1">
                            <button type="submit" class="btn btn-success">Submit</button>

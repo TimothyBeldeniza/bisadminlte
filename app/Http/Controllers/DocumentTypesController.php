@@ -129,7 +129,7 @@ class DocumentTypesController extends Controller
     {
       $docType = DocumentTypes::where('id',$id)->first();
       if($docType->delete())
-          return redirect()->route('doctypes.index')->with('danger','Document Type deleted successfully');
+          return redirect()->route('doctypes.index')->with('success','Document Type deleted successfully');
       else
           abort(404);
     }
