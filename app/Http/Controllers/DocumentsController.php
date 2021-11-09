@@ -67,16 +67,6 @@ class DocumentsController extends Controller
                     'transactions.status', 'transactions.userId', 'document_types.docType','document_types.price')
             ->get();
 
-            $totalRevenue = DB::table('documents_transactions')
-            ->join('transactions', 'documents_transactions.transId', '=', 'transactions.id')
-            ->join('document_types', 'documents_transactions.dmId', '=', 'document_types.id')
-            ->join('users', 'users.id', '=', 'transactions.userId')
-            ->whereNull('document_types.deleted_at')
-            ->where('documents_transactions.created_at', '>=', $fromDate)
-            ->where('documents_transactions.created_at', '<=', $toDate)
-            ->select(DB::raw('sum(document_types.price) as "revenue"'))
-            ->first();
-
             $totalRevenue = [
                'revenue' => DB::table('documents_transactions')
                            ->join('transactions', 'documents_transactions.transId', '=', 'transactions.id')
@@ -96,6 +86,7 @@ class DocumentsController extends Controller
                         ->where('documents_transactions.created_at', '>=', $fromDate)
                         ->where('documents_transactions.created_at', '<=', $toDate)
                         ->where('transactions.status', 'Due')
+                        ->orWhere('transactions.status', 'Ready to Claim')
                         ->select(DB::raw('sum(document_types.price) as "totalDue"'))
                         ->first(),
                
@@ -107,6 +98,7 @@ class DocumentsController extends Controller
                         ->where('documents_transactions.created_at', '>=', $fromDate)
                         ->where('documents_transactions.created_at', '<=', $toDate)
                         ->where('transactions.status', 'Paid')
+                        ->orWhere('transactions.status', 'Released')
                         ->select(DB::raw('sum(document_types.price) as "totalPaid"'))
                         ->first(),
             ];
@@ -141,6 +133,7 @@ class DocumentsController extends Controller
                         ->join('users', 'users.id', '=', 'transactions.userId')
                         ->whereNull('document_types.deleted_at')
                         ->where('transactions.status', 'Due')
+                        ->orWhere('transactions.status', 'Ready to Claim')
                         ->select(DB::raw('sum(document_types.price) as "totalDue"'))
                         ->first(),
                
@@ -150,6 +143,7 @@ class DocumentsController extends Controller
                         ->join('users', 'users.id', '=', 'transactions.userId')
                         ->whereNull('document_types.deleted_at')
                         ->where('transactions.status', 'Paid')
+                        ->orWhere('transactions.status', 'Released')
                         ->select(DB::raw('sum(document_types.price) as "totalPaid"'))
                         ->first(),
             ];

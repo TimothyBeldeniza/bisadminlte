@@ -24,21 +24,21 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-12">
-                @hasanyrole('Admin|Secretary')
+                @role('Admin')
                     <span class="input-group-btn">
                         <a class="btn btn-success mb-2 text-light" href="{{ route('users.create') }}"><i class="fas fa-plus-circle"></i> Add new user</a>
                     </span>
                     <span class="input-group-btn">
                         <a class="btn btn-success mb-2 text-light" href="users/import"><i class="fas fa-plus-circle"></i> Import Residents</a>
                     </span>
-                @endhasanyrole
+                @endrole
               <div class="card">
                 <div class="card-header">
                     <div class="float-left">
                         <h3 class="card-title">List of Users</h3>
                     </div>
                     <div class="float-right">
-                        @hasanyrole('Admin|Secretary')
+                        @role('Admin')
                             <form style="display: inline" action="{{ route('users.index') }}" method="GET" role="search">
                                 <div class="row">
                                     <label for="date" class="col-form-label">From</label>
@@ -57,7 +57,7 @@
                                     </a>
                                 </div>      
                             </form>
-                        @endhasanyrole
+                        @endrole
                     </div>
                 </div>
                 <!-- /.card-header -->
@@ -68,15 +68,15 @@
                       <th>No</th>
                       <th>Name</th>
                       <th>Email</th>
-                      @hasanyrole('Admin|Secretary')
+                      @role('Admin')
                         <th>Role</th>
                         <th>Action</th>
-                      @endhasanyrole
+                      @endrole
 
-                      @role('Chairman')
+                      @hasanyrole('Chairman|Secretary')
                         <th>Contact No.</th>
                         <th>Address</th>
-                      @endrole
+                      @endhasanyrole
                     </tr>
                     </thead>
                     <tbody>
@@ -86,7 +86,7 @@
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $user->lastName. ', ' .$user->firstName. ' ' .$user->middleName  }}</td>
                                     <td>{{ $user->email }}</td>
-                                    @hasanyrole('Admin|Secretary')
+                                    @role('Admin')
                                         <td>
                                             @if(!empty($user->getRoleNames()))
                                                 @foreach($user->getRoleNames() as $v)
@@ -125,12 +125,12 @@
                                                 <button  class="btn btn-link px-0" onclick="return confirm('Are you sure you want to delete this user?')" type="submit"><i class="fas fa-trash-alt text-danger fa-lg" ></i></button>
                                             </form>
                                         </td>
-                                    @endhasanyrole
+                                    @endrole
 
-                                    @role('Chairman')
+                                    @hasanyrole('Chairman|Secretary')
                                         <td>{{ $user->contactNo }}</td>
                                         <td>{{ $user->houseNo . ' ' . $user->street }}</td>
-                                    @endrole
+                                    @endhasanyrole
                                 </tr>
                             @endforeach
                         @else
