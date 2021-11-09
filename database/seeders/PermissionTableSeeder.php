@@ -58,11 +58,13 @@ class PermissionTableSeeder extends Seeder
             'module-requested-documents',
             'module-filed-complaints',
             'module-usrmngmnt',
+            'module-requested-appointments',
 
             //Resident 
             'barangay-official-list',
             'documents-scan-document',
             'module-request-document',
+            'module-request-appointment'
 
 
         ];
