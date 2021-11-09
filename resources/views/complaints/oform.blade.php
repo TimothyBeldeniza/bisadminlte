@@ -21,7 +21,8 @@
 	}
 
 	#qr-code{
-		float:left;
+      margin-right: 30px;
+		float:right;
 	}
 
 	#name{
@@ -59,7 +60,11 @@
 
         <div class="cr">
             <p><u><b>{{ $td->complainant }}</b></u></p>
-            <p>{{ $td->address }}</p>
+            <p>{{ $td->address }}
+            <img id="qr-code" 
+              src="data:image/png;base64, {!! base64_encode(QrCode::format('png')
+              ->size(80)
+              ->generate($td->unique_code)) !!}"></p>
             <p>--laban--</p>
             <p><u><b>{{ $td->respondents }}</b></u></p>
             <p>{{ $td->respondentsAdd }}</p>

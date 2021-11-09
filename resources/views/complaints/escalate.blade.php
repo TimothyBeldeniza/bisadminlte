@@ -21,7 +21,8 @@
 	}
 
 	#qr-code{
-		float:left;
+      margin-right: 30px;
+		float:right;
 	}
 
 	#name{
@@ -60,7 +61,11 @@
         <div class="cr">
             <p align="center"><b>CERTIFICATION TO FILE CASE</b></p>
             <p><u><b>{{ $td->firstName }} {{ $td->lastName }}</b></u></p>
-            <p>{{ $td->houseNo . ' ' . $td->street }}</p>
+            <p>{{ $td->houseNo . ' ' . $td->street }}
+            <img id="qr-code" 
+              src="data:image/png;base64, {!! base64_encode(QrCode::format('png')
+              ->size(80)
+              ->generate($td->unique_code)) !!}"></p>
             <p>--laban--</p>
             <p><u><b>{{ $td->respondents }}</b></u></p>
             <p>{{ $td->respondentsAdd }}</p>

@@ -48,9 +48,11 @@
                                       <i class="fas fa-exclamation-circle text-danger"></i> 
                                   </p> 
                               @endif
-                          <hr>
-                          <a onclick="history.back()" class="btn btn-primary float-end">Back</a>
-                          <a href="/documents/scan" class="btn btn-primary float-end">Scan Another Document</a>
+                              <hr>
+                              <div class="float-right">
+                                 <a href="/documents/scan" class="btn btn-primary">Scan Another Document</a> &nbsp;&nbsp;&nbsp;
+                                 <a href="{{ route('home') }}" class="btn btn-primary">Back</a> 
+                              </div>
                           </div>
                       </div>
                   </div>

@@ -32,7 +32,7 @@
                   <div class="card-body">
                      <p class="card-text" style="font-size: 130%">You, <b>{{ Auth::user()->firstName.' '.Auth::user()->lastName }}</b> have <b class="text-danger">Unresolved</b> or <b class="text-danger">On Going</b> cases. </p>
                      <p class="card-text" style="font-size: 130%">Please get them processed to be able to Request Documents once again.</p>
-                     <button class="btn btn-primary" onclick="history.back()">Back</button>
+                     <button class="btn btn-primary float-right" onclick="history.back()">Back</button>
                   </div>
               </div>
            @elseif ($hasCase == false)

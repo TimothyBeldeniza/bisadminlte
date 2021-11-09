@@ -247,25 +247,23 @@ class DocumentsController extends Controller
         $currentUser = Auth::user()->id;
         $doctypes = DocumentTypes::select('id','docType', 'price')->get();
 
-        $case = DB::table('complaints_transactions')
-                  ->join('transactions', 'complaints_transactions.transId', '=', 'transactions.id') 
-                  ->join('inside_respondents', 'inside_respondents.compId', '=', 'complaints_transactions.id')
-                  ->where('inside_respondents.userId', $currentUser)
-                  ->where('transactions.status', 'Unresolved')
-                  ->orWhere('transactions.status', 'On Going')
-                  ->select('complaints_transactions.id', 'transactions.status')
-                  ->get();
+      //   $case = DB::table('complaints_transactions')
+      //             ->join('transactions', 'complaints_transactions.transId', '=', 'transactions.id') 
+      //             ->join('inside_respondents', 'inside_respondents.compId', '=', 'complaints_transactions.id')
+      //             ->where('inside_respondents.userId', 1)
+      //             ->where('transactions.sttus', 'Unresolved')
+      //             ->orWhere('transactions.status', 'On Going')
+      //             ->select('complaints_transactions.id', 'transactions.status')
+      //             ->get();
 
-      // $case = DB::table('inside_respondents')
-      //          ->join('complaints_transactions', 'complaints_transactions.id', '=', 'inside_respondents.compId') 
-      //          ->join('transactions', 'transactions.id', '=', 'complaints_transactions.transId')
-      //          ->where('inside_respondents.userId', 7)
-      //          ->where('transactions.status', 'Unresolved')
-      //          ->orWhere('transactions.status', 'On Going')
-      //          ->select('inside_respondents.compId', 'transactions.status', 'inside_respondents.userId')
-      //          ->get();
+      $case = DB::table('inside_respondents')
+               ->join('complaints_transactions', 'complaints_transactions.id', '=', 'inside_respondents.compId') 
+               ->join('transactions', 'transactions.id', '=', 'complaints_transactions.transId')
+               ->where('inside_respondents.userId', $currentUser)
+               ->select('inside_respondents.compId', 'transactions.status')
+               ->get();
 
-        dd($case, $currentUser);
+      //   dd($case, $currentUser);
       //   dd($currentUser);
 
         if($case->count() > 0)
@@ -332,13 +330,11 @@ class DocumentsController extends Controller
             // ]);
 
             $case = DB::table('inside_respondents')
-            ->join('complaints_transactions', 'complaints_transactions.id', '=', 'inside_respondents.compId') 
-            ->join('inside_respondents', 'inside_respondents.compId', '=', 'complaints_transactions.id')
-            ->where('inside_respondents.userId', $request->user)
-            ->where('transactions.status', 'Unresolved')
-            ->orWhere('transactions.status', 'On Going')
-            ->select('transactions.status')
-            ->get();
+               ->join('complaints_transactions', 'complaints_transactions.id', '=', 'inside_respondents.compId') 
+               ->join('transactions', 'transactions.id', '=', 'complaints_transactions.transId')
+               ->where('inside_respondents.userId', $currentUser)
+               ->select('inside_respondents.compId', 'transactions.status')
+               ->get();
             dd($case);
             if($case->count() > 0)
             {   
