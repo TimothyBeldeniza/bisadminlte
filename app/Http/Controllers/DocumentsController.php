@@ -265,8 +265,20 @@ class DocumentsController extends Controller
                   ->where('inside_respondents.userId', $currentUser)
                   ->where('transactions.status', 'Unresolved')
                   ->orWhere('transactions.status', 'On Going')
-                  ->select('transactions.status')
+                  ->select('complaints_transactions.id', 'transactions.status')
                   ->get();
+
+      // $case = DB::table('inside_respondents')
+      //          ->join('complaints_transactions', 'complaints_transactions.id', '=', 'inside_respondents.compId') 
+      //          ->join('transactions', 'transactions.id', '=', 'complaints_transactions.transId')
+      //          ->where('inside_respondents.userId', 7)
+      //          ->where('transactions.status', 'Unresolved')
+      //          ->orWhere('transactions.status', 'On Going')
+      //          ->select('inside_respondents.compId', 'transactions.status', 'inside_respondents.userId')
+      //          ->get();
+
+        dd($case, $currentUser);
+      //   dd($currentUser);
 
         if($case->count() > 0)
         {   
@@ -331,15 +343,15 @@ class DocumentsController extends Controller
             //    'unique_code' => sha1(time()),
             // ]);
 
-            $case = DB::table('complaints_transactions')
-            ->join('transactions', 'complaints_transactions.transId', '=', 'transactions.id') 
+            $case = DB::table('inside_respondents')
+            ->join('complaints_transactions', 'complaints_transactions.id', '=', 'inside_respondents.compId') 
             ->join('inside_respondents', 'inside_respondents.compId', '=', 'complaints_transactions.id')
             ->where('inside_respondents.userId', $request->user)
             ->where('transactions.status', 'Unresolved')
             ->orWhere('transactions.status', 'On Going')
             ->select('transactions.status')
             ->get();
-
+            dd($case);
             if($case->count() > 0)
             {   
                if($case[0]->status == "Unresolved" || $case[0]->status == "On Going")
@@ -561,7 +573,7 @@ class DocumentsController extends Controller
             ->where('transactions.unique_code', $request->input('code'))
             ->orderBy('documents_transactions.id','DESC')
             ->select('documents_transactions.id', 'documents_transactions.transId', 'documents_transactions.purpose', 
-                    'documents_transactions.barangayIdPath', DB::raw('date(documents_transactions.created_at) as "date"'),
+                    'documents_transactions.barangayIdPath', 'documents_transactions.reason', DB::raw('date(documents_transactions.created_at) as "date"'),
                     'users.firstName', 'users.lastName', 'users.email', 'users.profilePath', 
                     'transactions.status', 'transactions.userId', 'document_types.docType', 'document_types.price')
             ->first();

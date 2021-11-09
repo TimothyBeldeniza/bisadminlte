@@ -555,7 +555,7 @@ class ComplaintsController extends Controller
         
         $reason = ComplaintsTransactions::where('id', $compId)->update(['reason' => $request->reason]);
         $settled = Transactions::where('id', $transId)->update(['status' => 'Dismissed']);
-        return redirect()->back()->with('danger', 'Complaint Dismissed!');
+        return redirect()->back()->with('warning', 'Complaint Dismissed!');
     }
 
     public function recordHearing(Request $request, $compId, $transId)

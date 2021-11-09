@@ -160,7 +160,7 @@ class BarangayController extends Controller
         ]);
       }
 
-      return redirect()->back()->with('success', 'Barangay Updated!');
+      return redirect('/barangay')->with('success', 'Barangay Updated!');
     }
 
     /**

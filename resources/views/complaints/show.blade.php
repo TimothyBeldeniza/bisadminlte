@@ -35,7 +35,7 @@
                     @if ($td->status == "Settled") 
                       <b class="text-success">{{ $td->status }}</b>
                     @elseif ($td->status == "Escalated" || $td->status == "On Going")
-                      <b class="text-warning">{{ $td->status }}</b>
+                      <b class="text-orange">{{ $td->status }}</b>
                     @elseif ($td->status == "Dismissed")
                       <b class="text-danger">{{ $td->status }}</b>
                     @else
@@ -49,7 +49,8 @@
                         <div class="modal-content">
                             <div class="modal-header bg-warning">
                             <h5 class="modal-title text-dark" id="compDetailsLabel">Complaint Details</h5>
-               
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
                             </button>
                             </div>
             
@@ -83,7 +84,9 @@
                   <div class="modal-content">
                     <div class="modal-header bg-success">
                       <h5 class="modal-title text-light" id="recordhearingLabel">Hearing Details</h5>
-                      <button type="button" class="btn-close btn-light" data-dismiss="modal" aria-label="Close"></button>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
                     </div>
                     <div class="modal-body">
                       <form method="POST" action="{{ url('/complaints/show/hearing/'.$td->id.'/'.$td->transId) }}">
@@ -94,7 +97,7 @@
                           {{-- <div id="summernote"></div> --}}
                           {{-- <textarea id="details" name="details" required></textarea> --}}
                         </div>
-                        <div class="float-end my-2">
+                        <div class="float-right my-2">
                           <button type="submit" class="btn btn-primary">Save Details</button>
                         </div>
                       </form>
@@ -119,7 +122,8 @@
                         <div class="modal-content">
                           <div class="modal-header bg-warning">
                             <h5 class="modal-title text-dark" id="conditionLabel">Conditions Details</h5>
-               
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
                             </button>
                           </div>          
                           <div class="modal-body">
@@ -181,7 +185,9 @@
                         <div class="modal-content">
                           <div class="modal-header bg-info">
                             <h5 class="modal-title" id="hearingLabel">Hearing No. {{ $ctr }} Details</h5>
-               
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
                           </div>          
                           <div class="modal-body">
                             <b>Hearing Details:</b><br>
@@ -209,8 +215,10 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-success">
-            <h5 class="modal-title text-light" id="recordhearingLabel">Settlement Details</h5>
-            </button>
+               <h5 class="modal-title text-light" id="recordhearingLabel">Settlement Details</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
             </div>
             <div class="modal-body">
             <form method="POST" action="{{ url('/complaints/show/settle/'.$td->id.'/'.$td->transId) }}">
@@ -220,7 +228,7 @@
                 <label for="details" class="col-form-label"><b>Input Settlement Details:</b></label>
                 <textarea class="form-control" name="reason" id="reason" rows="10" placeholder="Input details here..." required></textarea>
                 </div>
-                <div class="float-end my-3">
+                <div class="float-right my-3">
                 <button type="submit" class="btn btn-primary">Save Settlement Details</button>
                 </div>
             </form>
@@ -234,8 +242,10 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-danger">
-            <h5 class="modal-title text-light" id="recordhearingLabel">Dismissal Details</h5>
-            </button>
+               <h5 class="modal-title text-light" id="recordhearingLabel">Dismissal Details</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
             </div>
             <div class="modal-body">
             <form method="POST" action="{{ url('/complaints/show/dismiss/'.$td->id.'/'.$td->transId) }}">
@@ -245,7 +255,7 @@
                 <label for="details" class="col-form-label"><b>Input Dismissal Details:</b></label>
                 <textarea class="form-control" name="reason" id="reason" rows="10" placeholder="Input details here..." required></textarea>
                 </div>
-                <div class="float-end my-3">
+                <div class="float-right my-3">
                 <button type="submit" class="btn btn-primary">Save Dismissal Details</button>
                 </div>
             </form>
@@ -259,8 +269,10 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
           <div class="modal-header bg-warning">
-          <h5 class="modal-title text-dark" id="recordhearingLabel">Escalate Details</h5>
-          </button>
+            <h5 class="modal-title text-dark" id="recordhearingLabel">Escalate Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="modal-body">
           <form method="POST" action="{{ url('/complaints/show/escalate/'.$td->id.'/'.$td->transId) }}">
@@ -270,7 +282,7 @@
               <label for="details" class="col-form-label"><b>Input Escalation Details:</b></label>
               <textarea class="form-control" name="reason" id="reason" rows="10" placeholder="Input details here..." required></textarea>
               </div>
-              <div class="float-end my-3">
+              <div class="float-right my-3">
               <button type="submit" class="btn btn-primary">Save Escalation Details</button>
               </div>
           </form>
