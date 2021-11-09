@@ -23,7 +23,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card">
-                        <div class="card-header">Import Excel</div>
+                        <div style="background-color: #f6f7cd" class="card-header text-dark font-weight-bold">Import Excel</div>
         
                         <div class="card-body">
                             @if (session('status'))
@@ -70,10 +70,11 @@
                                 @csrf
 
                                 <div class="form-group">
-                                    <input class="form-control" type="file" name="file">
-
-                                    <button type="submit" class="mt-2 float-right btn btn-primary">Import
-                                    </button>
+                                    <input class="form-control" type="file" name="file" required>
+                                    <div class="float-right mt-2">
+                                       <button type="submit" class="btn btn-primary">Import</button>
+                                       <a class="btn btn-primary" href="{{ route('users.index') }}">Back</a>
+                                    </div>
                                 </div>
                             </form>
                         </div>

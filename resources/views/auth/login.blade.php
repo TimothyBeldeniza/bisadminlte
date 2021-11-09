@@ -103,7 +103,10 @@
 						<div>
 							<a class="txt1" href="{{ route('password.request') }}">
 								{{ __('Forgot Your Password?') }}
-							</a>
+							</a> <br>
+							{{-- <a class="txt1" href="{{ route('password.request') }}">
+								{{ __('Verify Your Password') }}
+							</a> --}}
 						</div>
 
 						<div>

@@ -66,7 +66,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::pluck('name','name')->all();
+        $roles = Role::where('id', '>', 1)->pluck('name','name');
 
         // dd(compact('roles'));
         // exit();
@@ -321,8 +321,6 @@ class UserController extends Controller
             'permission' => 'required'
         ]);
     
-
-    
         $user = User::find($id);
         // $permission = Permission::get();
 
@@ -377,8 +375,7 @@ class UserController extends Controller
 
         // dd($role[0]);
 
-        return redirect()->route('users.index')
-                        ->with('success','User updated successfully');
+        return redirect()->route('users.index')->with('success','User updated successfully');
     }
 
     /**

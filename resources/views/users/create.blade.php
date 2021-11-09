@@ -258,10 +258,10 @@
                                 
                                 <div class="col-md-6">
                                     
-                                      <input id="gender" type="radio" name="gender" value="male" class=" @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" required autocomplete="gender">
+                                      <input onclick="disableStatus()" id="male" type="radio" name="gender" value="male" class=" @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" required autocomplete="gender">
                                       <label for="male">Male</label>
                                     
-                                      <input id="gender" type="radio" name="gender" value="female" class=" @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" required autocomplete="gender">
+                                      <input onclick="disableStatus()" id="female" type="radio" name="gender" value="female" class=" @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" required autocomplete="gender">
                                       <label for="female">Female</label>
                                     
                                     {{--   <input id="gender" type="radio" name="gender" value="rather not say" class=" @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" required autocomplete="gender">
@@ -280,10 +280,10 @@
                                       <input id="civilStatus" type="radio" value="Married" class=" @error('civilStatus') is-invalid @enderror" name="civilStatus" value="{{ old('civilStatus') }}" required autocomplete="civilStatus">
                                       <label for="married">Married</label>
                                     
-                                      <input id="civilStatus" type="radio" value="Widowed" class=" @error('civilStatus') is-invalid @enderror" name="civilStatus" value="{{ old('civilStatus') }}" required autocomplete="civilStatus">
+                                      <input id="widowed" type="radio" value="Widowed" class=" @error('civilStatus') is-invalid @enderror" name="civilStatus" value="{{ old('civilStatus') }}" required autocomplete="civilStatus">
                                       <label for="widowed">Widowed</label>
 
-                                      <input id="civilStatus" type="radio" value="Widower" class=" @error('civilStatus') is-invalid @enderror" name="civilStatus" value="{{ old('civilStatus') }}" required autocomplete="civilStatus">
+                                      <input id="widower" type="radio" value="Widower" class=" @error('civilStatus') is-invalid @enderror" name="civilStatus" value="{{ old('civilStatus') }}" required autocomplete="civilStatus">
                                       <label for="widowed">Widower</label>
     
                                       <input id="civilStatus" type="radio" value="Divorced" class=" @error('civilStatus') is-invalid @enderror" name="civilStatus" value="{{ old('civilStatus') }}" required autocomplete="civilStatus">
@@ -335,4 +335,20 @@
         </div>
     </div>
     {{-- @endrole --}}
+    <script>
+       function disableStatus() {
+          if(document.getElementById('male').checked)
+          {
+             document.getElementById('widowed').disabled = true;
+             $('input[id=widowed]').attr('checked',false);
+             document.getElementById('widower').disabled = false;
+          }
+          else if(document.getElementById('female').checked)
+          {
+             document.getElementById('widower').disabled = true;
+             $('input[id=widower]').attr('checked',false);
+             document.getElementById('widowed').disabled = false;
+          }
+       }
+    </script>
 </x-layout>

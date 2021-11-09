@@ -195,6 +195,20 @@
                                         @enderror --}}
                                     </div> 
                                 </div>
+
+                                <div class="form-group row my-1">
+                                 <label for="gender" class="col-md-4 col-form-label text-md-right fw-bold required">{{ __('Sex') }}</label>
+                                 
+                                 <div class="col-md-6">
+                                     <input readonly id="gender" type="text" class="form-control @error('gender') is-invalid @enderror" name="gender" value="{{ $user->gender }}" placeholder="Enter gender..." required autocomplete="gender">
+                                     
+                                     @error('gender')
+                                     <span class="invalid-feedback" role="alert">
+                                         <strong>{{ $message }}</strong>
+                                     </span>
+                                     @enderror
+                                 </div>
+                                </div>
                                 
                                 <div class="form-group row my-1">
                                     <label for="civilStatus" class="col-md-4 col-form-label text-md-right fw-bold required">{{ __('Civil Status') }}</label>
