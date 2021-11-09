@@ -258,16 +258,16 @@
                           <th></th>
                           <th></th>
                           @if ($totalRevenue['due']->totalDue == 0)
-                             <th>Total Due: ₱0</th>
+                             <th class="text-center">Due: ₱0</th>
                           @else
-                             <th>Total Paid: {{ '₱' . $totalRevenue['due']->totalDue }}</th>
+                             <th class="text-center">Due: {{ '₱' . $totalRevenue['due']->totalDue }}</th>
                           @endif
                           @if ($totalRevenue['paid']->totalPaid == 0)
-                             <th>Total Paid: ₱0</th>
+                             <th class="text-center">Paid: ₱0</th>
                           @else
-                             <th>Total Paid: {{ '₱' . $totalRevenue['paid']->totalPaid }}</th>
+                             <th class="text-center">Paid: {{ '₱' . $totalRevenue['paid']->totalPaid }}</th>
                           @endif
-                          <th>Total Revenue: {{ '₱' . $totalRevenue['revenue']->revenue }}</th>
+                          <th class="text-center">Total: {{ '₱' . $totalRevenue['revenue']->revenue }}</th>
                        </tr>
                     </tfoot>
                     @endhasanyrole

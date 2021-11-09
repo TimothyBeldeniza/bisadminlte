@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\AppointmentController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
@@ -118,5 +119,6 @@ Route::group(['middleware' => ['auth','verified']], function() {
     Route::resource('services', ServicesController::class);
     Route::resource('barangay', BarangayController::class);
     Route::resource('doctypes', DocumentTypesController::class);
+    Route::resource('appointments', AppointmentController::class);
     // Route::resource('dashboard', DashboardController::class);
 });

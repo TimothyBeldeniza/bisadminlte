@@ -311,6 +311,12 @@ class CreateAdminUserSeeder extends Seeder
             'barangay-official-list',
             'documents-scan-document',
             'module-request-document',
+            'complaint-view-settle-form',
+            'complaint-save-settle-form',
+            'complaint-view-complaint-form',
+            'complaint-save-complaint-form',
+            'complaint-view-escalation-form',
+            'complaint-save-escalation-form',
         ]);
 
         $barts->assignRole('Resident');
@@ -318,6 +324,12 @@ class CreateAdminUserSeeder extends Seeder
             'barangay-official-list',
             'documents-scan-document',
             'module-request-document',
+            'complaint-view-settle-form',
+            'complaint-save-settle-form',
+            'complaint-view-complaint-form',
+            'complaint-save-complaint-form',
+            'complaint-view-escalation-form',
+            'complaint-save-escalation-form',
         ]);
 
         $baste->assignRole('Resident');
@@ -325,6 +337,12 @@ class CreateAdminUserSeeder extends Seeder
             'barangay-official-list',
             'documents-scan-document',
             'module-request-document',
+            'complaint-view-settle-form',
+            'complaint-save-settle-form',
+            'complaint-view-complaint-form',
+            'complaint-save-complaint-form',
+            'complaint-view-escalation-form',
+            'complaint-save-escalation-form',
         ]);
     }
 }

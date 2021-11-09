@@ -173,7 +173,7 @@ class UserController extends Controller
         else if($request->input('roles') == 'Secretary')
         {
             $user->syncPermissions([
-
+                'module-requested-appointments',
                 'module-requested-documents',
                 'documents-show-ID',
                 'documents-process',
@@ -217,6 +217,7 @@ class UserController extends Controller
         else if($request->input('roles') == 'Clerk')
         {
             $user->syncPermissions([
+                'module-requested-appointments',
                 'module-requested-documents',
                 'documents-show-ID',
                 'documents-process',
@@ -232,6 +233,7 @@ class UserController extends Controller
         else if($request->input('roles') == 'Chairman')
         {
             $user->syncPermissions([
+                
                 'module-requested-documents',
                 'barangay-official-list',
                 'module-filed-complaints',
@@ -253,6 +255,13 @@ class UserController extends Controller
                 'barangay-official-list',
                 'documents-scan-document',
                 'module-request-document',
+                'module-request-appointment',
+                'complaint-view-settle-form',
+                'complaint-save-settle-form',
+                'complaint-view-complaint-form',
+                'complaint-save-complaint-form',
+                'complaint-view-escalation-form',
+                'complaint-save-escalation-form',
     
             ]);
         }

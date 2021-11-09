@@ -22,7 +22,7 @@
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
-      @role('Chairman|Secretary')
+      @role('Chairman|Secretary|Admin')
       <section class="content">
          <div class="container-fluid">
          <h5 class="font-weight-bold">Residents Information</h5>
@@ -258,6 +258,7 @@
       </div>
       @endhasrole
     
+    @hasanyrole('Chairman|Councilor|Secretary|Treasurer|Clerk|Resident')
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
@@ -738,6 +739,7 @@
       </div>
     </div>
     <!-- /.content -->
+    @endhasanyrole
 </x-layout>
 
 

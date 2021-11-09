@@ -143,7 +143,15 @@
           @endcan
 
           @hasanyrole('Admin|Chairman|Councilor|Secretary|Treasurer|Clerk')
-          <li class="nav-header">M A N A G E M E N T S</li>   
+          <li class="nav-header">M A N A G E M E N T S</li> 
+          @can('module-requested-appointments')
+          <li class="nav-item">
+            <a href="{{ route('appointments.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-file-signature"></i>
+              <p>Appointments for ID</p>
+            </a>
+          </li>
+          @endcan  
           @can('module-requested-documents')
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -208,7 +216,15 @@
           @endhasanyrole
 
           <li class="nav-header">S E R V I C E S</li>
-             @can('module-file-complaint')
+          @can('module-request-appointment')
+          <li class="nav-item">
+            <a href="{{ route('appointments.create') }}" class="nav-link">
+              <i class="nav-icon fas fa-file-signature"></i>
+              <p>Request Appointment</p>
+            </a>
+          </li>
+          @endcan
+          @can('module-file-complaint')
           <li class="nav-item">
             <a href="{{ route('complaints.create') }}" class="nav-link">
               <i class="nav-icon fas fa-file-signature"></i>

@@ -59,7 +59,7 @@
                         <p class="card-text"><b>Status of Request:</b> <b class="text-success">{{ $data->status }}</b></p>
                       @endif
                       @if ($data->barangayIdPath == null)
-                        <p class="card-text"><b>Valid ID: Presented ID to authenticated personnel</b></p>
+                        <p class="card-text"><b>Valid ID: Presented to staff</b></p>
                       @else
                       <p class="card-text"><b>Valid ID:</b></p>
                       <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#bargyId{{$data->id}}">Show ID</button>
@@ -92,13 +92,13 @@
                       @elseif($data->status == 'Ready to Claim')
                         @if($data->price == 0)
                            <a class="btn btn-success fw-bold" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
-                           <a class="btn btn-dark fw-bold" onclick="return confirm('Are yousure to proceed?')" href="documents/release/{{ $data->id }}">Release</a>
+                           <a class="btn btn-dark fw-bold" onclick="return confirm('Are yousure to proceed?')" href="documents/release/{{ $data->transId }}">Release</a>
                         @else
                            <a class="btn btn-primary fw-bold" onclick="return confirm('Are yousure to proceed?')" href="/documents/paid/{{ $data->transId }}">Paid</a>
                         @endif
                       @elseif($data->status == 'Paid')
                            <a class="btn btn-success fw-bold" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
-                           <a class="btn btn-dark fw-bold" onclick="return confirm('Are yousure to proceed?')" href="/documents/release/{{ $data->id }}">Release</a>
+                           <a class="btn btn-dark fw-bold" onclick="return confirm('Are yousure to proceed?')" href="/documents/release/{{ $data->transId }}">Release</a>
                       @elseif($data->status == 'Released')
                            <b class="text-success">Document Released</b>
                       @else
