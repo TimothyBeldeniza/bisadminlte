@@ -118,7 +118,7 @@
                                             data-attr="{{ route('users.edit', $user->id) }}" title="edit">
                                             <i class="fas fa-edit fa-lg"></i>
                                             </a>
-                                
+
                                             <form action="{{ route('users.destroy', $user->id) }}" method="post" style="display:inline">
                                                 @csrf
                                                 @method('delete')

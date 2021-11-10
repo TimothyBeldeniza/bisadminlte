@@ -207,8 +207,10 @@ class ComplaintsController extends Controller
         $td = $document['td'];
         $officials = $document['officials'];
         $brgy = $document['brgy'];
+        $brgyLogo = $document['brgyLogo'];
+        $cityLogo = $document['cityLogo'];
         
-        return view('complaints.form')->with('td', $td)->with('officials', $officials)->with('brgy', $brgy);
+        return view('complaints.form')->with('td', $td)->with('officials', $officials)->with('brgy', $brgy)->with('cityLogoPath', $cityLogo)->with('brgyLogoPath', $brgyLogo);
     }
 
     public function pdfViewOutsideComplaint($compId, $transId) 
@@ -218,7 +220,10 @@ class ComplaintsController extends Controller
         $td = $document['td'];
         $officials = $document['officials'];
         $brgy = $document['brgy'];
-        return view('complaints.oform')->with('td', $td)->with('officials', $officials)->with('brgy', $brgy);
+        $brgyLogo = $document['brgyLogo'];
+        $cityLogo = $document['cityLogo'];
+
+        return view('complaints.oform')->with('td', $td)->with('officials', $officials)->with('brgy', $brgy)->with('cityLogoPath', $cityLogo)->with('brgyLogoPath', $brgyLogo);
     }
 
     public function pdfSaveComplaint($compId, $transId) 
@@ -254,7 +259,10 @@ class ComplaintsController extends Controller
         $td = $document['td'];
         $officials = $document['officials'];
         $brgy = $document['brgy'];
-        return view('complaints.escalate')->with('td', $td)->with('officials', $officials)->with('brgy', $brgy);
+        $brgyLogo = $document['brgyLogo'];
+        $cityLogo = $document['cityLogo'];
+
+        return view('complaints.escalate')->with('td', $td)->with('officials', $officials)->with('brgy', $brgy)->with('cityLogoPath', $cityLogo)->with('brgyLogoPath', $brgyLogo);
     }
 
     public function pdfViewOutsideEscalate($compId, $transId)
@@ -263,7 +271,10 @@ class ComplaintsController extends Controller
         $td = $document['td'];
         $officials = $document['officials'];
         $brgy = $document['brgy'];
-        return view('complaints.oescalate')->with('td', $td)->with('officials', $officials)->with('brgy', $brgy);
+        $brgyLogo = $document['brgyLogo'];
+        $cityLogo = $document['cityLogo'];
+
+        return view('complaints.oescalate')->with('td', $td)->with('officials', $officials)->with('brgy', $brgy)->with('cityLogoPath', $cityLogo)->with('brgyLogoPath', $brgyLogo);
     }
 
     public function pdfSaveEscalate($compId, $transId)
@@ -299,7 +310,10 @@ class ComplaintsController extends Controller
         $td = $document['td'];
         $officials = $document['officials'];
         $brgy = $document['brgy'];
-        return view('complaints.settle')->with('td', $td)->with('officials', $officials)->with('brgy', $brgy);
+        $brgyLogo = $document['brgyLogo'];
+        $cityLogo = $document['cityLogo'];
+
+        return view('complaints.settle')->with('td', $td)->with('officials', $officials)->with('brgy', $brgy)->with('cityLogoPath', $cityLogo)->with('brgyLogoPath', $brgyLogo);
     }
 
     public function pdfViewOutsideSettle($compId, $transId)
@@ -309,7 +323,10 @@ class ComplaintsController extends Controller
         $td = $document['td'];
         $officials = $document['officials'];
         $brgy = $document['brgy'];
-        return view('complaints.osettle')->with('td', $td)->with('officials', $officials)->with('brgy', $brgy);
+        $brgyLogo = $document['brgyLogo'];
+        $cityLogo = $document['cityLogo'];
+
+        return view('complaints.osettle')->with('td', $td)->with('officials', $officials)->with('brgy', $brgy)->with('cityLogoPath', $cityLogo)->with('brgyLogoPath', $brgyLogo);
     }
 
     public function pdfSaveSettle($compId, $transId)

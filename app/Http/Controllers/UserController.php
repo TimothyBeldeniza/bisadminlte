@@ -40,7 +40,7 @@ class UserController extends Controller
             $fromDate = $request->input('from') . ' 00:00:00';
             $toDate = $request->input('to') . ' 23:59:59';
 
-            $data = User::whereBetween('created_at', [$fromDate, $toDate])->get();
+            $data = User::whereBetween('created_at', [$fromDate, $toDate])->where('id', '>', 1)->get();
 
             // $data = User::where('firstName', 'Like', '%' . request('term') . '%')
             // ->orWhere('lastName', 'Like', '%' . request('term') . '%')
@@ -50,7 +50,7 @@ class UserController extends Controller
         }
         else
         {
-            $data = User::orderBy('id','ASC')->get();
+            $data = User::orderBy('id','ASC')->where('id', '>', 1)->get();
 
         }
 
