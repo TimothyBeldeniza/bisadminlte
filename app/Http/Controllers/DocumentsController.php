@@ -346,10 +346,10 @@ class DocumentsController extends Controller
             $case = DB::table('inside_respondents')
                ->join('complaints_transactions', 'complaints_transactions.id', '=', 'inside_respondents.compId') 
                ->join('transactions', 'transactions.id', '=', 'complaints_transactions.transId')
-               ->where('inside_respondents.userId', $currentUser)
+               ->where('inside_respondents.userId', $request->user)
                ->select('inside_respondents.compId', 'transactions.status')
                ->get();
-            dd($case);
+            // dd($case);
             if($case->count() > 0)
             {   
                if($case[0]->status == "Unresolved" || $case[0]->status == "On Going")

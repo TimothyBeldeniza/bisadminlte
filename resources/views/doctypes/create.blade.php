@@ -37,9 +37,9 @@
                         <li><p><b>&lt;&lt;houseNo&gt;&gt;</b> - Resident's House Number</p></li>
                         <li><p><b>&lt;&lt;street&gt;&gt;</b> - Resident's Street</p></li>
                         <li><p><b>&lt;&lt;purpose&gt;&gt;</b> - Document Purpose</p></li>
-                        <li><p><b>&lt;&lt;brgy&gt;&gt;</b> - Resident's Barangay</p></li>
-                        <li><p><b>&lt;&lt;city&gt;&gt;</b> - Resident's City</p></li>
-                        <li><p><b>&lt;&lt;province&gt;&gt;</b> - Resident's Province</p></li>
+                        <li><p><b>&lt;&lt;brgy&gt;&gt;</b> - Barangay Name</p></li>
+                        <li><p><b>&lt;&lt;city&gt;&gt;</b> - Barangay's City</p></li>
+                        <li><p><b>&lt;&lt;province&gt;&gt;</b> - Barangay's Province</p></li>
                      </ul>
                   </div>
                </div>

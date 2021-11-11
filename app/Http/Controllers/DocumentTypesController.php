@@ -63,7 +63,7 @@ class DocumentTypesController extends Controller
           'price' => $request->price,
         ]);
 
-        return redirect('doctypes/create')->with('success', 'Document Type added successfully!');
+        return redirect('doctypes')->with('success', 'Document Type added successfully!');
     }
 
     /**
