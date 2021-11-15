@@ -104,6 +104,9 @@ Route::post('complaints/show/hearing/{compId}/{transId}', [ComplaintsController:
 //Processing of Blotters
 Route::get('blotters/note/{transId}/{userId}', [BlottersController::class,'noted']);
 
+//Restoring of Document Types 
+Route::get('doctypes/restore/{id}', [DocumentTypesController::class,'restore']);
+
 //Import Users
 Route::get('/users/import', [UsersImportController::class,'show']);
 Route::post('/users/import/store', [UsersImportController::class,'store']);

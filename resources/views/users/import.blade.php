@@ -57,7 +57,7 @@
                             <form action="/users/import/store" method="POST" enctype="multipart/form-data">
                                 @csrf
 
-                                <div class="form-group mt-2">
+                                <div class="form-group mt-2 mb-2">
                                     <input class="form-control" type="file" name="file" required>
                                     <div class="float-right mt-2">
                                        <button type="submit" class="btn btn-primary">Import</button>

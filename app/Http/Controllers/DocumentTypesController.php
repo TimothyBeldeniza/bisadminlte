@@ -28,9 +28,14 @@ class DocumentTypesController extends Controller
         $td = DB::table('document_types')
               ->wherenull('deleted_at')
               ->select('id', 'docType', 'price')
-              ->paginate(10);
-        return view('doctypes.index', compact('td'))
-              ->with('i', ($request->input('page', 1) - 1) * 10);
+              ->get();
+        $tddel = DB::table('document_types')
+              ->wherenotnull('deleted_at')
+              ->select('id', 'docType', 'price')
+              ->get();
+        return view('doctypes.index', compact('td', 'tddel'))
+              ->with('i', ($request->input('page', 1) - 1) * 10)
+              ->with('j', ($request->input('page', 1) - 1) * 10);
     }
 
     /**
@@ -132,5 +137,15 @@ class DocumentTypesController extends Controller
           return redirect()->route('doctypes.index')->with('success','Document Type deleted successfully');
       else
           abort(404);
+    }
+
+    public function restore($id)
+    {
+      // $docType = DocumentTypes::where('id',$id)->first();
+      $docType = DocumentTypes::withTrashed()->find($id)->restore();
+      return redirect()->route('doctypes.index')->with('success','Document Type restored successfully');
+      // if($docType->restore())
+      // else
+      //     abort(404);
     }
 }
