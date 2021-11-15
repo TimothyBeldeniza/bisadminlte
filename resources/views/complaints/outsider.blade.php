@@ -1,5 +1,5 @@
 <x-layout>
-  @section('title', 'Complaints')
+  @section('title', 'Non-residential Complaints')
 
 
   <div class="content-header">

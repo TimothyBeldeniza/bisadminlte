@@ -14,7 +14,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
                     <li class="breadcrumb-item active">Edit Profile</li>
                     </ol>
                 </div><!-- /.col -->
@@ -221,10 +221,10 @@
                                           <input {{ $user->civilStatus == "Married" ? 'checked' : '' }} id="civilStatus" type="radio" value="Married" class=" @error('civilStatus') is-invalid @enderror" name="civilStatus" value="Married" required autocomplete="civilStatus">
                                           <label for="Married">Married</label>
                                         
-                                          <input {{ $user->civilStatus == "Widowed" ? 'checked' : '' }} id="civilStatus" type="radio" value="Widowed" class=" @error('civilStatus') is-invalid @enderror" name="civilStatus" value="Widowed" required autocomplete="civilStatus">
+                                          <input {{ $user->civilStatus == "Widowed" ? 'checked' : '' }} {{ $user->sex == "Male" ? 'disabled' : '' }} id="widowed" type="radio" value="Widowed" class=" @error('civilStatus') is-invalid @enderror" name="civilStatus" value="Widowed" required autocomplete="civilStatus">
                                           <label for="Widowed">Widowed</label>
 
-                                          <input {{ $user->civilStatus == "Widower" ? 'checked' : '' }} id="civilStatus" type="radio" value="Widower" class=" @error('civilStatus') is-invalid @enderror" name="civilStatus" value="Widowed" required autocomplete="civilStatus">
+                                          <input {{ $user->civilStatus == "Widower" ? 'checked' : '' }} {{ $user->sex == "Female" ? 'disabled' : '' }} id="widower" type="radio" value="Widower" class=" @error('civilStatus') is-invalid @enderror" name="civilStatus" value="Widowed" required autocomplete="civilStatus">
                                           <label for="Widowed">Widower</label>
         
                                           <input {{ $user->civilStatus == "Divorced" ? 'checked' : '' }} id="civilStatus" type="radio" value="Divorced" class=" @error('civilStatus') is-invalid @enderror" name="civilStatus" value="Divorced" required autocomplete="civilStatus">

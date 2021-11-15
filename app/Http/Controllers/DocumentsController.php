@@ -284,7 +284,7 @@ class DocumentsController extends Controller
                ->select('inside_respondents.compId', 'transactions.status')
                ->get();
 
-        dd($case, $currentUser);
+      //   dd($case, $currentUser);
       //   dd($currentUser);
 
         if($case->count() > 0)
@@ -528,11 +528,18 @@ class DocumentsController extends Controller
             'submit' => 'string',
         ]);
 
-        // dd($transId);
+      //   dd($request->submit);
 
         if($request->otherReason == null)
         {
-            DocumentsTransactions::where('id', $docId)->update(['reason' => $request->reason]);       
+            if($request->submit == 'process')
+            {
+               DocumentsTransactions::where('id', $docId)->update(['reason' => 'Adequate Requirements']);
+            }
+            else
+            {
+               DocumentsTransactions::where('id', $docId)->update(['reason' => $request->reason]);       
+            }
         }
         else    
         {

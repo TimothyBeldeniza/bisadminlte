@@ -1,5 +1,5 @@
 <x-layout>
-    @section('title', 'QR Scanner')
+    @section('title', 'Scan Document')
     @section('scripts')
         @if($instascanJS ?? false)
             <script src="{{ asset('js/instascan/adapter.min.js') }}"></script>

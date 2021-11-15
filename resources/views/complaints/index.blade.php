@@ -1,5 +1,5 @@
 <x-layout>
-  @section('title', 'Complaints')
+  @section('title', 'Residential Complaints')
 
   <div class="content-header">
     <div class="container-fluid">

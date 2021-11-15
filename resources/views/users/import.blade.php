@@ -1,6 +1,6 @@
 
 <x-layout>
-
+   @section('title', 'Import Residents')
     <div class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
@@ -35,6 +35,7 @@
                             @endif
 
                             <p class="text-card">
+                               <b>Create a new Excel File first. No Copy of a file</b> <br>
                                <b>The Excel (xls/xl) file should have the following headers to avoid errors:</b>
                                <ul>
                                   <li>Last Name <b>*</b></li>

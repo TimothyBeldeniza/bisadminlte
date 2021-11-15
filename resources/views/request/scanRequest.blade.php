@@ -7,7 +7,7 @@
         @endif
     @endsection
 
-    @section('title', 'QR Scanner')
+    @section('title', 'Scan Request')
 
     <div class="content-header">
         <div class="container-fluid">

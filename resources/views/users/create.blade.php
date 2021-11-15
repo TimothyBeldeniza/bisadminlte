@@ -5,19 +5,20 @@
         color: red;
        }
   </style>
-  @section('title', 'Register User')
+  @section('title', 'Register Resident')
 
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Register User</h1>
+                <h1>Register Resident</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Register User</li>
+                <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Users</a></li>
+                <li class="breadcrumb-item active">Register Resident</li>
                 </ol>
             </div>
             </div>
@@ -105,7 +106,7 @@
                 </div>
                 </div>
                 <div class="card">
-                    <div style="background-color: #f6f7cd" class="card-header text-dark font-weight-bold">{{ __('Register User') }}</div>
+                    <div style="background-color: #f6f7cd" class="card-header text-dark font-weight-bold">{{ __('Resident Information') }}</div>
     
                     <div class="card-body">
                         <form method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data">
@@ -324,6 +325,7 @@
                                     <button  type="submit" class="btn btn-primary fw-bold">
                                         {{ __('Submit') }}
                                     </button>
+                                    <a class="btn btn-primary" href="{{ route('users.index') }}">Back</a>
                                 </div>
                             </div>
     

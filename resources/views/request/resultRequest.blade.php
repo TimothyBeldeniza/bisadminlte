@@ -96,7 +96,8 @@
               <div style="background-color: #f6f7cd;" class="card-header font-weight-bold"><b>Actions</b></div>
               <div class="card-body">
                       @if($data->status == 'For Validation')
-                          <a class="btn btn-primary" data-toggle="modal" data-target="#process{{ $data->id }}">Process</a>
+                          {{-- <a class="btn btn-primary" data-toggle="modal" data-target="#process{{ $data->id }}">Process</a> --}}
+                          <a class="btn btn-primary fw-bold" href="/documents/process/{{ $data->id }}/{{ $data->transId }}/{{ $data->userId }}">Process</a>
                           <a class="btn btn-danger" data-toggle="modal" data-target="#disapprove{{ $data->id }}">Disapprove</a>
                       @elseif($data->status == 'Ready to Claim')
                         @if($data->price == 0)
@@ -116,7 +117,7 @@
                           <b class="text-danger">Document Cancelled</b>
                       @endif
                       {{-- Process Reason Modal --}}
-                      <div class="modal fade" id="process{{ $data->id }}" tabindex="-1" aria-labelledby="processLabel" aria-hidden="true">
+                      {{-- <div class="modal fade" id="process{{ $data->id }}" tabindex="-1" aria-labelledby="processLabel" aria-hidden="true">
                           <div class="modal-dialog">
                               <div class="modal-content">
                                   <div class="modal-header bg-primary">
@@ -153,7 +154,7 @@
                                   </div>
                               </div>
                           </div>
-                      </div>
+                      </div> --}}
                       {{-- End of Process Reason Modal --}}
                       {{-- Disapprove Reason Modal --}}
                       <div class="modal fade" id="disapprove{{ $data->id }}" tabindex="-1" aria-labelledby="disapproveLabel" aria-hidden="true">

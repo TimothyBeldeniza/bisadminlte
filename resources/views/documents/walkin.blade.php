@@ -5,6 +5,7 @@
      color: red;
     }
  </style>
+ @section('title', 'Walk-in Request Document')
    <!-- Content Header (Page header) -->
    <section class="content-header">
      <div class="container-fluid">

@@ -125,7 +125,12 @@
                                     <td class="text-center">
                                           @if($trans->status == 'For Validation')
                                              @can('documents-process')
-                                                <a class="btn btn-primary fw-bold" data-toggle="modal" data-target="#process{{ $trans->id }}">Process</a>
+                                                {{-- <a class="btn btn-primary fw-bold" data-toggle="modal" data-target="#process{{ $trans->id }}">Process</a> --}}
+                                                <form action="/documents/process/{{ $trans->id }}/{{ $trans->transId }}/{{ $trans->userId }}" method="POST">
+                                                   {{-- <button class="btn btn-primary fw-bold">Process</button> --}}
+                                                   @csrf
+                                                   <button type="submit" name="submit" value="process" onclick="return confirm('Are your sure to proceed?')" class="btn btn-primary">Process</button>
+                                                </form>
                                              @endcan
                                              @can('documents-disapprove')
                                                 <a class="btn btn-danger fw-bold" data-toggle="modal" data-target="#disapprove{{ $trans->id }}">Disapprove</a>
@@ -146,12 +151,14 @@
                                     </td>
                                     @endhasanyrole
                                     {{-- Process Reason Modal --}}
-                                    <div class="modal fade" id="process{{ $trans->id }}" tabindex="-1" aria-labelledby="processLabel" aria-hidden="true">
+                                    {{-- <div class="modal fade" id="process{{ $trans->id }}" tabindex="-1" aria-labelledby="processLabel" aria-hidden="true">
                                        <div class="modal-dialog">
                                           <div class="modal-content">
                                                 <div class="modal-header bg-primary">
                                                    <h5 class="modal-title text-light" id="processLabel">Processing</h5>
-                                                   {{-- <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button> --}}
+                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                    </button>                                            
                                                 </div>
                                                 <div class="modal-body text-left">
                                                    <form action="documents/process/{{ $trans->id }}/{{ $trans->transId }}/{{ $trans->userId }}" method="POST">
@@ -184,7 +191,7 @@
                                                 </div>
                                           </div>
                                        </div>
-                                    </div>
+                                    </div> --}}
                                     {{-- End of Process Reason Modal --}}
                                     {{-- Disapprove Reason Modal --}}
                                     <div class="modal fade" id="disapprove{{ $trans->id }}" tabindex="-1" aria-labelledby="disapproveLabel" aria-hidden="true">
@@ -192,7 +199,9 @@
                                           <div class="modal-content">
                                                 <div class="modal-header bg-danger">
                                                    <h5 class="modal-title text-light" id="disapproveLabel">Disapproving</h5>
-                                                   <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                    </button>                                            
                                                 </div>
                                                 <div class="modal-body text-start">
                                                    <form action="documents/process/{{ $trans->id }}/{{ $trans->transId }}/{{ $trans->userId }}" method="POST">
@@ -200,17 +209,17 @@
                                                       @csrf
 
                                                       <div class="form-group my-1"> 
-                                                            <input type="radio" id="vId" name="reason" value="Invalid ID" onclick="disapproveOthers{{ $trans->id }}()">
+                                                            <input type="radio" id="vId" name="reason" value="Invalid ID" onclick="disapproveOthers{{ $trans->id }}()" required>
                                                             <label>Invalid ID</label>
                                                       </div>
 
                                                       <div class="form-group my-1"> 
-                                                            <input type="radio" id="sp" name="reason" value="Inufficient Purpose" onclick="disapproveOthers{{ $trans->id }}()">
+                                                            <input type="radio" id="sp" name="reason" value="Inufficient Purpose" onclick="disapproveOthers{{ $trans->id }}()" required>
                                                             <label>Insufficient Purpose</label>
                                                       </div>
 
                                                       <div class="form-group my-1">
-                                                            <input type="radio" id="otherD{{ $trans->id }}" name="reason" value="Other" onclick="disapproveOthers{{ $trans->id }}()">
+                                                            <input type="radio" id="otherD{{ $trans->id }}" name="reason" value="Other" onclick="disapproveOthers{{ $trans->id }}()" required>
                                                             <label>Other</label>
                                                       </div>  
 
@@ -218,7 +227,7 @@
                                                             <label for="otherReason" class="my-1">Specify other reason:</label>
                                                             <input type="text" class="form-control" id="otherReason" name="otherReason" placeholder="Input reason here...">
                                                       </div>
-                                                      <div class="float-end my-1">
+                                                      <div class="float-right my-1">
                                                             <button type="submit" name="submit" value="disapprove" onclick="return confirm('Are your sure to proceed?')" class="btn btn-primary">Save Reason</button>
                                                       </div>
                                                    </form>
