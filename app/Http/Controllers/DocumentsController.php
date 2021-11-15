@@ -58,13 +58,14 @@ class DocumentsController extends Controller
             ->join('document_types', 'documents_transactions.dmId', '=', 'document_types.id')
             ->join('users', 'users.id', '=', 'transactions.userId')
             ->whereNull('document_types.deleted_at')
-            ->where('documents_transactions.created_at', '>=', $fromDate)
-            ->where('documents_transactions.created_at', '<=', $toDate)
+            ->where('documents_transactions.updated_at', '>=', $fromDate)
+            ->where('documents_transactions.updated_at', '<=', $toDate)
             ->orderBy('documents_transactions.id','DESC')
             ->select('documents_transactions.id', 'documents_transactions.transId', 'documents_transactions.purpose', 
                     'documents_transactions.barangayIdPath', DB::raw('date(documents_transactions.created_at) as "date"'),
                     'users.firstName', 'users.lastName', 'users.email', 
-                    'transactions.status', 'transactions.userId', 'document_types.docType','document_types.price')
+                    'transactions.status', 'transactions.userId', DB::raw('date(transactions.updated_at) as "releaseDate"'),
+                    'document_types.docType','document_types.price')
             ->get();
 
             $totalRevenue = [
@@ -73,8 +74,8 @@ class DocumentsController extends Controller
                            ->join('document_types', 'documents_transactions.dmId', '=', 'document_types.id')
                            ->join('users', 'users.id', '=', 'transactions.userId')
                            ->whereNull('document_types.deleted_at')
-                           ->where('documents_transactions.created_at', '>=', $fromDate)
-                           ->where('documents_transactions.created_at', '<=', $toDate)
+                           ->where('documents_transactions.updated_at', '>=', $fromDate)
+                           ->where('documents_transactions.updated_at', '<=', $toDate)
                            ->select(DB::raw('sum(document_types.price) as "revenue"'))
                            ->first(),
 
@@ -83,9 +84,9 @@ class DocumentsController extends Controller
                         ->join('document_types', 'documents_transactions.dmId', '=', 'document_types.id')
                         ->join('users', 'users.id', '=', 'transactions.userId')
                         ->whereNull('document_types.deleted_at')
-                        ->where('documents_transactions.created_at', '>=', $fromDate)
-                        ->where('documents_transactions.created_at', '<=', $toDate)
-                        ->where('transactions.status', 'Due')
+                        ->where('documents_transactions.updated_at', '>=', $fromDate)
+                        ->where('documents_transactions.updated_at', '<=', $toDate)
+                        ->where('transactions.status', 'For Validation')
                         ->orWhere('transactions.status', 'Ready to Claim')
                         ->select(DB::raw('sum(document_types.price) as "totalDue"'))
                         ->first(),
@@ -95,8 +96,8 @@ class DocumentsController extends Controller
                         ->join('document_types', 'documents_transactions.dmId', '=', 'document_types.id')
                         ->join('users', 'users.id', '=', 'transactions.userId')
                         ->whereNull('document_types.deleted_at')
-                        ->where('documents_transactions.created_at', '>=', $fromDate)
-                        ->where('documents_transactions.created_at', '<=', $toDate)
+                        ->where('documents_transactions.updated_at', '>=', $fromDate)
+                        ->where('documents_transactions.updated_at', '<=', $toDate)
                         ->where('transactions.status', 'Paid')
                         ->orWhere('transactions.status', 'Released')
                         ->select(DB::raw('sum(document_types.price) as "totalPaid"'))
@@ -115,7 +116,8 @@ class DocumentsController extends Controller
             ->select('documents_transactions.id', 'documents_transactions.transId', 'documents_transactions.purpose', 
                     'documents_transactions.barangayIdPath', DB::raw('date(documents_transactions.created_at) as "date"'),
                     'users.firstName', 'users.lastName', 'users.email', 
-                    'transactions.status', 'transactions.userId', 'document_types.docType','document_types.price')
+                    'transactions.status', 'transactions.userId', DB::raw('date(transactions.updated_at) as "releaseDate"'),
+                    'document_types.docType','document_types.price')
             ->get();
 
             $totalRevenue = [
@@ -132,7 +134,7 @@ class DocumentsController extends Controller
                         ->join('document_types', 'documents_transactions.dmId', '=', 'document_types.id')
                         ->join('users', 'users.id', '=', 'transactions.userId')
                         ->whereNull('document_types.deleted_at')
-                        ->where('transactions.status', 'Due')
+                        ->where('transactions.status', 'For Validation')
                         ->orWhere('transactions.status', 'Ready to Claim')
                         ->select(DB::raw('sum(document_types.price) as "totalDue"'))
                         ->first(),
@@ -226,12 +228,16 @@ class DocumentsController extends Controller
         $officials = $document['officials'];
         $template = $document['result'];
         $brgy = $document['brgy'];
+        $brgyLogo = $document['brgyLogo'];
+        $cityLogo = $document['cityLogo'];
         
         return view('documents.document')
         ->with('td', $td)
         ->with('officials', $officials)
         ->with('template', $template)
-        ->with('brgy', $brgy);
+        ->with('brgy', $brgy)
+        ->with('cityLogoPath', $cityLogo)
+        ->with('brgyLogoPath', $brgyLogo);
     }
 
     public function pdfSaveDocument($transId, $userId) 
@@ -274,10 +280,11 @@ class DocumentsController extends Controller
                ->join('complaints_transactions', 'complaints_transactions.id', '=', 'inside_respondents.compId') 
                ->join('transactions', 'transactions.id', '=', 'complaints_transactions.transId')
                ->where('inside_respondents.userId', $currentUser)
+               ->orderBy('inside_respondents.compId', 'DESC')
                ->select('inside_respondents.compId', 'transactions.status')
                ->get();
 
-      //   dd($case, $currentUser);
+        dd($case, $currentUser);
       //   dd($currentUser);
 
         if($case->count() > 0)
@@ -303,10 +310,42 @@ class DocumentsController extends Controller
     public function walkin()
     { 
          $users = User::all()->where('id', '>', 1)->sortBy('lastName');
-         
+
          $doctypes = DocumentTypes::select('id','docType', 'price')->get();
 
-         return view('documents.walkin', compact('doctypes', 'users'));
+         $noCases = array();
+         $hasCases = array();
+
+         foreach($users as $user)
+         {
+            $case = DB::table('inside_respondents')
+                  ->join('complaints_transactions', 'complaints_transactions.id', '=', 'inside_respondents.compId') 
+                  ->join('transactions', 'transactions.id', '=', 'complaints_transactions.transId')
+                  ->where('inside_respondents.userId', $user->id)
+                  ->orderBy('inside_respondents.compId', 'DESC')
+                  ->select('inside_respondents.compId', 'transactions.status')
+                  ->get();
+
+            if($case->count() > 0)
+            {   
+               if($case[0]->status == "Unresolved" || $case[0]->status == "On Going")
+               {
+                  $hasCases[] = $user;
+               }
+               elseif($case[0]->status == "Dismissed" || $case[0]->status == "Settled" || $case[0]->status == "Escalated")
+               {
+                  $noCases[] = $user;
+               }
+            }
+            else
+            {
+               $noCases[] = $user;
+            }
+         }
+
+         // dd($users, $case, $noCases, $hasCases);
+
+         return view('documents.walkin', compact('doctypes', 'users', 'hasCases', 'noCases'));
     }
 
     /**
@@ -347,6 +386,7 @@ class DocumentsController extends Controller
                ->join('complaints_transactions', 'complaints_transactions.id', '=', 'inside_respondents.compId') 
                ->join('transactions', 'transactions.id', '=', 'complaints_transactions.transId')
                ->where('inside_respondents.userId', $request->user)
+               ->orderBy('inside_respondents.compId', 'DESC')
                ->select('inside_respondents.compId', 'transactions.status')
                ->get();
             // dd($case);
@@ -363,7 +403,7 @@ class DocumentsController extends Controller
                   $wname = $walkinUser->firstName . ' ' . $walkinUser->lastName;
                   $transId = Transactions::create([
                      'userId' => $request->user,
-                     'status' => 'Due',
+                     'status' => 'For Validation',
                      'unique_code' => sha1(time()),
                   ]);
                }
@@ -375,7 +415,7 @@ class DocumentsController extends Controller
                $wname = $walkinUser->firstName . ' ' . $walkinUser->lastName;
                $transId = Transactions::create([
                   'userId' => $request->user,
-                  'status' => 'Due',
+                  'status' => 'For Validation',
                   'unique_code' => sha1(time()),
                ]);
             }
@@ -385,7 +425,7 @@ class DocumentsController extends Controller
         {
            $transId = Transactions::create([
              'userId' => $userId,
-             'status' => 'Due',
+             'status' => 'For Validation',
              'unique_code' => sha1(time()),
            ]);
         }
@@ -573,7 +613,8 @@ class DocumentsController extends Controller
             ->select('documents_transactions.id', 'documents_transactions.transId', 'documents_transactions.purpose', 
                     'documents_transactions.barangayIdPath', 'documents_transactions.reason', DB::raw('date(documents_transactions.created_at) as "date"'),
                     'users.firstName', 'users.lastName', 'users.email', 'users.profilePath', 
-                    'transactions.status', 'transactions.userId', 'document_types.docType', 'document_types.price')
+                    'transactions.status', 'transactions.userId', DB::raw('date(transactions.updated_at) as "releaseDate"'),
+                    'document_types.docType', 'document_types.price')
             ->first();
         
         // dd($data);

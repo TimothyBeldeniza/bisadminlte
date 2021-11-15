@@ -254,17 +254,17 @@
                             </div>
                             
                             <div class="form-group row my-1">
-                                <label for="gender" class="col-md-4 col-form-label text-md-right required">{{ __('Sex') }}</label>
+                                <label for="sex" class="col-md-4 col-form-label text-md-right required">{{ __('Sex') }}</label>
                                 
                                 <div class="col-md-6">
                                     
-                                      <input onclick="disableStatus()" id="male" type="radio" name="gender" value="male" class=" @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" required autocomplete="gender">
+                                      <input onclick="disableStatus()" id="male" type="radio" name="sex" value="Male" name="sex" value="{{ old('sex') }}" required autocomplete="sex">
                                       <label for="male">Male</label>
                                     
-                                      <input onclick="disableStatus()" id="female" type="radio" name="gender" value="female" class=" @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" required autocomplete="gender">
+                                      <input onclick="disableStatus()" id="female" type="radio" name="sex" value="Female" name="sex" value="{{ old('sex') }}" required autocomplete="sex">
                                       <label for="female">Female</label>
                                     
-                                    {{--   <input id="gender" type="radio" name="gender" value="rather not say" class=" @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" required autocomplete="gender">
+                                    {{--   <input id="sex" type="radio" name="sex" value="rather not say" name="sex" value="{{ old('sex') }}" required autocomplete="sex">
                                       <label for="others">Others</label> --}}
                                 </div>
                             </div>

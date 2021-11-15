@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             // $table->string('city');
             // $table->string('province');
             $table->date('dob');
-            $table->string('gender');
+            $table->string('sex');
             $table->string('civilStatus');
             $table->string('citizenship');
             $table->string('profilePath')->nullable();

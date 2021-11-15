@@ -95,19 +95,19 @@ class HomeController extends Controller
             'unresolved' => Transactions::where('status', '=' ,'Unresolved')->count(),
             'onGoing' => Transactions::where('status', '=' ,'On Going')->count(),
             'dismissed' => Transactions::where('status', '=' ,'Dismissed')->count(),
-            'due' => Transactions::where('status', '=' ,'Due')->count(),
+            'due' => Transactions::where('status', '=' ,'For Validation')->count(),
             'readyToClaim' => Transactions::where('status', '=' ,'Ready To Claim')->count(),
             'paid' => Transactions::where('status', '=' ,'Paid')->count(),
             'released' => Transactions::where('status', '=' ,'Released')->count(),
             'cancelled' => Transactions::where('status', '=' ,'Cancelled')->count(),
-            'male' => User::whereHas("roles", function($q){ $q->where("name", "!=", "Admin"); })->where('gender','Male')->count(),
-            'female' => User::whereHas("roles", function($q){ $q->where("name","!=", "Admin"); })->where('gender','Female')->count(),
+            'male' => User::whereHas("roles", function($q){ $q->where("name", "!=", "Admin"); })->where('sex','Male')->count(),
+            'female' => User::whereHas("roles", function($q){ $q->where("name","!=", "Admin"); })->where('sex','Female')->count(),
             'senior' => User::whereHas("roles", function($q){ $q->where("name", "!=", "Admin"); })->where('dob', '<=', Carbon::now()->subDecades(6)->format('Y-m-d'))->count(),
             'totalRes' =>  User::whereHas("roles", function($q){ $q->where("name", "!=", "Admin"); })->count(),
         ];
 
         $count = [
-            'dues' => $documents->where('status', 'Due')->count(),
+            'dues' => $documents->where('status', 'For Validation')->count(),
             'comps' => $complaints->where('status', 'Unresolved')->count(),
             'res' => $residents->where('status', 'Unresolved')->count(),
             'nonr' => $nonresidents->where('status', 'Unresolved')->count(),

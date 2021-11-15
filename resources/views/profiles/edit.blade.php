@@ -197,12 +197,12 @@
                                 </div>
 
                                 <div class="form-group row my-1">
-                                 <label for="gender" class="col-md-4 col-form-label text-md-right fw-bold required">{{ __('Sex') }}</label>
+                                 <label for="sex" class="col-md-4 col-form-label text-md-right fw-bold required">{{ __('Sex') }}</label>
                                  
                                  <div class="col-md-6">
-                                     <input readonly id="gender" type="text" class="form-control @error('gender') is-invalid @enderror" name="gender" value="{{ $user->gender }}" placeholder="Enter gender..." required autocomplete="gender">
+                                     <input readonly id="sex" type="text" class="form-control @error('sex') is-invalid @enderror" name="sex" value="{{ $user->sex }}" placeholder="Enter sex..." required autocomplete="sex">
                                      
-                                     @error('gender')
+                                     @error('sex')
                                      <span class="invalid-feedback" role="alert">
                                          <strong>{{ $message }}</strong>
                                      </span>

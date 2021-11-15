@@ -41,7 +41,7 @@ class UsersImport implements
             'houseNo' => $row['house_no'],
             'street' => $row['street'],
             'dob' =>  \Carbon\Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['dob']))->format('Y-m-d'),
-            'gender' => $row['gender'],
+            'sex' => $row['sex'],
             'civilStatus' => $row['civil_status'],
             'citizenship' => $row['citizenship'],
             'profilePath' => 'default.png',
@@ -78,7 +78,7 @@ class UsersImport implements
             '*.house_no' => ['required', 'string'],
             '*.street' => ['required', 'string'],
             '*.dob' => ['required'],  
-            '*.gender' => ['required', 'string'],
+            '*.sex' => ['required', 'string'],
             '*.civil_status' => ['required', 'string'],
             '*.citizenship' => ['required','regex:/^[a-zA-ZñÑ\s]+$/', 'string'],
         ];

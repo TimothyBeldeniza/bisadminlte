@@ -90,20 +90,21 @@
           <!-- Small boxes (Stat box) -->
           <div class="row">
             <div class="col">
-              <!-- small box -->
-              <div class="small-box bg-danger">
-                <div class="inner">
-                  <h3>{{ $stats['dismissed'] }}</h3>
-  
-                  <p>Dismissed</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-close-circled"></i>
-                </div>
-                <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-            <!-- ./col -->
+               <!-- small box -->
+               <div class="small-box bg-dark">
+                 <div class="inner">
+                   <h3>{{ $stats['unresolved'] }}</h3>
+   
+                   <p>Unresolved</p>
+                 </div>
+                 <div class="icon">
+                   <i class="ion ion-thumbsdown"></i>
+                 </div>
+                 <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+               </div>
+             </div>
+             <!-- ./col -->
+
             <div class="col">
               <!-- small box -->
               <div class="small-box bg-maroon">
@@ -149,22 +150,24 @@
                 <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
+
             <div class="col">
-              <!-- small box -->
-              <div class="small-box bg-dark">
-                <div class="inner">
-                  <h3>{{ $stats['unresolved'] }}</h3>
-  
-                  <p>Unresolved</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-thumbsdown"></i>
-                </div>
-                <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-            <!-- ./col -->
+               <!-- small box -->
+               <div class="small-box bg-danger">
+                 <div class="inner">
+                   <h3>{{ $stats['dismissed'] }}</h3>
+   
+                   <p>Dismissed</p>
+                 </div>
+                 <div class="icon">
+                   <i class="ion ion-close-circled"></i>
+                 </div>
+                 <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+               </div>
+             </div>
+             <!-- ./col -->
           </div>
+          
 
         </div><!-- /.container-fluid -->
       </div>
@@ -185,7 +188,7 @@
                 <div class="inner">
                   <h3>{{ $stats['due'] }}</h3>
   
-                  <p>Due</p>
+                  <p>For Validation</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-ios-pricetags"></i>

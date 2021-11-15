@@ -31,7 +31,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'city',
         'province',
         'dob',
-        'gender',
+        'sex',
         'civilStatus',
         'citizenship',
         'profilePath',

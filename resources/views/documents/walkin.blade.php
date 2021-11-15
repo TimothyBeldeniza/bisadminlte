@@ -35,7 +35,14 @@
                         <label for="user" class="required">{{ __('User') }}</label>
                         <select id="user" name="user" class="form-control select2bs4" onfocus="this.value=''">
                            <option value></option>
-                           @foreach ($users as $user)
+                           @foreach ($users as $user) 
+                              {{-- @foreach ($hasCases as $x)
+                                 @if ($user->id == $x->id)
+                                    <option value="{{ $user->id }}" disabled>{{ $user->firstName. ' '. $user->lastName }} (In Unresolved or On Going Cases)</option>
+                                 @else
+                                    <option value="{{ $user->id }}">{{ $user->firstName. ' '. $user->lastName }}</option>
+                                 @endif
+                              @endforeach    --}}
                               <option value="{{ $user->id }}">{{ $user->firstName. ' '. $user->lastName }}</option>
                            @endforeach
                         </select>

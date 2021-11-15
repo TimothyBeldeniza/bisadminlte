@@ -19,19 +19,13 @@
         </div><!-- /.container-fluid -->
     </div>
     <div class="content">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card">
                         <div style="background-color: #f6f7cd" class="card-header text-dark font-weight-bold">Import Excel</div>
         
-                        <div class="card-body">
-                            @if (session('status'))
-                                <div class="alert alert-success" role="alert">
-                                    {{ session('status') }}
-                                </div>
-                            @endif
-        
+                        <div class="card-body">       
                             @if (isset($errors) && $errors->any())
                                 <div class="alert alert-danger">
                                     @foreach ($errors->all() as $error)
@@ -40,6 +34,38 @@
                                 </div>
                             @endif
 
+                            <p class="text-card">
+                               <b>The Excel (xls/xl) file should have the following headers to avoid errors:</b>
+                               <ul>
+                                  <li>Last Name <b>*</b></li>
+                                  <li>First Name <b>*</b></li>
+                                  <li>Middle Name</li>
+                                  <li>Email <b>*</b></li>
+                                  <li>Contact No <b>*</b></li>
+                                  <li>Street <b>*</b></li>
+                                  <li>DoB <b>*</b></li>
+                                  <li>Sex <b>*</b></li>
+                                  <li>Civil Status <b>*</b></li>
+                                  <li>Citizenship <b>*</b></li>
+                               </ul>
+                               <b>Note: Each header must require a value, except the Middle Name.</b> <br>
+                               <b>Example Excel Content:</b>
+                            </p>
+                            {{-- <img src="{{ asset('images/sample headers.png') }}" alt="sample_headers image" style="width: 1000px"> --}}
+                            <iframe src="{{ asset('images/sample headers.png') }}" style="width: 100%"></iframe>
+                            <hr>
+                            <form action="/users/import/store" method="POST" enctype="multipart/form-data">
+                                @csrf
+
+                                <div class="form-group mt-2">
+                                    <input class="form-control" type="file" name="file" required>
+                                    <div class="float-right mt-2">
+                                       <button type="submit" class="btn btn-primary">Import</button>
+                                       <a class="btn btn-primary" href="{{ route('users.index') }}">Back</a>
+                                    </div>
+                                </div>
+                            </form>
+                            <hr>
                             @if(session()->has('failures'))
                                 <table class="table table-danger">
                                     <tr>
@@ -66,17 +92,6 @@
                                     @endforeach
                                 </table>
                             @endif
-                            <form action="/users/import/store" method="POST" enctype="multipart/form-data">
-                                @csrf
-
-                                <div class="form-group mt-2">
-                                    <input class="form-control" type="file" name="file" required>
-                                    <div class="float-right mt-2">
-                                       <button type="submit" class="btn btn-primary">Import</button>
-                                       <a class="btn btn-primary" href="{{ route('users.index') }}">Back</a>
-                                    </div>
-                                </div>
-                            </form>
                         </div>
                     </div>
                 </div>

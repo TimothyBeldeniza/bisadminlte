@@ -58,7 +58,7 @@
                       <th>No.</th>
                       <th>Name</th>
                       <th>Date Requested</th>
-                      <th>Email</th>
+                      <th>Date Released</th>
                       <th>Document</th>
                       <th>Purpose</th>
                       <th>Valid ID</th>
@@ -78,7 +78,11 @@
                                     <td>{{ ++$i }}</td>
                                     <td class="text-start"><b>{{ $trans->lastName. ', ' .$trans->firstName}}</b></td>
                                     <td>{{ $trans->date}}</td>
-                                    <td>{{ $trans->email }}</td>
+                                    @if ($trans->status != "Released")
+                                       <td><b>Not yet Released</b></td>
+                                    @else
+                                       <td>{{ $trans->releaseDate }}</td>
+                                    @endif
                                     <td>{{ $trans->docType }}</td>
                                     <td>{{ $trans->purpose }}</td>
                                     <td class="text-center">
@@ -111,7 +115,7 @@
          
                                     @if ($trans->status == "Disapproved" || $trans->status == "Cancelled")
                                        <td class="text-danger"><b>{{ $trans->status }}</b></td>
-                                       @elseif ($trans->status == "Due")
+                                       @elseif ($trans->status == "For Validation")
                                           <td class="text-dark"><b>{{ $trans->status }}</b></td>
                                        @else
                                           <td class="text-success"><b>{{ $trans->status }}</b></td>    
@@ -119,7 +123,7 @@
                                     <td>{{ '₱' . $trans->price }}</td>
                                     @hasanyrole('Admin|Clerk|Secretary')
                                     <td class="text-center">
-                                          @if($trans->status == 'Due')
+                                          @if($trans->status == 'For Validation')
                                              @can('documents-process')
                                                 <a class="btn btn-primary fw-bold" data-toggle="modal" data-target="#process{{ $trans->id }}">Process</a>
                                              @endcan
@@ -263,9 +267,9 @@
                           <th></th>
                           <th></th>
                           @if ($totalRevenue['due']->totalDue == 0)
-                             <th class="text-center">Due: ₱0</th>
+                             <th class="text-center">For Validation: ₱0</th>
                           @else
-                             <th class="text-center">Due: {{ '₱' . $totalRevenue['due']->totalDue }}</th>
+                             <th class="text-center">For Validation: {{ '₱' . $totalRevenue['due']->totalDue }}</th>
                           @endif
                           @if ($totalRevenue['paid']->totalPaid == 0)
                              <th class="text-center">Paid: ₱0</th>

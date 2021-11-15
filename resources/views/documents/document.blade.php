@@ -42,7 +42,7 @@
 		float: left;
 		/* border: 1px solid; */
 		margin: -105px 20px 0px 5px;
-		padding: 0px 20px 150px 0px;
+		/* padding: 0px 20px 150px 0px; */
 	}
 
 	#type{
@@ -53,14 +53,14 @@
     /* margin-left: 250px; */
     /* border: 3px solid black; */
 		font-size: 100%;
-		margin-top: 150px;
+		margin-top: 120px;
 	}
 
 	.footer{
     /* margin-left: 250px; */
     /* border: 3px solid black; */
 		/* font-size: 130%; */
-    margin-top: 80px;
+    margin-top: 50px;
 		/* margin: 50px; */
 	}
 </style>
@@ -122,6 +122,7 @@
       <p>Issued on this date <b>{{ Carbon\Carbon::now()->format('jS F, Y') }}</b>, from the Barangay Information System, Brgy. {{ $brgy->name }}, {{ $brgy->city }}, {{ $brgy->province }}, Philippines.</p>	
     </div>
 
+    
 
     <div class="footer">
 		@foreach ($officials as $chairman)
@@ -132,10 +133,14 @@
 				</p>
 			@endif
 		@endforeach
-    <p><img id="qr-code" 
-      src="data:image/png;base64,{!! base64_encode(QrCode::format('png')
-      ->size(90)
-      ->generate($td->unique_code)) !!}"></p>
+      <p><img id="qr-code" 
+         src="data:image/png;base64,{!! base64_encode(QrCode::format('png')
+         ->size(90)
+         ->generate($td->unique_code)) !!}"></p>
+
+      <p>Note: Not Valid Without Official Dry Seal <br>
+      Paid Under O.R. No: <br>
+      Issued By: {{ Auth::user()->firstName. ' ' .Auth::user()->lastName }}</p>
     </div>
 
 

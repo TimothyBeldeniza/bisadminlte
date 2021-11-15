@@ -49,6 +49,11 @@
                       <p class="card-text"><b>Document Price:</b> {{ '₱' . $data->price }}</p>
                       <p class="card-text"><b>Purpose of Request:</b> {{ $data->purpose }}</p>
                       <p class="card-text"><b>Date Requested:</b> {{ Carbon\Carbon::parse($data->date)->format('jS F, Y') }}</p>
+                      @if ($data->status != "Released")
+                        <p class="card-text"><b>Not yet Released</b></p>
+                      @else
+                        <p class="card-text"><b>Date Released:</b> {{ Carbon\Carbon::parse($data->releaseDate)->format('jS F, Y') }}</p>
+                      @endif
                       <hr>
                       @if ($data->status == "Disapproved" || $data->status == "Cancelled")
                         <p class="card-text"><b>Status of Request:</b> <b class="text-danger">{{ $data->status }}</b></p>
@@ -60,8 +65,8 @@
                       @if ($data->barangayIdPath == null)
                         <p class="card-text"><b>Valid ID: Presented to staff</b></p>
                       @else
-                      <p class="card-text"><b>Valid ID:</b></p>
-                      <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#bargyId{{$data->id}}">Show ID</button>
+                      <p class="card-text"><b>Valid ID: </b>
+                      <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#bargyId{{$data->id}}">Show ID</button></p>
                         <div class="modal fade" id="bargyId{{$data->id}}" tabindex="-1" aria-labelledby="bargyIdLabel" aria-hidden="true">
                           <div class="modal-dialog modal-lg">
                               <div class="modal-content">
@@ -90,7 +95,7 @@
             <div style="width:50%" class="card">
               <div style="background-color: #f6f7cd;" class="card-header font-weight-bold"><b>Actions</b></div>
               <div class="card-body">
-                      @if($data->status == 'Due')
+                      @if($data->status == 'For Validation')
                           <a class="btn btn-primary" data-toggle="modal" data-target="#process{{ $data->id }}">Process</a>
                           <a class="btn btn-danger" data-toggle="modal" data-target="#disapprove{{ $data->id }}">Disapprove</a>
                       @elseif($data->status == 'Ready to Claim')
