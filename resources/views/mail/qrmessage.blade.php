@@ -22,7 +22,7 @@
     </p>
 
     <p>
-        Your request of document has been successfully submitted. 
+        Your request of {{ $document }} has been successfully submitted. 
         Kindly present the QR code given below to the office for faster transaction process.
         <br>
         <br>
@@ -32,7 +32,7 @@
     </p>
 
     <div>
-        <img src="{!!$message->embedData(QrCode::format('png')->size(200)->encoding('UTF-8')->generate($ub), 'QrCode.png', 'image/png')!!}">    
+        <img src="{!!$message->embedData(QrCode::format('png')->size(200)->encoding('UTF-8')->generate($uq), 'QrCode.png', 'image/png')!!}">    
         <br>
     </div>
     <p>
