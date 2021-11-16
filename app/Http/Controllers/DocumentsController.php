@@ -284,7 +284,6 @@ class DocumentsController extends Controller
                ->select('inside_respondents.compId', 'transactions.status')
                ->get();
 
-        dd($case, $currentUser);
       //   dd($currentUser);
 
         if($case->count() > 0)
