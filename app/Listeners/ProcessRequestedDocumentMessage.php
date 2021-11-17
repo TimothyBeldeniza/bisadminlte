@@ -30,7 +30,8 @@ class ProcessRequestedDocumentMessage
     public function handle(ProcessRequestedDocument $event)
     {
         // dd($event->email[0]);
-        Mail::to($event->email)->send(new RequestedDocument);
+        $uq = $event->unique_code;
+        Mail::to($event->email)->send(new RequestedDocument($uq));
         // dispatch(new RequestedDocumentJob());
     }
 }

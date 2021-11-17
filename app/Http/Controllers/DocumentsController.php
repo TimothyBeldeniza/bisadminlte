@@ -284,7 +284,6 @@ class DocumentsController extends Controller
                ->select('inside_respondents.compId', 'transactions.status')
                ->get();
 
-      //   dd($case, $currentUser);
       //   dd($currentUser);
 
         if($case->count() > 0)
@@ -370,6 +369,12 @@ class DocumentsController extends Controller
            'others' => 'nullable', 'string',
            'image' => 'mimes:jpg,png,jpeg|max:5048',
         ]);
+
+        $getDocument = DocumentTypes::find($request->docType);
+        $document = $getDocument->docType;
+
+        
+        
         
         if($request->user != null)
         {
@@ -455,7 +460,7 @@ class DocumentsController extends Controller
                 ]);
             }
             
-            event(new SubmitRequest($email,$unique_code,$name,$brgyName));
+            event(new SubmitRequest($email,$unique_code,$name,$brgyName,$document));
             return redirect('home')->with('success', 'Document requested successfully!');
         }
         else
@@ -478,9 +483,9 @@ class DocumentsController extends Controller
             }
 
             if($request->user != null)
-               event(new SubmitRequest($walkinUser->email,$unique_code,$wname,$brgyName));
+               event(new SubmitRequest($walkinUser->email,$unique_code,$wname,$brgyName,$document));
             else
-               event(new SubmitRequest($email,$unique_code,$name,$brgyName));
+               event(new SubmitRequest($email,$unique_code,$name,$brgyName,$document));
             return redirect('home')->with('success', 'Document requested successfully!');
         }
         
@@ -569,7 +574,11 @@ class DocumentsController extends Controller
 
         $email = User::where('id', $userId)->pluck('email')->all();
         
-        event(new ProcessRequestedDocument($email));
+        $getUniqueCode = Transactions::find($transId);
+
+        $unique_code = $getUniqueCode->unique_code;
+
+        event(new ProcessRequestedDocument($email,$unique_code));
     }
     
     public function disapproved($transId)

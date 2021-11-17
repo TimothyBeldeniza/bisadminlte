@@ -7,8 +7,28 @@
     Kindly claim it to our office, Thank you!
     <br>
     <br>
-    Regards,
+    NOTE: Present the QR code below for faster transaction.
     <br>
-    Barangay Information System
-    {{-- <img src="{{ asset('images/brgy-logo.png') }}" style="height: 100px; width: auto;"> --}}
+    <div>
+        <img src="{!!$message->embedData(QrCode::format('png')->size(200)->encoding('UTF-8')->generate($uq), 'QrCode.png', 'image/png')!!}">    
+        <br>
+    </div>
+    <p>
+        Thank you and God bless, 
+        <br>
+        Barangay Upper Bicutan
+        <br>
+    </p>
+    
+    {{-- <p class="text-primary">
+        Blk. 52 Lot 27 Ph 2. <br>
+        Upper Bicutan, Taguig City <br>
+        Metro Manila 1633 <br>
+        Tel. No. 838-3910/839-2296 <br>
+    </p> --}}
+    
+    {{-- <img id="brgy-logo" src="{{ url('https://bis.test/images/brgy-logo.png') }}" alt="brgy-logo" style="height: 100px; width: auto;"> --}}
+    <br>
+    <b>***DO NOT REPLY TO THIS EMAIL***</b>
+
 </p>
