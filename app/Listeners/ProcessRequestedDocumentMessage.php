@@ -31,7 +31,9 @@ class ProcessRequestedDocumentMessage
     {
         // dd($event->email[0]);
         $uq = $event->unique_code;
-        Mail::to($event->email)->send(new RequestedDocument($uq));
+        $name = $event->name;
+        $brgy = $event->brgy;
+        Mail::to($event->email)->send(new RequestedDocument($uq,$name,$brgy));
         // dispatch(new RequestedDocumentJob());
     }
 }

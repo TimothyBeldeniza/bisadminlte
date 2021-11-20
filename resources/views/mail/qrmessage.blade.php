@@ -16,19 +16,34 @@
     }
 </style>
 <div>
-    <p>
-        Good day! {{ $name }}
-        <br><br>
-    </p>
+
+    <h1>
+      Good day, {{ $name }}! 
+    </h1>
 
     <p>
         Your request of {{ $document }} has been successfully submitted. 
         Kindly present the QR code given below to the office for faster transaction process.
         <br>
         <br>
+        <b>Reminder to keep in mind:</b><br>
+        Do not forget to download your QR code, as it will also serve as your claiming stab. <br>
+        Two ways in saving your QR Code: <br>
+        <ol> 
+            <li><b>If you are using a smartphone:</b></li> 
+               <ol> 
+                  <li>Press and hold the QR code to view the image.</li> 
+                  <li>After viewing the image, tap the three circles in the upper right ang select "Save" to save a copy of your QR code to your smartphone. </li> 
+               </ol>
+               </li>
+            <li><b>If you are using a laptop/desktop:</b></li>
+               <ol>
+                  <li>Right-click the QR code and select "Save image as..." to save it on your device.</li>
+               </ol>
+         </ol> 
+         <br>
 
-        NOTE: This is up for double checking. Would there be any changes, we'll let you know right away. Thank you for understanding.
-        <br>
+        <b>Note:</b> This is up for double-checking. Would there be any changes, we'll let you know right away. Thank you for understanding. <br><br>
     </p>
 
     <div>
@@ -36,7 +51,7 @@
         <br>
     </div>
     <p>
-        Thank you and God bless, 
+        Thank you, and God bless, 
         <br>
         Barangay {{ $brgyName }}
         <br>

@@ -573,12 +573,16 @@ class DocumentsController extends Controller
         $rtc = Transactions::where('id', $transId)->update(['status' => 'Ready to Claim']);
 
         $email = User::where('id', $userId)->pluck('email')->all();
+
+        $name = User::where('id', $userId)->pluck('firstName')->first();
+
+        $brgy = Barangay::find(1)->pluck('name')->first(); 
         
         $getUniqueCode = Transactions::find($transId);
 
         $unique_code = $getUniqueCode->unique_code;
-
-        event(new ProcessRequestedDocument($email,$unique_code));
+        
+        event(new ProcessRequestedDocument($email,$unique_code,$name,$brgy));
     }
     
     public function disapproved($transId)

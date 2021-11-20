@@ -1,22 +1,25 @@
 <h1>
-    Hello!
+    Hello, {{ $name }}!
 </h1>
 
-<p style="font-size: 25px">
-    Your Requested Document has been processed and is ready.
-    Kindly claim it to our office, Thank you!
+<p>
+    Your requested document has been processed and is ready.
+    Kindly claim it to our office. 
     <br>
     <br>
-    NOTE: Present the QR code below for faster transaction.
+    Thank you!
+    <br>
+    <br>
+    <b>Note:</b> Present the QR code for the faster transaction as it will also serve as your claiming stab for the requested document.
     <br>
     <div>
         <img src="{!!$message->embedData(QrCode::format('png')->size(200)->encoding('UTF-8')->generate($uq), 'QrCode.png', 'image/png')!!}">    
         <br>
     </div>
     <p>
-        Thank you and God bless, 
+        Thank you, and God bless, 
         <br>
-        Barangay Upper Bicutan
+        Barangay {{ $brgy }}
         <br>
     </p>
     
