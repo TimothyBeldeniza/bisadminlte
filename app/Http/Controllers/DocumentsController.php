@@ -536,6 +536,10 @@ class DocumentsController extends Controller
             {
                DocumentsTransactions::where('id', $docId)->update(['reason' => 'Adequate Requirements']);
             }
+            else if($request->submit == 'disapprove')
+            {
+               DocumentsTransactions::where('id', $docId)->update(['reason' => $request->reason]);
+            }
             else
             {
                DocumentsTransactions::where('id', $docId)->update(['reason' => $request->reason]);       

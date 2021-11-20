@@ -133,7 +133,7 @@
                                                 </form>
                                              @endcan
                                              @can('documents-disapprove')
-                                                <a class="btn btn-danger fw-bold" data-toggle="modal" data-target="#disapprove{{ $trans->id }}">Disapprove</a>
+                                                <a class="btn btn-danger fw-bold mt-2" data-toggle="modal" data-target="#disapprove{{ $trans->id }}">Disapprove</a>
                                              @endcan
                                           @elseif($trans->status == 'Ready to Claim')
                                              @if($trans->price == 0)

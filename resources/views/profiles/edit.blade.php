@@ -52,7 +52,7 @@
                                     
                                     <div class="col-md-6">
                                         <input type="file"  class="form-control @error('image') is-invalid @enderror" name="image">
-                                        <span><b>Image must be .jpg / .jpeg / .png</b></span>
+                                        <span><b class="text-danger">Image must be .jpg / .jpeg / .png</b></span>
                                         @error('image')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

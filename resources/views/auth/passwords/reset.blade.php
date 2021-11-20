@@ -11,7 +11,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-               <div style="background-color: #f6f7cd" class="card-header text-dark font-weight-bold">{{ __('Reset Password') }}</div>
+               <div style="background-color: #f6f7cd" class="card-header text-dark font-weight-bold">{{ __('Set Password') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('password.update') }}">
@@ -58,7 +58,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
+                                    {{ __('Set Password') }}
                                 </button>
                             </div>
                         </div>

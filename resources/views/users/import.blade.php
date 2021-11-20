@@ -1,5 +1,10 @@
-
 <x-layout>
+   <style>
+      .required:after {
+       content:" *";
+       color: red;
+      }
+   </style>
    @section('title', 'Import Residents')
     <div class="content-header">
         <div class="container-fluid">
@@ -38,16 +43,16 @@
                                <b>Create a new Excel File first. No Copy of a file</b> <br>
                                <b>The Excel (xls/xl) file should have the following headers to avoid errors:</b>
                                <ul>
-                                  <li>Last Name <b>*</b></li>
-                                  <li>First Name <b>*</b></li>
+                                  <li>Last Name <b class="text-danger">*</b></li>
+                                  <li>First Name <b class="text-danger">*</b></li>
                                   <li>Middle Name</li>
-                                  <li>Email <b>*</b></li>
-                                  <li>Contact No <b>*</b></li>
-                                  <li>Street <b>*</b></li>
-                                  <li>DoB <b>*</b></li>
-                                  <li>Sex <b>*</b></li>
-                                  <li>Civil Status <b>*</b></li>
-                                  <li>Citizenship <b>*</b></li>
+                                  <li>Email <b class="text-danger">*</b></li>
+                                  <li>Contact No <b class="text-danger">*</b></li>
+                                  <li>Street <b class="text-danger">*</b></li>
+                                  <li>DoB <b class="text-danger">*</b></li>
+                                  <li>Sex <b class="text-danger">*</b></li>
+                                  <li>Civil Status <b class="text-danger">*</b></li>
+                                  <li>Citizenship <b class="text-danger">*</b></li>
                                </ul>
                                <b>Note: Each header must require a value, except the Middle Name.</b> <br>
                                <b>Example Excel Content:</b>
@@ -59,6 +64,7 @@
                                 @csrf
 
                                 <div class="form-group mt-2 mb-2">
+                                    <label for="file" class="required">Excel File</label>
                                     <input class="form-control" type="file" name="file" required>
                                     <div class="float-right mt-2">
                                        <button type="submit" class="btn btn-primary">Import</button>
