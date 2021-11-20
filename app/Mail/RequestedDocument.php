@@ -16,9 +16,11 @@ class RequestedDocument extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($uq,$name,$brgy)
     {
-        //
+        $this->uq = $uq;
+        $this->name = $name;
+        $this->brgy = $brgy;
     }
 
     /**
@@ -28,6 +30,10 @@ class RequestedDocument extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.processeddoc');
+        return $this->view('mail.processeddoc')->with([
+            'uq' => $this->uq,
+            'name' => $this->name,
+            'brgy' => $this->brgy,
+        ]);
     }
 }

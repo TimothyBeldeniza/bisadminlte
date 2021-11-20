@@ -15,15 +15,21 @@ class ProcessRequestedDocument
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $email;
+    public $unique_code;
+    public $name;
+    public $brgy;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($email)
+    public function __construct($email,$unique_code,$name,$brgy)
     {
         $this->email = $email;
+        $this->unique_code = $unique_code;
+        $this->name = $name;
+        $this->brgy = $brgy;
     }
 
     /**

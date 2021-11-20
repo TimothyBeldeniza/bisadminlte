@@ -17,6 +17,7 @@
         "maatwebsite/excel": "^3.1",
         "realrashid/sweet-alert": "^4.0",
         "simplesoftwareio/simple-qrcode": "^4.2",
+        "spatie/laravel-backup": "^6.16",
         "spatie/laravel-permission": "^5.1"
     },
     "require-dev": {

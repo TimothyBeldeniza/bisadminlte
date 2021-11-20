@@ -325,7 +325,7 @@
                                         {{ $docu->purpose }}
                                     </a>
                                 </td>
-                                @if ($docu->status == "Due")
+                                @if ($docu->status == "For Validation")
 
                                     <td class="project-state text-center">
                                         <span class="badge badge-dark">{{ $docu->status }}</span>

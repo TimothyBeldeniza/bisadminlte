@@ -16,17 +16,19 @@ class SubmitRequest
     public $email;
     public $unique_code;
     public $brgyName;
+    public $document;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($email,$unique_code,$name,$brgyName)
+    public function __construct($email,$unique_code,$name,$brgyName,$document)
     {
         $this->email = $email;
         $this->unique_code = $unique_code;
         $this->name = $name;
         $this->brgyName = $brgyName;
+        $this->document = $document;
     }
 
     /**

@@ -285,7 +285,11 @@
                           @else
                              <th class="text-center">Paid: {{ '₱' . $totalRevenue['paid']->totalPaid }}</th>
                           @endif
-                          <th class="text-center">Total: {{ '₱' . $totalRevenue['revenue']->revenue }}</th>
+                          @if ($totalRevenue['revenue']->revenue == 0)
+                             <th class="text-center">Total: ₱0</th>
+                          @else
+                           <th class="text-center">Total: {{ '₱' . $totalRevenue['revenue']->revenue }}</th>
+                          @endif
                        </tr>
                     </tfoot>
                     @endhasanyrole
