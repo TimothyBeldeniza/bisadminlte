@@ -9,7 +9,7 @@
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
                 <li class="breadcrumb-item active">Request Result</li>
               </ol>
             </div><!-- /.col -->
@@ -36,7 +36,7 @@
                               <hr>
                               <div class="float-right">
                                  <a href="/documents/scanReq" class="btn btn-primary">Scan Another Document</a> &nbsp;&nbsp;&nbsp;
-                                 <a href="{{ route('home') }}" class="btn btn-primary">Back</a> 
+                                 <a href="{{ route('home') }}" class="btn btn-secondary">Back</a> 
                               </div>
                           </div>
                       </div>

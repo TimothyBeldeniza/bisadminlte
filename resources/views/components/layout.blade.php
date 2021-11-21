@@ -233,6 +233,7 @@
             </a>
           </li>
           @endcan
+          @hasanyrole('Chairman|Councilor|Secretary|Treasurer|Clerk|Resident')
           @can('module-request-document') 
           <li class="nav-item">
             <a href="{{ route('documents.create') }}" class="nav-link">
@@ -241,6 +242,7 @@
             </a>
           </li>
           @endcan
+          @endhasanyrole
           @can('documents-walk-in')
           <li class="nav-item">
             <a href="{{ route('documents.walkin') }}" class="nav-link">
