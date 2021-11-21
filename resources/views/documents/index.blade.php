@@ -1,4 +1,10 @@
 <x-layout>
+    <style>
+      .required:after {
+         content:" *";
+         color: red;
+      }
+    </style>
     @section('title', 'Documents')
 
     <div class="content-header">
@@ -219,14 +225,14 @@
                                                       </div>
 
                                                       <div class="form-group my-1">
-                                                            <input type="radio" id="otherD{{ $trans->id }}" name="reason" value="Other" onclick="disapproveOthers{{ $trans->id }}()" required>
+                                                            <input type="radio" id="otherD{{ $trans->id }}" name="reason" onclick="disapproveOthers{{ $trans->id }}()" required>
                                                             <label>Other</label>
                                                       </div>  
 
-                                                      <div class="form-group my-1" style="display:none;" id="othersD{{ $trans->id }}">
-                                                            <label for="otherReason" class="my-1">Specify other reason:</label>
-                                                            <input type="text" class="form-control" id="otherReason" name="otherReason" placeholder="Input reason here...">
-                                                      </div>
+                                                      <div class="form-group my-1" id="othersD{{ $trans->id }}">
+                                                            <label id="otherLabel" for="otherReason" class="my-1">Specify other reason</label>
+                                                            <input type="text" class="form-control" id="otherReason" name="otherReason" placeholder="Input reason here..." pattern="[a-zA-Z]*" disabled>
+                                                      </div> 
                                                       <div class="float-right my-1">
                                                             <button type="submit" name="submit" value="disapprove" onclick="return confirm('Are your sure to proceed?')" class="btn btn-primary">Save Reason</button>
                                                       </div>
@@ -247,9 +253,16 @@
                                        
                                        function disapproveOthers{{ $trans->id }}() {
                                           if (document.getElementById('otherD{{ $trans->id }}').checked) {
-                                             document.getElementById('othersD{{ $trans->id }}').style.display = 'block';
+                                             document.getElementById("otherLabel").classList.add('required');
+                                             document.getElementById('otherReason').setAttribute("required", "");
+                                             document.getElementById('otherReason').removeAttribute("disabled");
                                           }
-                                          else document.getElementById('othersD{{ $trans->id }}').style.display = 'none';
+                                          else 
+                                          {
+                                             document.getElementById("otherLabel").classList.remove('required');
+                                             document.getElementById('otherReason').removeAttribute("required");
+                                             document.getElementById('otherReason').setAttribute("disabled", "");
+                                          }
                                        }
 
                                        function enableRelease{{ $trans->id }}()

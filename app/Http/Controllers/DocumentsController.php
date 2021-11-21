@@ -365,20 +365,16 @@ class DocumentsController extends Controller
         $request->validate([
            'docType' => 'required', 'integer',
            'user' => 'nullable', 'integer',
-           'purpose' => 'required', 'string',
-           'others' => 'nullable', 'string',
+           'purpose' => 'required', 'string', 'regex:/^[a-zA-ZñÑ\s]+$/',
+           'others' => ['nullable', 'string', 'regex:/^[a-zA-ZñÑ\s]+$/'],
            'image' => 'mimes:jpg,png,jpeg|max:5048',
         ]);
 
         $getDocument = DocumentTypes::find($request->docType);
         $document = $getDocument->docType;
 
-        
-        
-        
         if($request->user != null)
         {
-
             // $walkinUser = User::find($request->user);
             // $wname = $walkinUser->firstName . ' ' . $walkinUser->lastName;
             // $transId = Transactions::create([
@@ -408,7 +404,7 @@ class DocumentsController extends Controller
                   $wname = $walkinUser->firstName . ' ' . $walkinUser->lastName;
                   $transId = Transactions::create([
                      'userId' => $request->user,
-                     'status' => 'For Validation',
+                     'status' => 'Ready to Claim',
                      'unique_code' => sha1(time()),
                   ]);
                }
@@ -420,7 +416,7 @@ class DocumentsController extends Controller
                $wname = $walkinUser->firstName . ' ' . $walkinUser->lastName;
                $transId = Transactions::create([
                   'userId' => $request->user,
-                  'status' => 'For Validation',
+                  'status' => 'Ready to Claim',
                   'unique_code' => sha1(time()),
                ]);
             }
@@ -529,21 +525,15 @@ class DocumentsController extends Controller
     {
         $request->validate([
             'reason' => 'string',
-            'otherReason' => 'nullable',
+            'otherReason' => ['nullable', 'string', 'regex:/^[a-zA-ZñÑ\s]+$/'],
             'submit' => 'string',
         ]);
-
-      //   dd($request->submit);
 
         if($request->otherReason == null)
         {
             if($request->submit == 'process')
             {
                DocumentsTransactions::where('id', $docId)->update(['reason' => 'Adequate Requirements']);
-            }
-            else if($request->submit == 'disapprove')
-            {
-               DocumentsTransactions::where('id', $docId)->update(['reason' => $request->reason]);
             }
             else
             {
