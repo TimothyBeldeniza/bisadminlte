@@ -35,7 +35,7 @@
           @endif
             <form method="POST" action="{{ route('complaints.store') }}" enctype="multipart/form-data">
                 @csrf
-                <b>Complainant</b><br>
+                <b class="required">Complainant</b><br>
                 <input type="radio" id="insideC" name="fromC" onclick="showComplainant()" required>
                 <label>Residential</label>
                 &nbsp;&nbsp;&nbsp;&nbsp;
@@ -47,8 +47,7 @@
                   <div class="form-group row my-1">
                       <label for="complainantId" class="col-md-4 col-form-label required">{{ __('Complainant Name') }}</label>
                       <div class="col-md-6">
-                          <select id="complainantId" name="complainantId" class="form-control select2bs4" onfocus="this.value=''">
-                              <option value>--Select Registered User--</option>
+                          <select id="complainantId" name="complainantId" class="form-control select2bs4">                           
                           @foreach ($users as $user)
                               <option value="{{ $user->id }}">{{ $user->firstName. ' '. $user->lastName }}</option>
                           @endforeach
@@ -58,11 +57,11 @@
                 </div>
 
                 <div id="otherComplainant" style="display: none">
-                    <b>Outside</b><br>
+                    <b class="required">Outside</b><br>
                     <div class="form-group row my-1">
                        <div class="col-sm">
                            <label class="required" for="name">{{ __('Complainant Full Name') }}</label>
-                           <input id="cName" type="text" class="form-control" @error('cName') is-invalid @enderror name="cName" id="cName" placeholder="Enter Complainant Full Name..." onfocus="this.value=''">
+                           <input id="cName" type="text" class="form-control" @error('cName') is-invalid @enderror name="cName" id="cName" placeholder="Enter Complainant Full Name..." pattern="[a-zA-Z\s]+">
                            @error('cName')
                            <span class="invalid-feedback" role="alert">
                               <strong>{{ $message }}</strong>
@@ -89,8 +88,7 @@
                   <div class="form-group row my-1">
                       <label for="respondentId" class="col-md-4 col-form-label required">{{ __('Respondent Name') }}</label>
                       <div class="col-md-6">
-                          <select id="respondentId" name="respondentId" class="form-control select2bs4" onfocus="this.value=''">
-                              <option value>--Select Registered User--</option>
+                          <select id="respondentId" name="respondentId" class="form-control select2bs4">
                           @foreach ($users as $user)
                               <option value="{{ $user->id }}">{{ $user->firstName. ' '. $user->lastName }}</option>
                           @endforeach
@@ -103,7 +101,7 @@
                   <div class="form-group row my-1">
                      <div class="col-sm">
                         <label for="respondents" class="required">{{ __('Respondent Name') }}</label>
-                        <input id="respondents" type="text" class="form-control" @error('respondents') is-invalid @enderror placeholder="Enter Respondent Full Name here..." name="respondents" onfocus="this.value=''">
+                        <input id="respondents" type="text" class="form-control" @error('respondents') is-invalid @enderror placeholder="Enter Respondent Full Name here..." name="respondents" pattern="[a-zA-Z\s]+">
                         @error('respondents')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -154,7 +152,11 @@
                 document.getElementById('complainant').style.display = 'block';
                 document.getElementById('otherComplainant').style.display = 'none';
                 document.getElementById('outsideR').disabled = false;
-                $("#complainantId").attr('required', '');
+               //  $("#cName").val('');
+               //  $("#cAddress").val('');
+               document.getElementById("cName").value='';
+               document.getElementById("cAddress").value='';
+               $("#complainantId").val(null).trigger('change');
             }
             else if (document.getElementById('outsideC').checked) 
             {
@@ -164,6 +166,7 @@
                 $("#cName").attr('required', '');
                 $("#cAddress").attr('required', '');
                 $("#complainantId").removeAttr('required');
+                $("#complainantId").prop("disabled", true);
             }
        }  
        function showRespondent() {
@@ -172,7 +175,11 @@
                 document.getElementById('respondent').style.display = 'block';
                 document.getElementById('otherRespondent').style.display = 'none';
                 document.getElementById('outsideC').disabled = false;
-                $("#respondentId").attr('required', '');
+               //  $("#respondents").val('');
+               //  $("#respondentsAdd").val('');
+               document.getElementById("respondents").value='';
+               document.getElementById("respondentsAdd").value='';
+               $("#respondentId").val(null).trigger('change');
             }
             else if (document.getElementById('outsideR').checked) 
             {
@@ -182,6 +189,7 @@
                 $("#respondents").attr('required', '');
                 $("#respondentsAdd").attr('required', '');
                 $("#respondentId").removeAttr('required');
+                $("#respondentId").prop("disabled", false);
             }
        }  
        function preventDupes( select, index ) {

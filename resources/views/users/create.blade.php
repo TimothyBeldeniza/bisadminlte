@@ -287,8 +287,8 @@
                                       <input id="widower" type="radio" value="Widower" class=" @error('civilStatus') is-invalid @enderror" name="civilStatus" value="{{ old('civilStatus') }}" required autocomplete="civilStatus">
                                       <label for="widowed">Widower</label>
     
-                                      <input id="civilStatus" type="radio" value="Divorced" class=" @error('civilStatus') is-invalid @enderror" name="civilStatus" value="{{ old('civilStatus') }}" required autocomplete="civilStatus">
-                                      <label for="divorce">Divorced</label>
+                                      <input id="civilStatus" type="radio" value="Anulled" class=" @error('civilStatus') is-invalid @enderror" name="civilStatus" value="{{ old('civilStatus') }}" required autocomplete="civilStatus">
+                                      <label for="divorce">Anulled</label>
                                 </div>
                             </div>
     
@@ -325,7 +325,7 @@
                                     <button  type="submit" class="btn btn-primary fw-bold">
                                         {{ __('Submit') }}
                                     </button>
-                                    <a class="btn btn-primary" href="{{ route('users.index') }}">Back</a>
+                                    <a class="btn btn-secondary" href="{{ route('users.index') }}">Back</a>
                                 </div>
                             </div>
     

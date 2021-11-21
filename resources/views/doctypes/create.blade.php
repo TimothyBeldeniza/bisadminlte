@@ -56,14 +56,15 @@
                            <input type="text" class="form-control" name="docType" placeholder="Enter Document title here..." required>
                         </div>
                         <div class="form-group my-1">
-                        <label for="Image" class="required fw-bold">{{ __('Document Content*') }}</label>
+                        <label for="Image" class="required fw-bold">{{ __('Document Content') }}</label>
                            {{-- <textarea class="form-control" name="template" id="summernote"></textarea> --}}
-                           <textarea class="form-control" rows="10" name="template" placeholder="Example: 
+                           <textarea maxlength="715" id="template" class="form-control" rows="10" name="template" placeholder="Example: 
 This is to certify that <<lastName>>, <<firstName>>, of legal age, <<civilStatus>>, <<citizenship>> citizen, and resident of <<houseNo>>, <<street>>, <<brgy>>, <<city>>, <<province>>.
 
 Further, certify that the above-named person belongs to the Indigent Family in this Barangay.
                                       
 This certification is being issued upon the request of the interested party connection with the requirement for whatever legal purposes that may serve them best, in this case, it is a <<purpose>> requirement." required></textarea>
+                        <div id="counter"></div>
                         </div>
                         <div class="form-group my-1">
                         <label for="price" class="required fw-bold">{{ __('Document Price') }}</label>
@@ -79,4 +80,20 @@ This certification is being issued upon the request of the interested party conn
          </div>
       </div>
   </div>
+  <script>
+      const messageEle = document.getElementById('template');
+      const counterEle = document.getElementById('counter');
+
+      messageEle.addEventListener('input', function (e) {
+         const target = e.target;
+
+         // Get the `maxlength` attribute
+         const maxLength = target.getAttribute('maxlength');
+
+         // Count the current number of characters
+         const currentLength = target.value.length;
+
+         counterEle.innerHTML = `${currentLength}/${maxLength} Characters`;
+      });
+  </script>
 </x-layout> 

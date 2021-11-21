@@ -241,6 +241,22 @@
                 <a href="{{ route('documents.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
+            <!-- ./col -->
+            <div class="col">
+               <!-- small box -->
+               <div class="small-box bg-orange">
+                 <div class="inner">
+                   <h3>{{ $stats['disapproved'] }}</h3>
+   
+                   <p>Disapproved</p>
+                 </div>
+                 <div class="icon">
+                   <i class="ion ion-alert-circled"></i>
+                 </div>
+                 <a href="{{ route('documents.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+               </div>
+             </div>
+             <!-- ./col -->
             <div class="col">
               <!-- small box -->
               <div class="small-box bg-danger">

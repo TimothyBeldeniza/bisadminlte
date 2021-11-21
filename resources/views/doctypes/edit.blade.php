@@ -1,4 +1,10 @@
 <x-layout>
+   <style>
+      .required:after {
+      content:" *";
+      color: red;
+     }
+   </style>
   @section('title', 'Edit Document Types') 
   <div class="content-header">
    <div class="container-fluid">
@@ -46,16 +52,17 @@
                       @method('PUT')
                       @csrf
                       <div class="form-group my-1">
-                        <label for="Image" class=" fw-bold">{{ __('Document Title*') }}</label>
+                        <label for="Image" class="fw-bold required">{{ __('Document Title') }}</label>
                         <input type="text" class="form-control" name="docType" value="{{ $td->docType }}" placeholder="Enter Document title here..." required>
                       </div>
                       <div class="form-group my-1">
-                        <label for="Image" class=" fw-bold">{{ __('Document Content*') }}</label>
+                        <label for="Image" class="fw-bold required">{{ __('Document Content') }}</label>
                           {{-- <textarea class="form-control" name="template" id="summernote">{{ $td->template }}</textarea> --}}
-                          <textarea class="form-control" rows="10" name="template" required>{{ $td->template }}</textarea>
+                          <textarea maxlength="715" id="template" class="form-control" rows="10" name="template" required>{{ $td->template }}</textarea>
+                          <div id="counter"></div>
                       </div>
                       <div class="form-group my-1">
-                        <label for="Image" class=" fw-bold">{{ __('Document Price*') }}</label>
+                        <label for="Image" class="fw-bold required">{{ __('Document Price') }}</label>
                           <input type="number" class="form-control" value="{{ $td->price }}" step="0.01" min="0" max="100" name="price" placeholder="ex. 50" required>
                       </div>
                       <div class="form-group my-1">
@@ -68,4 +75,20 @@
          </div>
       </div>
    </div>
+   <script>
+      const messageEle = document.getElementById('template');
+      const counterEle = document.getElementById('counter');
+
+      messageEle.addEventListener('input', function (e) {
+         const target = e.target;
+
+         // Get the `maxlength` attribute
+         const maxLength = target.getAttribute('maxlength');
+
+         // Count the current number of characters
+         const currentLength = target.value.length;
+
+         counterEle.innerHTML = `${currentLength}/${maxLength} Characters`;
+      });
+  </script>
 </x-layout> 

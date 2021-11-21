@@ -231,7 +231,7 @@
 
                                                       <div class="form-group my-1" id="othersD{{ $trans->id }}">
                                                             <label id="otherLabel" for="otherReason" class="my-1">Specify other reason</label>
-                                                            <input type="text" class="form-control" id="otherReason" name="otherReason" placeholder="Input reason here..." pattern="[a-zA-Z]*" disabled>
+                                                            <input type="text" class="form-control" id="otherReason" name="otherReason" placeholder="Input reason here..." pattern="[a-zA-Z0-9\s]+" disabled>
                                                       </div> 
                                                       <div class="float-right my-1">
                                                             <button type="submit" name="submit" value="disapprove" onclick="return confirm('Are your sure to proceed?')" class="btn btn-primary">Save Reason</button>

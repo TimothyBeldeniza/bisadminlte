@@ -52,14 +52,24 @@
                   @method('put')
                   <div class="form-group">
                     <label for="Image" class="text-md font-weight-bold">{{ __('City Logo') }}</label>
-                    <input type="file" class="form-control" name="cityLogoPath">
+                    <input type="file" class="form-control @error('cityLogoPath') is-invalid @enderror" name="cityLogoPath">
                     <small style="color: red">Must be a PNG image type!</small>
+                    @error('cityLogoPath')
+                        <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                   </div>
 
                   <div class="form-group">
                     <label for="Image" class="text-md font-weight-bold">{{ __('Barangay Logo') }}</label>
-                    <input type="file" class="form-control" name="logoPath">
+                    <input type="file" class="form-control @error('logoPath') is-invalid @enderror" name="logoPath">
                     <small style="color: red">Must be a PNG image type!</small>
+                    @error('logoPath')
+                        <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                   </div>
 
                   <div class="form-group">
