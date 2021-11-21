@@ -111,6 +111,10 @@ Route::get('doctypes/restore/{id}', [DocumentTypesController::class,'restore']);
 Route::get('/users/import', [UsersImportController::class,'show']);
 Route::post('/users/import/store', [UsersImportController::class,'store']);
 
+//Barangay backup
+Route::get('/backup', [BarangayController::class, 'backup']);
+Route::get('/backup/confirmBackup', [BarangayController::class, 'confirmBackup']);
+
 Route::group(['middleware' => ['auth','verified']], function() {
     Route::resource('users', UserController::class);
     Route::resource('profiles', ProfileController::class);
