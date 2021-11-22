@@ -104,7 +104,7 @@
                  <div class="icon">
                    <i class="ion ion-thumbsdown"></i>
                  </div>
-                 <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                 {{-- <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
                </div>
              </div>
              <!-- ./col -->
@@ -120,7 +120,7 @@
                 <div class="icon">
                   <i class="ion ion-load-a"></i>
                 </div>
-                <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                {{-- <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
               </div>
             </div>
             <!-- ./col -->
@@ -136,7 +136,7 @@
                 <div class="icon">
                   <i class="ion ion-alert-circled"></i>
                 </div>
-                <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                {{-- <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
               </div>
             </div>
             <!-- ./col -->
@@ -151,7 +151,7 @@
                 <div class="icon">
                   <i class="ion ion-thumbsup"></i>
                 </div>
-                <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                {{-- <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
               </div>
             </div>
 
@@ -166,7 +166,7 @@
                  <div class="icon">
                    <i class="ion ion-close-circled"></i>
                  </div>
-                 <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                 {{-- <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
                </div>
              </div>
              <!-- ./col -->
