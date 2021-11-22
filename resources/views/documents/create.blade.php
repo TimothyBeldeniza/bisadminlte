@@ -55,8 +55,13 @@
                            @csrf
                            <label class="required" for="image">Valid ID</label>
                            <div class="form-group mb-3">
-                                 <input type="file" class="form-control" name="image" id="image" required>
-                                 <span><b>Image must be .jpg / .jpeg / .png</b></span>
+                                 <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" id="image" required>
+                                 <span><b class="text-danger">Image must be .jpg / .jpeg / .png</b></span>
+                                 @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                 @enderror
                            </div>
                            <div class="form-group row mb-3">
                                  <div class="col-sm">

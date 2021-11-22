@@ -147,16 +147,16 @@
       })
 
       function showComplainant() {
+         function showComplainant() {
             if (document.getElementById('insideC').checked) 
             {
                 document.getElementById('complainant').style.display = 'block';
                 document.getElementById('otherComplainant').style.display = 'none';
                 document.getElementById('outsideR').disabled = false;
-               //  $("#cName").val('');
-               //  $("#cAddress").val('');
-               document.getElementById("cName").value='';
-               document.getElementById("cAddress").value='';
-               $("#complainantId").val(null).trigger('change');
+                $("#complainantId").val(null).trigger('change');
+                $("#complainantId").attr('required', '');
+                $("#cName").val('');
+                $("#cAddress").val('');
             }
             else if (document.getElementById('outsideC').checked) 
             {
@@ -166,7 +166,7 @@
                 $("#cName").attr('required', '');
                 $("#cAddress").attr('required', '');
                 $("#complainantId").removeAttr('required');
-                $("#complainantId").prop("disabled", true);
+                $("#complainantId").val(null).trigger('change');
             }
        }  
        function showRespondent() {
@@ -175,11 +175,10 @@
                 document.getElementById('respondent').style.display = 'block';
                 document.getElementById('otherRespondent').style.display = 'none';
                 document.getElementById('outsideC').disabled = false;
-               //  $("#respondents").val('');
-               //  $("#respondentsAdd").val('');
-               document.getElementById("respondents").value='';
-               document.getElementById("respondentsAdd").value='';
-               $("#respondentId").val(null).trigger('change');
+                $("#respondentId").val(null).trigger('change');
+                $("#respondentId").attr('required', '');
+                $("#respondents").val('');
+                $("#respondentsAdd").val('');
             }
             else if (document.getElementById('outsideR').checked) 
             {
@@ -189,7 +188,7 @@
                 $("#respondents").attr('required', '');
                 $("#respondentsAdd").attr('required', '');
                 $("#respondentId").removeAttr('required');
-                $("#respondentId").prop("disabled", false);
+                $("#respondentId").val(null).trigger('change');
             }
        }  
        function preventDupes( select, index ) {

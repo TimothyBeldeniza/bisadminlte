@@ -587,6 +587,7 @@ class DocumentsController extends Controller
     public function cancel($transId)
     {
         $cancel = Transactions::where('id', $transId)->update(['status' => 'Cancelled']);
+        return redirect()->back()->with('warning', 'Document is now Cancelled!');
     }
 
     public function paid($transId)

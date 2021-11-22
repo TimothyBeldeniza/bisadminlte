@@ -4,6 +4,10 @@
             max-height: 300px;
             overflow-y: auto;
         }
+        .required:after {
+         content:" *";
+         color: red;
+        }
     </style>
     @section('title', 'Home')
     <!-- Content Header (Page header) -->
@@ -384,9 +388,9 @@
                                                             <label>Other</label>
                                                         </div>  
 
-                                                        <div class="form-group my-1" style="display:none;" id="othersC{{ $docu->id }}">
-                                                            <label for="otherReason" class="my-1">Specify other reason:</label>
-                                                            <input type="text" class="form-control" id="otherReason" name="otherReason" placeholder="Input reason here...">
+                                                        <div class="form-group my-1" id="othersC{{ $docu->id }}">
+                                                            <label id="otherLabel" for="otherReason" class="my-1">Specify other reason</label>
+                                                            <input type="text" class="form-control" id="otherReason" name="otherReason" pattern="[a-zA-Z\s]+" placeholder="Input reason here..." disabled>
                                                         </div>
                                                         <div class="float-right my-1">
                                                             <button type="submit" name="submit" value="cancel" onclick="return confirm('Are your sure to cancel request?')" class="btn btn-danger">Cancel Request</button>
@@ -427,9 +431,16 @@
                             <script>
                               function cancelOthers{{ $docu->id }}() {
                                   if (document.getElementById('otherC{{ $docu->id }}').checked) {
-                                      document.getElementById('othersC{{ $docu->id }}').style.display = 'block';
+                                    document.getElementById("otherLabel").classList.add('required');
+                                    document.getElementById('otherReason').setAttribute("required", "");
+                                    document.getElementById('otherReason').removeAttribute("disabled");
                                   }
-                                  else document.getElementById('othersC{{ $docu->id }}').style.display = 'none';
+                                  else 
+                                  {
+                                    document.getElementById("otherLabel").classList.remove('required');
+                                    document.getElementById('otherReason').removeAttribute("required");
+                                    document.getElementById('otherReason').setAttribute("disabled", "");
+                                  }
                               }
                             </script>
                         @endforeach

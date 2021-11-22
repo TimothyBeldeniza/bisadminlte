@@ -66,7 +66,7 @@
                           <input type="number" class="form-control" value="{{ $td->price }}" step="0.01" min="0" max="100" name="price" placeholder="ex. 50" required>
                       </div>
                       <div class="form-group my-1">
-                        <button type=”submit” class="btn btn-success fw-bold">Submit</button>
+                        <button type=”submit” class="btn btn-success fw-bold">Save</button>
                       </div>
                     </form>
                   </div>
