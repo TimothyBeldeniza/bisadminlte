@@ -366,7 +366,7 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <form action="documents/process/{{ $docu->id }}/{{ $docu->transId }}/{{ $docu->userId }}" method="POST">
-                                                        <b>Reason for Cancelling</b><br>
+                                                        <b class="required">Reason for Cancelling</b><br>
                                                         @csrf
                                                         <div class="form-group my-1"> 
                                                             <input type="radio"name="reason" value="Unable to go to Barangay Hall" onclick="cancelOthers{{ $docu->id }}()">

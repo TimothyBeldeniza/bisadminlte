@@ -76,7 +76,7 @@
                 </div>
                     
                 <hr>
-                <b>Respondents</b><br>
+                <b class="required">Respondents</b><br>
                 <input type="radio" id="insideR" name="fromR" onclick="showRespondent()" required>
                 <label>Residential</label>
                 &nbsp;&nbsp;&nbsp;&nbsp;
@@ -147,27 +147,26 @@
       })
 
       function showComplainant() {
-         function showComplainant() {
-            if (document.getElementById('insideC').checked) 
-            {
-                document.getElementById('complainant').style.display = 'block';
-                document.getElementById('otherComplainant').style.display = 'none';
-                document.getElementById('outsideR').disabled = false;
-                $("#complainantId").val(null).trigger('change');
-                $("#complainantId").attr('required', '');
-                $("#cName").val('');
-                $("#cAddress").val('');
-            }
-            else if (document.getElementById('outsideC').checked) 
-            {
-                document.getElementById('otherComplainant').style.display = 'block';
-                document.getElementById('complainant').style.display = 'none';
-                document.getElementById('outsideR').disabled = true;
-                $("#cName").attr('required', '');
-                $("#cAddress").attr('required', '');
-                $("#complainantId").removeAttr('required');
-                $("#complainantId").val(null).trigger('change');
-            }
+         if (document.getElementById('insideC').checked) 
+         {
+               document.getElementById('complainant').style.display = 'block';
+               document.getElementById('otherComplainant').style.display = 'none';
+               document.getElementById('outsideR').disabled = false;
+               $("#complainantId").val(null).trigger('change');
+               $("#complainantId").attr('required', '');
+               $("#cName").val('');
+               $("#cAddress").val('');
+         }
+         else if (document.getElementById('outsideC').checked) 
+         {
+               document.getElementById('otherComplainant').style.display = 'block';
+               document.getElementById('complainant').style.display = 'none';
+               document.getElementById('outsideR').disabled = true;
+               $("#cName").attr('required', '');
+               $("#cAddress").attr('required', '');
+               $("#complainantId").removeAttr('required');
+               $("#complainantId").val(null).trigger('change');
+         }
        }  
        function showRespondent() {
             if (document.getElementById('insideR').checked) 
