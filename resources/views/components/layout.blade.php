@@ -276,12 +276,12 @@
             </a>
           </li>
 
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="backup/confirmBackup" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>
               <p>Back up System</p>
             </a>
-          </li>
+          </li> --}}
           @endrole
           <li class="nav-item">
             <a href="{{ route('profiles.edit', Auth::user()->id) }}" class="nav-link">

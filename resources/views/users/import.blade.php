@@ -68,7 +68,7 @@
                                     <input class="form-control" type="file" name="file" required>
                                     <div class="float-right mt-2">
                                        <button type="submit" class="btn btn-primary">Import</button>
-                                       <a class="btn btn-primary" href="{{ route('users.index') }}">Back</a>
+                                       <a class="btn btn-secondary" href="{{ route('users.index') }}">Back</a>
                                     </div>
                                 </div>
                             </form>

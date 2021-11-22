@@ -99,6 +99,7 @@ class HomeController extends Controller
             'readyToClaim' => Transactions::where('status', '=' ,'Ready To Claim')->count(),
             'paid' => Transactions::where('status', '=' ,'Paid')->count(),
             'released' => Transactions::where('status', '=' ,'Released')->count(),
+            'disapproved' => Transactions::where('status', '=' ,'Disapproved')->count(),
             'cancelled' => Transactions::where('status', '=' ,'Cancelled')->count(),
             'male' => User::whereHas("roles", function($q){ $q->where("name", "!=", "Admin"); })->where('sex','Male')->count(),
             'female' => User::whereHas("roles", function($q){ $q->where("name","!=", "Admin"); })->where('sex','Female')->count(),

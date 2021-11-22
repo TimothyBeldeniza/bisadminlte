@@ -69,16 +69,6 @@ class DocumentsController extends Controller
             ->get();
 
             $totalRevenue = [
-               'revenue' => DB::table('documents_transactions')
-                           ->join('transactions', 'documents_transactions.transId', '=', 'transactions.id')
-                           ->join('document_types', 'documents_transactions.dmId', '=', 'document_types.id')
-                           ->join('users', 'users.id', '=', 'transactions.userId')
-                           ->whereNull('document_types.deleted_at')
-                           ->where('documents_transactions.updated_at', '>=', $fromDate)
-                           ->where('documents_transactions.updated_at', '<=', $toDate)
-                           ->select(DB::raw('sum(document_types.price) as "revenue"'))
-                           ->first(),
-
                'due' => DB::table('documents_transactions')
                         ->join('transactions', 'documents_transactions.transId', '=', 'transactions.id')
                         ->join('document_types', 'documents_transactions.dmId', '=', 'document_types.id')
@@ -365,20 +355,16 @@ class DocumentsController extends Controller
         $request->validate([
            'docType' => 'required', 'integer',
            'user' => 'nullable', 'integer',
-           'purpose' => 'required', 'string',
-           'others' => 'nullable', 'string',
+           'purpose' => 'required', 'string', 'regex:/^[a-zA-ZñÑ\s]+$/',
+           'others' => ['nullable', 'string', 'regex:/^[a-zA-ZñÑ\s]+$/'],
            'image' => 'mimes:jpg,png,jpeg|max:5048',
         ]);
 
         $getDocument = DocumentTypes::find($request->docType);
         $document = $getDocument->docType;
 
-        
-        
-        
         if($request->user != null)
         {
-
             // $walkinUser = User::find($request->user);
             // $wname = $walkinUser->firstName . ' ' . $walkinUser->lastName;
             // $transId = Transactions::create([
@@ -408,7 +394,7 @@ class DocumentsController extends Controller
                   $wname = $walkinUser->firstName . ' ' . $walkinUser->lastName;
                   $transId = Transactions::create([
                      'userId' => $request->user,
-                     'status' => 'For Validation',
+                     'status' => 'Ready to Claim',
                      'unique_code' => sha1(time()),
                   ]);
                }
@@ -420,7 +406,7 @@ class DocumentsController extends Controller
                $wname = $walkinUser->firstName . ' ' . $walkinUser->lastName;
                $transId = Transactions::create([
                   'userId' => $request->user,
-                  'status' => 'For Validation',
+                  'status' => 'Ready to Claim',
                   'unique_code' => sha1(time()),
                ]);
             }
@@ -529,21 +515,15 @@ class DocumentsController extends Controller
     {
         $request->validate([
             'reason' => 'string',
-            'otherReason' => 'nullable',
+            'otherReason' => ['nullable', 'string', 'regex:/^[a-zA-ZñÑ\s]+$/'],
             'submit' => 'string',
         ]);
-
-      //   dd($request->submit);
 
         if($request->otherReason == null)
         {
             if($request->submit == 'process')
             {
                DocumentsTransactions::where('id', $docId)->update(['reason' => 'Adequate Requirements']);
-            }
-            else if($request->submit == 'disapprove')
-            {
-               DocumentsTransactions::where('id', $docId)->update(['reason' => $request->reason]);
             }
             else
             {
@@ -597,6 +577,7 @@ class DocumentsController extends Controller
     public function cancel($transId)
     {
         $cancel = Transactions::where('id', $transId)->update(['status' => 'Cancelled']);
+        return redirect()->back()->with('warning', 'Document is now Cancelled!');
     }
 
     public function paid($transId)
