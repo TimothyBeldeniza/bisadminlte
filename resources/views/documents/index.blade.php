@@ -211,7 +211,7 @@
                                                 </div>
                                                 <div class="modal-body text-start">
                                                    <form action="documents/process/{{ $trans->id }}/{{ $trans->transId }}/{{ $trans->userId }}" method="POST">
-                                                      <b>Reason to Disapprove</b><br>
+                                                      <b class="required">Reason to Disapprove</b><br>
                                                       @csrf
 
                                                       <div class="form-group my-1"> 
@@ -298,10 +298,11 @@
                           @else
                              <th class="text-center">Paid: {{ '₱' . $totalRevenue['paid']->totalPaid }}</th>
                           @endif
-                          @if ($totalRevenue['revenue']->revenue == 0)
+                          {{ $revenue = $totalRevenue['paid']->totalPaid + $totalRevenue['due']->totalDue }}
+                          @if ($revenue == 0)
                              <th class="text-center">Total: ₱0</th>
                           @else
-                           <th class="text-center">Total: {{ '₱' . $totalRevenue['revenue']->revenue }}</th>
+                           <th class="text-center">Total: {{ '₱' . $revenue }}</th>
                           @endif
                        </tr>
                     </tfoot>

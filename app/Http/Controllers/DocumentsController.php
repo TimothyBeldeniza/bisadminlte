@@ -69,16 +69,6 @@ class DocumentsController extends Controller
             ->get();
 
             $totalRevenue = [
-               'revenue' => DB::table('documents_transactions')
-                           ->join('transactions', 'documents_transactions.transId', '=', 'transactions.id')
-                           ->join('document_types', 'documents_transactions.dmId', '=', 'document_types.id')
-                           ->join('users', 'users.id', '=', 'transactions.userId')
-                           ->whereNull('document_types.deleted_at')
-                           ->where('documents_transactions.updated_at', '>=', $fromDate)
-                           ->where('documents_transactions.updated_at', '<=', $toDate)
-                           ->select(DB::raw('sum(document_types.price) as "revenue"'))
-                           ->first(),
-
                'due' => DB::table('documents_transactions')
                         ->join('transactions', 'documents_transactions.transId', '=', 'transactions.id')
                         ->join('document_types', 'documents_transactions.dmId', '=', 'document_types.id')
