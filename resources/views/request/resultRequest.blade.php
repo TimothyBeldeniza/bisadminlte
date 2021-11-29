@@ -97,7 +97,11 @@
               <div class="card-body">
                       @if($data->status == 'For Validation')
                           {{-- <a class="btn btn-primary" data-toggle="modal" data-target="#process{{ $data->id }}">Process</a> --}}
-                          <a class="btn btn-primary fw-bold" href="/documents/process/{{ $data->id }}/{{ $data->transId }}/{{ $data->userId }}">Process</a>
+                          {{-- <a class="btn btn-primary fw-bold" href="/documents/process/{{ $data->id }}/{{ $data->transId }}/{{ $data->userId }}">Process</a> --}}
+                        <form action="/documents/process/{{ $trans->id }}/{{ $trans->transId }}/{{ $trans->userId }}" method="POST">
+                           @csrf
+                           <button type="submit" name="submit" value="process" onclick="return confirm('Are your sure to proceed?')" class="btn btn-primary">Process</button>
+                        </form>
                           <a class="btn btn-danger" data-toggle="modal" data-target="#disapprove{{ $data->id }}">Disapprove</a>
                       @elseif($data->status == 'Ready to Claim')
                         @if($data->price == 0)
