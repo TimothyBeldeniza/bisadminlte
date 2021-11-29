@@ -102,13 +102,13 @@
                       @elseif($data->status == 'Ready to Claim')
                         @if($data->price == 0)
                            <a onclick="enableRelease{{ $data->id }}()" class="btn btn-success fw-bold" onlclick="" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
-                           <a id="release{{ $data->id }}" class="btn btn-dark disabled fw-bold" onclick="return confirm('Are you sure to proceed?')" href="/documents/release/{{ $data->id }}">Release</a>
+                           <a id="release{{ $data->id }}" class="btn btn-dark disabled fw-bold" onclick="return confirm('Are you sure to proceed?')" href="/documents/release/{{ $data->transId }}">Release</a>
                         @else
                            <a class="btn btn-primary fw-bold" onclick="return confirm('Are yousure to proceed?')" href="/documents/paid/{{ $data->transId }}">Paid</a>
                         @endif
                       @elseif($data->status == 'Paid')
                            <a onclick="enableRelease{{ $data->id }}()" class="btn btn-success fw-bold" onlclick="" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
-                           <a id="release{{ $data->id }}" class="btn btn-dark disabled fw-bold" onclick="return confirm('Are you sure to proceed?')" href="/documents/release/{{ $data->id }}">Release</a>
+                           <a id="release{{ $data->id }}" class="btn btn-dark disabled fw-bold" onclick="return confirm('Are you sure to proceed?')" href="/documents/release/{{ $data->transId }}">Release</a>
                       @elseif($data->status == 'Released')
                            <b class="text-success">Document Released</b>
                       @elseif($data->status == 'Disapproved')
