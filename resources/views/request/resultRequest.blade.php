@@ -98,7 +98,7 @@
                       @if($data->status == 'For Validation')
                           {{-- <a class="btn btn-primary" data-toggle="modal" data-target="#process{{ $data->id }}">Process</a> --}}
                           {{-- <a class="btn btn-primary fw-bold" href="/documents/process/{{ $data->id }}/{{ $data->transId }}/{{ $data->userId }}">Process</a> --}}
-                        <form action="/documents/process/{{ $trans->id }}/{{ $trans->transId }}/{{ $trans->userId }}" method="POST">
+                        <form action="/documents/process/{{ $data->id }}/{{ $data->transId }}/{{ $data->userId }}" method="POST">
                            @csrf
                            <button type="submit" name="submit" value="process" onclick="return confirm('Are your sure to proceed?')" class="btn btn-primary">Process</button>
                         </form>
@@ -108,7 +108,7 @@
                            <a onclick="enableRelease{{ $data->id }}()" class="btn btn-success fw-bold" onlclick="" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
                            <a id="release{{ $data->id }}" class="btn btn-dark disabled fw-bold" onclick="return confirm('Are you sure to proceed?')" href="/documents/release/{{ $data->transId }}">Release</a>
                         @else
-                           <a class="btn btn-primary fw-bold" onclick="return confirm('Are yousure to proceed?')" href="/documents/paid/{{ $data->transId }}">Paid</a>
+                           <a class="btn btn-primary fw-bold" onclick="return confirm('Are you sure to proceed?')" href="/documents/paid/{{ $data->transId }}">Paid</a>
                         @endif
                       @elseif($data->status == 'Paid')
                            <a onclick="enableRelease{{ $data->id }}()" class="btn btn-success fw-bold" onlclick="" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
