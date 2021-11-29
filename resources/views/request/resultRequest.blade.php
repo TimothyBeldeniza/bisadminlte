@@ -1,4 +1,11 @@
 <x-layout>
+   <style>
+      .required:after {
+         content:" *";
+         color: red;
+      }
+    </style>
+
     @section('title', 'Requested Document')
 
     <div class="content-header">
@@ -188,9 +195,9 @@
                                               <label>Other</label>
                                           </div>  
 
-                                          <div class="form-group my-1" style="display:none;" id="othersD{{ $data->id }}">
+                                          <div class="form-group my-1" id="othersD{{ $data->id }}">
                                               <label for="otherReason" class="my-1">Specify other reason:</label>
-                                              <input type="text" class="form-control" id="otherReason" name="otherReason" placeholder="Input reason here...">
+                                              <input type="text" class="form-control" id="otherReason" name="otherReason" placeholder="Input reason here..." disabled>
                                           </div>
                                           <div class="float-right my-1">
                                               <button type="submit" name="submit" value="disapprove" onclick="return confirm('Are your sure to proceed?')" class="btn btn-primary">Save Reason</button>
@@ -217,10 +224,17 @@
       }
       
       function disapproveOthers{{ $data->id }}() {
-          if (document.getElementById('otherD{{ $data->id }}').checked) {
-              document.getElementById('othersD{{ $data->id }}').style.display = 'block';
-          }
-          else document.getElementById('othersD{{ $data->id }}').style.display = 'none';
+         if (document.getElementById('otherD{{ $data->id }}').checked) {
+            document.getElementById("otherLabel").classList.add('required');
+            document.getElementById('otherReason').setAttribute("required", "");
+            document.getElementById('otherReason').removeAttribute("disabled");
+         }
+         else 
+         {
+            document.getElementById("otherLabel").classList.remove('required');
+            document.getElementById('otherReason').removeAttribute("required");
+            document.getElementById('otherReason').setAttribute("disabled", "");
+         }
       }
       
       function enableRelease{{ $data->id }}()
