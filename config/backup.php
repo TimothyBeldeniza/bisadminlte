@@ -170,7 +170,7 @@ return [
             'to' => 'puptbis@gmail.com',
 
             'from' => [
-                'address' => env('MAIL_FROM_ADDRESS', 'puptbis@gmail.com'),
+                'address' => env('MAIL_FROM_ADDRESS', 'bis@puptaguigcs.net'),
                 'name' => env('MAIL_FROM_NAME', 'Example'),
             ],
         ],
