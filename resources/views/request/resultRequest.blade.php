@@ -177,7 +177,7 @@
                                   </div>
                                   <div class="modal-body">
                                       <form action="/documents/process/{{ $data->id }}/{{ $data->transId }}/{{ $data->userId }}" method="POST">
-                                          <b>Reason to Disapprove</b><br>
+                                          <b class="required">Reason to Disapprove</b><br>
                                           @csrf
 
                                           <div class="form-group my-1"> 
@@ -196,7 +196,7 @@
                                           </div>  
 
                                           <div class="form-group my-1" id="othersD{{ $data->id }}">
-                                              <label for="otherReason" class="my-1">Specify other reason:</label>
+                                              <label id="otherLabel" for="otherReason" class="my-1">Specify other reason:</label>
                                               <input type="text" class="form-control" id="otherReason" name="otherReason" placeholder="Input reason here..." disabled>
                                           </div>
                                           <div class="float-right my-1">
