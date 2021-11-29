@@ -184,6 +184,8 @@ class UserController extends Controller
                 'documents-types-create',
                 'documents-types-edit',
                 'documents-types-delete',
+                'documents-types-delete',
+                'documents-walk-in',
 
                 'documents-scan-document',
                 'documents-scan-request',
