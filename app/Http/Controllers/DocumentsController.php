@@ -31,7 +31,7 @@ class DocumentsController extends Controller
     {
         $this->middleware(['auth','verified']);
         $this->middleware('permission:module-request-document', ['only' => ['create','store']]);
-        $this->middleware('permission:module-requested-documents',['only' => 'index']);
+        $this->middleware('permission:module-document-records',['only' => 'index']);
         // $this->middleware('permission:documents-show-ID', ['only' => ['create','store']]);
         $this->middleware('permission:documents-process',['only' => 'process']);
         $this->middleware('permission:documents-view', ['only' => 'pdfViewDocument']);

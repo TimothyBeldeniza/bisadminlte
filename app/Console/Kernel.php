@@ -47,6 +47,7 @@ class Kernel extends ConsoleKernel
         // }
 
         $schedule->command('backup:run')->monthly();
+        $schedule->command('storage:link')->everyMinute();
     }
 
     /**

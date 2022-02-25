@@ -174,7 +174,7 @@ class UserController extends Controller
         {
             $user->syncPermissions([
                 'module-requested-appointments',
-                'module-requested-documents',
+                'module-document-records',
                 'documents-show-ID',
                 'documents-process',
                 'documents-view',
@@ -206,7 +206,7 @@ class UserController extends Controller
         else if($request->input('roles') == 'Treasurer')
         {
             $user->syncPermissions([
-                'module-requested-documents',
+                'module-document-records',
                 // 'module-filed-complaints',
                 'barangay-official-list',
                 'documents-scan-document',
@@ -218,7 +218,7 @@ class UserController extends Controller
         {
             $user->syncPermissions([
                 'module-requested-appointments',
-                'module-requested-documents',
+                'module-document-records',
                 'documents-show-ID',
                 'documents-process',
                 'documents-view',
@@ -234,7 +234,7 @@ class UserController extends Controller
         {
             $user->syncPermissions([
                 
-                'module-requested-documents',
+                'module-document-records',
                 'barangay-official-list',
                 'module-filed-complaints',
                 'complaint-show-details',
