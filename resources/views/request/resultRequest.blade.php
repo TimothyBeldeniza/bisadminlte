@@ -1,4 +1,11 @@
 <x-layout>
+   <style>
+      .required:after {
+         content:" *";
+         color: red;
+      }
+    </style>
+
     @section('title', 'Requested Document')
 
     <div class="content-header">
@@ -97,18 +104,23 @@
               <div class="card-body">
                       @if($data->status == 'For Validation')
                           {{-- <a class="btn btn-primary" data-toggle="modal" data-target="#process{{ $data->id }}">Process</a> --}}
-                          <a class="btn btn-primary fw-bold" href="/documents/process/{{ $data->id }}/{{ $data->transId }}/{{ $data->userId }}">Process</a>
-                          <a class="btn btn-danger" data-toggle="modal" data-target="#disapprove{{ $data->id }}">Disapprove</a>
+                          {{-- <a class="btn btn-primary fw-bold" href="/documents/process/{{ $data->id }}/{{ $data->transId }}/{{ $data->userId }}">Process</a> --}}
+                        <form action="/documents/process/{{ $data->id }}/{{ $data->transId }}/{{ $data->userId }}" method="POST">
+                           @csrf
+                           <button type="submit" name="submit" value="process" onclick="return confirm('Are your sure to proceed?')" class="btn btn-primary">Process</button>
+                        </form>
+                        <br>
+                        <a class="btn btn-danger" data-toggle="modal" data-target="#disapprove{{ $data->id }}">Disapprove</a>
                       @elseif($data->status == 'Ready to Claim')
                         @if($data->price == 0)
                            <a onclick="enableRelease{{ $data->id }}()" class="btn btn-success fw-bold" onlclick="" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
-                           <a id="release{{ $data->id }}" class="btn btn-dark disabled fw-bold" onclick="return confirm('Are you sure to proceed?')" href="/documents/release/{{ $data->id }}">Release</a>
+                           <a id="release{{ $data->id }}" class="btn btn-dark disabled fw-bold" onclick="return confirm('Are you sure to proceed?')" href="/documents/release/{{ $data->transId }}">Release</a>
                         @else
-                           <a class="btn btn-primary fw-bold" onclick="return confirm('Are yousure to proceed?')" href="/documents/paid/{{ $data->transId }}">Paid</a>
+                           <a class="btn btn-primary fw-bold" onclick="return confirm('Are you sure to proceed?')" href="/documents/paid/{{ $data->transId }}">Paid</a>
                         @endif
                       @elseif($data->status == 'Paid')
                            <a onclick="enableRelease{{ $data->id }}()" class="btn btn-success fw-bold" onlclick="" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
-                           <a id="release{{ $data->id }}" class="btn btn-dark disabled fw-bold" onclick="return confirm('Are you sure to proceed?')" href="/documents/release/{{ $data->id }}">Release</a>
+                           <a id="release{{ $data->id }}" class="btn btn-dark disabled fw-bold" onclick="return confirm('Are you sure to proceed?')" href="/documents/release/{{ $data->transId }}">Release</a>
                       @elseif($data->status == 'Released')
                            <b class="text-success">Document Released</b>
                       @elseif($data->status == 'Disapproved')
@@ -165,7 +177,7 @@
                                   </div>
                                   <div class="modal-body">
                                       <form action="/documents/process/{{ $data->id }}/{{ $data->transId }}/{{ $data->userId }}" method="POST">
-                                          <b>Reason to Disapprove</b><br>
+                                          <b class="required">Reason to Disapprove</b><br>
                                           @csrf
 
                                           <div class="form-group my-1"> 
@@ -183,9 +195,9 @@
                                               <label>Other</label>
                                           </div>  
 
-                                          <div class="form-group my-1" style="display:none;" id="othersD{{ $data->id }}">
-                                              <label for="otherReason" class="my-1">Specify other reason:</label>
-                                              <input type="text" class="form-control" id="otherReason" name="otherReason" placeholder="Input reason here...">
+                                          <div class="form-group my-1" id="othersD{{ $data->id }}">
+                                              <label id="otherLabel" for="otherReason" class="my-1">Specify other reason:</label>
+                                              <input type="text" class="form-control" id="otherReason" name="otherReason" placeholder="Input reason here..." disabled>
                                           </div>
                                           <div class="float-right my-1">
                                               <button type="submit" name="submit" value="disapprove" onclick="return confirm('Are your sure to proceed?')" class="btn btn-primary">Save Reason</button>
@@ -212,10 +224,17 @@
       }
       
       function disapproveOthers{{ $data->id }}() {
-          if (document.getElementById('otherD{{ $data->id }}').checked) {
-              document.getElementById('othersD{{ $data->id }}').style.display = 'block';
-          }
-          else document.getElementById('othersD{{ $data->id }}').style.display = 'none';
+         if (document.getElementById('otherD{{ $data->id }}').checked) {
+            document.getElementById("otherLabel").classList.add('required');
+            document.getElementById('otherReason').setAttribute("required", "");
+            document.getElementById('otherReason').removeAttribute("disabled");
+         }
+         else 
+         {
+            document.getElementById("otherLabel").classList.remove('required');
+            document.getElementById('otherReason').removeAttribute("required");
+            document.getElementById('otherReason').setAttribute("disabled", "");
+         }
       }
       
       function enableRelease{{ $data->id }}()

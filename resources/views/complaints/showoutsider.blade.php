@@ -34,7 +34,7 @@
                 @if ($td->status == "Settled") 
                   <b class="text-success">{{ $td->status }}</b>
                 @elseif ($td->status == "Escalated" || $td->status == "On Going")
-                  <b class="text-warning">{{ $td->status }}</b>
+                  <b class="text-orange">{{ $td->status }}</b>
                 @elseif ($td->status == "Dismissed")
                   <b class="text-danger">{{ $td->status }}</b>
                 @else
