@@ -83,7 +83,7 @@ class BarangayController extends Controller
         'region' => ['required','string'],
         'province' => ['required','string'],
         'city' => ['required', 'regex:/^[a-zA-ZñÑ\s]+$/','string'],
-        'name' => ['required', 'regex:/^[a-zA-ZñÑ\s]+$/','string'],
+        'name' => ['required','string'],
         'zipCode' => 'required', 'integer',
       ]);
 
