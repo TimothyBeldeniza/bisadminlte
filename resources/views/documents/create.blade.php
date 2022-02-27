@@ -55,11 +55,11 @@
                            @csrf
                            <label class="required" for="image">Valid ID</label>
                            <div class="form-group mb-3">
-                                 <input type="file" class="form-control" name="image" id="image" required>
+                                 <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" id="image" required>
                                  <span><b class="text-danger">Image must be .jpg / .jpeg / .png</b></span>
                                  @error('image')
                                     <span class="invalid-feedback" role="alert">
-                                       <strong>{{ $message }}</strong>
+                                        <strong>{{ $message }}</strong>
                                     </span>
                                  @enderror
                            </div>
@@ -111,7 +111,7 @@
                               </div>
                               <div class="col-sm">
                                  <label class="required" for="purpose">{{ __('Purpose') }}</label>
-                                 <select class="form-control" name="purpose" id="purpose" onchange="showDiv('others', this)" required>
+                                 <select class="form-control" name="purpose" id="purpose" onchange="showOther()" required>
                                     <option value>--Select Purpose--</option>
                                     <option>Personal Identification and Residence Status</option>
                                     <option>Good Standing in the Community</option>
@@ -125,12 +125,17 @@
                                     <option>Marriage (Abroad)</option>
                                     <option>Construction Permit</option>
                                     <option>Construction Excavaion Permit</option>
-                                    <option value="others">Other Purpose</option>
+                                    <option>Other Purpose</option>
                                  </select>
                               </div>
-                              <div class="col-sm" id="others" style="display: none">
-                                 <label for="others">Enter Other Purpose</label>
-                                 <input type="text" class="form-control" name="others" placeholder="Enter Other Purpose...">
+                              <div class="col-sm" id="others">
+                                 <label id="othersLabel" for="others">Enter Other Purpose</label>
+                                 <input id="othersInput" type="text" class="form-control  @error('others') is-invalid @enderror" name="others" placeholder="Enter Other Purpose..." disabled>
+                                 @error('others')
+                                    <span class="invalid-feedback" role="alert">
+                                       <strong>{{ $message }}</strong>
+                                    </span>
+                                 @enderror
                               </div>
                            </div>
       
@@ -149,10 +154,21 @@
         </div>
     </div>
     <script>
-      function showDiv(divId, element)
+      function showOther()
       {
-          document.getElementById(divId).style.display = element.value == "others" ? 'block' : 'none';
-      } 
+         if(document.getElementById("purpose").value == "Other Purpose")
+         {
+            document.getElementById("othersLabel").classList.add('required');
+            document.getElementById('othersInput').removeAttribute("disabled");
+            document.getElementById('othersInput').setAttribute("required", "");
+         }
+         else
+         {
+            document.getElementById("othersLabel").classList.remove('required');
+            document.getElementById('othersInput').setAttribute("disabled", "");
+            document.getElementById('othersInput').removeAttribute("required");
+         }
+      }  
     </script>
 </x-layout>
     

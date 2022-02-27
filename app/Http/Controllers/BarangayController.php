@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Barangay;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
@@ -82,7 +83,7 @@ class BarangayController extends Controller
         'region' => ['required','string'],
         'province' => ['required','string'],
         'city' => ['required', 'regex:/^[a-zA-ZñÑ\s]+$/','string'],
-        'name' => ['required', 'regex:/^[a-zA-ZñÑ\s]+$/','string'],
+        'name' => ['required','string'],
         'zipCode' => 'required', 'integer',
       ]);
 
@@ -172,5 +173,19 @@ class BarangayController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function confirmBackup()
+    {
+        return view('barangay.confirm-backup');
+    }
+
+    public function backup()
+    {
+     
+      Artisan::call('backup:run');
+
+      return redirect('home')->with('success', 'System back up successful');
     }
 }

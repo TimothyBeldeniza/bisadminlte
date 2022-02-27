@@ -52,7 +52,7 @@ class PermissionTableSeeder extends Seeder
             //Modules/pages
 
             'module-file-complaint',
-            'module-requested-documents',
+            'module-document-records',
             'module-filed-complaints',
             'module-usrmngmnt',
             'module-requested-appointments',

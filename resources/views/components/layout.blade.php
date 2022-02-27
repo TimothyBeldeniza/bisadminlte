@@ -153,7 +153,7 @@
             </a>
           </li>
           @endcan   --}}
-          @can('module-requested-documents')
+          @can('module-document-records')
           <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-folder-open"></i>
@@ -233,7 +233,7 @@
             </a>
           </li>
           @endcan
-          @hasanyrole('Chairman|Councilor|Secretary|Treasurer|Clerk')
+          @hasanyrole('Chairman|Councilor|Secretary|Treasurer|Clerk|Resident')
           @can('module-request-document') 
           <li class="nav-item">
             <a href="{{ route('documents.create') }}" class="nav-link">
@@ -275,6 +275,13 @@
               <p>Barangay</p>
             </a>
           </li>
+
+          {{-- <li class="nav-item">
+            <a href="backup/confirmBackup" class="nav-link">
+              <i class="nav-icon fas fa-cog"></i>
+              <p>Back up System</p>
+            </a>
+          </li> --}}
           @endrole
           <li class="nav-item">
             <a href="{{ route('profiles.edit', Auth::user()->id) }}" class="nav-link">

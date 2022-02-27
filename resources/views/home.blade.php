@@ -4,6 +4,10 @@
             max-height: 300px;
             overflow-y: auto;
         }
+        .required:after {
+         content:" *";
+         color: red;
+        }
     </style>
     @section('title', 'Home')
     <!-- Content Header (Page header) -->
@@ -100,7 +104,7 @@
                  <div class="icon">
                    <i class="ion ion-thumbsdown"></i>
                  </div>
-                 <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                 {{-- <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
                </div>
              </div>
              <!-- ./col -->
@@ -116,7 +120,7 @@
                 <div class="icon">
                   <i class="ion ion-load-a"></i>
                 </div>
-                <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                {{-- <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
               </div>
             </div>
             <!-- ./col -->
@@ -132,7 +136,7 @@
                 <div class="icon">
                   <i class="ion ion-alert-circled"></i>
                 </div>
-                <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                {{-- <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
               </div>
             </div>
             <!-- ./col -->
@@ -147,7 +151,7 @@
                 <div class="icon">
                   <i class="ion ion-thumbsup"></i>
                 </div>
-                <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                {{-- <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
               </div>
             </div>
 
@@ -162,7 +166,7 @@
                  <div class="icon">
                    <i class="ion ion-close-circled"></i>
                  </div>
-                 <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                 {{-- <a href="{{ route('complaints.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
                </div>
              </div>
              <!-- ./col -->
@@ -241,6 +245,22 @@
                 <a href="{{ route('documents.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
+            <!-- ./col -->
+            <div class="col">
+               <!-- small box -->
+               <div class="small-box bg-orange">
+                 <div class="inner">
+                   <h3>{{ $stats['disapproved'] }}</h3>
+   
+                   <p>Disapproved</p>
+                 </div>
+                 <div class="icon">
+                   <i class="ion ion-alert-circled"></i>
+                 </div>
+                 <a href="{{ route('documents.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+               </div>
+             </div>
+             <!-- ./col -->
             <div class="col">
               <!-- small box -->
               <div class="small-box bg-danger">
@@ -346,7 +366,7 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <form action="documents/process/{{ $docu->id }}/{{ $docu->transId }}/{{ $docu->userId }}" method="POST">
-                                                        <b>Reason for Cancelling</b><br>
+                                                        <b class="required">Reason for Cancelling</b><br>
                                                         @csrf
                                                         <div class="form-group my-1"> 
                                                             <input type="radio"name="reason" value="Unable to go to Barangay Hall" onclick="cancelOthers{{ $docu->id }}()">
@@ -368,9 +388,9 @@
                                                             <label>Other</label>
                                                         </div>  
 
-                                                        <div class="form-group my-1" style="display:none;" id="othersC{{ $docu->id }}">
-                                                            <label for="otherReason" class="my-1">Specify other reason:</label>
-                                                            <input type="text" class="form-control" id="otherReason" name="otherReason" placeholder="Input reason here...">
+                                                        <div class="form-group my-1" id="othersC{{ $docu->id }}">
+                                                            <label id="otherLabel" for="otherReason" class="my-1">Specify other reason</label>
+                                                            <input type="text" class="form-control" id="otherReason" name="otherReason" pattern="[a-zA-Z\s]+" placeholder="Input reason here..." disabled>
                                                         </div>
                                                         <div class="float-right my-1">
                                                             <button type="submit" name="submit" value="cancel" onclick="return confirm('Are your sure to cancel request?')" class="btn btn-danger">Cancel Request</button>
@@ -411,9 +431,16 @@
                             <script>
                               function cancelOthers{{ $docu->id }}() {
                                   if (document.getElementById('otherC{{ $docu->id }}').checked) {
-                                      document.getElementById('othersC{{ $docu->id }}').style.display = 'block';
+                                    document.getElementById("otherLabel").classList.add('required');
+                                    document.getElementById('otherReason').setAttribute("required", "");
+                                    document.getElementById('otherReason').removeAttribute("disabled");
                                   }
-                                  else document.getElementById('othersC{{ $docu->id }}').style.display = 'none';
+                                  else 
+                                  {
+                                    document.getElementById("otherLabel").classList.remove('required');
+                                    document.getElementById('otherReason').removeAttribute("required");
+                                    document.getElementById('otherReason').setAttribute("disabled", "");
+                                  }
                               }
                             </script>
                         @endforeach

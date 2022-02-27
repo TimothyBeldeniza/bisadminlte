@@ -215,7 +215,7 @@ class CreateAdminUserSeeder extends Seeder
 
         $chairman->assignRole('Chairman');
         $chairman->syncPermissions([
-            'module-requested-documents',
+            'module-document-records',
             'module-usrmngmnt',
             'barangay-official-list',
             'module-filed-complaints',
@@ -233,7 +233,7 @@ class CreateAdminUserSeeder extends Seeder
 
         $sec->assignRole('Secretary');
         $sec->syncPermissions([
-            'module-requested-documents',
+            'module-document-records',
             'module-usrmngmnt',
             'documents-show-ID',
             'documents-process',
@@ -285,7 +285,7 @@ class CreateAdminUserSeeder extends Seeder
 
         $trea->assignRole('Treasurer');
         $trea->syncPermissions([
-            'module-requested-documents',
+            'module-document-records',
             'barangay-official-list',
             'documents-scan-document',
             'module-request-document',
@@ -293,7 +293,7 @@ class CreateAdminUserSeeder extends Seeder
 
         $clerk->assignRole('Clerk');
         $clerk->syncPermissions([
-            'module-requested-documents',
+            'module-document-records',
             'documents-show-ID',
             'documents-process',
             'documents-view',
