@@ -8,8 +8,8 @@
 	.header{
     /* border: 3px solid black; */
 		font-size: 120%;
-		margin: 50px;
-    text-transform: uppercase;
+		margin: 20px;
+      text-transform: uppercase;
 	}
 
 	#brgy-logo{
@@ -24,11 +24,11 @@
 
 	#qr-code{
     /* border: 3px solid black; */
-    margin-bottom: 50px;
+    margin-bottom: 100px;
 	}
 
 	.document-type{
-		margin-left: 250px;
+		margin-left: 200px;
     /* width: 50%; */
     /* border: 3px solid black; */
     padding: 10px;
@@ -53,7 +53,7 @@
     /* margin-left: 250px; */
     /* border: 3px solid black; */
 		font-size: 100%;
-		margin-top: 120px;
+		/* margin-top: 100px; */
 	}
 
 	.footer{
@@ -68,9 +68,9 @@
 	
 		<div class="header" align="center">
 			{{-- <p><img id="brgy-logo" src="{{ asset('images/'.$brgy->logoPath) }}" alt="brgy-logo" style="height: 100px; width: auto;"></p> --}}
-			<p><img id="brgy-logo" src="<?php echo $brgyLogoPath ?>" alt="brgy-logo" style="height: 100px; width: auto;"></p>
+			<p><img id="brgy-logo" src="<?php echo $brgyLogoPath ?>" alt="brgy-logo" style="height: 100px; width: auto;">
       		{{-- <p><img id="city-logo" src="{{ asset('images/'.$brgy->cityLogoPath) }}" alt="city-logo" style="height: 100px; width: auto;"></p> --}}
-      		<p><img id="city-logo" src="<?php echo $cityLogoPath ?>" alt="city-logo" style="height: 100px; width: auto;"></p>
+         <img id="city-logo" src="<?php echo $cityLogoPath ?>" alt="city-logo" style="height: 100px; width: auto;"></p>
 			<p>Republika ng Pilipinas <br>
 			{{-- Probinsya Ng {{ $brgy->province }} <br> --}}
 			Lungsod Ng {{ $brgy->city }}<br>

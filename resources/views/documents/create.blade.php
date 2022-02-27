@@ -40,9 +40,9 @@
               
                <div class="col-md-3">
                   <div class="card">
-                     <div class="card-header font-weight-bold text-dark" style="background-color: #f6f7cd;">Note</div>
+                     <div class="card-header font-weight-bold text-dark" style="background-color: #f6f7cd;">Note:</div>
                      <div class="card-body">
-                        <p class="card-text text-danger font-weight-bold">If any of your personal details have changed recently, refer to the Edit Profile to change them before Requesting a Document</p>
+                        <p class="card-text text-danger font-weight-bold">If any of your details have changed recently, go to the "Edit Profile" tab to change them before requesting a document.</p>
                      </div>
                   </div>
                </div>
@@ -56,7 +56,12 @@
                            <label class="required" for="image">Valid ID</label>
                            <div class="form-group mb-3">
                                  <input type="file" class="form-control" name="image" id="image" required>
-                                 <span><b>Image must be .jpg / .jpeg / .png</b></span>
+                                 <span><b class="text-danger">Image must be .jpg / .jpeg / .png</b></span>
+                                 @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                       <strong>{{ $message }}</strong>
+                                    </span>
+                                 @enderror
                            </div>
                            <div class="form-group row mb-3">
                                  <div class="col-sm">

@@ -36,7 +36,7 @@
                               <hr>
                               <div class="float-right">
                                  <a href="/documents/scanReq" class="btn btn-primary">Scan Another Document</a> &nbsp;&nbsp;&nbsp;
-                                 <a href="{{ route('home') }}" class="btn btn-primary">Back</a> 
+                                 <a href="{{ route('home') }}" class="btn btn-secondary">Back</a> 
                               </div>
                           </div>
                       </div>

@@ -35,11 +35,11 @@
           @endif
             <form method="POST" action="{{ route('complaints.store') }}" enctype="multipart/form-data">
                 @csrf
-                <b>Complainant</b><br>
-                <input type="radio" id="insideC" name="fromC" onclick="showComplainant()">
+                <b class="required">Complainant</b><br>
+                <input type="radio" id="insideC" name="fromC" onclick="showComplainant()" required>
                 <label>Residential</label>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" id="outsideC" name="fromC" onclick="showComplainant()">
+                <input type="radio" id="outsideC" name="fromC" onclick="showComplainant()" required>
                 <label>Non-Residential</label>
 
                 <div id="complainant" style="display: none">
@@ -77,11 +77,11 @@
                 </div>
                     
                 <hr>
-                <b>Respondents</b><br>
-                <input type="radio" id="insideR" name="fromR" onclick="showRespondent()">
+                <b class="required">Respondents</b><br>
+                <input type="radio" id="insideR" name="fromR" onclick="showRespondent()" required>
                 <label>Residential</label>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" id="outsideR" name="fromR" onclick="showRespondent()">
+                <input type="radio" id="outsideR" name="fromR" onclick="showRespondent()" required>
                 <label>Non-Residential</label>
 
                 <div id="respondent" style="display: none">
