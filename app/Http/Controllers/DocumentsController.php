@@ -352,7 +352,7 @@ class DocumentsController extends Controller
         $email = Auth::User()->email;
         $name  = Auth::User()->firstName . ' ' . Auth::User()->lastName;
         $brgyName = Barangay::find(1)->pluck('name')->first(); 
-        $unique_code = sha1(time());
+        $unique_code = sha1(time().$userId);
         
         $request->validate([
            'docType' => 'required', 'integer',
