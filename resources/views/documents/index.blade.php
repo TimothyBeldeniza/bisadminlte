@@ -289,16 +289,16 @@
                           <th></th>
                           <th></th>
                           @if ($totalRevenue['due']->totalDue == 0)
-                             <th class="text-center">For Validation: ₱0</th>
+                             <th class="text-center">For Validation + Ready to Claim: ₱0</th>
                           @else
-                             <th class="text-center">For Validation: {{ '₱' . $totalRevenue['due']->totalDue }}</th>
+                             <th class="text-center">For Validation + Ready to Claim: {{ '₱' . $totalRevenue['due']->totalDue }}</th>
                           @endif
                           @if ($totalRevenue['paid']->totalPaid == 0)
                              <th class="text-center">Paid: ₱0</th>
                           @else
                              <th class="text-center">Paid: {{ '₱' . $totalRevenue['paid']->totalPaid }}</th>
                           @endif
-                          {{ $revenue = $totalRevenue['paid']->totalPaid + $totalRevenue['due']->totalDue }}
+                          <p class="d-none">{{ $revenue = $totalRevenue['paid']->totalPaid + $totalRevenue['due']->totalDue }}</p>
                           @if ($revenue == 0)
                              <th class="text-center">Total: ₱0</th>
                           @else

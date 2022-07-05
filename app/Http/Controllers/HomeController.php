@@ -97,8 +97,16 @@ class HomeController extends Controller
             'dismissed' => Transactions::where('status', '=' ,'Dismissed')->count(),
             'due' => Transactions::where('status', '=' ,'For Validation')->count(),
             'readyToClaim' => Transactions::where('status', '=' ,'Ready To Claim')->count(),
-            'paid' => Transactions::where('status', '=' ,'Paid')->count(),
-            'released' => Transactions::where('status', '=' ,'Released')->count(),
+
+            'paid' => Transactions::from('transactions as t')
+                      ->join('documents_transactions as dt', 't.id', 'dt.transId')
+                      ->join('document_types as dty', 'dt.dmId', 'dty.id')
+                      ->where('t.status', '=' ,'Paid')
+                      ->orWhere('t.status', '=' ,'Released')
+                      ->where('dty.price', '>', 0)
+                      ->count(),
+
+            'released' => Transactions::where('status', '=' ,'Released')->orWhere('status', '=' ,'Paid')->count(),
             'disapproved' => Transactions::where('status', '=' ,'Disapproved')->count(),
             'cancelled' => Transactions::where('status', '=' ,'Cancelled')->count(),
             'male' => User::whereHas("roles", function($q){ $q->where("name", "!=", "Admin"); })->where('sex','Male')->count(),
