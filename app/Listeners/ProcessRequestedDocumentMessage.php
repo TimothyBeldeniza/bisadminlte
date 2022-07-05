@@ -27,13 +27,24 @@ class ProcessRequestedDocumentMessage
      * @param  object  $event
      * @return void
      */
+
+    // ProcessRequestedDocument $event
     public function handle(ProcessRequestedDocument $event)
     {
         // dd($event->email[0]);
+
         $uq = $event->unique_code;
         $name = $event->name;
         $brgy = $event->brgy;
-        Mail::to($event->email)->send(new RequestedDocument($uq,$name,$brgy));
-        // dispatch(new RequestedDocumentJob());
+        $email = $event->email[0];
+        // Mail::to($event->email)->send(new RequestedDocument($uq,$name,$brgy));
+
+        // dd($uq,
+        // $name,
+        // $brgy,
+        // $email);
+        RequestedDocumentJob::dispatch($uq, $name,$brgy,$email);
+        
+        // dispatch(new RequestedDocumentJob($uq, $name,$brgy,$email));
     }
 }

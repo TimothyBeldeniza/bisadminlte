@@ -2,9 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Events\ProcessRequestedDocument;
-use App\Listeners\ProcessRequestedDocumentMessage;
-use App\Mail\RequestedDocument;
+use App\Mail\ResidentQrMessage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -13,7 +11,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 
-class RequestedDocumentJob implements ShouldQueue
+class SendQrEmail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -25,16 +23,17 @@ class RequestedDocumentJob implements ShouldQueue
     protected $email;
     protected $unique_code;
     protected $name;
-    protected $brgy;
+    protected $brgyName;
+    protected $document;
 
-    public function __construct($email,$unique_code,$name,$brgy)
+    public function __construct($email,$unique_code,$name,$brgyName,$document)
     {
- 
-
+        
         $this->email = $email;
         $this->unique_code = $unique_code;
         $this->name = $name;
-        $this->brgy = $brgy;
+        $this->brgyName = $brgyName;
+        $this->document = $document;
     }
 
     /**
@@ -43,17 +42,7 @@ class RequestedDocumentJob implements ShouldQueue
      * @return void
      */
     public function handle()
-    {   
-        // $uq = $this->event->unique_code;
-        // $name = $this->event->name;
-        // $brgy = $this->event->brgy;
-        
-        // dd($this->email, $this->unique_code, $this->name, $this->brgy);
-        
-        
-       
-        Mail::to($this->email)->send(new RequestedDocument($this->unique_code,$this->name,$this->brgy));
-
-        // Mail::to($this->event->email)->send(new RequestedDocument($uq,$name,$brgy));
+    {
+        Mail::to($this->email)->send(new ResidentQrMessage($this->unique_code,$this->name,$this->brgyName,$this->document));
     }
 }

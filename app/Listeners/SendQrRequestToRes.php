@@ -32,6 +32,7 @@ class SendQrRequestToRes
         $name = $event->name;
         $brgyName = $event->brgyName;
         $document =  $event->document;
+        
         Mail::to($event->email)->send(new ResidentQrMessage($uq,$name,$brgyName,$document));
     }
 }

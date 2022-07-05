@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Events\ProcessRequestedDocument;
 use App\Events\SubmitRequest;
+use App\Jobs\RequestedDocumentJob;
+use App\Jobs\SendQrEmail;
 use App\Models\Barangay;
 use Illuminate\Http\Request;
 use App\Models\Transactions;
@@ -446,7 +448,10 @@ class DocumentsController extends Controller
                 ]);
             }
             
-            event(new SubmitRequest($email,$unique_code,$name,$brgyName,$document));
+            // event(new SubmitRequest($email,$unique_code,$name,$brgyName,$document));
+
+            dispatch(new SendQrEmail($email,$unique_code,$name,$brgyName,$document));
+
             return redirect('home')->with('success', 'Document requested successfully!');
         }
         else
@@ -469,9 +474,11 @@ class DocumentsController extends Controller
             }
 
             if($request->user != null)
-               event(new SubmitRequest($walkinUser->email,$unique_code,$wname,$brgyName,$document));
+            //    event(new SubmitRequest($walkinUser->email,$unique_code,$wname,$brgyName,$document));
+               dispatch(new SendQrEmail($walkinUser->email,$unique_code,$name,$brgyName,$document));
             else
-               event(new SubmitRequest($email,$unique_code,$name,$brgyName,$document));
+            //    event(new SubmitRequest($email,$unique_code,$name,$brgyName,$document));
+               dispatch(new SendQrEmail($email,$unique_code,$name,$brgyName,$document));
             return redirect('home')->with('success', 'Document requested successfully!');
         }
         
@@ -570,7 +577,9 @@ class DocumentsController extends Controller
 
         $unique_code = $getUniqueCode->unique_code;
         
-        event(new ProcessRequestedDocument($email,$unique_code,$name,$brgy));
+        // event(new ProcessRequestedDocument($email,$unique_code,$name,$brgy));
+
+        dispatch(new RequestedDocumentJob($email,$unique_code,$name,$brgy));
     }
     
     public function disapproved($transId)
