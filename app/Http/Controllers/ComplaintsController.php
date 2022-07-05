@@ -410,7 +410,7 @@ class ComplaintsController extends Controller
             'userId' => $request->complainantId,
             // 'serviceId' => $serviceId,
             'status' => 'Unresolved',
-            'unique_code' => sha1(time()),               
+            'unique_code' => sha1(time().$request->respondentId),               
           ]);
 
           $compId = ComplaintsTransactions::create([  
@@ -434,7 +434,7 @@ class ComplaintsController extends Controller
             'userId' => $request->complainantId,
             // 'serviceId' => $serviceId,
             'status' => 'Unresolved',
-            'unique_code' => sha1(time()),               
+            'unique_code' => sha1(time().$request->complainantId),               
           ]);
         
           ComplaintsTransactions::create([  
@@ -459,7 +459,7 @@ class ComplaintsController extends Controller
             'userId' => $request->respondentId,
             // 'serviceId' => $serviceId,
             'status' => 'Unresolved',
-            'unique_code' => sha1(time()),               
+            'unique_code' => sha1(time().$request->respondentId),               
           ]);
 
           $compId = ComplaintsTransactions::create([  

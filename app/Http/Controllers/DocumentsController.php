@@ -397,7 +397,7 @@ class DocumentsController extends Controller
                   $transId = Transactions::create([
                      'userId' => $request->user,
                      'status' => 'Ready to Claim',
-                     'unique_code' => sha1(time()),
+                     'unique_code' => sha1($email.time().$userId),
                   ]);
                }
             }
@@ -409,7 +409,7 @@ class DocumentsController extends Controller
                $transId = Transactions::create([
                   'userId' => $request->user,
                   'status' => 'Ready to Claim',
-                  'unique_code' => sha1(time()),
+                  'unique_code' => sha1($email.time().$userId),
                ]);
             }
             
@@ -419,7 +419,7 @@ class DocumentsController extends Controller
            $transId = Transactions::create([
              'userId' => $userId,
              'status' => 'For Validation',
-             'unique_code' => sha1(time()),
+             'unique_code' => sha1($email.time().$userId),
            ]);
         }
 
