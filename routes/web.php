@@ -33,7 +33,8 @@ use App\Http\Controllers\UsersImportController;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('homepage.index');
+    // return view('auth.login');
 });
 
 Auth::routes(['verify' => true]);
