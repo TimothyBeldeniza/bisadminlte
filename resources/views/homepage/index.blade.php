@@ -23,7 +23,7 @@
     <nav class="navbar navbar-expand-lg  navbar-dark menu shadow fixed-top">
         <div class="container">
           <a class="navbar-brand d-flex align-items-center" href="#">
-              <img class="image-fluid bis-logo" src="images/BIS - Logo.png" alt="logo-image">
+              <img class="image-fluid bis-logo" src="{{ asset('homepage-assets/images/BIS - Logo.png') }}" alt="logo-image">
               <h3 class="fw-bold ms-2"> B I S</h3>
           </a>
           
