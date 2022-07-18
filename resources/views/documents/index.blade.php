@@ -48,7 +48,7 @@
                                 <button type="submit" name="search" title="Search" class="btn btn-success">Range</button>
                                 <a href="{{ route('documents.index') }}">
                                     <button class="btn btn-success ml-2" type="button" title="Refresh page">
-                                        <span class="fas fa-sync-alt"></span>
+                                        <i class="fas fa-sync-alt"></i>
                                     </button>
                                 </a>
                                
@@ -130,29 +130,31 @@
                                     @hasanyrole('Admin|Clerk|Secretary')
                                     <td class="text-center">
                                           @if($trans->status == 'For Validation')
+                                          <div class="d-flex">
                                              @can('documents-process')
                                                 {{-- <a class="btn btn-primary fw-bold" data-toggle="modal" data-target="#process{{ $trans->id }}">Process</a> --}}
                                                 <form action="/documents/process/{{ $trans->id }}/{{ $trans->transId }}/{{ $trans->userId }}" method="POST">
                                                    {{-- <button class="btn btn-primary fw-bold">Process</button> --}}
                                                    @csrf
-                                                   <button type="submit" name="submit" value="process" onclick="return confirm('Are your sure to proceed?')" class="btn btn-primary">Process</button>
+                                                   <button type="submit" name="submit" value="process" title="Process Request" onclick="return confirm('Are your sure to PROCESS request?')" class="btn btn-sm btn-primary mr-2"><i class="fas fa-thumbs-up"></i></button>
                                                 </form>
                                              @endcan
                                              @can('documents-disapprove')
-                                                <a class="btn btn-danger fw-bold mt-2" data-toggle="modal" data-target="#disapprove{{ $trans->id }}">Disapprove</a>
+                                                <a class="btn btn-sm btn-danger mr-2" data-toggle="modal" title="Disapprove Request" data-target="#disapprove{{ $trans->id }}"><i class="fas fa-thumbs-down"></i></a>
                                              @endcan
+                                          </div>
                                           @elseif($trans->status == 'Ready to Claim')
                                              @if($trans->price == 0)
-                                                <a onclick="enableRelease{{ $trans->id }}()" class="btn btn-success fw-bold" onlclick="" href="documents/generate-document-pdf/{{ $trans->id }}/{{ $trans->userId }}">Save PDF</a>
-                                                <a id="release{{ $trans->id }}" class="btn btn-dark disabled fw-bold" onclick="return confirm('Are you sure to proceed?')" href="documents/release/{{ $trans->transId }}">Release</a>
+                                                <a onclick="enableRelease{{ $trans->id }}()" class="btn btn-sm btn-success" title="Save PDF" href="documents/generate-document-pdf/{{ $trans->id }}/{{ $trans->userId }}"><i class="fas fa-save"></i></i></a>
+                                                <a id="release{{ $trans->id }}" class="btn btn-sm btn-dark disabled font-weight-bold" title="Release Document" onclick="return confirm('Are you sure to proceed?')" href="documents/release/{{ $trans->transId }}">Release</a>
                                              @else
-                                                <a class="btn btn-primary fw-bold" onclick="return confirm('Are you sure to proceed?')" href="documents/paid/{{ $trans->transId }}">Paid</a>
+                                                <a class="btn btn-sm btn-primary font-weight-bold" onclick="return confirm('Are you sure to proceed?')" title="Document Paid" href="documents/paid/{{ $trans->transId }}">Paid</a>
                                              @endif
                                           @elseif($trans->status == 'Paid')
-                                             <a onclick="enableRelease{{ $trans->id }}()" class="btn btn-success fw-bold" onlclick="" href="documents/generate-document-pdf/{{ $trans->id }}/{{ $trans->userId }}">Save PDF</a>
-                                             <a id="release{{ $trans->id }}" class="btn btn-dark disabled fw-bold" onclick="return confirm('Are you sure to proceed?')" href="documents/release/{{ $trans->transId }}">Release</a>
+                                             <a onclick="enableRelease{{ $trans->id }}()" class="btn btn-sm btn-success" title="Save PDF" href="documents/generate-document-pdf/{{ $trans->id }}/{{ $trans->userId }}"><i class="fas fa-save"></i></i></a>
+                                             <a id="release{{ $trans->id }}" class="btn btn-sm btn-dark disabled font-weight-bold" title="Release Document" onclick="return confirm('Are you sure to proceed?')" href="documents/release/{{ $trans->transId }}">Release</a>
                                           @elseif($trans->status == 'Released')
-                                             <b>None</b>
+                                             <a onclick="enableRelease{{ $trans->id }}()" class="btn btn-sm btn-success" title="Save PDF" href="documents/generate-document-pdf/{{ $trans->id }}/{{ $trans->userId }}"><i class="fas fa-save"></i></span></a>
                                           @endif
                                     </td>
                                     @endhasanyrole

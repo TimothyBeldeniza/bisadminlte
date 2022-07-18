@@ -20,6 +20,7 @@ class CreateComplaintsTransactionsTable extends Migration
             $table->string('compDetails');
             $table->string('respondents')->nullable();
             $table->string('respondentsAdd')->nullable();
+            $table->bigInteger('respondentsContact')->nullable();
             $table->string('reason')->nullable();
             $table->timestamps();
             $table->foreign('transId')

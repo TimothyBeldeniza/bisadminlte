@@ -103,26 +103,26 @@
               <div style="background-color: #f6f7cd;" class="card-header font-weight-bold"><b>Actions</b></div>
               <div class="card-body">
                       @if($data->status == 'For Validation')
-                          {{-- <a class="btn btn-primary" data-toggle="modal" data-target="#process{{ $data->id }}">Process</a> --}}
-                          {{-- <a class="btn btn-primary fw-bold" href="/documents/process/{{ $data->id }}/{{ $data->transId }}/{{ $data->userId }}">Process</a> --}}
-                        <form action="/documents/process/{{ $data->id }}/{{ $data->transId }}/{{ $data->userId }}" method="POST">
-                           @csrf
-                           <button type="submit" name="submit" value="process" onclick="return confirm('Are your sure to proceed?')" class="btn btn-primary">Process</button>
-                        </form>
-                        <br>
-                        <a class="btn btn-danger" data-toggle="modal" data-target="#disapprove{{ $data->id }}">Disapprove</a>
+                        <div class="d-flex">
+                           <form action="/documents/process/{{ $data->id }}/{{ $data->transId }}/{{ $data->userId }}" method="POST">
+                              @csrf
+                              <button type="submit" name="submit" value="process" onclick="return confirm('Are your sure to proceed?')" class="btn btn-primary font-weight-bold mr-2"><i class="fas fa-thumbs-up"></i> Process</button>
+                           </form>
+                           <a class="btn btn-danger font-weight-bold mr-2" data-toggle="modal" data-target="#disapprove{{ $data->id }}"><i class="fas fa-thumbs-down"></i> Disapprove</a>
+                        </div>
                       @elseif($data->status == 'Ready to Claim')
                         @if($data->price == 0)
-                           <a onclick="enableRelease{{ $data->id }}()" class="btn btn-success fw-bold" onlclick="" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
-                           <a id="release{{ $data->id }}" class="btn btn-dark disabled fw-bold" onclick="return confirm('Are you sure to proceed?')" href="/documents/release/{{ $data->transId }}">Release</a>
+                           <a onclick="enableRelease{{ $data->id }}()" class="btn btn-success font-weight-bold" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}"><i class="fas fa-save"></i></i> Save PDF</a>
+                           <a id="release{{ $data->id }}" class="btn btn-dark disabled font-weight-bold" onclick="return confirm('Are you sure to proceed?')" href="/documents/release/{{ $data->transId }}">Release</a>
                         @else
-                           <a class="btn btn-primary fw-bold" onclick="return confirm('Are you sure to proceed?')" href="/documents/paid/{{ $data->transId }}">Paid</a>
+                           <a class="btn btn-primary font-weight-bold" onclick="return confirm('Are you sure to proceed?')" href="/documents/paid/{{ $data->transId }}">Paid</a>
                         @endif
                       @elseif($data->status == 'Paid')
-                           <a onclick="enableRelease{{ $data->id }}()" class="btn btn-success fw-bold" onlclick="" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}">Save PDF</a>
-                           <a id="release{{ $data->id }}" class="btn btn-dark disabled fw-bold" onclick="return confirm('Are you sure to proceed?')" href="/documents/release/{{ $data->transId }}">Release</a>
+                           <a onclick="enableRelease{{ $data->id }}()" class="btn btn-success font-weight-bold" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}"><i class="fas fa-save"></i></i> Save PDF</a>
+                           <a id="release{{ $data->id }}" class="btn btn-dark disabled font-weight-bold" onclick="return confirm('Are you sure to proceed?')" href="/documents/release/{{ $data->transId }}">Release</a>
                       @elseif($data->status == 'Released')
-                           <b class="text-success">Document Released</b>
+                              <b class="text-success">Document Released</b>
+                              <a class="btn btn-success font-weight-bold" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}"><i class="fas fa-save"></i></i> Save PDF</a>
                       @elseif($data->status == 'Disapproved')
                            <b class="text-success">Document Disapproved</b>
                       @else

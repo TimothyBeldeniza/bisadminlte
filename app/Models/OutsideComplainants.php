@@ -13,5 +13,6 @@ class OutsideComplainants extends Model
       'compId',
       'complainant',
       'address',
+      'contact',
     ];
 }
