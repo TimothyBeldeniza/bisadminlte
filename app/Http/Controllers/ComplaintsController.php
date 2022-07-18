@@ -384,31 +384,33 @@ class ComplaintsController extends Controller
      */
     public function store(Request $request)
     {
-        // $serviceId = 2;
-        $request->validate([
+         $request->validate([
             'complainantId' => ['nullable', 'integer'],
             'cName' => ['nullable', 'regex:/^[a-zA-ZñÑ\s]+$/','string'],
             'cAddress' => ['nullable','string'],
+            'cContact' => ['nullable','integer'],
             'respondentId' => ['nullable', 'integer'],
             'respondents' => ['nullable','regex:/^[a-zA-ZñÑ\s]+$/','string', 'max:255'],
-            'respondentsAdd' => 'nullable','string',
-            'compDetails' => 'required', 'string',
-        ]);
+            'respondentsAdd' => ['nullable','string'],
+            'respondentsContact' => ['nullable','integer'],
+            'compDetails' => ['required', 'string'],
+            'fromC' => ['required', 'string'],
+            'fromR' => ['required', 'string'],
+         ]);
+         
 
-        // dd($request->all());
-
-        if($request->complainantId != null && $request->respondentId != null)
+        if($request->fromC == 'insideC' && $request->fromR == 'insideR')
         { // Complainant Inside / Respondent Inside
           //get inside info of respondent inside the barangay
+
           $respondentInfo = DB::table('users')
                             ->where('id', $request->respondentId)
                             ->select(DB::raw('concat(firstName, " ", lastName) as "name"'), 
-                                      DB::raw('concat(houseNo, ", ", street) as "address"'))
+                                      DB::raw('concat(houseNo, ", ", street) as "address"'), 'contactNo')
                             ->first();
 
           $transId = Transactions::create([
             'userId' => $request->complainantId,
-            // 'serviceId' => $serviceId,
             'status' => 'Unresolved',
             'unique_code' => sha1(time().$request->respondentId),               
           ]);
@@ -419,6 +421,7 @@ class ComplaintsController extends Controller
             'compDetails' => $request->compDetails,
             'respondents' => $respondentInfo->name,
             'respondentsAdd' => $respondentInfo->address,
+            'respondentsContact' => $respondentInfo->contactNo,
           ]);
 
           InsideRespondents::create([
@@ -428,11 +431,12 @@ class ComplaintsController extends Controller
 
           return redirect('home')->with('success', 'Complaint filed successfully!');
         }
-        elseif($request->complainantId != null && $request->respondents != null && $request->respondentsAdd != null)
+
+        if($request->fromC == 'insideC' && $request->fromR == 'outsideR')
         { // Complainant Inside / Respondent Outside
+
           $transId = Transactions::create([
             'userId' => $request->complainantId,
-            // 'serviceId' => $serviceId,
             'status' => 'Unresolved',
             'unique_code' => sha1(time().$request->complainantId),               
           ]);
@@ -443,21 +447,25 @@ class ComplaintsController extends Controller
               'compDetails' => $request->compDetails,
               'respondents' => $request->respondents,
               'respondentsAdd' => $request->respondentsAdd,
+              'respondentsContact' => $request->respondentsContact,
           ]);
+          
           return redirect('home')->with('success', 'Complaint filed successfully!');
         }
-        elseif($request->cName != null && $request->cAddress != null && $request->respondentId != null)
+
+        if($request->fromC == 'outsideC' && $request->fromR == 'insideR')
         { // Complainant Outside / Respondent Inside
           //get inside info of respondent inside the barangay
+
           $respondentInfo = DB::table('users')
                             ->where('id', $request->respondentId)
                             ->select(DB::raw('concat(firstName, " ", lastName) as "name"'), 
-                                    DB::raw('concat(houseNo, ", ", street) as "address"'))
+                                    DB::raw('concat(houseNo, ", ", street) as "address"'), 'contactNo')
                             ->first();
+         
 
           $transId = Transactions::create([
             'userId' => $request->respondentId,
-            // 'serviceId' => $serviceId,
             'status' => 'Unresolved',
             'unique_code' => sha1(time().$request->respondentId),               
           ]);
@@ -468,12 +476,14 @@ class ComplaintsController extends Controller
             'compDetails' => $request->compDetails,
             'respondents' => $respondentInfo->name,
             'respondentsAdd' => $respondentInfo->address,
+            'respondentsContact' => $respondentInfo->contactNo,
           ]);
 
           OutsideComplainants::create([
             'compId' => $compId->id,
             'complainant' => $request->cName,
             'address' => $request->cAddress,
+            'contact' => $request->cContact,
           ]);
 
           InsideRespondents::create([
@@ -483,9 +493,10 @@ class ComplaintsController extends Controller
 
           return redirect('home')->with('success', 'Complaint filed successfully!');
         }
-        elseif($request->respondentId == null && $request->complainantId == null)
+
+        if($request->fromC == 'outsideC' && $request->fromR == 'outsideR')
         {
-          return redirect('complaints/create')->with('danger', 'Must contain insider complainant or respondent!');
+          return redirect('home')->with('warning', 'Must contain a Residential complainant or respondent!');
         }
         
     }
@@ -504,9 +515,10 @@ class ComplaintsController extends Controller
         ->where('users.id', $userId)
         ->where('complaints_transactions.id', $compId)
         ->select('complaints_transactions.id', DB::raw('date(complaints_transactions.created_at) as "date"'), 
-                DB::raw('date(complaints_transactions.updated_at) as "condition_date"'),'complaints_transactions.respondents', 'complaints_transactions.respondentsAdd',
+                DB::raw('date(complaints_transactions.updated_at) as "condition_date"'),'complaints_transactions.respondents', 
+                'complaints_transactions.respondentsAdd', 'complaints_transactions.respondentsContact',
                 'complaints_transactions.compDetails', 'complaints_transactions.transId', 'complaints_transactions.reason',
-                'users.lastName', 'users.firstName', 'users.houseNo', 'users.street',
+                'users.lastName', 'users.firstName', 'users.houseNo', 'users.street', 'users.contactNo',
                 'transactions.status', 'transactions.userId')
         ->first();
 
@@ -535,10 +547,11 @@ class ComplaintsController extends Controller
         ->where('complaints_transactions.id', $compId)
         ->select('complaints_transactions.id', 'complaints_transactions.transId', 'complaints_transactions.compType', 
                 DB::raw('date(complaints_transactions.updated_at) as "condition_date"'),
-                'complaints_transactions.compDetails','complaints_transactions.respondents', 'complaints_transactions.respondentsAdd',
+                'complaints_transactions.compDetails','complaints_transactions.respondents', 
+                'complaints_transactions.respondentsAdd', 'complaints_transactions.respondentsContact',
                 'complaints_transactions.reason',
                 DB::raw('date(complaints_transactions.created_at) as "date"'),
-                'outside_complainants.complainant', 'outside_complainants.address',
+                'outside_complainants.complainant', 'outside_complainants.address', 'outside_complainants.contact',
                 'transactions.status','transactions.userId')
         ->first();
 

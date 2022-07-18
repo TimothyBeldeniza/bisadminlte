@@ -27,8 +27,10 @@
                 <p class="card-text"><b>Date Filed:</b> {{ Carbon\Carbon::parse($td->date)->format('jS F, Y') }} </p>
                 <p class="card-text"><b>Complainant:</b> {{ $td->complainant }}</p>
                 <p class="card-text"><b>Address:</b> {{ $td->address}}</p>
-                <p class="card-text"><b>Respondent(s):</b> {{ $td->respondents }}</p>
+                <p class="card-text"><b>Contact:</b> +63{{ $td->contact}}</p>
+                <p class="card-text"><b>Respondent:</b> {{ $td->respondents }}</p>
                 <p class="card-text"><b>Address:</b> {{ $td->respondentsAdd }}</p>
+                <p class="card-text"><b>Contact:</b> +63{{ $td->respondentsContact}}</p>
                 <p class="card-text"><b>Hearings/Summons:</b> {{ $hearingCounts }} of 3</p>
                 <p class="card-text"><b>Status:</b>
                 @if ($td->status == "Settled") 

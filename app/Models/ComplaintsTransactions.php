@@ -15,6 +15,7 @@ class ComplaintsTransactions extends Model
         'compDetails',
         'respondents',
         'respondentsAdd',
+        'respondentsContact',
         'reason',
     ];
 }

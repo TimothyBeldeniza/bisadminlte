@@ -119,7 +119,8 @@
     <div class="body">
       <p>TO WHOM IT MAY CONCERN:</p>
       <p>{!! nl2br(e($template)) !!}</p>
-      <p>Issued on this date <b>{{ Carbon\Carbon::now()->format('jS F, Y') }}</b>, from the Barangay Information System, Brgy. {{ $brgy->name }}, {{ $brgy->city }}, {{ $brgy->province }}, Philippines.</p>	
+      {{-- <p>Issued on this date <b>{{ Carbon\Carbon::now()->format('jS F, Y') }}</b>, from the Barangay Information System, Brgy. {{ $brgy->name }}, {{ $brgy->city }}, {{ $brgy->province }}, Philippines.</p>	 --}}
+      <p>Issued on this date <b>{{ Carbon\Carbon::parse($td->date)->format('jS F, Y') }}</b>, from the Barangay Information System, Brgy. {{ $brgy->name }}, {{ $brgy->city }}, {{ $brgy->province }}, Philippines.</p>	
     </div>
 
     

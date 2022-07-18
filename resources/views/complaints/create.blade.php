@@ -36,11 +36,16 @@
             <form method="POST" action="{{ route('complaints.store') }}" enctype="multipart/form-data">
                 @csrf
                 <b class="required">Complainant</b><br>
-                <input type="radio" id="insideC" name="fromC" onclick="showComplainant()" required>
-                <label>Residential</label>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" id="outsideC" name="fromC" onclick="showComplainant()" required>
-                <label>Non-Residential</label>
+                <div class="d-flex">
+                  <div class="pr-3">
+                     <input type="radio" id="insideC" name="fromC" value="insideC" onclick="showComplainant()" required>
+                     <label>Residential</label>
+                  </div>
+                  <div class="pr-3">
+                     <input type="radio" id="outsideC" name="fromC" value="outsideC" onclick="showComplainant()" required>
+                     <label>Non-Residential</label>
+                  </div>
+                </div>
 
                 <div id="complainant" style="display: none">
                   <b>Inside</b><br>
@@ -69,6 +74,15 @@
                            @enderror
                        </div>
                        <div class="col-sm">
+                           <label class="required" for="cContact">{{ __('Complainant Number') }}</label>
+                           <input id="cContact" type="text" class="form-control" @error('cContact') is-invalid @enderror name="cContact" id="cContact" placeholder="Enter Complainant Contact Number..." pattern="[0-9]+">
+                           @error('cContact')
+                           <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                           </span>
+                           @enderror
+                        </div>
+                       <div class="col-sm">
                            <label class="required" for="cAddress">{{ __('Complainant Address') }}</label>
                            <textarea class="form-control" name="cAddress" id="cAddress" cols="30" rows="3" id="cAddress" placeholder="Enter Complainant's Address here..."></textarea>
                        </div>
@@ -77,10 +91,10 @@
                     
                 <hr>
                 <b class="required">Respondents</b><br>
-                <input type="radio" id="insideR" name="fromR" onclick="showRespondent()" required>
+                <input type="radio" id="insideR" name="fromR" value="insideR" onclick="showRespondent()" required>
                 <label>Residential</label>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" id="outsideR" name="fromR" onclick="showRespondent()" required>
+                <input type="radio" id="outsideR" name="fromR" value="outsideR" onclick="showRespondent()" required>
                 <label>Non-Residential</label>
 
                 <div id="respondent" style="display: none">
@@ -103,6 +117,15 @@
                         <label for="respondents" class="required">{{ __('Respondent Name') }}</label>
                         <input id="respondents" type="text" class="form-control" @error('respondents') is-invalid @enderror placeholder="Enter Respondent Full Name here..." name="respondents" pattern="[a-zA-Z\s]+">
                         @error('respondents')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                     </div>
+                     <div class="col-sm">
+                        <label for="respondents">{{ __('Respondent Contact Number') }}</label>
+                        <input id="respondentsContact" type="text" class="form-control" @error('respondentsContact') is-invalid @enderror placeholder="Enter Respondent Contact Number here..." name="respondentsContact" pattern="[0-9]+">
+                        @error('respondentsContact')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -152,42 +175,56 @@
                document.getElementById('complainant').style.display = 'block';
                document.getElementById('otherComplainant').style.display = 'none';
                document.getElementById('outsideR').disabled = false;
+               document.getElementById('complainantId').setAttribute("required", "");
+               document.getElementById('cName').removeAttribute("required", "");
+               document.getElementById('cContact').removeAttribute("required", "");
+               document.getElementById('cAddress').removeAttribute("required", "");
+               document.getElementById('cName').value = "";
+               document.getElementById('cAddress').value = "";
+               document.getElementById('cContact').value = "";
                $("#complainantId").val(null).trigger('change');
-               $("#complainantId").attr('required', '');
-               $("#cName").val('');
-               $("#cAddress").val('');
          }
          else if (document.getElementById('outsideC').checked) 
          {
                document.getElementById('otherComplainant').style.display = 'block';
                document.getElementById('complainant').style.display = 'none';
                document.getElementById('outsideR').disabled = true;
-               $("#cName").attr('required', '');
-               $("#cAddress").attr('required', '');
-               $("#complainantId").removeAttr('required');
+               document.getElementById('complainantId').removeAttribute("required", "");
+               document.getElementById('cName').setAttribute("required", "");
+               document.getElementById('cContact').setAttribute("required", "");
+               document.getElementById('cAddress').setAttribute("required", "");
                $("#complainantId").val(null).trigger('change');
          }
        }  
        function showRespondent() {
             if (document.getElementById('insideR').checked) 
             {
-                document.getElementById('respondent').style.display = 'block';
-                document.getElementById('otherRespondent').style.display = 'none';
-                document.getElementById('outsideC').disabled = false;
-                $("#respondentId").val(null).trigger('change');
-                $("#respondentId").attr('required', '');
-                $("#respondents").val('');
-                $("#respondentsAdd").val('');
+               document.getElementById('respondent').style.display = 'block';
+               document.getElementById('otherRespondent').style.display = 'none';
+               document.getElementById('outsideC').disabled = false;
+               //  $("#respondentId").attr('required', '');
+               //  $("#respondents").val('');
+               //  $("#respondentsAdd").val('');
+               //  $("#respondentsContact").val('');
+               document.getElementById('respondentId').setAttribute("required", "");
+               document.getElementById('respondents').removeAttribute("required", "");
+               document.getElementById('respondentsAdd').removeAttribute("required", "");
+               document.getElementById('respondentsContact').removeAttribute("required", "");
+               document.getElementById('respondents').value = "";
+               document.getElementById('respondentsAdd').value = "";
+               document.getElementById('respondentsContact').value = "";
+               $("#respondentId").val(null).trigger('change');
             }
             else if (document.getElementById('outsideR').checked) 
             {
-                document.getElementById('otherRespondent').style.display = 'block';
-                document.getElementById('respondent').style.display = 'none';
-                document.getElementById('outsideC').disabled = true;
-                $("#respondents").attr('required', '');
-                $("#respondentsAdd").attr('required', '');
-                $("#respondentId").removeAttr('required');
-                $("#respondentId").val(null).trigger('change');
+               document.getElementById('otherRespondent').style.display = 'block';
+               document.getElementById('respondent').style.display = 'none';
+               document.getElementById('outsideC').disabled = true;
+               document.getElementById('respondentId').removeAttribute("required", "");
+               document.getElementById('respondents').setAttribute("required", "");
+               document.getElementById('respondentsAdd').setAttribute("required", "");
+               document.getElementById('respondentsContact').setAttribute("required", "");
+               $("#respondentId").val(null).trigger('change');
             }
        }  
        function preventDupes( select, index ) {
