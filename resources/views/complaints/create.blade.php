@@ -75,7 +75,7 @@
                        </div>
                        <div class="col-sm">
                            <label class="required" for="cContact">{{ __('Complainant Number') }}</label>
-                           <input id="cContact" type="text" class="form-control" @error('cContact') is-invalid @enderror name="cContact" id="cContact" placeholder="Enter Complainant Contact Number..." pattern="[0-9]+">
+                           <input id="cContact" type="text" class="form-control" @error('cContact') is-invalid @enderror name="cContact" id="cContact" placeholder="09123456789" pattern="[0-9]{11}">
                            @error('cContact')
                            <span class="invalid-feedback" role="alert">
                               <strong>{{ $message }}</strong>
@@ -124,7 +124,7 @@
                      </div>
                      <div class="col-sm">
                         <label for="respondents">{{ __('Respondent Contact Number') }}</label>
-                        <input id="respondentsContact" type="text" class="form-control" @error('respondentsContact') is-invalid @enderror placeholder="Enter Respondent Contact Number here..." name="respondentsContact" pattern="[0-9]+">
+                        <input id="respondentsContact" type="text" class="form-control" @error('respondentsContact') is-invalid @enderror placeholder="09123456789" name="respondentsContact" pattern="[0-9]{11}">
                         @error('respondentsContact')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -223,7 +223,6 @@
                document.getElementById('respondentId').removeAttribute("required", "");
                document.getElementById('respondents').setAttribute("required", "");
                document.getElementById('respondentsAdd').setAttribute("required", "");
-               document.getElementById('respondentsContact').setAttribute("required", "");
                $("#respondentId").val(null).trigger('change');
             }
        }  
