@@ -7,7 +7,7 @@
   {{-- <title>Barangay Information System</title> --}}
   <title>@yield('title') - BIS</title>
   
-  <link rel="icon" href="{{ url('images/brgy-logo.png') }}" type="image/png">
+  <link rel="icon" href="{{ url('images/BIS - Logo.png') }}" type="image/png">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -91,7 +91,7 @@
   <aside style="background-color: #264e2c;" class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-      <img src="{{ asset('images/brgy-logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="{{ asset('images/BIS - Logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">BIS</span>
     </a>
 
