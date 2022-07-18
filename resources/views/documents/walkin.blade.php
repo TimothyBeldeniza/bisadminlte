@@ -66,25 +66,25 @@
                   <div class="col-sm">
                      <label class="required" for="purpose">{{ __('Purpose') }}</label>
                      <select class="form-control" name="purpose" id="purpose" onchange="showOther()" required>
-                        <option value>--Select Purpose--</option>
-                        <option>Personal Identification and Residence Status</option>
-                        <option>Good Standing in the Community</option>
-                        <option>No pending case filed in the barangay</option>
-                        <option>Employment (Local)</option>
-                        <option>Employment (Abroad)</option>
-                        <option>Enrollment</option>
-                        <option>Scholarship</option>
-                        <option>Senior Citizens & Solo Parent</option>
-                        <option>Marriage (Local)</option>
-                        <option>Marriage (Abroad)</option>
-                        <option>Construction Permit</option>
-                        <option>Construction Excavaion Permit</option>
-                        <option>Other Purpose</option>
+                        <option selected disabled>--SELECT PURPOSE--</option>
+                        <option>PERSONAL IDENTIFICATION AND RESIDENCE STATUS</option>
+                        <option>GOOD STANDING IN THE COMMUNITY</option>
+                        <option>NO PENDING CASE FILED IN THE BARANGAY</option>
+                        <option>EMPLOYMENT (LOCAL)</option>
+                        <option>EMPLOYMENT (ABROAD)</option>
+                        <option>ENROLLMENT</option>
+                        <option>SCHOLARSHIP</option>
+                        <option>SENIOR CITIZENS & SOLO PARENT</option>
+                        <option>MARRIAGE (LOCAL)</option>
+                        <option>MARRIAGE (ABROAD)</option>
+                        <option>CONSTRUCTION PERMIT</option>
+                        <option>CONSTRUCTION EXCAVAION PERMIT</option>
+                        <option>OTHER PURPOSE</option>
                      </select>
                   </div>
                   <div class="col-sm" id="others">
                      <label id="othersLabel" for="others">Enter Other Purpose</label>
-                     <input id="othersInput" type="text" class="form-control  @error('others') is-invalid @enderror" name="others" placeholder="Enter Other Purpose..." disabled>
+                     <input id="othersInput" type="text" class="form-control  @error('others') is-invalid @enderror" onkeyup="this.value = this.value.toUpperCase();" name="others" placeholder="Enter Other Purpose..." disabled>
                      @error('others')
                         <span class="invalid-feedback" role="alert">
                            <strong>{{ $message }}</strong>
@@ -117,7 +117,7 @@
 
       function showOther()
       {
-         if(document.getElementById("purpose").value == "Other Purpose")
+         if(document.getElementById("purpose").value == "OTHER PURPOSE")
          {
             document.getElementById("othersLabel").classList.add('required');
             document.getElementById('othersInput').removeAttribute("disabled");

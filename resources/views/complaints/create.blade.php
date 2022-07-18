@@ -66,7 +66,7 @@
                     <div class="form-group row my-1">
                        <div class="col-sm">
                            <label class="required" for="name">{{ __('Complainant Full Name') }}</label>
-                           <input id="cName" type="text" class="form-control" @error('cName') is-invalid @enderror name="cName" id="cName" placeholder="Enter Complainant Full Name..." pattern="[a-zA-Z\s]+">
+                           <input id="cName" type="text" class="form-control" @error('cName') is-invalid @enderror name="cName" id="cName" onkeyup="this.value = this.value.toUpperCase();" placeholder="Enter Complainant Full Name..." pattern="[a-zA-Z\s]+">
                            @error('cName')
                            <span class="invalid-feedback" role="alert">
                               <strong>{{ $message }}</strong>
@@ -84,7 +84,7 @@
                         </div>
                        <div class="col-sm">
                            <label class="required" for="cAddress">{{ __('Complainant Address') }}</label>
-                           <textarea class="form-control" name="cAddress" id="cAddress" cols="30" rows="3" id="cAddress" placeholder="Enter Complainant's Address here..."></textarea>
+                           <textarea class="form-control" name="cAddress" id="cAddress" cols="30" rows="3" id="cAddress" onkeyup="this.value = this.value.toUpperCase();" placeholder="Enter Complainant's Address here..."></textarea>
                        </div>
                     </div>
                 </div>
@@ -115,7 +115,7 @@
                   <div class="form-group row my-1">
                      <div class="col-sm">
                         <label for="respondents" class="required">{{ __('Respondent Name') }}</label>
-                        <input id="respondents" type="text" class="form-control" @error('respondents') is-invalid @enderror placeholder="Enter Respondent Full Name here..." name="respondents" pattern="[a-zA-Z\s]+">
+                        <input id="respondents" type="text" class="form-control" @error('respondents') is-invalid @enderror onkeyup="this.value = this.value.toUpperCase();" placeholder="Enter Respondent Full Name here..." name="respondents" pattern="[a-zA-Z\s]+">
                         @error('respondents')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -133,7 +133,7 @@
                      </div>
                      <div class="col-sm">
                         <label for="respondentsAdd" class="required">{{ __("Respondents Address") }}</label>
-                        <textarea class="form-control" name="respondentsAdd" id="respondentsAdd" cols="30" rows="3" placeholder="Enter Respondent's Address here..."></textarea>
+                        <textarea class="form-control" name="respondentsAdd" id="respondentsAdd" cols="30" rows="3" onkeyup="this.value = this.value.toUpperCase();" placeholder="Enter Respondent's Address here..."></textarea>
                      </div>
                   </div>
                 </div>
