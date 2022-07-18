@@ -388,117 +388,113 @@ class ComplaintsController extends Controller
             'complainantId' => ['nullable', 'integer'],
             'cName' => ['nullable', 'regex:/^[a-zA-ZñÑ\s]+$/','string'],
             'cAddress' => ['nullable','string'],
-            'cContact' => ['nullable','integer'],
+            'cContact' => ['nullable','digits:11'],
             'respondentId' => ['nullable', 'integer'],
             'respondents' => ['nullable','regex:/^[a-zA-ZñÑ\s]+$/','string', 'max:255'],
             'respondentsAdd' => ['nullable','string'],
-            'respondentsContact' => ['nullable','integer'],
+            'respondentsContact' => ['nullable','digits:11'],
             'compDetails' => ['required', 'string'],
             'fromC' => ['required', 'string'],
             'fromR' => ['required', 'string'],
          ]);
-         
 
-        if($request->fromC == 'insideC' && $request->fromR == 'insideR')
-        { // Complainant Inside / Respondent Inside
+         if($request->fromC == 'insideC' && $request->fromR == 'insideR')
+         { // Complainant Inside / Respondent Inside
           //get inside info of respondent inside the barangay
 
-          $respondentInfo = DB::table('users')
-                            ->where('id', $request->respondentId)
-                            ->select(DB::raw('concat(firstName, " ", lastName) as "name"'), 
-                                      DB::raw('concat(houseNo, ", ", street) as "address"'), 'contactNo')
-                            ->first();
+            $respondentInfo = DB::table('users')
+                              ->where('id', $request->respondentId)
+                              ->select(DB::raw('concat(firstName, " ", lastName) as "name"'), 
+                                       DB::raw('concat(houseNo, ", ", street) as "address"'), 'contactNo')
+                              ->first();
 
-          $transId = Transactions::create([
-            'userId' => $request->complainantId,
-            'status' => 'Unresolved',
-            'unique_code' => sha1(time().$request->respondentId),               
-          ]);
+            $transId = Transactions::create([
+               'userId' => $request->complainantId,
+               'status' => 'Unresolved',
+               'unique_code' => sha1(time().$request->respondentId),               
+            ]);
 
-          $compId = ComplaintsTransactions::create([  
-            'transId' => $transId->id,
-            'compType' => '1',
-            'compDetails' => $request->compDetails,
-            'respondents' => $respondentInfo->name,
-            'respondentsAdd' => $respondentInfo->address,
-            'respondentsContact' => $respondentInfo->contactNo,
-          ]);
+            $compId = ComplaintsTransactions::create([  
+               'transId' => $transId->id,
+               'compType' => '1',
+               'compDetails' => $request->compDetails,
+               'respondents' => $respondentInfo->name,
+               'respondentsAdd' => $respondentInfo->address,
+               'respondentsContact' => $respondentInfo->contactNo,
+            ]);
 
-          InsideRespondents::create([
-             'compId' => $compId->id,
-             'userId' => $request->respondentId,
-          ]);
+            InsideRespondents::create([
+               'compId' => $compId->id,
+               'userId' => $request->respondentId,
+            ]);
 
-          return redirect('home')->with('success', 'Complaint filed successfully!');
-        }
+            return redirect('home')->with('success', 'Complaint filed successfully!');
+         }
 
-        if($request->fromC == 'insideC' && $request->fromR == 'outsideR')
-        { // Complainant Inside / Respondent Outside
+         if($request->fromC == 'insideC' && $request->fromR == 'outsideR')
+         { // Complainant Inside / Respondent Outside
 
-          $transId = Transactions::create([
-            'userId' => $request->complainantId,
-            'status' => 'Unresolved',
-            'unique_code' => sha1(time().$request->complainantId),               
-          ]);
-        
-          ComplaintsTransactions::create([  
-              'transId' => $transId->id,
-              'compType' => '1',
-              'compDetails' => $request->compDetails,
-              'respondents' => $request->respondents,
-              'respondentsAdd' => $request->respondentsAdd,
-              'respondentsContact' => $request->respondentsContact,
-          ]);
-          
-          return redirect('home')->with('success', 'Complaint filed successfully!');
-        }
-
-        if($request->fromC == 'outsideC' && $request->fromR == 'insideR')
-        { // Complainant Outside / Respondent Inside
-          //get inside info of respondent inside the barangay
-
-          $respondentInfo = DB::table('users')
-                            ->where('id', $request->respondentId)
-                            ->select(DB::raw('concat(firstName, " ", lastName) as "name"'), 
-                                    DB::raw('concat(houseNo, ", ", street) as "address"'), 'contactNo')
-                            ->first();
+            $transId = Transactions::create([
+               'userId' => $request->complainantId,
+               'status' => 'Unresolved',
+               'unique_code' => sha1(time().$request->complainantId),               
+            ]);
          
+            ComplaintsTransactions::create([  
+               'transId' => $transId->id,
+               'compType' => '1',
+               'compDetails' => $request->compDetails,
+               'respondents' => $request->respondents,
+               'respondentsAdd' => $request->respondentsAdd,
+               'respondentsContact' => $request->respondentsContact,
+            ]);
+            
+            return redirect('home')->with('success', 'Complaint filed successfully!');
+         }
 
-          $transId = Transactions::create([
-            'userId' => $request->respondentId,
-            'status' => 'Unresolved',
-            'unique_code' => sha1(time().$request->respondentId),               
-          ]);
+         if($request->fromC == 'outsideC' && $request->fromR == 'insideR')
+         { // Complainant Outside / Respondent Inside
+            //get inside info of respondent inside the barangay
+            $respondentInfo = DB::table('users')
+                              ->where('id', $request->respondentId)
+                              ->select(DB::raw('concat(firstName, " ", lastName) as "name"'), 
+                                       DB::raw('concat(houseNo, ", ", street) as "address"'), 'contactNo')
+                              ->first();
 
-          $compId = ComplaintsTransactions::create([  
-            'transId' => $transId->id,
-            'compType' => '0',
-            'compDetails' => $request->compDetails,
-            'respondents' => $respondentInfo->name,
-            'respondentsAdd' => $respondentInfo->address,
-            'respondentsContact' => $respondentInfo->contactNo,
-          ]);
+            $transId = Transactions::create([
+               'userId' => $request->respondentId,
+               'status' => 'Unresolved',
+               'unique_code' => sha1(time().$request->respondentId),               
+            ]);
 
-          OutsideComplainants::create([
-            'compId' => $compId->id,
-            'complainant' => $request->cName,
-            'address' => $request->cAddress,
-            'contact' => $request->cContact,
-          ]);
+            $compId = ComplaintsTransactions::create([  
+               'transId' => $transId->id,
+               'compType' => '0',
+               'compDetails' => $request->compDetails,
+               'respondents' => $respondentInfo->name,
+               'respondentsAdd' => $respondentInfo->address,
+               'respondentsContact' => $respondentInfo->contactNo,
+            ]);
 
-          InsideRespondents::create([
-            'compId' => $compId->id,
-            'userId' => $request->respondentId,
-          ]);
+            OutsideComplainants::create([
+               'compId' => $compId->id,
+               'complainant' => $request->cName,
+               'address' => $request->cAddress,
+               'contact' => $request->cContact,
+            ]);
 
-          return redirect('home')->with('success', 'Complaint filed successfully!');
-        }
+            InsideRespondents::create([
+               'compId' => $compId->id,
+               'userId' => $request->respondentId,
+            ]);
 
-        if($request->fromC == 'outsideC' && $request->fromR == 'outsideR')
-        {
-          return redirect('home')->with('warning', 'Must contain a Residential complainant or respondent!');
-        }
-        
+            return redirect('home')->with('success', 'Complaint filed successfully!');
+         }
+
+         if($request->fromC == 'outsideC' && $request->fromR == 'outsideR')
+         {
+            return redirect('home')->with('warning', 'Must contain a Residential complainant or respondent!');
+         } 
     }
 
     /**

@@ -130,7 +130,7 @@
                                     @hasanyrole('Admin|Clerk|Secretary')
                                     <td class="text-center">
                                           @if($trans->status == 'For Validation')
-                                          <div class="d-flex">
+                                          <div class="d-flex justify-content-center">
                                              @can('documents-process')
                                                 {{-- <a class="btn btn-primary fw-bold" data-toggle="modal" data-target="#process{{ $trans->id }}">Process</a> --}}
                                                 <form action="/documents/process/{{ $trans->id }}/{{ $trans->transId }}/{{ $trans->userId }}" method="POST">
