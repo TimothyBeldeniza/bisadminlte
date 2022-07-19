@@ -23,7 +23,7 @@
     <nav class="navbar navbar-expand-lg  navbar-dark menu shadow fixed-top">
         <div class="container">
           <a class="navbar-brand d-flex align-items-center" href="#">
-              <img class="image-fluid bis-logo" src="{{ asset('homepage-assets/images/BIS - Logo.png') }}" alt="logo-image">
+              <img class="image-fluid bis-logo" src="{{ asset('homepage-assets       /images/BIS - Logo.png') }}" alt="logo-image">
               <h3 class="fw-bold ms-2"> B I S</h3>
           </a>
           
@@ -43,6 +43,9 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Contact</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('login') }}">Login</a>
               </li>
             </ul>
           </div>
@@ -307,9 +310,9 @@
               <div class="card border-2 p-4 ">
                 <div class="card-body icon-box ">
                   <div class="icon">
-                    <a href="#" class=""><img src="{{ asset('homepage-assets/images/arts/scan.jpg') }}" class="img-fluid py-4 rounded"></a>
+                    <a href="{{ url('/documents/scan') }}" class=""><img src="{{ asset('homepage-assets/images/arts/scan.jpg') }}" class="img-fluid py-4 rounded"></a>
                   </div>
-                  <h4 class="mt-4 text-center "><a href="#" class="text-decoration-none">Scan Document</a></h4>
+                  <h4 class="mt-4 text-center "><a href="{{ url('/documents/scan') }}" class="text-decoration-none">Scan Document</a></h4>
                 </div>
               </div>
             </div>
@@ -318,9 +321,9 @@
               <div class="card border-2 p-4 ">
                 <div class="card-body icon-box ">
                   <div class="icon">
-                    <a href="#" class=""><img src="{{ asset('homepage-assets/images/arts/req-doc.jpg') }}" class="img-fluid py-4 rounded"></a>
+                    <a href="{{ route('documents.create') }}" class=""><img src="{{ asset('homepage-assets/images/arts/req-doc.jpg') }}" class="img-fluid py-4 rounded"></a>
                   </div>
-                  <h4 class="mt-4 text-center "><a href="#" class="text-decoration-none">Request Document</a></h4>
+                  <h4 class="mt-4 text-center "><a href="{{ route('documents.create') }}" class="text-decoration-none">Request Document</a></h4>
                 </div>
               </div>
             </div>
