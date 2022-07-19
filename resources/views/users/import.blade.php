@@ -59,6 +59,10 @@
                             </p>
                             {{-- <img src="{{ asset('images/sample headers.png') }}" alt="sample_headers image" style="width: 1000px"> --}}
                             <iframe src="{{ asset('images/sample headers.png') }}" style="width: 100%"></iframe>
+                            <br>
+                            <form method="get" action="{{ asset('files/Example Excel Content for BIS Import.xlsx') }}">
+                              <button type="submit" class="btn btn-success font-weight-bold"><i class="fas fa-download"></i> Download Example</button>
+                            </form>
                             <hr>
                             <form action="/users/import/store" method="POST" enctype="multipart/form-data">
                                 @csrf
@@ -67,8 +71,8 @@
                                     <label for="file" class="required">Excel File</label>
                                     <input class="form-control" type="file" name="file" required>
                                     <div class="float-right mt-2">
-                                       <button type="submit" class="btn btn-primary">Import</button>
-                                       <a class="btn btn-secondary" href="{{ route('users.index') }}">Back</a>
+                                       <button type="submit" class="btn btn-primary font-weight-bold"><i class="fas fa-file-import"></i> Import</button>
+                                       <a class="btn btn-secondary font-weight-bold" href="{{ route('users.index') }}">Back</a>
                                     </div>
                                 </div>
                             </form>

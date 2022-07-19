@@ -44,12 +44,12 @@
                      <td>{{ $docType->docType }}</td>
                      <td>₱{{ $docType->price }}</td>
                      <td>
-                     <a class="btn btn-primary fw-bold" href="{{ route('doctypes.edit', $docType->id) }}"><i class="fas fa-pen-square"></i> Edit</a>
+                     <a class="btn btn-primary font-weight-bold" href="{{ route('doctypes.edit', $docType->id) }}"><i class="fas fa-pen-square"></i> Edit</a>
                      
                      <form action="{{ route('doctypes.destroy', $docType->id) }}" method="post" style="display:inline">
                         @csrf
                         @method('delete')
-                        <button type="submit" class="btn btn-danger fw-bold" onclick="return confirm('Are you sure you want to delete this document?')"><i class="fas fa-trash-alt"></i> Delete</button>
+                        <button type="submit" class="btn btn-danger font-weight-bold" onclick="return confirm('Are you sure you want to delete this document?')"><i class="fas fa-trash-alt"></i> Delete</button>
                      </form>
                      </td>
                   </tr>
@@ -83,12 +83,12 @@
                      <td>{{ $docType->docType }}</td>
                      <td>₱{{ $docType->price }}</td>
                      <td>
-                     {{-- <a class="btn btn-success fw-bold" href="#"><i class="fas fa-pen-square"></i> Restore</a> --}}
+                     {{-- <a class="btn btn-success font-weight-bold" href="#"><i class="fas fa-pen-square"></i> Restore</a> --}}
                      
                      <form action="doctypes/restore/{{ $docType->id }}" method="post" style="display:inline">
                         @csrf
                         @method('get')
-                        <button type="submit" class="btn btn-success fw-bold" onclick="return confirm('Are you sure you want to restore this document?')"><i class="fas fa-pen-square"></i> Restore</button>
+                        <button type="submit" class="btn btn-success font-weight-bold" onclick="return confirm('Are you sure you want to restore this document?')"><i class="fas fa-pen-square"></i> Restore</button>
                      </form>
                      </td>
                   </tr>

@@ -43,7 +43,7 @@
                   <b class="text-dark">{{ $td->status }}</b>
                 @endif
                 </p>
-                <button type="button" class="btn btn-warning fw-bold"  data-toggle="modal" data-target="#compDetails{{$td->id}}">Show Complaint Details</button>
+                <button type="button" class="btn btn-warning font-weight-bold"  data-toggle="modal" data-target="#compDetails{{$td->id}}">Show Complaint Details</button>
                 <!-- Modal -->
                 <div class="modal fade" id="compDetails{{$td->id}}" tabindex="-1" aria-labelledby="compDetailsLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -68,13 +68,13 @@
                 <!-- End of Modal -->    
               <hr>
               @role('Admin|Chairman|Councilor')
-                <a class="btn @if ( $hearingCounts == 3 || $td->status == 'Dismissed' || $td->status == 'Escalated' || $td->status == 'Settled') return disabled @endif btn-success fw-bold float-start" data-toggle="modal" data-target="#record-hearing">Record Hearing</a>
+                <a class="btn @if ( $hearingCounts == 3 || $td->status == 'Dismissed' || $td->status == 'Escalated' || $td->status == 'Settled') return disabled @endif btn-success font-weight-bold float-start" data-toggle="modal" data-target="#record-hearing">Record Hearing</a>
               @endrole
               @role('Resident')
-                <a href="{{ route('home') }}" class="btn btn-primary fw-bold float-end">Back</a>
+                <a href="{{ route('home') }}" class="btn btn-primary font-weight-bold float-end">Back</a>
               @endrole
               @role('Admin|Chairman|Councilor')
-                <a href="{{ route('complaints.outsider') }}" class="btn btn-primary fw-bold float-end">Back</a>
+                <a href="{{ route('complaints.outsider') }}" class="btn btn-primary font-weight-bold float-end">Back</a>
               @endrole
             </div>
           </div>
@@ -112,7 +112,7 @@
               @if ($td->reason == Null)
                 <b class="text-danger">No Final Decisions made</b>
               @else
-                <a class="btn btn-warning fw-bold my-2" data-toggle="modal" data-target="#view-condition">Show Conditions</a>
+                <a class="btn btn-warning font-weight-bold my-2" data-toggle="modal" data-target="#view-condition">Show Conditions</a>
                 <!-- Conditions View Modal -->
                 <div class="modal fade" id="view-condition" tabindex="-1" aria-labelledby="conditionLabel" aria-hidden="true">
                   <div class="modal-dialog modal-lg modal-dialog-scrollable">
@@ -139,34 +139,34 @@
               <hr>
               <h5 class="card-text">Measures</h5>
               @if ($td->status == "Settled")
-                <a class="btn btn-secondary fw-bold my-2" href="/complaints/outsider/show/view-o-settle-pdf/{{ $td->id }}/{{ $td->transId }}" target="_blank">View Settle Form</a><br>
-                <a class="btn btn-primary fw-bold my-2" href="/complaints/outsider/show/save-o-escalate-pdf/{{ $td->id }}/{{ $td->transId }}">Save Settle Form</a><br>
+                <a class="btn btn-secondary font-weight-bold my-2" href="/complaints/outsider/show/view-o-settle-pdf/{{ $td->id }}/{{ $td->transId }}" target="_blank">View Settle Form</a><br>
+                <a class="btn btn-primary font-weight-bold my-2" href="/complaints/outsider/show/save-o-escalate-pdf/{{ $td->id }}/{{ $td->transId }}">Save Settle Form</a><br>
               @elseif ($td->status == "Escalated")
-                <a class="btn btn-secondary fw-bold my-2" href="/complaints/outsider/show/view-o-escalate-pdf/{{ $td->id }}/{{ $td->transId }}" target="_blank">View Escalation Form</a><br>
-                <a class="btn btn-primary fw-bold my-2" href="/complaints/outsider/show/save-o-escalate-pdf/{{ $td->id }}/{{ $td->transId }}">Save Escalation Form</a><br>
+                <a class="btn btn-secondary font-weight-bold my-2" href="/complaints/outsider/show/view-o-escalate-pdf/{{ $td->id }}/{{ $td->transId }}" target="_blank">View Escalation Form</a><br>
+                <a class="btn btn-primary font-weight-bold my-2" href="/complaints/outsider/show/save-o-escalate-pdf/{{ $td->id }}/{{ $td->transId }}">Save Escalation Form</a><br>
               @elseif ($td->status == "Dismissed") 
                 <b class="text-danger"> No Measures Required</b>
               @elseif ($hearingCounts == 3)
                 @role('Admin|Chairman|Councilor')
-                  <a class="btn btn-success fw-bold my-2" title="Settle the Complaint" data-toggle="modal" data-target="#record-settle">Settle</a>
-                  <a class="btn btn-warning fw-bold my-2" title="Escalate the Complaint" data-toggle="modal" data-target="#record-escalate">Escalate</a>
-                  <a class="btn btn-danger fw-bold my-2" title="Dismiss the Complaint" data-toggle="modal" data-target="#record-dismiss">Dismiss</a><br>
+                  <a class="btn btn-success font-weight-bold my-2" title="Settle the Complaint" data-toggle="modal" data-target="#record-settle">Settle</a>
+                  <a class="btn btn-warning font-weight-bold my-2" title="Escalate the Complaint" data-toggle="modal" data-target="#record-escalate">Escalate</a>
+                  <a class="btn btn-danger font-weight-bold my-2" title="Dismiss the Complaint" data-toggle="modal" data-target="#record-dismiss">Dismiss</a><br>
                 @endrole 
-                <a class="btn btn-primary fw-bold my-2" href="/complaints/outsider/show/view-o-complaint-pdf/{{ $td->id }}/{{ $td->transId }}" target="_blank">View Complaint Form</a><br> 
-                <a class="btn btn-secondary fw-bold my-2" href="/complaints/outsider/show/save-o-complaint-pdf/{{ $td->id }}/{{ $td->transId }}">Save Complaint Form</a><br> 
+                <a class="btn btn-primary font-weight-bold my-2" href="/complaints/outsider/show/view-o-complaint-pdf/{{ $td->id }}/{{ $td->transId }}" target="_blank">View Complaint Form</a><br> 
+                <a class="btn btn-secondary font-weight-bold my-2" href="/complaints/outsider/show/save-o-complaint-pdf/{{ $td->id }}/{{ $td->transId }}">Save Complaint Form</a><br> 
               @elseif($hearingCounts == 0)
                 @role('Admin|Chairman|Councilor')
-                  <a class="btn btn-danger fw-bold my-2" title="Dismiss the Complaint" data-toggle="modal" data-target="#record-dismiss">Dismiss</a><br>
+                  <a class="btn btn-danger font-weight-bold my-2" title="Dismiss the Complaint" data-toggle="modal" data-target="#record-dismiss">Dismiss</a><br>
                 @endrole 
-                <a class="btn btn-primary fw-bold my-2" href="/complaints/outsider/show/view-o-complaint-pdf/{{ $td->id }}/{{ $td->transId }}" target="_blank">View Complaint Form</a><br>
-                <a class="btn btn-secondary fw-bold my-2" href="/complaints/outsider/show/save-o-complaint-pdf/{{ $td->id }}/{{ $td->transId }}">Save Complaint Form</a><br> 
+                <a class="btn btn-primary font-weight-bold my-2" href="/complaints/outsider/show/view-o-complaint-pdf/{{ $td->id }}/{{ $td->transId }}" target="_blank">View Complaint Form</a><br>
+                <a class="btn btn-secondary font-weight-bold my-2" href="/complaints/outsider/show/save-o-complaint-pdf/{{ $td->id }}/{{ $td->transId }}">Save Complaint Form</a><br> 
               @else
               @role('Admin|Chairman|Councilor')
-                <a class="btn btn-success fw-bold my-2" title="Settle the Complaint" data-toggle="modal" data-target="#record-settle">Settle</a>
-                <a class="btn btn-danger fw-bold my-2" title="Dismiss the Complaint" data-toggle="modal" data-target="#record-dismiss">Dismiss</a><br>
+                <a class="btn btn-success font-weight-bold my-2" title="Settle the Complaint" data-toggle="modal" data-target="#record-settle">Settle</a>
+                <a class="btn btn-danger font-weight-bold my-2" title="Dismiss the Complaint" data-toggle="modal" data-target="#record-dismiss">Dismiss</a><br>
               @endrole 
-                <a class="btn btn-primary fw-bold my-2" href="/complaints/outsider/show/view-o-complaint-pdf/{{ $td->id }}/{{ $td->transId }}" target="_blank">View Complaint Form</a><br>
-                <a class="btn btn-secondary fw-bold my-2" href="/complaints/outsider/show/save-o-complaint-pdf/{{ $td->id }}/{{ $td->transId }}">Save Complaint Form</a><br>
+                <a class="btn btn-primary font-weight-bold my-2" href="/complaints/outsider/show/view-o-complaint-pdf/{{ $td->id }}/{{ $td->transId }}" target="_blank">View Complaint Form</a><br>
+                <a class="btn btn-secondary font-weight-bold my-2" href="/complaints/outsider/show/save-o-complaint-pdf/{{ $td->id }}/{{ $td->transId }}">Save Complaint Form</a><br>
               @endif
               <hr>
               <h5 class="card-text">Hearing Details</h5>
@@ -174,7 +174,7 @@
                 <b class="text-danger">No Hearings Conducted</b>
               @endif
               @for ($ctr = 1; $ctr <= $hearingCounts; $ctr++)
-                <button type="button" class="btn btn-outline-info fw-bold my-2" data-toggle="modal" data-target="#hearing-{{$ctr}}">Hearing No. {{ $ctr }}</button>
+                <button type="button" class="btn btn-outline-info font-weight-bold my-2" data-toggle="modal" data-target="#hearing-{{$ctr}}">Hearing No. {{ $ctr }}</button>
                   <!-- Hearing View Modal -->
                   <div class="modal fade" id="hearing-{{$ctr}}" tabindex="-1" aria-labelledby="hearingLabel" aria-hidden="true">
                   <div class="modal-dialog modal-lg modal-dialog-scrollable">

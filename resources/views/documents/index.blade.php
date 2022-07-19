@@ -31,34 +31,34 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                    <div class="float-left">
-                        <h3 class="card-title">List of Requested Documents</h3>
-                    </div>
-                    <div class="float-right">
-                        <form style="display: inline" action="{{ route('documents.index') }}" method="GET" role="search">
-                            <div class="row">
-                                <label for="date" class="col-form-label">From</label>
+                     <div class="float-left">
+                         <h3 class="card-title">List of Requested Documents</h3>
+                     </div>
+                     <div class="float-right">
+                         <form style="display: inline" action="{{ route('documents.index') }}" method="GET" role="search">
+                        <div class="row">
+                           <label for="date" class="col-form-label">From</label>
                                 <div class="col-sm-4">
                                     <input type="date" class="form-control input-sm" id="from" name="from" required>
-                                </div>
-                                <label for="date" class="col-form-label">To</label>
-                                <div class="col-sm-4">
-                                <input type="date" class="form-control input-sm" id="to" name="to" required>
-                                </div>        
+                                 </div>
+                                 <label for="date" class="col-form-label">To</label>
+                                 <div class="col-sm-4">
+                                    <input type="date" class="form-control input-sm" id="to" name="to" required>
+                                 </div>
                                 <button type="submit" name="search" title="Search" class="btn btn-success">Range</button>
-                                <a href="{{ route('documents.index') }}">
-                                    <button class="btn btn-success ml-2" type="button" title="Refresh page">
-                                        <i class="fas fa-sync-alt"></i>
-                                    </button>
-                                </a>
+                                    <a href="{{ route('documents.index') }}">
+                                          <button class="btn btn-success ml-2" type="button" title="Refresh page">
+                                             <i class="fas fa-sync-alt"></i>
+                                          </button>
+                                    </a>        
                                
                             </div>      
-                        </form>
-                    </div>
+                         </form>
+                     </div>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <table id="example1" class="table table-bordered table-striped">
+                  <table id="documents" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                       <th>No.</th>
@@ -93,7 +93,7 @@
                                     <td>{{ $trans->purpose }}</td>
                                     <td class="text-center">
                                         @if ($trans->barangayIdPath != null)
-                                          <button type="button" class="btn btn-primary fw-bold"  data-toggle="modal" data-target="#bargyId{{$trans->id}}">Show ID</button>
+                                          <button type="button" class="btn btn-primary font-weight-bold" data-toggle="modal" data-target="#bargyId{{$trans->id}}"><i class="fas fa-eye"></i> Valid ID</button>
                                           
                                           <div class="modal fade" id="bargyId{{$trans->id}}" tabindex="-1" aria-labelledby="bargyIdLabel" aria-hidden="true">
                                               <div class="modal-dialog modal-lg">
@@ -128,7 +128,7 @@
                                     @endif
                                     <td>{{ '₱' . $trans->price }}</td>
                                     @hasanyrole('Admin|Clerk|Secretary')
-                                    <td class="text-center">
+                                    <td class="text-center d-print-none">
                                           @if($trans->status == 'For Validation')
                                           <div class="d-flex justify-content-center">
                                              @can('documents-process')
@@ -140,7 +140,7 @@
                                                 </form>
                                              @endcan
                                              @can('documents-disapprove')
-                                                <a class="btn btn-sm btn-danger mr-2" data-toggle="modal" title="Disapprove Request" data-target="#disapprove{{ $trans->id }}"><i class="fas fa-thumbs-down"></i></a>
+                                                <a class="btn btn-sm btn-danger" data-toggle="modal" title="Disapprove Request" data-target="#disapprove{{ $trans->id }}"><i class="fas fa-thumbs-down"></i></a>
                                              @endcan
                                           </div>
                                           @elseif($trans->status == 'Ready to Claim')
@@ -283,29 +283,21 @@
                     @hasanyrole('Chairman|Treasurer')
                     <tfoot>
                        <tr> 
-                          {{-- <th colspan="10" rowspan="1">Total Revenue: P 100,000</th> --}}
                           <th></th>
                           <th></th>
                           <th></th>
                           <th></th>
                           <th></th>
+                          <th class="text-start">
+                              For Validation / Ready to Claim: ₱{{ $totalRevenue['due']->totalDue != 0 ? $totalRevenue['due']->totalDue : 0 }}
+                          </th>
                           <th></th>
-                          @if ($totalRevenue['due']->totalDue == 0)
-                             <th class="text-center">For Validation + Ready to Claim: ₱0</th>
-                          @else
-                             <th class="text-center">For Validation + Ready to Claim: {{ '₱' . $totalRevenue['due']->totalDue }}</th>
-                          @endif
-                          @if ($totalRevenue['paid']->totalPaid == 0)
-                             <th class="text-center">Paid: ₱0</th>
-                          @else
-                             <th class="text-center">Paid: {{ '₱' . $totalRevenue['paid']->totalPaid }}</th>
-                          @endif
-                          <p class="d-none">{{ $revenue = $totalRevenue['paid']->totalPaid + $totalRevenue['due']->totalDue }}</p>
-                          @if ($revenue == 0)
-                             <th class="text-center">Total: ₱0</th>
-                          @else
-                           <th class="text-center">Total: {{ '₱' . $revenue }}</th>
-                          @endif
+                          <th class="text-start">
+                              Paid: ₱{{ $totalRevenue['paid']->totalPaid != 0 ? $totalRevenue['paid']->totalPaid : 0 }}
+                          </th>
+                          <th class="text-start">
+                              Revenue: ₱{{ $revenue = $totalRevenue['paid']->totalPaid + $totalRevenue['due']->totalDue }}
+                          </th>
                        </tr>
                     </tfoot>
                     @endhasanyrole
@@ -323,26 +315,55 @@
       </section>
       <!-- /.content -->
 
-      @section('custom-scripts')
-
-      <script>
-            $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", {extend:"print", footer: true}, "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-      </script>
-      @endsection
+   @section('custom-scripts')
+   <script>
+   $(function () {
+      let text = "";
+      let from = $('#from').val();
+      let to = $('#to').val();
+      if (from && to)
+      {
+         text = from + "-" + to;
+      }
+      $("#documents").DataTable({
+         "responsive": true, 
+         "lengthChange": false, 
+         "autoWidth": false,
+         "buttons": [
+            {
+               extend:"csv",
+               title: 'Document Transactions ' + text,
+               exportOptions: {
+                  columns: [ 0, 1, 2, 3, 4, 5, 7, 8 ]
+               },
+               footer: true,
+            }, {
+               extend:"excel",
+               title: 'Document Transactions ' + text,
+               exportOptions: {
+                  columns: [ 0, 1, 2, 3, 4, 5, 7, 8 ]
+               },
+               footer: true,
+            }, {
+               extend:"pdf",
+               title: 'Document Transactions ' + text,
+               exportOptions: {
+                  columns: [ 0, 1, 2, 3, 4, 5, 7, 8 ]
+               },
+               footer: true,
+            }, {
+               extend:"print",
+               title: 'Document Transactions ' + text,
+               exportOptions: {
+                  columns: [ 0, 1, 2, 3, 4, 5, 7, 8 ]
+               },
+               footer: true,
+            }, 
+            "colvis"]
+      }).buttons().container().appendTo('#documents_wrapper .col-md-6:eq(0)');
+   });
+   </script>
+   @endsection
 </x-layout>
 
 

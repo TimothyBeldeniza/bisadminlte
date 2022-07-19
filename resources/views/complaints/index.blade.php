@@ -37,7 +37,7 @@
                       <div class="col-sm-4">
                       <input type="date" class="form-control input-sm" id="to" name="to" required>
                       </div>        
-                      <button type="submit" name="search" title="Search" class="btn btn-success">Range</button>
+                      <button type="submit" name="search" title="Search" class="btn btn-success font-weight-bold">Range</button>
                       <a href="{{ route('complaints.index') }}">
                           <button class="btn btn-success ml-2" type="button" title="Refresh page">
                               <span class="fas fa-sync-alt"></span>
@@ -46,12 +46,12 @@
                       
                   </div>      
               </form>
-          </div>
+            </div>
 
          </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <table id="example1" class="table table-bordered table-striped"> 
+            <table id="complaints" class="table table-bordered table-striped"> 
               <thead >
                   <tr>
                   <th>No.</th>
@@ -80,7 +80,7 @@
                             <td class="text-dark"><b>{{ $comp->status }}</b></td>
                           @endif
                           <td>
-                              <a class="btn btn-primary fw-bold" href="complaints/show/{{ $comp->id }}/{{ $comp->userId }}">View</a> 
+                              <a class="btn btn-primary btn-sm" title="View Complaint" href="complaints/show/{{ $comp->id }}/{{ $comp->userId }}"><i class="fas fa-eye"></i></a> 
                           </td>
                       </tr>
                     @endforeach
@@ -98,24 +98,54 @@
   </div><!-- /.container-fluid -->
 </div>
 
-  @section('custom-scripts')
-  <script>
-    $(function () {
-      $("#example1").DataTable({
-        "responsive": true, "lengthChange": false, "autoWidth": false,
-        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-      $('#example2').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
-      });
-    });
-  </script>
+@section('custom-scripts')
+<script>
+   $(function () {
+   let text = "";
+   let from = $('#from').val();
+   let to = $('#to').val();
+   if (from && to)
+   {
+      text = from + "-" + to;
+   }
+   $("#complaints").DataTable({
+      "responsive": true, 
+      "lengthChange": false, 
+      "autoWidth": false,
+      "buttons": [
+         {
+            extend:"csv",
+            title: 'Residential Complaints Transactions ' + text,
+            exportOptions: {
+               columns: [ 0, 1, 2, 3, 4 ]
+            },
+            footer: true,
+         }, {
+            extend:"excel",
+            title: 'Residential Complaints Transactions ' + text,
+            exportOptions: {
+               columns: [ 0, 1, 2, 3, 4 ]
+            },
+            footer: true,
+         }, {
+            extend:"pdf",
+            title: 'Residential Complaints Transactions ' + text,
+            exportOptions: {
+               columns: [ 0, 1, 2, 3, 4 ]
+            },
+            footer: true,
+         }, {
+            extend:"print",
+            title: 'Residential Complaints Transactions ' + text,
+            exportOptions: {
+               columns: [ 0, 1, 2, 3, 4 ]
+            },
+            footer: true,
+         }, 
+         "colvis"]
+   }).buttons().container().appendTo('#complaints_wrapper .col-md-6:eq(0)');
+});
+</script>
 @endsection
 </x-layout>
 

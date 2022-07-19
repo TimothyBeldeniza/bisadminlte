@@ -471,62 +471,64 @@
               </div>
             </div>
             <div class="card-body p-0">
-              <table class="table table-striped projects">
-                  <thead>
-                      <tr>
-                          <th class="text-center">
-                              Date Filed
-                          </th>
-                          <th class="text-center">
-                              Respondents
-                          </th>
-                          <th class="text-center">
-                              Status
-                          </th>
-                          <th class="text-center">
-                              Action
-                          </th>
-                      </tr>
-                  </thead>
-                  <tbody>
-
-                    @if($complaints->count() > 0)                                       
-                        @foreach ($complaints as $comp)
-                            <tr>
-
-                                <td class="text-center">
-                                    <a>
-                                        {{ $comp->date }}
-                                    </a>
-                                </td>
-
-                                <td class="text-center">
-                                    <a>
-                                        {{ $comp->respondents }}
-                                    </a>
-                                </td>
-
-                              @if ($comp->status == "Settled")
-                                <td class="project-state text-center">
-                                  <span class="badge badge-success">{{ $comp->status }}</span>
-                                </td>
-                              @elseif ($comp->status == "Escalated")
-                                <td class="project-state text-center">
-                                  <span class="badge badge-warning">{{ $comp->status }}</span>
-                                </td>
-                              @else
-                                <td class="project-state text-center">
-                                  <span class="badge badge-danger">{{ $comp->status }}</span>
-                                </td>
-                              @endif
-                              <td class="text-center"><a class="btn btn-primary my-2" href="complaints/show/{{ $comp->id }}/{{ $comp->userId }}">View</a></td>
-                            </tr>
-                        @endforeach
-                    @else
-                        <td class="text-center" colspan="4"><b class="text-danger"> No available data</b></td>
-                    @endif
-                  </tbody>
-              </table>
+              <div class="table-responsive">
+                 <table class="table table-striped projects">
+                     <thead>
+                         <tr>
+                             <th class="text-center">
+                                 Date Filed
+                             </th>
+                             <th class="text-center">
+                                 Respondents
+                             </th>
+                             <th class="text-center">
+                                 Status
+                             </th>
+                             <th class="text-center">
+                                 Action
+                             </th>
+                         </tr>
+                     </thead>
+                     <tbody>
+   
+                       @if($complaints->count() > 0)                                       
+                           @foreach ($complaints as $comp)
+                               <tr>
+   
+                                   <td class="text-center">
+                                       <a>
+                                           {{ $comp->date }}
+                                       </a>
+                                   </td>
+   
+                                   <td class="text-center">
+                                       <a>
+                                           {{ $comp->respondents }}
+                                       </a>
+                                   </td>
+   
+                                 @if ($comp->status == "Settled")
+                                   <td class="project-state text-center">
+                                     <span class="badge badge-success">{{ $comp->status }}</span>
+                                   </td>
+                                 @elseif ($comp->status == "Escalated")
+                                   <td class="project-state text-center">
+                                     <span class="badge badge-warning">{{ $comp->status }}</span>
+                                   </td>
+                                 @else
+                                   <td class="project-state text-center">
+                                     <span class="badge badge-danger">{{ $comp->status }}</span>
+                                   </td>
+                                 @endif
+                                 <td class="text-center"><a class="btn btn-primary my-2" href="complaints/show/{{ $comp->id }}/{{ $comp->userId }}"><i class="fas fa-eye"></i></a></td>
+                               </tr>
+                           @endforeach
+                       @else
+                           <td class="text-center" colspan="4"><b class="text-danger"> No available data</b></td>
+                       @endif
+                     </tbody>
+                 </table>
+              </div>
             </div>
             <!-- /.card-body -->
           </div>
@@ -596,7 +598,7 @@
                                       <span class="badge badge-danger">{{ $comp->status }}</span>
                                     </td>
                                   @endif
-                                  <td class="text-center"><a class="btn btn-primary my-2" href="complaints/show/{{ $comp->id }}/{{ $comp->userId }}">View</a></td>
+                                  <td class="text-center"><a class="btn btn-primary my-2" href="complaints/show/{{ $comp->id }}/{{ $comp->userId }}"><i class="fas fa-eye"></i></a></td>
                                 </tr>
                             @endforeach
                         @else
@@ -674,7 +676,7 @@
                                       <span class="badge badge-danger">{{ $comp->status }}</span>
                                     </td>
                                   @endif
-                                  <td class="text-center"><a class="btn btn-primary my-2" href="{{ route('complaints.showoutsider', $comp->id) }}">View</a></td>
+                                  <td class="text-center"><a class="btn btn-primary my-2" href="{{ route('complaints.showoutsider', $comp->id) }}"><i class="fas fa-eye"></i></a></td>
                                 </tr>
                             @endforeach
                         @else
