@@ -153,7 +153,7 @@
                         <div class="row">
                             <div class="d-flex justify-content-end input-group col-sm mb-3">
                                 <div>
-                                    <button onclick="return confirm('Are your inputs correct?')" type="submit" class="btn btn-primary fw-bold">
+                                    <button onclick="return confirm('Are your inputs correct?')" type="submit" class="btn btn-primary font-weight-bold">
                                         {{ __('Submit') }}
                                     </button>
                                 </div>

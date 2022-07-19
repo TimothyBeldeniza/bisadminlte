@@ -52,11 +52,11 @@
                         {{-- @method('POST') --}}
                         @csrf
                         <div class="form-group my-1">
-                           <label for="Image" class="required fw-bold">{{ __('Document Title') }}</label>
+                           <label for="Image" class="required font-weight-bold">{{ __('Document Title') }}</label>
                            <input type="text" class="form-control" name="docType" placeholder="Enter Document title here..." required>
                         </div>
                         <div class="form-group my-1">
-                        <label for="Image" class="required fw-bold">{{ __('Document Content') }}</label>
+                        <label for="Image" class="required font-weight-bold">{{ __('Document Content') }}</label>
                            {{-- <textarea class="form-control" name="template" id="summernote"></textarea> --}}
                            <textarea maxlength="715" id="template" class="form-control" rows="10" name="template" placeholder="Example: 
 This is to certify that <<lastName>>, <<firstName>>, of legal age, <<civilStatus>>, <<citizenship>> citizen, and resident of <<houseNo>>, <<street>>, <<brgy>>, <<city>>, <<province>>.
@@ -67,7 +67,7 @@ This certification is being issued upon the request of the interested party conn
                         <div id="counter"></div>
                         </div>
                         <div class="form-group my-1">
-                        <label for="price" class="required fw-bold">{{ __('Document Price') }}</label>
+                        <label for="price" class="required font-weight-bold">{{ __('Document Price') }}</label>
                            <input type="number" class="form-control" step="1" min="0" max="100" name="price" placeholder="ex. 50" required> 
                         </div>
                         <div class="form-group my-1">

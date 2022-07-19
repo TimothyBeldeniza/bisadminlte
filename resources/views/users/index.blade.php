@@ -62,7 +62,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <table id="example1" class="table table-bordered table-striped">
+                  <table id="users" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                       <th>No</th>
@@ -128,7 +128,7 @@
                                     @endrole
 
                                     @hasanyrole('Chairman|Secretary')
-                                        <td>{{ $user->contactNo }}</td>
+                                        <td>+63{{ $user->contactNo }}</td>
                                         <td>{{ $user->houseNo . ' ' . $user->street }}</td>
                                     @endhasanyrole
                                 </tr>
@@ -243,21 +243,51 @@
         });
 
         // Page specific script
-        $(function () {
-            $("#example1").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-            });
-        });
+         $(function () {
+            let text = "";
+            let from = $('#from').val();
+            let to = $('#to').val();
+            if (from && to)
+            {
+               text = from + "-" + to;
+            }
+            $("#users").DataTable({
+               "responsive": true, 
+               "lengthChange": false, 
+               "autoWidth": false,
+               "buttons": [
+                  {
+                     extend:"csv",
+                     title: 'Registered Users ' + text,
+                     exportOptions: {
+                        columns: [ 0, 1, 2, 3, 4 ]
+                     },
+                     footer: true,
+                  }, {
+                     extend:"excel",
+                     title: 'Registered Users ' + text,
+                     exportOptions: {
+                        columns: [ 0, 1, 2, 3, 4 ]
+                     },
+                     footer: true,
+                  }, {
+                     extend:"pdf",
+                     title: 'Registered Users ' + text,
+                     exportOptions: {
+                        columns: [ 0, 1, 2, 3, 4 ]
+                     },
+                     footer: true,
+                  }, {
+                     extend:"print",
+                     title: 'Registered Users ' + text,
+                     exportOptions: {
+                        columns: [ 0, 1, 2, 3, 4 ]
+                     },
+                     footer: true,
+                  }, 
+                  "colvis"]
+            }).buttons().container().appendTo('#users_wrapper .col-md-6:eq(0)');
+         });
 
     </script>
     @endsection

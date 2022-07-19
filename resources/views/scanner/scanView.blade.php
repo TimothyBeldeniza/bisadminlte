@@ -29,14 +29,13 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-md-8">
-                    <h1 class="text-center">Scan Document QR</h1>
                     <a href="/home">
                         <button class="btn btn-secondary col-md-12 btn-lg mb-2">Go back</button>
                     </a>
                         <div class="card">
                             <div class="card-header text-center">{{ __('Scan Here') }}</div>
                             <div class="card-body text-center">
-                                <video id="preview" width="600" height="400"></video>
+                                <video id="preview" class="w-100 h-100"></video>
                                 <hr>
                                     <button class="btn btn-primary mx-auto" id="cameraFinder" onclick="getCameras();" style="display: block;">Get Cameras</button>
                                     <button class="btn btn-success mx-auto" id="cameraToggle" onclick="openCamera();" style="display: none; disabled: true;">Turn ON Camera</button>

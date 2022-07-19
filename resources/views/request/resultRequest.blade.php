@@ -32,7 +32,8 @@
           <div class="card">
             <div style="background-color: #f6f7cd;" class="card-header font-weight-bold"><b>Profile</b></div>
                 <div class="card-body">
-                  <p class="text-center"><img src="{{ asset('images/users/'.$data->profilePath) }}" style="height: 288px; width: auto;"></p>
+                  <p class="text-center"><img class="w-100 h-100" src="{{ asset('images/users/'.$data->profilePath) }}"></p>
+                  <hr>
                   <p class="text-center text-start card-text"><b>Requisitioner:</b> {{ $data->lastName . ', ' . $data->firstName}}</p>
                   <p class="text-center text-start card-text"><b>Email:</b> {{ $data->email}}</p>
                 </div>

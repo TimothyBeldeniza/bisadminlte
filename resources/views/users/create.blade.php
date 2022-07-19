@@ -322,10 +322,10 @@
     
                             <div class="form-group row my-1">
                                 <div class="col-md-6 offset-md-4 ">
-                                    <button  type="submit" class="btn btn-primary fw-bold">
+                                    <button  type="submit" class="btn btn-primary font-weight-bold">
                                         {{ __('Submit') }}
                                     </button>
-                                    <a class="btn btn-secondary" href="{{ route('users.index') }}">Back</a>
+                                    <a class="btn btn-secondary font-weight-bold" href="{{ route('users.index') }}">Back</a>
                                 </div>
                             </div>
     

@@ -25,11 +25,11 @@
     <div class="content-header">
         <div class="container-fluid">
             <div class="row justify-content-center">
-                <div class="col-4">
+                <div class="col-md-4">
                     <div class="card">
                         <div style="background-color: #f6f7cd" class="card-header text-dark font-weight-bold"><b>Profile Picture</b></div>
                           <div class="card-body">
-                            <p class="text-center"><img src="{{ asset('images/users/'.$user->profilePath) }}" style="height: 288px; width: auto;"></p>
+                            <p class="text-center"><img class="w-100 h-100" src="{{ asset('images/users/'.$user->profilePath) }}"></p>
                             <hr>
                             <p class="card-text"><b>Name: </b>{{ $user->firstName. ' ' .$user->lastName }}</p>
                             <p class="card-text"><b>Email: </b>{{ $user->email }}</p>

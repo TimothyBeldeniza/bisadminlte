@@ -38,7 +38,7 @@
                         <div class="card">
                             <div class="card-header text-center">{{ __('Scan Here') }}</div>
                             <div class="card-body text-center">
-                                <video id="preview" width="600" height="400"></video>
+                                <video id="preview" class="w-100 h-100"></video>
                                 <hr>
                                     <button class="btn btn-primary mx-auto" id="cameraFinder" onclick="getCameras();" style="display: block;">Get Cameras</button>
                                     <button class="btn btn-success mx-auto" id="cameraToggle" onclick="openCamera();" style="display: none; disabled: true;">Turn ON Camera</button>
