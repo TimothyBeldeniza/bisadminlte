@@ -59,7 +59,8 @@
         <div class="container">
           <div class="row align-items-center text-white">
             <!-- START THE CONTENT FOR THE INTRO  -->
-            <div class="col-lg-6 intros text-start">
+            <div data-aos="fade-right"
+              data-aos-duration="3000" class="col-lg-6 intros text-start">
               <h1 class="display-2">
                 <span class="display-2--intro">Barangay Information System</span>
                 <span class="display-2--description lh-base">
@@ -71,7 +72,8 @@
               </button>
             </div>
             <!-- START THE CONTENT FOR THE VIDEO -->
-            <div class="col-lg-6 intros text-end">
+            <div data-aos="fade-left"
+              data-aos-duration="3000" class="col-lg-6 intros text-end">
               <div class="video-box">
                 <img src="{{ asset('homepage-assets/images/arts/ui.png') }}" alt="video illutration" class="img-fluid">
                 <a href="#" class="glightbox position-absolute top-50 start-50 translate-middle">
