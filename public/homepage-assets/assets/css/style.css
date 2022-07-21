@@ -4588,7 +4588,7 @@ textarea.form-control-lg {
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.125);
 }
 .accordion-button:not(.collapsed)::after {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23f6f7cd'%3e%3cpath fill-rule='evenodd' d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z'/%3e%3cpath d='M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%2353ae60'%3e%3cpath fill-rule='evenodd' d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z'/%3e%3cpath d='M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z'/%3e%3c/svg%3e");
   transform: rotate(-180deg);
 }
 .accordion-button::after {
@@ -11267,25 +11267,10 @@ textarea.form-control-lg {
 .intro-section {
   background: linear-gradient(to right, rgba(38, 78, 44, 0.95), rgba(246, 247, 205, 0.95));
   padding: 10rem 0 0 0;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-}
-.intro-section svg {
-  margin-top: 20px;
-  position: absolute;
-  bottom: 0;
 }
 
 .intros .video-box {
   position: relative;
-}
-.intros .video-box a {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 .intros .video-box a span i {
   font-size: 6rem;
@@ -11324,89 +11309,46 @@ textarea.form-control-lg {
   font-weight: 500;
 }
 
-.services {
-  position: relative;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-.services__content {
-  padding: 1rem;
-  margin-top: 0;
-}
-.services__content p {
-  font-size: 0.8rem;
-}
-@media (min-width: 992px) {
-  .services__content p {
-    font-size: 1rem;
-  }
-}
-@media (min-width: 992px) {
-  .services__content {
-    margin-top: 5rem;
-  }
-}
-.services__content .icon {
-  font-size: 1.5rem;
-  color: #264e2c;
-}
-@media (min-width: 992px) {
-  .services__content .icon {
-    font-size: 2.5rem;
-  }
-}
-.services__pic {
-  max-width: 100%;
-}
-
 .testimonials {
   position: relative;
   padding: 0;
   background: linear-gradient(to right, rgba(38, 78, 44, 0.95), rgba(246, 247, 205, 0.95));
 }
-.testimonials__card {
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 2rem 1.25rem;
-  border-radius: 0.65rem;
-  height: auto;
-  text-align: center;
+.testimonials .announcement-box {
+  height: 590px;
 }
-.testimonials__card i {
-  font-size: 1.5rem;
-  color: rgba(38, 78, 44, 0.7);
+.testimonials .announcement-box .announcement-content p {
+  font-size: 17px;
+  margin-bottom: 1px;
 }
-.testimonials__card .ratings i {
-  color: rgba(38, 78, 44, 0.7);
-  font-size: 1rem;
+.testimonials .announcement-box .announcement-content small {
+  color: #555;
+  font-size: 16px;
 }
-.testimonials__picture {
-  width: 6rem;
-  height: 6rem;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.testimonials__card h5 {
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
-.testimonials__picture img {
-  border: 5px solid rgba(38, 78, 44, 0.7);
+.testimonials__card img {
+  width: 100%;
+  max-height: 450;
+  object-fit: cover;
+  object-position: center;
 }
-.testimonials__name {
-  padding-top: 3rem;
-  margin-bottom: 1rem;
-  text-align: center;
-  font-weight: 500;
-  color: #fff;
+.testimonials__card p {
+  font-size: 18px;
 }
-.testimonials__name h3 {
-  padding-top: 0.8rem;
-  text-transform: capitalize;
-}
-.testimonials__name p {
-  padding-bottom: 2rem;
-  text-transform: capitalize;
+.testimonials .announcement-content p {
+  -webkit-line-clamp: 3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .portfolio {
-  padding: 4rem 0;
+  padding-bottom: 150px;
 }
 .portfolio button {
   text-transform: capitalize;
@@ -11417,57 +11359,19 @@ textarea.form-control-lg {
 }
 .portfolio .card:hover {
   background-color: #264e2c;
-  transition-duration: 1000ms;
+  transition-duration: 1s;
   transition-property: all;
 }
 .portfolio .card:hover img {
   background-color: white;
   box-shadow: 12px 12px rgba(255, 255, 255, 0.4);
-  transition-duration: 1000ms;
+  transition-duration: 1s;
   transition-property: all;
 }
 .portfolio .card:hover a {
   color: white;
-  transition-duration: 1000ms;
+  transition-duration: 1s;
   transition-property: all;
-}
-
-.get-started {
-  padding: 4rem 0;
-  background-color: #e9ecef;
-}
-
-.cta-info {
-  padding: 3rem;
-  margin: 1rem 0;
-}
-.cta-info__list {
-  position: relative;
-  list-style-type: none;
-  display: block;
-  padding-top: 0.5rem;
-  padding-left: 0.5rem;
-  margin-bottom: 0.7rem;
-}
-.cta-info__list li::before {
-  font-family: "Font Awesome 6 Free";
-  content: "\f00c";
-  font-weight: 600;
-  margin-right: 0.5rem;
-  font-size: 1.2rem;
-}
-
-.form {
-  padding: 3rem;
-}
-.form button {
-  border: none;
-  color: #fff;
-}
-.form button a {
-  color: #fff;
-  text-decoration: none;
-  text-transform: capitalize;
 }
 
 .footer {

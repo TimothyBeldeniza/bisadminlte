@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Learning Bootstrap v5 with sass</title>
+    <title>BIS - Home</title>
     <link rel="stylesheet" href="{{ asset('homepage-assets/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('homepage-assets/assets/css/fontawesome.css') }}">
     <link rel="stylesheet" href="{{ asset('homepage-assets/assets/vendors/css/glightbox.min.css') }}">
@@ -23,7 +23,7 @@
     <nav class="navbar navbar-expand-lg  navbar-dark menu shadow fixed-top">
         <div class="container">
           <a class="navbar-brand d-flex align-items-center" href="#">
-              <img class="image-fluid bis-logo" src="{{ asset('homepage-assets       /images/BIS - Logo.png') }}" alt="logo-image">
+              <img class="image-fluid bis-logo" src="{{ asset('homepage-assets/images/BIS - Logo.png') }}" alt="logo-image">
               <h3 class="fw-bold ms-2"> B I S</h3>
           </a>
           
@@ -33,75 +33,63 @@
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Services</a>
+                <a class="nav-link" href="#companies">About Us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Announcements</a>
+                <a class="nav-link" href="#testimonials">Announcements & Events</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">FAQ</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
+                <a class="nav-link" href="#portfolio">Services</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('login') }}">Login</a>
               </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="#"></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"></a>
+              </li> -->
             </ul>
           </div>
         </div>
       </nav>
       
-      
-      <!-- START THE INTRO SECTION -->
-      <section id="home" class="intro-section position-relative">
-          <div class="container">
-            <div class="row align-items-center text-dark">
-              <!-- START THE CONTENT FOR THE INTRO -->
-              <div data-aos="fade-right"
-              data-aos-duration="3000" class="col-md-6 intros text-start">
-                  <h1 class="display-2">
-                      <span class="text-light display-2--intro">Barangay Information System</span>
-                      <span class="text-light display-2--description lh-base">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque, distinctio.
-                      </span>
-                  </h1>
-
-                  <button type="button" class="rounded-pill btn-rounded">Get in Touch
-                    <span>
-                        <i class="fas fa-arrow-right"></i>
-                    </span>
-                  </button>
-              </div>
-
-              <!-- START THE CONTENT FOR THE VIDEO -->
-              <div data-aos="fade-left"
-              data-aos-duration="3000" class="col-md-6 intros text-end">
-                <div class="video-box">
-
-                    <img src="{{ asset('homepage-assets/images/arts/ui.png') }}" alt="video illustration " class="img-fluid">
-                
-                    <a href="#" class="glightbox">
-                      <span>
-                        <i class="fas fa-play-circle"></i>
-                      </span>
-
-                      <span class="border-animation border-animation--border-1"></span>
-                      <span class="border-animation border-animation--border-2"></span>
-
-                    </a>
-                </div>
+      <section id="home" class="intro-section">
+        <div class="container">
+          <div class="row align-items-center text-white">
+            <!-- START THE CONTENT FOR THE INTRO  -->
+            <div class="col-lg-6 intros text-start">
+              <h1 class="display-2">
+                <span class="display-2--intro">Barangay Information System</span>
+                <span class="display-2--description lh-base">
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque, distinctio.
+                </span>
+              </h1>
+              <button type="button" class="rounded-pill btn-rounded">Get in Touch
+                <span><i class="fas fa-arrow-right"></i></span>
+              </button>
+            </div>
+            <!-- START THE CONTENT FOR THE VIDEO -->
+            <div class="col-lg-6 intros text-end">
+              <div class="video-box">
+                <img src="{{ asset('homepage-assets/images/arts/ui.png') }}" alt="video illutration" class="img-fluid">
+                <a href="#" class="glightbox position-absolute top-50 start-50 translate-middle">
+                  <span>
+                    <i class="fas fa-play-circle"></i>
+                  </span>
+                  <span class="border-animation border-animation--border-1"></span>
+                  <span class="border-animation border-animation--border-2"></span>
+                </a>
               </div>
             </div>
           </div>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffffff" fill-opacity="1" d="M0,96L40,122.7C80,149,160,203,240,197.3C320,192,400,128,480,106.7C560,85,640,107,720,144C800,181,880,235,960,229.3C1040,224,1120,160,1200,138.7C1280,117,1360,139,1400,149.3L1440,160L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg>
-          
-        
-        </section>
-      
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffffff" fill-opacity="1" d="M0,160L48,176C96,192,192,224,288,208C384,192,480,128,576,133.3C672,139,768,213,864,202.7C960,192,1056,96,1152,74.7C1248,53,1344,107,1392,133.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+      </section>
 
       <!-- START THE COMPANIES SEcTION -->
-      <section class="companies">
+      <section id="companies" class="companies">
         <div class="container-fluid">
           <div data-aos="fade-down"
           data-aos-duration="3000" class="row text-center">
@@ -127,192 +115,135 @@
         </div>
       </section>
 
-      <!-- START SECTION 5 -THE Testimonials -->
+      <!-- START SECTION -THE Announcements -->
       <section id="testimonials" class="testimonials">
         <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffffff" fill-opacity="1" d="M0,96L48,128C96,160,192,224,288,213.3C384,203,480,117,576,117.3C672,117,768,203,864,213.3C960,224,1056,160,1152,144C1248,128,1344,160,1392,176L1440,192L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>
         <div data-aos="fade-up" data-aos-duration="3000" class="container">
+          
           <div class="row text-center text-white">
-            <h1 class="display-3 fw-bold">Announcements</h1>
+            <h1 class="display-3 fw-bold">Announcements & Events</h1>
             <hr style="width:100px; height:3px;" class="mx-auto">
-            <p class="lead pt-1">What our barangay officials are saying</p>
+            <!-- <p class="lead pt-1">What our barangay officials are saying</p> -->
           </div>
 
           <!-- START THE CAROUSEL CONTENT -->
-          <div class="row align-items-center">
-            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-              <div class="carousel-inner">
-                <!-- CAROUSEL ITEM 1 -->
-                <div class="carousel-item active">
-                  <!-- TESTIMONIALS CARD -->
-                  <div class="testimonials__card">
-                    <p class="lh-lg">
-                      <i class="fas fa-quote-left"></i>
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore, temporibus omnis maxime, possimus veniam sint aliquam deserunt labore optio ipsum repudiandae.
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores atque obcaecati repudiandae similique eaque consequuntur, dolore illo accusamus molestiae. Consequuntur qui ipsum commodi nobis quos dolore cupiditate odit fugiat sint!
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident nisi eveniet, sunt sapiente veniam in facere, explicabo consequuntur illo, modi nihil expedita quis. Magni quae necessitatibus totam praesentium tempora? Quasi!
-                      <i class="fas fa-quote-right"></i>
-                      
-                    </p>
-                  </div>
-                  <!-- client picture -->
-                  <div class="testimonials__picture">
-                    <img src="{{ asset('homepage-assets/images/officials/bart.png') }}" alt="official-1 picture" class="rounded-circle img-fluid">
-                  </div>
+          <div class="row bg-white rounded-3">
+            <div class="announcement col-lg-5  p-4">
+              <h5 class="fw-bold text-primary">Announcements and Advisories</h5>
+              <hr class="text-success">
 
-                  <!-- client name & role -->
-                  <div class="testimonials__name">
-                    <h3>Jon Jeremiah Bartolome</h3>
-                    <p class="fw-light">Chairman</p>
-                  </div>
+              <div class="announcement-box overflow-auto">
+                <div class="announcement-content text-capitalize">
+                  <h5 class="text-primary text-capitalize">Title of Announcement</h5>
+                  <p class="text-capitalize">MAGALANG NA MULING PAALALA MULA SA OSCA:
+                    TUMAWAG PO MUNA SA MGA BILANG NG TELEPONO NA SUMUSUNOD 
+                    8571-3878, 5310-3371,5310-3372 
+                    BAGO PO PAPUNTAHIN SI SENIOR SA OSCA-MANILA CITY HALL PARA SA SCHEDULE.
+                    MANGYARI PO LAMANG NA TULUNGAN PO NATIN SI SENIOR CITIZEN NA MAKATAWAG SA OSCA PARA SA SCHEDULE BAGO PO SILA PUMUNTA SA CITY HALL PARA SA PAGPROSESO NG ID.
+                    SIGURADUHIN PO LAMANG NA DUMATING PO SILA SA ORAS AT ARAW NG KANILANG SCHEDULE. 
+                    KAPAG HINDI PO SILA MAKAKARATING KAILANGAN PO NILANG TUMAWAG MULI AT MAGPASCHEDULE.
+                    ANG PAGKUHA NG BOOKLETS,  VERIFICATION SA HELP DESK AT IBA PONG SERBISYO AY DI NA PO KAILANGANG MAGPASCHEDULE.
+                    ITO AY BILANG PAG IINGAT SA BANTA NG COVID 19,  PAGPAPABUTI NG AMING SERBISYO AT PAGTUGON SA KAUTUSAN NG ATING PUNONG LUNGSOD NG PAG AAYOS NG ATING MGA TANGGAPAN/ LUGAR NG GAWAIN.
+                    Masaya po kami na kayo ay mapaglingkuran.</p>
+                  <small class="text-dark">Posted: July 07, 2022</small>
+                  <hr>
                 </div>
-
-                <!-- CAROUSEL ITEM 2 -->
-                <div class="carousel-item">
-                  <!-- TESTIMONIALS CARD -->
-                  <div class="testimonials__card">
-                    <p class="lh-lg">
-                      <i class="fas fa-quote-left"></i>
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore, temporibus omnis maxime, possimus veniam sint aliquam deserunt labore optio ipsum repudiandae.
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe cum libero suscipit! Repellat ipsum numquam quae nulla placeat, incidunt nostrum nisi nihil, sit aspernatur temporibus et nam? Quibusdam, aperiam laborum.
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, est rerum vero sit maxime blanditiis dolorem error neque sint omnis excepturi esse? Est ratione odio architecto minima, sit quo et?
-                      <i class="fas fa-quote-right"></i>
-                      
-                    </p>
-                  </div>
-                  <!-- client picture -->
-                  <div class="testimonials__picture">
-                    <img src="{{ asset('homepage-assets/images/officials/baste.png') }}" alt="official-1 picture" class="rounded-circle img-fluid">
-                  </div>
-
-                  <!-- client name & role -->
-                  <div class="testimonials__name">
-                    <h3>Sebastian Carlo Cabiades</h3>
-                    <p class="fw-light">Secretary</p>
-                  </div>
+                <div class="announcement-content text-capitalize">
+                  <h5 class="text-primary text-capitalize">Lorem, ipsum dolor.</h5>
+                  <p class="text-capitalize">Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem reprehenderit numquam repellat harum ipsum minus, corrupti aut officiis explicabo labore, est eum quod maxime doloremque, illo expedita dignissimos iste debitis!</p>
+                  <small class="text-dark">Posted: July 07, 2022</small>
+                  <hr>
+                </div>
+                <div class="announcement-content text-capitalize">
+                  <h5 class="text-primary text-capitalize">Lorem, ipsum dolor.</h5>
+                  <p class="text-capitalize">Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem reprehenderit numquam repellat harum ipsum minus, corrupti aut officiis explicabo labore, est eum quod maxime doloremque, illo expedita dignissimos iste debitis!</p>
+                  <small class="text-dark">Posted: July 07, 2022</small>
+                  <hr>
+                </div>
+                <div class="announcement-content text-capitalize">
+                  <h5 class="text-primary text-capitalize">Lorem, ipsum dolor.</h5>
+                  <p class="text-capitalize">Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem reprehenderit numquam repellat harum ipsum minus, corrupti aut officiis explicabo labore, est eum quod maxime doloremque, illo expedita dignissimos iste debitis!</p>
+                  <small class="text-dark">Posted: July 07, 2022</small>
+                  <hr>
                 </div>
               </div>
-              <div class="text-center">
-                <button class="btn btn-outline-light fas fa-long-arrow-alt-left" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+              
+            </div>
+
+            <div class="col-lg-7 p-4">
+              <h5 class="fw-bold text-primary">Latest Events</h5>
+              <hr class="text-primary">
+              <div class="text-end mb-2">
+                <button class="btn btn-outline-primary fas fa-long-arrow-alt-left" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                 
                 </button>
-                <button class="btn btn-outline-light fas fa-long-arrow-alt-right" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <button class="btn btn-outline-primary fas fa-long-arrow-alt-right" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
                   
                 </button>
               </div>
+              <div class="align-items-start">
+                <div id="carouselExampleCaptions" class=" carousel slide" data-bs-ride="carousel">
+                  <div class="carousel-inner">
+                    <!-- CAROUSEL ITEM 1 -->
+                    <div class="carousel-item active">
+                      <!-- TESTIMONIALS CARD -->
+                      <div class="testimonials__card">
+                        
+                        <img class="event-img img-fluid" src="{{ asset('homepage-assets/images/2joints.jpg') }}" alt="">
 
+                        <h5 class="mt-3 event-description text-primary">New Normal sa Nutrisyon Sama Sama gawan ng Solusyon. Brgy. 204 Zone 18 Dist. 2 Ch.Maria Victoria Balawitan.</h5>
+                        <p>July 20, 2022</p>
+                      </div>
+                    </div> 
+                    <div class="carousel-item ">
+                      <!-- TESTIMONIALS CARD -->
+                      <div class="testimonials__card">
+                        
+                        <img class="event-img img-fluid" src="{{ asset('homepage-assets/images/bingo.jpg') }}" alt="">
+
+                        <h5 class="mt-3 event-description text-primary">FIESTA BINGO BONANZA 2022 AT BARANGAY 204 ZONE 18..CH. MARIA VICTORIA. B. BALAWITAN</h5>
+                        <p>July 21, 2022</p>
+                      </div>
+                    </div> 
+                  </div>
+                </div>
+              </div>
             </div>
+            
           </div>
+          
 
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffffff" fill-opacity="1" d="M0,96L48,128C96,160,192,224,288,213.3C384,203,480,117,576,117.3C672,117,768,203,864,213.3C960,224,1056,160,1152,144C1248,128,1344,160,1392,176L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
       </section>
 
 
-      <!-- START SECTION 6 - FAQ -->
+    
 
-      <section id="faq" class="faq">
-        <div class="container">
-          <div class="row text-center">
-            <h1 class="display-3 fw-bold text-uppercase">faq</h1>
-            <div class="heading-line"></div>
-            <p class="lead">Frequently asked questions, get knowledge before hand</p>
-          </div>
+      
 
-          <!-- ACCORDION CONTENT -->
-          <div class="row mt-5">
-            <div class="col-md-12">
-              <div class="accordion" id="accordionExample">
-                <!-- ACCORDION ITEM 1 -->
-                <div data-aos="zoom-in-up" class="accordion-item shadow mb-3">
-                  <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      What are the main features?
-                    </button>
-                  </h2>
-                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                    </div>
-                  </div>
-                </div>
-                <!-- ACCORDION ITEM 2 -->
-                <div data-aos="zoom-in-up" class="accordion-item shadow mb-3">
-                  <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                      Question #2
-                    </button>
-                  </h2>
-                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                    </div>
-                  </div>
-                </div>
-                <!-- ACCORDION ITEM 3 -->
-                <div data-aos="zoom-in-up" class="accordion-item shadow mb-3">
-                  <h2 class="accordion-header" id="headingThree">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                      Question #3
-                    </button>
-                  </h2>
-                  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                    </div>
-                  </div>
-                </div>
-                <!-- ACCORDION ITEM 4 -->
-                <div data-aos="zoom-in-up" class="accordion-item shadow mb-3">
-                  <h2 class="accordion-header" id="headingFour">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                      Question #4
-                    </button>
-                  </h2>
-                  <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <strong>This is the fourth item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- START SECTION 7 - THE PROPERTIES -->
+      <!-- START SECTION - THE Services -->
 
       <section id="portfolio" class="portfolio">
         <div class="container">
-          <div class="row text-center mt-5">
+          <div data-aos="fade-down"
+          data-aos-duration="3000"  class="row text-center mt-5">
             <h1 class="display-3 fw-bold text-capitalize">Services</h1>
             <div class="heading-line"></div>
             <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat fugit eius ad.</p>
           </div>
 
 
-          <!-- START THE PORTFOLIO ITEMS -->
+          <!-- START THE Services ITEMS -->
           <div class="row">
-            <!-- <div class="col-lg-4 col-md-6 border border-success d-flex align-items-center justify-content-center p-3">
-              <div class="portfolio-box shadow border border-dark ">
-                <img src="images/arts/document-scan.png" alt="" atl="portfolio 7 image" title="portfolio 7 picture" class="img-fluid">
-                <div class="portfolio-info border border-danger">
-                  <div class="caption">
-                    <h4>Authentication</h4>
-                    <p>Scan Document</p>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-
             <div data-aos="fade-right"
-            data-aos-duration="3000" class="col-lg-4 col-md-6 mt-4 ">
+              data-aos-duration="3000" class="col-lg-4 col-md-6 mt-4 ">
               <div class="card border-2 p-4 ">
                 <div class="card-body icon-box ">
                   <div class="icon">
-                    <a href="{{ url('/documents/scan') }}" class=""><img src="{{ asset('homepage-assets/images/arts/scan.jpg') }}" class="img-fluid py-4 rounded"></a>
+                    <a href="#" class=""><img src="{{ asset('homepage-assets/images/arts/scan.jpg') }}" class="img-fluid py-4 rounded"></a>
                   </div>
-                  <h4 class="mt-4 text-center "><a href="{{ url('/documents/scan') }}" class="text-decoration-none">Scan Document</a></h4>
+                  <h4 class="mt-4 text-center "><a href="#" class="text-decoration-none">Scan Document</a></h4>
                 </div>
               </div>
             </div>
@@ -338,69 +269,11 @@
                 </div>
               </div>
             </div>
-            
-            
           </div>
         </div>
       </section>
 
-      <!-- START SECTION 8 GET STARTED -->
-      <section id="contact" class="get-started">
-        <div data-aos="fade-up"
-          data-aos-duration="3000" class="container">
-          <div class="row text-center">
-            <h1 class="display-3 fw-bold text-capitalize">Get Started</h1>
-            <div class="heading-line"></div>
-            <p class="lh-lg">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus corrupti ab nesciunt!
-            </p>
-          </div>
-          <!-- START THE CTA CONTENT -->
-          <div class="row text-white">
-            <div class="col-12 col-lg-6 gradient shadow p-3">
-              <div class="cta-info w-100">
-                <h4 class="display-4 fw-bold">100% Satisfaction Guaranteed</h4>
-                <p class="lh-lg">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi laborum, voluptate esse suscipit repudiandae incidunt ut. Laborum illum pariatur natus exercitationem.
-                </p>
-                <h3 class="display-3--brief">What will be the next step?</h3>
-                <ul class="cta-info__list">
-                  <li>We'll prepare the proposal</li>
-                  <li>We'll discuss it together</li>
-                  <li>Let's start the discussion</li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-12 col-lg-6 bg-white shadow p-3">
-              <div class="form w-100 pb-2">
-                <h4 class="display-3--title mb-5">Ask a question</h4>
-                <form action="#" class="row">
-                  <div class="col-lg-6 mb-3">
-                    <input type="text" placeholder="First Name" id="inputFirstName" class="form-control form-control-lg shadow">
-                  </div>
-                  <div class="col-lg-6 mb-3">
-                    <input type="text" placeholder="Last Name" id="inputLastName" class="form-control form-control-lg shadow">
-                  </div>
-                  <div class="col-lg-12 mb-3">
-                    <input type="email" placeholder="Email Address" id="inputEmail" class="form-control form-control-lg shadow">
-                  </div>
-                  <div class="col-lg-12 mb-3">
-                    <textarea name="message" placeholder="Message" id="message" cols="30" rows="8" class="form-control form-control-lg shadow"></textarea>
-                  </div>
-                  <div class="text-center d-grid mt-1">
-                    <button type="button" class="btn btn-primary rounded-pill pt-3 pb-3">
-                      Submit
-                      <i class="fas fa-paper-plane"></i>
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- START SECTION 9 - FOOTER  -->
+      <!-- START SECTION  - FOOTER  -->
       <footer class="footer">
         <div class="container">
           <div data-aos="fade-up"
@@ -464,11 +337,8 @@
                 connect with us on social media
               </div>
               <div class="col-lg-7 col-md-6">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-tiktok"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.facebook.com/brgy204"><i class="fab fa-facebook"></i></a>
+
               </div>
             </div>
           </div>
