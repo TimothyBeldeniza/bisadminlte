@@ -299,9 +299,9 @@
                 </button>
               </div>
             </div>
-            <div class="card-body p-0">
+            <div class="card-body p-3">
                <div class="table-responsive">
-                  <table class="table table-striped projects">
+                  <table id="documents_requested" class="table table-striped projects">
                       <thead>
                           <tr>
                               <th style="width: 15%" class="text-center">
@@ -313,14 +313,14 @@
                               <th style="width: 20%" class="text-center">
                                   Purpose
                               </th>
-                              <th class="text-center">
+                              <th style="width: 8%" class="text-center">
                                   Status
                               </th>
+                              {{-- <th style="width: 20%" class="text-center">
+                                 Reason
+                              </th> --}}
                               <th style="width: 8%" class="text-center">
                                   Action
-                              </th>
-                              <th style="width: 20%" class="text-center">
-                                Reason
                               </th>
                           </tr>
                       </thead>
@@ -328,7 +328,7 @@
     
                         @if($documents->count() > 0)                                       
                             @foreach ($documents as $docu)
-                                <tr>
+                                <tr class="text-center">
                                     <td class="text-center">
                                         <a>
                                             {{ $docu->date }}
@@ -340,95 +340,122 @@
                                             {{ $docu->docType }}
                                         </a>
                                     </td>
-    
+
                                     <td class="text-center">
                                         <a>
                                             {{ $docu->purpose }}
                                         </a>
                                     </td>
+    
                                     @if ($docu->status == "For Validation")
     
                                         <td class="project-state text-center">
                                             <span class="badge badge-dark">{{ $docu->status }}</span>
                                         </td>
     
-                                        
-                                        <td class="project-actions text-center">
-                                              <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#cancel{{ $docu->transId }}">
-                                                 <i class="fas fa-times-circle"></i>
-                                                 Cancel
-                                              </a>
-                                        </td>
-                                        <div class="modal fade" id="cancel{{ $docu->transId }}" tabindex="-1" aria-labelledby="cancelLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header bg-danger">
-                                                        <h5 class="modal-title" id="cancelLabel">Cancellation</h5>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form action="documents/process/{{ $docu->id }}/{{ $docu->transId }}/{{ $docu->userId }}" method="POST">
-                                                            <b class="required">Reason for Cancelling</b><br>
-                                                            @csrf
-                                                            <div class="form-group my-1"> 
-                                                                <input type="radio"name="reason" value="Unable to go to Barangay Hall" onclick="cancelOthers{{ $docu->id }}()">
-                                                                <label>Not able to go to Barangay Hall</label>
-                                                            </div>
-    
-                                                            <div class="form-group my-1"> 
-                                                                <input type="radio" name="reason" value="Existing Document" onclick="cancelOthers{{ $docu->id }}()">
-                                                                <label>Existing Document</label>
-                                                            </div>
-    
-                                                            <div class="form-group my-1"> 
-                                                                <input type="radio" name="reason" value="Changed my mind" onclick="cancelOthers{{ $docu->id }}()">
-                                                                <label>Changed my mind</label>
-                                                            </div>
-    
-                                                            <div class="form-group my-1">
-                                                                <input type="radio" id="otherC{{ $docu->id }}" name="reason" value="Other" onclick="cancelOthers{{ $docu->id }}()">
-                                                                <label>Other</label>
-                                                            </div>  
-    
-                                                            <div class="form-group my-1" id="othersC{{ $docu->id }}">
-                                                                <label id="otherLabel" for="otherReason" class="my-1">Specify other reason</label>
-                                                                <input type="text" class="form-control" id="otherReason" name="otherReason" pattern="[a-zA-Z\s]+" placeholder="Input reason here..." disabled>
-                                                            </div>
-                                                            <div class="float-right my-1">
-                                                                <button type="submit" name="submit" value="cancel" onclick="return confirm('Are your sure to cancel request?')" class="btn btn-danger">Cancel Request</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-    
-                                        <td class="text-center">
-                                            <a>
-                                                None
-                                            </a>
-                                        </td>
-    
                                     @elseif($docu->status == "Disapproved")
+                                        <td class="project-state text-center">
+                                            <span class="badge badge-danger">{{ $docu->status }}</span>
+                                        </td> 
+                                        
+                                        <td class="project-actions text-center"><b>None</b></td>
+                                    @elseif($docu->status == "Cancelled")
                                         <td class="project-state text-center">
                                             <span class="badge badge-danger">{{ $docu->status }}</span>
                                         </td>
                                         
-                                        <td class="project-actions text-center"><b>None</b></td>
                                         <td class="text-center">
                                             <a>
                                                 {{ $docu->reason }}
                                             </a>
                                         </td>
+                                        <td class="project-actions text-center"><b>None</b></td>
                                     @else
                                         <td class="project-state text-center">
                                             <span class="badge badge-success">{{ $docu->status }}</span>
                                         </td>
-                                        <td class="project-state text-center"><b>None</b></td>
-    
-                                        <td class="project-state text-center"><b>Done</b></td>
                                     @endif
+
+                                    <td class="project-actions text-center">
+                                       <div class="d-flex justify-content-center">
+                                          @if ($docu->status == "For Validation")
+                                          <a class="btn btn-danger btn-sm mr-2" title="Cancel Document" data-toggle="modal" data-target="#cancel{{ $docu->transId }}">
+                                             <i class="fas fa-times-circle"></i>
+                                          </a>
+                                          @endif
+                                          <a class="btn btn-primary btn-sm mr-2" title="View Document" data-toggle="modal" data-target="#view{{ $docu->transId }}">
+                                             <i class="fas fa-eye"></i>
+                                          </a>
+                                       </div>
+                                     </td>
     
                                 </tr>
+
+                                 <div class="modal fade" id="cancel{{ $docu->transId }}" tabindex="-1" aria-labelledby="cancelLabel" aria-hidden="true">
+                                       <div class="modal-dialog">
+                                          <div class="modal-content">
+                                                <div class="modal-header bg-danger">
+                                                   <h5 class="modal-title" id="cancelLabel">Cancellation</h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                   <form action="documents/process/{{ $docu->id }}/{{ $docu->transId }}/{{ $docu->userId }}" method="POST">
+                                                      <b class="required">Reason for Cancelling</b><br>
+                                                      @csrf
+                                                      <div class="form-group my-1"> 
+                                                            <input type="radio"name="reason" value="Unable to go to Barangay Hall" onclick="cancelOthers{{ $docu->id }}()">
+                                                            <label>Not able to go to Barangay Hall</label>
+                                                      </div>
+
+                                                      <div class="form-group my-1"> 
+                                                            <input type="radio" name="reason" value="Existing Document" onclick="cancelOthers{{ $docu->id }}()">
+                                                            <label>Existing Document</label>
+                                                      </div>
+
+                                                      <div class="form-group my-1"> 
+                                                            <input type="radio" name="reason" value="Changed my mind" onclick="cancelOthers{{ $docu->id }}()">
+                                                            <label>Changed my mind</label>
+                                                      </div>
+
+                                                      <div class="form-group my-1">
+                                                            <input type="radio" id="otherC{{ $docu->id }}" name="reason" value="Other" onclick="cancelOthers{{ $docu->id }}()">
+                                                            <label>Other</label>
+                                                      </div>  
+
+                                                      <div class="form-group my-1" id="othersC{{ $docu->id }}">
+                                                            <label id="otherLabel" for="otherReason" class="my-1">Specify other reason</label>
+                                                            <input type="text" class="form-control" id="otherReason" name="otherReason" pattern="[a-zA-Z\s]+" placeholder="Input reason here..." disabled>
+                                                      </div>
+                                                      <div class="float-right my-1">
+                                                            <button type="submit" name="submit" value="cancel" onclick="return confirm('Are your sure to cancel request?')" class="btn btn-danger font-weight-bold">Cancel Request</button>
+                                                      </div>
+                                                   </form>
+                                                </div>
+                                          </div>
+                                       </div>
+                                 </div>
+
+                                 <div class="modal fade" id="view{{ $docu->transId }}" tabindex="-1" aria-labelledby="viewLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                       <div class="modal-content">
+                                             <div class="modal-header bg-primary">
+                                                <h5 class="modal-title" id="cancelLabel">View Document Request</h5>
+                                             </div>
+                                             <div class="modal-body m-3">
+                                                <div class="row">
+                                                   <div class="col">
+                                                      <label>Date Filed: </label><p class="card-text">{{ $docu->date }}</p>    
+                                                      <label>Documet Type: </label><p class="card-text">{{ $docu->docType }}</p>    
+                                                   </div>
+                                                   <div class="col">
+                                                      <label>Purpose: </label><p class="card-text">{{ $docu->purpose }}</p>           
+                                                      <label>Reason: </label><p class="card-text">{{ $docu->reason == null ? 'None' : $docu->reason }}</p>           
+                                                   </div>
+                                                </div>
+                                             </div>
+                                       </div>
+                                    </div>
+                                 </div>
+
                                 <script>
                                   function cancelOthers{{ $docu->id }}() {
                                       if (document.getElementById('otherC{{ $docu->id }}').checked) {
@@ -445,8 +472,6 @@
                                   }
                                 </script>
                             @endforeach
-                        @else
-                            <td class="text-center" colspan="6"><b class="text-danger"> No available data</b></td>
                         @endif
                       </tbody>
                   </table>
@@ -470,9 +495,9 @@
                 </button>
               </div>
             </div>
-            <div class="card-body p-0">
+            <div class="card-body p-3">
               <div class="table-responsive">
-                 <table class="table table-striped projects">
+                 <table id="filed_complaints" class="table table-striped projects">
                      <thead>
                          <tr>
                              <th class="text-center">
@@ -490,7 +515,6 @@
                          </tr>
                      </thead>
                      <tbody>
-   
                        @if($complaints->count() > 0)                                       
                            @foreach ($complaints as $comp)
                                <tr>
@@ -507,24 +531,20 @@
                                        </a>
                                    </td>
    
+                                   <td class="project-state text-center">
                                  @if ($comp->status == "Settled")
-                                   <td class="project-state text-center">
                                      <span class="badge badge-success">{{ $comp->status }}</span>
-                                   </td>
                                  @elseif ($comp->status == "Escalated")
-                                   <td class="project-state text-center">
                                      <span class="badge badge-warning">{{ $comp->status }}</span>
-                                   </td>
                                  @else
-                                   <td class="project-state text-center">
                                      <span class="badge badge-danger">{{ $comp->status }}</span>
-                                   </td>
                                  @endif
-                                 <td class="text-center"><a class="btn btn-primary my-2" href="complaints/show/{{ $comp->id }}/{{ $comp->userId }}"><i class="fas fa-eye"></i></a></td>
+                                 </td>
+                                 <td class="text-center">
+                                    <a class="btn btn-primary my-2" href="complaints/show/{{ $comp->id }}/{{ $comp->userId }}"><i class="fas fa-eye"></i></a>
+                                 </td>
                                </tr>
                            @endforeach
-                       @else
-                           <td class="text-center" colspan="4"><b class="text-danger"> No available data</b></td>
                        @endif
                      </tbody>
                  </table>
@@ -548,10 +568,10 @@
                 </button>
               </div>
             </div>
-            <div class="card-body p-0">
+            <div class="card-body p-3">
                <div class="table-responsive">
-                  <table class="table table-striped projects">
-                      <thead>
+                  <table id="complaint_against_resi" class="table table-striped projects">
+                     <thead>
                           <tr>
                               <th class="text-center">
                                   Date Filed
@@ -566,45 +586,38 @@
                                   Action
                               </th>
                           </tr>
-                      </thead>
-                      <tbody>
-    
+                     </thead>
+                     <tbody>
                         @if($residents->count() > 0)                                       
-                            @foreach ($residents as $comp)
-                                <tr>
-    
-                                    <td class="text-center">
-                                        <a>
-                                            {{ $comp->date }}
-                                        </a>
-                                    </td>
-    
-                                    <td class="text-center">
-                                        <a>
-                                            {{ $comp->firstName. ' ' .$comp->lastName }}
-                                        </a>
-                                    </td>
-    
-                                  @if ($comp->status == "Settled")
-                                    <td class="project-state text-center">
-                                      <span class="badge badge-success">{{ $comp->status }}</span>
-                                    </td>
-                                  @elseif ($comp->status == "Escalated")
-                                    <td class="project-state text-center">
-                                      <span class="badge badge-warning">{{ $comp->status }}</span>
-                                    </td>
-                                  @else
-                                    <td class="project-state text-center">
-                                      <span class="badge badge-danger">{{ $comp->status }}</span>
-                                    </td>
-                                  @endif
-                                  <td class="text-center"><a class="btn btn-primary my-2" href="complaints/show/{{ $comp->id }}/{{ $comp->userId }}"><i class="fas fa-eye"></i></a></td>
-                                </tr>
-                            @endforeach
-                        @else
-                            <td class="text-center" colspan="4"><b class="text-danger">No available data</b></td>
+                           @foreach ($residents as $comp)
+                              <tr>
+   
+                                 <td class="text-center">
+                                       <a>
+                                          {{ $comp->date }}
+                                       </a>
+                                 </td>
+   
+                                 <td class="text-center">
+                                       <a>
+                                          {{ $comp->firstName. ' ' .$comp->lastName }}
+                                       </a>
+                                 </td>
+   
+                                 <td class="project-state text-center">
+                                    @if ($comp->status == "Settled")
+                                          <span class="badge badge-success">{{ $comp->status }}</span>
+                                    @elseif ($comp->status == "Escalated")
+                                          <span class="badge badge-warning">{{ $comp->status }}</span>
+                                    @else
+                                          <span class="badge badge-danger">{{ $comp->status }}</span>
+                                    @endif
+                                 </td>
+                                 <td class="text-center"><a class="btn btn-primary my-2" href="complaints/show/{{ $comp->id }}/{{ $comp->userId }}"><i class="fas fa-eye"></i></a></td>
+                              </tr>
+                           @endforeach
                         @endif
-                      </tbody>
+                     </tbody>
                   </table>
                </div>
             </div>
@@ -626,9 +639,9 @@
                 </button>
               </div>
             </div>
-            <div class="card-body p-0">
+            <div class="card-body p-3">
                <div class="table-responsive">
-                  <table class="table table-striped projects">
+                  <table id="complaint_against_nonresi" class="table table-striped projects">
                       <thead>
                           <tr>
                               <th class="text-center">
@@ -649,38 +662,34 @@
     
                         @if($nonresidents->count() > 0)                                       
                             @foreach ($nonresidents as $comp)
-                                <tr>
+                              <tr>
     
-                                    <td class="text-center">
-                                        <a>
-                                            {{ $comp->date }}
-                                        </a>
-                                    </td>
+                                 <td class="text-center">
+                                       <a>
+                                          {{ $comp->date }}
+                                       </a>
+                                 </td>
+   
+                                 <td class="text-center">
+                                       <a>
+                                          {{ $comp->complainant }}
+                                       </a>
+                                 </td>
     
-                                    <td class="text-center">
-                                        <a>
-                                            {{ $comp->complainant }}
-                                        </a>
-                                    </td>
-    
-                                  @if ($comp->status == "Settled")
-                                    <td class="project-state text-center">
-                                      <span class="badge badge-success">{{ $comp->status }}</span>
-                                    </td>
-                                  @elseif ($comp->status == "Escalated")
-                                    <td class="project-state text-center">
-                                      <span class="badge badge-warning">{{ $comp->status }}</span>
-                                    </td>
-                                  @else
-                                    <td class="project-state text-center">
-                                      <span class="badge badge-danger">{{ $comp->status }}</span>
-                                    </td>
-                                  @endif
-                                  <td class="text-center"><a class="btn btn-primary my-2" href="{{ route('complaints.showoutsider', $comp->id) }}"><i class="fas fa-eye"></i></a></td>
-                                </tr>
+                                 <td class="project-state text-center">
+                                    @if ($comp->status == "Settled")
+                                        <span class="badge badge-success">{{ $comp->status }}</span>
+                                    @elseif ($comp->status == "Escalated")
+                                        <span class="badge badge-warning">{{ $comp->status }}</span>
+                                    @else
+                                        <span class="badge badge-danger">{{ $comp->status }}</span>
+                                    @endif
+                                 </td>
+
+                                 <td class="text-center"><a class="btn btn-primary my-2" href="{{ route('complaints.showoutsider', $comp->id) }}"><i class="fas fa-eye"></i></a></td>
+                                
+                              </tr>
                             @endforeach
-                        @else
-                            <td class="text-center" colspan="4"><b class="text-danger">No available data</b></td>
                         @endif
                       </tbody>
                   </table>
@@ -690,96 +699,42 @@
           </div>
           <!-- /.card -->
 
-          <div class="card collapsed-card">
-            <div class="card-header">
-              <h3 class="card-title font-weight-bold">Cancelled Document Requests</h3>
-    
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                  <i class="fas fa-plus"></i>
-                </button>
-              </div>
-            </div>
-            <div class="card-body p-0">
-               <div class="table-responsive">
-                  <table class="table table-striped projects">
-                      <thead>
-                          <tr>
-                              <th class="text-center">
-                                  Date Requested
-                              </th>
-                              <th class="text-center">
-                                  Date Canceled
-                              </th>
-                              <th class="text-center">
-                                  Document Type
-                              </th>
-                              <th class="text-center">
-                                  Purpose
-                              </th>
-                              <th class="text-center">
-                                  Status
-                              </th>
-                              <th class="text-center">
-                                  Reason
-                              </th>
-                          </tr>
-                      </thead>
-                      <tbody>
-    
-                        @if($xdocus->count() > 0)                                       
-                            @foreach ($xdocus as $xdocu)
-                                <tr>
-    
-                                    <td class="text-center">
-                                        <a>
-                                            {{ $xdocu->date }}
-                                        </a>
-                                    </td>
-    
-                                    <td class="text-center">
-                                        <a>
-                                            {{ $xdocu->cancelDate }}
-                                        </a>
-                                    </td>
-    
-                                    <td class="text-center">
-                                        <a>
-                                            {{ $xdocu->docType }}
-                                        </a>
-                                    </td>
-    
-                                    <td class="text-center">
-                                        <a>
-                                            {{ $xdocu->purpose }}
-                                        </a>
-                                    </td>
-    
-                                    <td class="text-center">
-                                        <span class="badge badge-danger">{{ $xdocu->status }}</span>
-                                    </td>
-    
-                                    <td class="text-center text-danger">
-                                        <a>
-                                            {{ $xdocu->reason }}
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @else
-                            <td class="text-center" colspan="6"><b class="text-danger"> No available data</b></td>
-                        @endif
-                      </tbody>
-                  </table>
-               </div>
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
       </div>
     </div>
     <!-- /.content -->
     @endhasanyrole
+    @section('custom-scripts')
+    <script>
+      $(document).ready(function () {
+         $("#documents_requested").DataTable({
+            "responsive": true, 
+            "lengthChange": true, 
+            "autoWidth": false,
+         });
+
+         $("#filed_complaints").DataTable({
+            "responsive": true, 
+            "lengthChange": true, 
+            "autoWidth": false,
+            "rowReorder": {
+               selector: "td:nth-child(2)"
+            },
+         });
+         
+         $("#complaint_against_resi").DataTable({
+            "responsive": true, 
+            "lengthChange": true, 
+            "autoWidth": false,
+         });
+
+         $("#complaint_against_nonresi").DataTable({
+            "responsive": true, 
+            "lengthChange": true, 
+            "autoWidth": false,
+         });
+      });
+    </script>
+    @endsection
 </x-layout>
 
 

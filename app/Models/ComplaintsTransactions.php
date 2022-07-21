@@ -17,5 +17,6 @@ class ComplaintsTransactions extends Model
         'respondentsAdd',
         'respondentsContact',
         'reason',
+        'hearing_date',
     ];
 }

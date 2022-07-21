@@ -421,6 +421,7 @@ class ComplaintsController extends Controller
                'respondents' => $respondentInfo->name,
                'respondentsAdd' => $respondentInfo->address,
                'respondentsContact' => $respondentInfo->contactNo,
+               'hearing_date' => $request->hearing_date,
             ]);
 
             InsideRespondents::create([
@@ -447,6 +448,7 @@ class ComplaintsController extends Controller
                'respondents' => $request->respondents,
                'respondentsAdd' => $request->respondentsAdd,
                'respondentsContact' => $request->respondentsContact,
+               'hearing_date' => $request->hearing_date,
             ]);
             
             return redirect('home')->with('success', 'Complaint filed successfully!');
@@ -474,6 +476,7 @@ class ComplaintsController extends Controller
                'respondents' => $respondentInfo->name,
                'respondentsAdd' => $respondentInfo->address,
                'respondentsContact' => $respondentInfo->contactNo,
+               'hearing_date' => $request->hearing_date,
             ]);
 
             OutsideComplainants::create([
@@ -514,6 +517,7 @@ class ComplaintsController extends Controller
                 DB::raw('date(complaints_transactions.updated_at) as "condition_date"'),'complaints_transactions.respondents', 
                 'complaints_transactions.respondentsAdd', 'complaints_transactions.respondentsContact',
                 'complaints_transactions.compDetails', 'complaints_transactions.transId', 'complaints_transactions.reason',
+                'complaints_transactions.hearing_date',
                 'users.lastName', 'users.firstName', 'users.houseNo', 'users.street', 'users.contactNo',
                 'transactions.status', 'transactions.userId')
         ->first();
@@ -545,7 +549,7 @@ class ComplaintsController extends Controller
                 DB::raw('date(complaints_transactions.updated_at) as "condition_date"'),
                 'complaints_transactions.compDetails','complaints_transactions.respondents', 
                 'complaints_transactions.respondentsAdd', 'complaints_transactions.respondentsContact',
-                'complaints_transactions.reason',
+                'complaints_transactions.reason', 'complaints_transactions.hearing_date',
                 DB::raw('date(complaints_transactions.created_at) as "date"'),
                 'outside_complainants.complainant', 'outside_complainants.address', 'outside_complainants.contact',
                 'transactions.status','transactions.userId')
@@ -632,6 +636,10 @@ class ComplaintsController extends Controller
         Hearings::create([
             'compId' => $compId,
             'details' => $request->details,
+        ]);
+
+        ComplaintsTransactions::where('id', $compId)->update([  
+         'hearing_date' => $request->hearing_date,
         ]);
 
         $onGoing = Transactions::where('id', $transId)->update(['status' => 'On Going']);

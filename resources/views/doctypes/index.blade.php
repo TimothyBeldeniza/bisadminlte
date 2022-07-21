@@ -77,24 +77,22 @@
                   </tr>
                </thead>
                @if($tddel->count() > 0)
-               @foreach ($tddel as $docType)
-                  <tr>
-                     <td>{{ ++$j }}</td>
-                     <td>{{ $docType->docType }}</td>
-                     <td>₱{{ $docType->price }}</td>
-                     <td>
-                     {{-- <a class="btn btn-success font-weight-bold" href="#"><i class="fas fa-pen-square"></i> Restore</a> --}}
-                     
-                     <form action="doctypes/restore/{{ $docType->id }}" method="post" style="display:inline">
-                        @csrf
-                        @method('get')
-                        <button type="submit" class="btn btn-success font-weight-bold" onclick="return confirm('Are you sure you want to restore this document?')"><i class="fas fa-pen-square"></i> Restore</button>
-                     </form>
-                     </td>
-                  </tr>
-               @endforeach
-               @else
-               <td colspan="4" class="text-center"><b class="text-danger">No Data Available</b></td>
+                  @foreach ($tddel as $docType)
+                     <tr>
+                        <td>{{ ++$j }}</td>
+                        <td>{{ $docType->docType }}</td>
+                        <td>₱{{ $docType->price }}</td>
+                        <td>
+                        {{-- <a class="btn btn-success font-weight-bold" href="#"><i class="fas fa-pen-square"></i> Restore</a> --}}
+                        
+                        <form action="doctypes/restore/{{ $docType->id }}" method="post" style="display:inline">
+                           @csrf
+                           @method('get')
+                           <button type="submit" class="btn btn-success font-weight-bold" onclick="return confirm('Are you sure you want to restore this document?')"><i class="fas fa-pen-square"></i> Restore</button>
+                        </form>
+                        </td>
+                     </tr>
+                  @endforeach
                @endif
                </table>
             </div>
@@ -105,18 +103,10 @@
   <script>
     $(function () {
       $("#example1").DataTable({
-        "responsive": true, "lengthChange": false, "autoWidth": false,
-      //   "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-      // $('#example2').DataTable({
-      //   "paging": true,
-      //   "lengthChange": false,
-      //   "searching": false,
-      //   "ordering": true,
-      //   "info": true,
-      //   "autoWidth": false,
-      //   "responsive": true,
-      // });
+        "responsive": true, 
+        "lengthChange": true, 
+        "autoWidth": false,
+      });
     });
   </script>
 @endsection

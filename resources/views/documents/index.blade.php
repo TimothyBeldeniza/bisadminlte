@@ -158,49 +158,6 @@
                                           @endif
                                     </td>
                                     @endhasanyrole
-                                    {{-- Process Reason Modal --}}
-                                    {{-- <div class="modal fade" id="process{{ $trans->id }}" tabindex="-1" aria-labelledby="processLabel" aria-hidden="true">
-                                       <div class="modal-dialog">
-                                          <div class="modal-content">
-                                                <div class="modal-header bg-primary">
-                                                   <h5 class="modal-title text-light" id="processLabel">Processing</h5>
-                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                      <span aria-hidden="true">&times;</span>
-                                                    </button>                                            
-                                                </div>
-                                                <div class="modal-body text-left">
-                                                   <form action="documents/process/{{ $trans->id }}/{{ $trans->transId }}/{{ $trans->userId }}" method="POST">
-                                                      <b>Reason to Process</b><br>
-                                                      @csrf
-
-                                                      <div class="form-group my-1"> 
-                                                            <input type="radio" id="vId" name="reason" value="Valid ID" onclick="processOthers{{ $trans->id }}()">
-                                                            <label>Valid ID</label>
-                                                      </div>
-
-                                                      <div class="form-group my-1"> 
-                                                            <input type="radio" id="sp" name="reason" value="Sufficient Purpose" onclick="processOthers{{ $trans->id }}()">
-                                                            <label>Sufficient Purpose</label>
-                                                      </div>
-
-                                                      <div class="form-group my-1">
-                                                            <input type="radio" id="otherP{{ $trans->id }}" name="reason" value="Other" onclick="processOthers{{ $trans->id }}()">
-                                                            <label>Other</label>
-                                                      </div>  
-
-                                                      <div class="form-group my-1" style="display:none;" id="othersP{{ $trans->id }}">
-                                                            <label for="otherReason" class="my-1">Specify other reason:</label>
-                                                            <input type="text" class="form-control" id="otherReason" name="otherReason" placeholder="Input reason here...">
-                                                      </div>
-                                                      <div class="float-end my-1">
-                                                            <button type="submit" name="submit" value="process" onclick="return confirm('Are your sure to proceed?')" class="btn btn-primary">Save Reason</button>
-                                                      </div>
-                                                   </form>
-                                                </div>
-                                          </div>
-                                       </div>
-                                    </div> --}}
-                                    {{-- End of Process Reason Modal --}}
                                     {{-- Disapprove Reason Modal --}}
                                     <div class="modal fade" id="disapprove{{ $trans->id }}" tabindex="-1" aria-labelledby="disapproveLabel" aria-hidden="true">
                                        <div class="modal-dialog">
@@ -274,10 +231,6 @@
                                  </script>
                                 @endif
                             @endforeach
-                        @else
-                            <tr>
-                            <td colspan="10" class="text-center"><b class="text-danger">No Data Available</b></td>
-                            </tr>
                         @endif
                     </tbody>
                     @hasanyrole('Chairman|Treasurer')
@@ -327,7 +280,7 @@
       }
       $("#documents").DataTable({
          "responsive": true, 
-         "lengthChange": false, 
+         "lengthChange": true, 
          "autoWidth": false,
          "buttons": [
             {

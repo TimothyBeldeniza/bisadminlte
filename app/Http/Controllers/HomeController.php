@@ -30,8 +30,6 @@ class HomeController extends Controller
         ->join('document_types', 'documents_transactions.dmId', '=', 'document_types.id')
         ->join('users', 'transactions.userId', '=', 'users.id')
         ->where('users.id', $userId)
-        ->where('transactions.status', '<>', 'Cancelled')
-
         ->orderBy('documents_transactions.id','DESC')
         ->select('documents_transactions.id',  'documents_transactions.transId', DB::raw('date(documents_transactions.created_at) as "date"'), 
                 'documents_transactions.purpose', 'documents_transactions.transId', 'document_types.docType', 
@@ -74,21 +72,6 @@ class HomeController extends Controller
                 'transactions.status', 'transactions.userId')
         ->get();
 
-        
-        $xdocus = DB::table('documents_transactions')
-        ->join('transactions', 'documents_transactions.transId', '=', 'transactions.id')
-        ->join('document_types', 'documents_transactions.dmId', '=', 'document_types.id')
-        ->join('users', 'users.id', '=', 'transactions.userId')
-        ->where('users.id', $userId)
-        ->where('transactions.status', 'Cancelled')
-        ->orderBy('documents_transactions.id','DESC')
-        ->select('documents_transactions.id', 
-                DB::raw('date(documents_transactions.created_at) as "date"'), 
-                DB::raw('date(documents_transactions.updated_at) as "cancelDate"'), 
-                'documents_transactions.purpose', 'documents_transactions.transId', 'documents_transactions.reason',
-                'document_types.docType','transactions.status')
-        ->get();
-
         $stats = [
             'settled' => Transactions::where('status', '=' ,'Settled')->count(),
             'escalated' => Transactions::where('status', '=' ,'Escalated')->count(),
@@ -123,7 +106,7 @@ class HomeController extends Controller
         ];
 
 
-        return view('home', compact('documents', 'complaints', 'residents', 'nonresidents', 'xdocus', 'stats', 'count'));
+        return view('home', compact('documents', 'complaints', 'residents', 'nonresidents', 'stats', 'count'));
     }
 
     /**

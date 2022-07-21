@@ -133,10 +133,6 @@
                                     @endhasanyrole
                                 </tr>
                             @endforeach
-                        @else
-                            <tr>
-                                <td colspan="5" class="text-center"><b class="text-danger">No Data Available</b></td>
-                            </tr>
                         @endif
 
 
@@ -253,9 +249,10 @@
             }
             $("#users").DataTable({
                "responsive": true, 
-               "lengthChange": false, 
+               "lengthChange": true, 
                "autoWidth": false,
                "buttons": [
+                  @hasanyrole('Chairman|Secretary')
                   {
                      extend:"csv",
                      title: 'Registered Users ' + text,
@@ -284,11 +281,10 @@
                         columns: [ 0, 1, 2, 3, 4 ]
                      },
                      footer: true,
-                  }, 
-                  "colvis"]
+                  },
+                  @endhasanyrole]
             }).buttons().container().appendTo('#users_wrapper .col-md-6:eq(0)');
          });
-
     </script>
     @endsection
 </x-layout>

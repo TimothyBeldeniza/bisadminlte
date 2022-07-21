@@ -25,13 +25,8 @@
             <div style="background-color: #f6f7cd" class="card-header text-dark font-weight-bold"><b>Complaint Details</b></div>
             <div class="card-body">
                 <p class="card-text"><b>Date Filed:</b> {{ Carbon\Carbon::parse($td->date)->format('jS F, Y') }} </p>
-                <p class="card-text"><b>Complainant:</b> {{ $td->complainant }}</p>
-                <p class="card-text"><b>Address:</b> {{ $td->address}}</p>
-                <p class="card-text"><b>Contact:</b> +63{{ $td->contact}}</p>
-                <p class="card-text"><b>Respondent:</b> {{ $td->respondents }}</p>
-                <p class="card-text"><b>Address:</b> {{ $td->respondentsAdd }}</p>
-                <p class="card-text"><b>Contact:</b> +63{{ $td->respondentsContact}}</p>
                 <p class="card-text"><b>Hearings/Summons:</b> {{ $hearingCounts }} of 3</p>
+                <p class="card-text"><b>Hearing Date:</b> {{ Carbon\Carbon::parse($td->hearing_date)->format('jS F, Y') }}</p>
                 <p class="card-text"><b>Status:</b>
                 @if ($td->status == "Settled") 
                   <b class="text-success">{{ $td->status }}</b>
@@ -43,6 +38,14 @@
                   <b class="text-dark">{{ $td->status }}</b>
                 @endif
                 </p>
+                <hr>
+                <p class="card-text"><b>Complainant:</b> {{ $td->complainant }}</p>
+                <p class="card-text"><b>Address:</b> {{ $td->address}}</p>
+                <p class="card-text"><b>Contact:</b> +63{{ $td->contact}}</p>
+                <hr>
+                <p class="card-text"><b>Respondent:</b> {{ $td->respondents }}</p>
+                <p class="card-text"><b>Address:</b> {{ $td->respondentsAdd }}</p>
+                <p class="card-text"><b>Contact:</b> +63{{ $td->respondentsContact}}</p>
                 <button type="button" class="btn btn-warning font-weight-bold"  data-toggle="modal" data-target="#compDetails{{$td->id}}">Show Complaint Details</button>
                 <!-- Modal -->
                 <div class="modal fade" id="compDetails{{$td->id}}" tabindex="-1" aria-labelledby="compDetailsLabel" aria-hidden="true">
@@ -88,15 +91,17 @@
                 <div class="modal-body">
                   <form method="POST" action="/complaints/show/hearing/{{ $td->id }}/{{ $td->transId }}">
                     @csrf
-                    <div class="my-1">
-                      <label for="details" class="col-form-label"><b>Input Hearing Details:</b></label>
-                      <textarea class="form-control" name="details" id="details" rows="10" placeholder="Input details here..."></textarea>
-                      {{-- <div id="summernote"></div> --}}
-                      {{-- <textarea id="details" name="details"></textarea> --}}
-                    </div>
-                    <div class="float-end my-2">
-                      <button type="submit" class="btn btn-primary">Save Details</button>
-                    </div>
+                     <div class="form-group mb-1 my-1">
+                        <label for="details"><b>Input Next Hearing Date:</b></label>
+                        <input type="date" class="form-control" name="hearing_date" id="hearing_date" required>
+                     </div>
+                     <div class="form-group mb-1 my-1">
+                        <label for="details"><b>Input Hearing Details:</b></label>
+                        <textarea class="form-control" name="details" id="details" rows="10" placeholder="Input details here..." required></textarea>
+                     </div>
+                     <div class="form-group float-right my-2">
+                        <button type="submit" class="btn btn-primary font-weight-bold">Save Details</button>
+                     </div>
                   </form>
                 </div>
               </div>
@@ -221,7 +226,7 @@
               <textarea class="form-control" name="reason" id="reason" rows="10" placeholder="Input details here..."></textarea>
               </div>
               <div class="float-end my-3">
-              <button type="submit" class="btn btn-primary">Save Settlement Details</button>
+              <button type="submit" class="btn btn-primary font-weight-bold">Save Settlement Details</button>
               </div>
           </form>
           </div>
@@ -243,10 +248,10 @@
               @csrf
               <div class="my-1">
               <label for="details" class="col-form-label"><b>Input Dismissal Details:</b></label>
-              <textarea class="form-control" name="reason" id="reason" rows="10" placeholder="Input details here..."></textarea>
+              <textarea class="form-control" name="reason" id="reason" rows="10" placeholder="Input details here..." required></textarea>
               </div>
               <div class="float-end my-3">
-              <button type="submit" class="btn btn-primary">Save Dismissal Details</button>
+              <button type="submit" class="btn btn-primary font-weight-bold">Save Dismissal Details</button>
               </div>
           </form>
           </div>
@@ -271,7 +276,7 @@
             <textarea class="form-control" name="reason" id="reason" rows="10" placeholder="Input details here..."></textarea>
             </div>
             <div class="float-end my-3">
-            <button type="submit" class="btn btn-primary">Save Escalation Details</button>
+            <button type="submit" class="btn btn-primary font-weight-bold">Save Escalation Details</button>
             </div>
         </form>
         </div>

@@ -17,7 +17,7 @@ class CreateOutsideComplainantsTable extends Migration
             $table->unsignedInteger('compId');
             $table->string('complainant');
             $table->string('address');
-            $table->integer('contact');
+            $table->bigInteger('contact');
             $table->timestamps();
             $table->foreign('compId')
             ->references('id') 
