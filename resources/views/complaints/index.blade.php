@@ -84,10 +84,6 @@
                           </td>
                       </tr>
                     @endforeach
-                  @else
-                    <tr>
-                      <td colspan="6" class="text-center"><b class="text-danger">No Data Available</b></td>
-                    </tr> 
                   @endif
               </tbody>
           </table>
@@ -110,7 +106,7 @@
    }
    $("#complaints").DataTable({
       "responsive": true, 
-      "lengthChange": false, 
+      "lengthChange": true, 
       "autoWidth": false,
       "buttons": [
          {

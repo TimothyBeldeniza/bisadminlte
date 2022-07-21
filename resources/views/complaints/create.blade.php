@@ -139,16 +139,20 @@
                 </div>
                 
                 <hr>
-                <div class="form-group row my-1">
-                   <div class="col-sm">
+                <div class="form-group my-1">
+                   <label class="required" for="hearing_date">{{ __('Hearing Date') }}</label>
+                   <input type="date" class="form-control" name="hearing_date" id="hearing_date" required>
+                </div>
+                <div class="form-group my-1">
                      <label class="required" for="complainDetails">{{ __('Complaint Details') }}</label>
                      <textarea class="form-control" placeholder="Enter details here..." name="compDetails" id="compDetails" cols="30" rows="3" required></textarea>
-                   </div>
+                </div>
+                <div class="form-group row my-1">
                 </div>
                 
                 <div class="form-group py-1">
                     <div class="float-right ">
-                        <button onclick="return confirm('Are your inputs correct?')" type="submit" class="btn btn-primary" >
+                        <button onclick="return confirm('Are your inputs correct?')" type="submit" class="btn btn-primary font-weight-bold">
                             {{ __('Submit') }}
                         </button>
                     </div>
@@ -233,10 +237,6 @@
                options[ len ].disabled = false;
             }
             select.options[ index ].disabled = true;
-            if( index === select.selectedIndex ) {
-               alert('You\'ve already selected the user "' + select.options[index].text + '".\n\nPlease choose another.');
-               this.selectedIndex = 0;
-            }
         }
 
          var select1 = select = document.getElementById( 'complainantId' );

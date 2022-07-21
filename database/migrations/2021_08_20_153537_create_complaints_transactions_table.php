@@ -22,6 +22,7 @@ class CreateComplaintsTransactionsTable extends Migration
             $table->string('respondentsAdd')->nullable();
             $table->bigInteger('respondentsContact')->nullable();
             $table->string('reason')->nullable();
+            $table->date('hearing_date')->nullable();
             $table->timestamps();
             $table->foreign('transId')
                 ->references('id') 
