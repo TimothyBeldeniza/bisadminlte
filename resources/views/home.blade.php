@@ -9,7 +9,7 @@
          color: red;
         }
     </style>
-    @section('title', 'Home')
+    @section('title', 'Dashboard')
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -316,9 +316,6 @@
                               <th style="width: 8%" class="text-center">
                                   Status
                               </th>
-                              {{-- <th style="width: 20%" class="text-center">
-                                 Reason
-                              </th> --}}
                               <th style="width: 8%" class="text-center">
                                   Action
                               </th>
@@ -347,34 +344,17 @@
                                         </a>
                                     </td>
     
-                                    @if ($docu->status == "For Validation")
-    
-                                        <td class="project-state text-center">
-                                            <span class="badge badge-dark">{{ $docu->status }}</span>
-                                        </td>
-    
+                                    <td class="project-state text-center">
+                                    @if ($docu->status == "For Validation")    
+                                       <span class="badge badge-dark">{{ $docu->status }}</span>
                                     @elseif($docu->status == "Disapproved")
-                                        <td class="project-state text-center">
-                                            <span class="badge badge-danger">{{ $docu->status }}</span>
-                                        </td> 
-                                        
-                                        <td class="project-actions text-center"><b>None</b></td>
+                                       <span class="badge badge-danger">{{ $docu->status }}</span>
                                     @elseif($docu->status == "Cancelled")
-                                        <td class="project-state text-center">
-                                            <span class="badge badge-danger">{{ $docu->status }}</span>
-                                        </td>
-                                        
-                                        <td class="text-center">
-                                            <a>
-                                                {{ $docu->reason }}
-                                            </a>
-                                        </td>
-                                        <td class="project-actions text-center"><b>None</b></td>
-                                    @else
-                                        <td class="project-state text-center">
-                                            <span class="badge badge-success">{{ $docu->status }}</span>
-                                        </td>
+                                       <span class="badge badge-danger">{{ $docu->status }}</span>
+                                    @else                                
+                                       <span class="badge badge-success">{{ $docu->status }}</span>
                                     @endif
+                                    </td>
 
                                     <td class="project-actions text-center">
                                        <div class="d-flex justify-content-center">
