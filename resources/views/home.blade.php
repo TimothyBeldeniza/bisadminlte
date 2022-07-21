@@ -9,7 +9,7 @@
          color: red;
         }
     </style>
-    @section('title', 'Home')
+    @section('title', 'Dashboard')
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
