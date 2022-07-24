@@ -157,7 +157,7 @@ class DocumentsController extends Controller
         ->join('users', 'users.id', '=', 'transactions.userId')
         ->where('users.id', $userId)
         ->where('documents_transactions.id', $transId)
-        ->select('documents_transactions.id', DB::raw('date(documents_transactions.created_at) as "date"'), 
+        ->select('documents_transactions.id', DB::raw('date(documents_transactions.updated_at) as "date"'), 
                 'documents_transactions.purpose', 'document_types.docType', 'document_types.template',
                 'users.lastName', 'users.firstName', 'users.civilStatus', 'users.citizenship', 'users.houseNo', 'users.street',
                 'transactions.unique_code')
@@ -479,7 +479,7 @@ class DocumentsController extends Controller
             else
             //    event(new SubmitRequest($email,$unique_code,$name,$brgyName,$document));
                dispatch(new SendQrEmail($email,$unique_code,$name,$brgyName,$document));
-            return redirect('home')->with('success', 'Document requested successfully!');
+            return redirect('documents')->with('success', 'Document requested successfully!');
         }
         
     }

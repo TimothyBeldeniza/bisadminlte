@@ -45,7 +45,7 @@
 	}
 </style>
 
-<body>
+<body onload="window.print();" onafterprint="window.close();">
 
         <div class="header" align="center">
             {{-- <p><img id="brgy-logo" src="{{ asset('images/'.$brgy->logoPath) }}" style="height: 100px; width: auto;"></p> --}}
@@ -81,7 +81,7 @@
 
         <div class="footer">
             <br>
-            <p>Sa ngayong araw, <b>{{ Carbon\Carbon::now()->format('j F, Y') }}</b></p><br>
+            <p>Sa ngayong araw, <b>{{ Carbon\Carbon::parse($td->up_date)->format('j F, Y') }}</b></p><br>
             <p><b>PATUNAY:</b></p> <br>
             @foreach ($officials as $chairman)
                 @if($chairman->position == 'Chairman')
@@ -89,10 +89,9 @@
                     <b>Punong Barangay</b></p>
                 @endif
             @endforeach
-            {{-- <p><img id="qr-code" 
-              src="data:image/png;base64, {!! base64_encode(QrCode::format('png')
-              ->size(100)
-              ->generate($td->unique_code)) !!}"></p> --}}
+            <br>
+            <p>Note: Not Valid Without Official Dry Seal <br>
+            Issued By: {{ Auth::user()->firstName. ' ' .Auth::user()->lastName }}</p>
         </div>
 
 </body>

@@ -17,11 +17,11 @@ class CreateComplaintsTransactionsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('transId');
             $table->string('compType')->nullable();
-            $table->string('compDetails');
+            $table->text('compDetails');
             $table->string('respondents')->nullable();
             $table->string('respondentsAdd')->nullable();
             $table->bigInteger('respondentsContact')->nullable();
-            $table->string('reason')->nullable();
+            $table->text('reason')->nullable();
             $table->date('hearing_date')->nullable();
             $table->timestamps();
             $table->foreign('transId')
