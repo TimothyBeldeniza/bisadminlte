@@ -93,7 +93,7 @@
                     @csrf
                      <div class="form-group mb-1 my-1">
                         <label for="details"><b>Input Next Hearing Date:</b></label>
-                        <input type="date" class="form-control" name="hearing_date" id="hearing_date" required>
+                        <input type="date" class="form-control" name="hearing_date" id="hearing_date" value="{{ $td->hearing_date }}" required>
                      </div>
                      <div class="form-group mb-1 my-1">
                         <label for="details"><b>Input Hearing Details:</b></label>
@@ -144,34 +144,34 @@
               <hr>
               <h5 class="card-text">Measures</h5>
               @if ($td->status == "Settled")
-                <a class="btn btn-secondary font-weight-bold my-2" href="/complaints/outsider/show/view-o-settle-pdf/{{ $td->id }}/{{ $td->transId }}" target="_blank">View Settle Form</a><br>
-                <a class="btn btn-primary font-weight-bold my-2" href="/complaints/outsider/show/save-o-escalate-pdf/{{ $td->id }}/{{ $td->transId }}">Save Settle Form</a><br>
+                <a class="btn btn-success font-weight-bold my-2" href="/complaints/outsider/show/view-o-settle-pdf/{{ $td->id }}/{{ $td->transId }}" target="_blank"><i class="fas fa-save"></i> Save Settle Form</a><br>
+                {{-- <a class="btn btn-primary font-weight-bold my-2" href="/complaints/outsider/show/save-o-escalate-pdf/{{ $td->id }}/{{ $td->transId }}">Save Settle Form</a><br> --}}
               @elseif ($td->status == "Escalated")
-                <a class="btn btn-secondary font-weight-bold my-2" href="/complaints/outsider/show/view-o-escalate-pdf/{{ $td->id }}/{{ $td->transId }}" target="_blank">View Escalation Form</a><br>
-                <a class="btn btn-primary font-weight-bold my-2" href="/complaints/outsider/show/save-o-escalate-pdf/{{ $td->id }}/{{ $td->transId }}">Save Escalation Form</a><br>
+                <a class="btn btn-success font-weight-bold my-2" href="/complaints/outsider/show/view-o-escalate-pdf/{{ $td->id }}/{{ $td->transId }}" target="_blank"><i class="fas fa-save"></i> Save Escalation Form</a><br>
+                {{-- <a class="btn btn-primary font-weight-bold my-2" href="/complaints/outsider/show/save-o-escalate-pdf/{{ $td->id }}/{{ $td->transId }}">Save Escalation Form</a><br> --}}
               @elseif ($td->status == "Dismissed") 
                 <b class="text-danger"> No Measures Required</b>
               @elseif ($hearingCounts == 3)
                 @role('Admin|Chairman|Councilor')
-                  <a class="btn btn-success font-weight-bold my-2" title="Settle the Complaint" data-toggle="modal" data-target="#record-settle">Settle</a>
-                  <a class="btn btn-warning font-weight-bold my-2" title="Escalate the Complaint" data-toggle="modal" data-target="#record-escalate">Escalate</a>
-                  <a class="btn btn-danger font-weight-bold my-2" title="Dismiss the Complaint" data-toggle="modal" data-target="#record-dismiss">Dismiss</a><br>
+                  <a class="btn btn-success font-weight-bold my-2" title="Settle the Complaint" data-toggle="modal" data-target="#record-settle"><i class="fas fa-check"></i> Settle</a>
+                  <a class="btn btn-warning font-weight-bold my-2" title="Escalate the Complaint" data-toggle="modal" data-target="#record-escalate"><i class="fas fa-exclamation"></i> Escalate</a>
+                  <a class="btn btn-danger font-weight-bold my-2" title="Dismiss the Complaint" data-toggle="modal" data-target="#record-dismiss"><i class="fas fa-times"></i> Dismiss</a><br>
                 @endrole 
-                <a class="btn btn-primary font-weight-bold my-2" href="/complaints/outsider/show/view-o-complaint-pdf/{{ $td->id }}/{{ $td->transId }}" target="_blank">View Complaint Form</a><br> 
-                <a class="btn btn-secondary font-weight-bold my-2" href="/complaints/outsider/show/save-o-complaint-pdf/{{ $td->id }}/{{ $td->transId }}">Save Complaint Form</a><br> 
+                <a class="btn btn-success font-weight-bold my-2" href="/complaints/outsider/show/view-o-complaint-pdf/{{ $td->id }}/{{ $td->transId }}" target="_blank"><i class="fas fa-save"></i> Save Complaint Form</a><br> 
+                {{-- <a class="btn btn-secondary font-weight-bold my-2" href="/complaints/outsider/show/save-o-complaint-pdf/{{ $td->id }}/{{ $td->transId }}">Save Complaint Form</a><br>  --}}
               @elseif($hearingCounts == 0)
                 @role('Admin|Chairman|Councilor')
-                  <a class="btn btn-danger font-weight-bold my-2" title="Dismiss the Complaint" data-toggle="modal" data-target="#record-dismiss">Dismiss</a><br>
+                  <a class="btn btn-danger font-weight-bold my-2" title="Dismiss the Complaint" data-toggle="modal" data-target="#record-dismiss"><i class="fas fa-times"></i> Dismiss</a><br>
                 @endrole 
-                <a class="btn btn-primary font-weight-bold my-2" href="/complaints/outsider/show/view-o-complaint-pdf/{{ $td->id }}/{{ $td->transId }}" target="_blank">View Complaint Form</a><br>
-                <a class="btn btn-secondary font-weight-bold my-2" href="/complaints/outsider/show/save-o-complaint-pdf/{{ $td->id }}/{{ $td->transId }}">Save Complaint Form</a><br> 
+                <a class="btn btn-success font-weight-bold my-2" href="/complaints/outsider/show/view-o-complaint-pdf/{{ $td->id }}/{{ $td->transId }}" target="_blank"><i class="fas fa-save"></i> Save Complaint Form</a><br>
+                {{-- <a class="btn btn-secondary font-weight-bold my-2" href="/complaints/outsider/show/save-o-complaint-pdf/{{ $td->id }}/{{ $td->transId }}">Save Complaint Form</a><br>  --}}
               @else
               @role('Admin|Chairman|Councilor')
-                <a class="btn btn-success font-weight-bold my-2" title="Settle the Complaint" data-toggle="modal" data-target="#record-settle">Settle</a>
-                <a class="btn btn-danger font-weight-bold my-2" title="Dismiss the Complaint" data-toggle="modal" data-target="#record-dismiss">Dismiss</a><br>
+                <a class="btn btn-success font-weight-bold my-2" title="Settle the Complaint" data-toggle="modal" data-target="#record-settle"><i class="fas fa-check"></i> Settle</a>
+                <a class="btn btn-danger font-weight-bold my-2" title="Dismiss the Complaint" data-toggle="modal" data-target="#record-dismiss"><i class="fas fa-times"></i> Dismiss</a><br>
               @endrole 
-                <a class="btn btn-primary font-weight-bold my-2" href="/complaints/outsider/show/view-o-complaint-pdf/{{ $td->id }}/{{ $td->transId }}" target="_blank">View Complaint Form</a><br>
-                <a class="btn btn-secondary font-weight-bold my-2" href="/complaints/outsider/show/save-o-complaint-pdf/{{ $td->id }}/{{ $td->transId }}">Save Complaint Form</a><br>
+                <a class="btn btn-success font-weight-bold my-2" href="/complaints/outsider/show/view-o-complaint-pdf/{{ $td->id }}/{{ $td->transId }}" target="_blank"><i class="fas fa-save"></i> Save Complaint Form</a><br>
+                {{-- <a class="btn btn-secondary font-weight-bold my-2" href="/complaints/outsider/show/save-o-complaint-pdf/{{ $td->id }}/{{ $td->transId }}">Save Complaint Form</a><br> --}}
               @endif
               <hr>
               <h5 class="card-text">Hearing Details</h5>

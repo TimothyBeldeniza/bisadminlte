@@ -74,7 +74,7 @@
                         <p class="card-text"><b>Valid ID: Presented to staff</b></p>
                       @else
                       <p class="card-text"><b>Valid ID: </b>
-                      <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#bargyId{{$data->id}}">Show ID</button></p>
+                      <button type="button" class="btn btn-primary font-weight-bold"  data-toggle="modal" data-target="#bargyId{{$data->id}}"><i class="fas fa-eye"></i> Show ID</button></p>
                         <div class="modal fade" id="bargyId{{$data->id}}" tabindex="-1" aria-labelledby="bargyIdLabel" aria-hidden="true">
                           <div class="modal-dialog modal-lg">
                               <div class="modal-content">
@@ -113,14 +113,16 @@
                         </div>
                       @elseif($data->status == 'Ready to Claim')
                         @if($data->price == 0)
-                           <a onclick="enableRelease{{ $data->id }}()" class="btn btn-success font-weight-bold" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}"><i class="fas fa-save"></i></i> Save PDF</a>
-                           <a id="release{{ $data->id }}" class="btn btn-dark disabled font-weight-bold" onclick="return confirm('Are you sure to proceed?')" href="/documents/release/{{ $data->transId }}">Release</a>
+                        <div class="text-center">
+                           <a onclick="enableRelease{{ $data->id }}()" class="btn btn-success font-weight-bold mb-2" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}"><i class="fas fa-save"></i></i> Save PDF</a>
+                           <a id="release{{ $data->id }}" class="btn btn-dark disabled font-weight-bold mb-2" onclick="return confirm('Are you sure to proceed?')" href="/documents/release/{{ $data->transId }}"><i class="fas fa-chevron-circle-right"></i> Release</a>
+                        </div>
                         @else
                            <a class="btn btn-primary font-weight-bold" onclick="return confirm('Are you sure to proceed?')" href="/documents/paid/{{ $data->transId }}">Paid</a>
                         @endif
                       @elseif($data->status == 'Paid')
                            <a onclick="enableRelease{{ $data->id }}()" class="btn btn-success font-weight-bold" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}"><i class="fas fa-save"></i></i> Save PDF</a>
-                           <a id="release{{ $data->id }}" class="btn btn-dark disabled font-weight-bold" onclick="return confirm('Are you sure to proceed?')" href="/documents/release/{{ $data->transId }}">Release</a>
+                           <a id="release{{ $data->id }}" class="btn btn-dark disabled font-weight-bold" onclick="return confirm('Are you sure to proceed?')" href="/documents/release/{{ $data->transId }}"><i class="fas fa-chevron-circle-right"></i> Release</a>
                       @elseif($data->status == 'Released')
                               <b class="text-success">Document Released</b>
                               <a class="btn btn-success font-weight-bold" href="/documents/generate-document-pdf/{{ $data->id }}/{{ $data->userId }}"><i class="fas fa-save"></i></i> Save PDF</a>
