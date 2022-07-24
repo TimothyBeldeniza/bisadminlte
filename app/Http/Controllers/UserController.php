@@ -153,8 +153,9 @@ class UserController extends Controller
         if($request->input('roles'))
         {
             $user->assignRole($request->input('roles'));
-            
-        } else {
+        } 
+        else 
+        {
             $user->assignRole('Resident');
         }
 
@@ -261,7 +262,7 @@ class UserController extends Controller
                 'documents-scan-document',
             ]);
         }
-        else if($request->input('roles')  == 'Resident')
+        else
         {
             $user->syncPermissions([
                 'barangay-official-list',
@@ -277,6 +278,7 @@ class UserController extends Controller
     
             ]);
         }
+
         if(Auth::check()){
             return redirect()->route('users.index')->with('success','User created successfully');
         } else{
