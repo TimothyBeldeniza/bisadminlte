@@ -17,6 +17,7 @@ use App\Http\Controllers\BlottersController;
 use App\Http\Controllers\BarangayOfficialsController;
 use App\Http\Controllers\BarangayController;
 use App\Http\Controllers\DocumentTypesController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\UsersImportController;
@@ -35,7 +36,7 @@ use App\Http\Controllers\UsersImportController;
 Route::get('/', function () {
     return view('homepage.index');
     // return view('auth.login');
-});
+})->name('homepage');
 
 Auth::routes(['verify' => true]);
 
@@ -130,3 +131,4 @@ Route::group(['middleware' => ['auth','verified']], function() {
     Route::resource('appointments', AppointmentController::class);
     // Route::resource('dashboard', DashboardController::class);
 });
+Route::resource('news', NewsController::class);

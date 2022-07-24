@@ -50,6 +50,7 @@
                                     <input type="date" class="form-control input-sm" id="to" name="to" required>
                                     </div>        
                                     <button type="submit" name="search" title="Search" class="btn btn-success">Range</button>
+                                    
                                     <a href="{{ route('users.index') }}">
                                         <button class="btn btn-success ml-2" type="button" title="Refresh page">
                                             <span class="fas fa-sync-alt"></span>

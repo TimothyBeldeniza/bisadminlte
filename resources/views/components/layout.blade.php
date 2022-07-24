@@ -58,11 +58,15 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">{{ Auth::user()->roles->pluck('name')->first() }}</a>
       </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{ route('homepage') }}" class="nav-link">Go to Homepage</a>
+      </li>
+      
       {{-- <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
       </li> --}}
     </ul>
-
+    
     <!-- Right navbar links -->
     {{-- <ul class="navbar-nav ml-auto">
       <li class="nav-item">
@@ -213,6 +217,13 @@
                     </a>
                 </li>
                 @endcan
+
+                <li class="nav-item">
+                  <a href="{{ route('news.index') }}" class="nav-link">
+                      <i class="nav-icon fas fa-users-cog"></i>
+                  <p>News</p>
+                  </a>
+              </li>
           </li>
           @endhasanyrole
 
@@ -380,7 +391,6 @@
 <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-
 
 @yield('custom-scripts')
 

@@ -32,10 +32,15 @@
           <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Home</a></li>
+              @auth
+              <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Dashboard</a></li>
+              @endauth
               <li class="nav-item"><a class="nav-link" href="#companies">About Us</a></li>
               <li class="nav-item"><a class="nav-link" href="#testimonials">Announcements & Events</a></li>
               <li class="nav-item"><a class="nav-link" href="#portfolio">Services</a></li>
-              <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
+              @guest
+                <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li> 
+              @endguest
               </li>
             </ul>
           </div>
