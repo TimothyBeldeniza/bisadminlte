@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Document</title>
+	<title>{{ $td->docType.' - '.$td->lastName.', '.$td->firstName.'/'.Carbon\Carbon::parse($td->date)->format('m-d-Y') }}</title>
 </head>
 
 <style>
@@ -64,7 +64,7 @@
 		/* margin: 50px; */
 	}
 </style>
-<body>
+<body onload="window.print();" onafterprint="window.close();">
 	
 		<div class="header" align="center">
 			{{-- <p><img id="brgy-logo" src="{{ asset('images/'.$brgy->logoPath) }}" alt="brgy-logo" style="height: 100px; width: auto;"></p> --}}

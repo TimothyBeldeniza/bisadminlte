@@ -137,6 +137,7 @@ class ComplaintsController extends Controller
         ->where('transactions.id', $transId)
         ->where('complaints_transactions.id', $compId)
         ->select('complaints_transactions.id', DB::raw('date(complaints_transactions.created_at) as "date"'), 
+                DB::raw('date(complaints_transactions.updated_at) as "up_date"'),
                 'complaints_transactions.respondents', 'complaints_transactions.respondentsAdd','complaints_transactions.reason',
                 'complaints_transactions.compDetails','users.lastName', 'users.firstName', 'users.houseNo', 'users.street','transactions.unique_code')
         ->first();
@@ -173,6 +174,7 @@ class ComplaintsController extends Controller
       ->where('transactions.id', $transId)
       ->where('complaints_transactions.id', $compId)
       ->select('complaints_transactions.id', DB::raw('date(complaints_transactions.created_at) as "date"'), 
+              DB::raw('date(complaints_transactions.updated_at) as "up_date"'),
               'complaints_transactions.respondents', 'complaints_transactions.respondentsAdd','complaints_transactions.reason',
               'complaints_transactions.compDetails', 
               'outside_complainants.complainant', 'outside_complainants.address',
@@ -429,7 +431,7 @@ class ComplaintsController extends Controller
                'userId' => $request->respondentId,
             ]);
 
-            return redirect('home')->with('success', 'Complaint filed successfully!');
+            return redirect('complaints')->with('success', 'Complaint filed successfully!');
          }
 
          if($request->fromC == 'insideC' && $request->fromR == 'outsideR')
@@ -451,7 +453,7 @@ class ComplaintsController extends Controller
                'hearing_date' => $request->hearing_date,
             ]);
             
-            return redirect('home')->with('success', 'Complaint filed successfully!');
+            return redirect('complaints')->with('success', 'Complaint filed successfully!');
          }
 
          if($request->fromC == 'outsideC' && $request->fromR == 'insideR')
@@ -491,7 +493,7 @@ class ComplaintsController extends Controller
                'userId' => $request->respondentId,
             ]);
 
-            return redirect('home')->with('success', 'Complaint filed successfully!');
+            return redirect('complaints/outsider')->with('success', 'Complaint filed successfully!');
          }
 
          if($request->fromC == 'outsideC' && $request->fromR == 'outsideR')

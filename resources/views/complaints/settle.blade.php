@@ -51,7 +51,7 @@
 	}
 </style>
 
-<body>
+<body onload="window.print();" onafterprint="window.close();">
 
         <div class="header" align="center">
             {{-- <p><img id="brgy-logo" src="{{ asset('images/'.$brgy->logoPath) }}" style="height: 100px; width: auto;"></p>
@@ -89,10 +89,10 @@
         </div>
 
         <div class="footer">
-            <p>Ginawa sa araw ng <b>{{ Carbon\Carbon::parse($td->date)->format('j F, Y') }}</b></p>
+            <p>Ginawa sa araw ng <b>{{ Carbon\Carbon::parse($td->up_date)->format('j F, Y') }}</b></p>
             <p><u style="text-transform: uppercase">{{ $td->firstName }} {{ $td->lastName }}</u><br><b>Nagrereklamo</b></p>
             <p><u style="text-transform: uppercase">{{ $td->respondents }}</u><br><b>Tumutugon</b></p>
-            <p>Natanggap at Nagsampa ngayong <b>{{ Carbon\Carbon::now()->format('j F, Y') }}</b></p>
+            <p>Natanggap at Nagsampa ngayong <b>{{ Carbon\Carbon::parse($td->up_date)->format('j F, Y') }}</b></p>
             <p><b>PAGPAPATUNAY</b></p>
             <p>Pinagtitibay ko rito na ang mga sumusunod na pag-areglo ay malayang inilunsad sa magkabilang partido matapos kong maipaliwanag sa kanilang dalawa ang kalikasan at bunga ng naturang pag-areglo.</p>
             @foreach ($officials as $chairman)
@@ -100,7 +100,10 @@
                     <p style="text-transform: uppercase; margin-top: 40px;"><b>{{ $chairman->name }}</b><br>
                     PUNONG BARANGAY</p>
                 @endif
-		        @endforeach
+            @endforeach
+            <br>
+            <p>Note: Not Valid Without Official Dry Seal <br>
+            Issued By: {{ Auth::user()->firstName. ' ' .Auth::user()->lastName }}</p>
         </div>
 
 </body>

@@ -102,8 +102,8 @@
                            <div class="form-group row my-1">
                               <div class="col-sm">
                                  <label class="required" for="docType">{{ __('Document Type') }}</label>
-                                 <select class="form-control" name="docType" id="docType" required>
-                                    <option value>--Select Document Type--</option>
+                                 <select class="form-control text-uppercase" name="docType" id="docType" required>
+                                    <option selected disabled>--Select Document Type--</option>
                                  @foreach ($doctypes as $doctype) 
                                     <option value="{{ $doctype->id }}">{{ $doctype->docType }} - ₱{{ $doctype->price }}</option>
                                  @endforeach
@@ -140,7 +140,7 @@
                            </div>
       
                            <div class="form-group float-right my-3">
-                              <button onclick="return confirm('Are your inputs correct?')" type="submit" class="btn btn-primary" >
+                              <button onclick="return confirm('Are your inputs correct?')" type="submit" class="btn btn-primary font-weight-bold" >
                                  {{ __('Submit') }}
                               </button>
                            </div>

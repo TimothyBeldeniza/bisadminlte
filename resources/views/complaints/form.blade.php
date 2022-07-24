@@ -45,7 +45,7 @@
 	}
 </style>
 
-<body>
+<body onload="window.print();" onafterprint="window.close();">
 
         <div class="header" align="center">
             {{-- <p><img id="brgy-logo" src="{{ asset('images/'.$brgy->logoPath) }}" style="height: 100px; width: auto;"></p> --}}
@@ -81,20 +81,19 @@
 
         <div class="footer">
             <br>
-            <p>Ginawa ngayong araw, <b>{{ Carbon\Carbon::now()->format('j F, Y') }}</b> </p> <br>
+            <p>Ginawa ngayong araw, <b>{{ Carbon\Carbon::parse($td->date)->format('j F, Y') }}</b> </p> <br>
             <p id="name"><u>{{ $td->firstName }} {{ $td->lastName }}</u></p>
             <p>Lagda ng Nagrereklamo</p> <br>
-            <p>Natanggap at Nagsampa ngayong <b>{{ Carbon\Carbon::now()->format('j F, Y') }}</b></p> <br>
+            <p>Natanggap at Nagsampa ngayong <b>{{ Carbon\Carbon::parse($td->date)->format('j F, Y') }}</b></p> <br>
             @foreach ($officials as $official)
                 @if($official->position == 'Chairman')
                     <p><u style="text-transform: uppercase">{{ $official->name }}</u><br>
                     <b>Punong Barangay</b></p>
                 @endif
             @endforeach
-            {{-- <p><img id="qr-code" 
-              src="data:image/png;base64, {!! base64_encode(QrCode::format('png')
-              ->size(100)
-              ->generate($td->unique_code)) !!}"></p> --}}
+            <br>
+            <p>Note: Not Valid Without Official Dry Seal <br>
+            Issued By: {{ Auth::user()->firstName. ' ' .Auth::user()->lastName }}</p>
         </div>
 
 </body>
