@@ -31,7 +31,7 @@ class DocumentsController extends Controller
      */
     function __construct()
     {
-        $this->middleware(['auth','verified']);
+        // $this->middleware(['auth','verified']);
         $this->middleware('permission:module-request-document', ['only' => ['create','store']]);
         $this->middleware('permission:module-document-records',['only' => 'index']);
         // $this->middleware('permission:documents-show-ID', ['only' => ['create','store']]);
@@ -39,7 +39,7 @@ class DocumentsController extends Controller
         $this->middleware('permission:documents-view', ['only' => 'pdfViewDocument']);
         $this->middleware('permission:documents-save-PDF',['only' => 'pdfSaveDocument']);
         $this->middleware('permission:documents-disapprove',['only' => 'disapproved']);
-        $this->middleware('permission:documents-scan-document',['only' => 'scan']);
+        // $this->middleware('permission:documents-scan-document',['only' => 'scan']);
         $this->middleware('permission:documents-scan-request',['only' => 'scanReq']);
         // $this->middleware();
     }

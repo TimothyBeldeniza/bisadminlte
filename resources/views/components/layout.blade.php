@@ -55,12 +55,19 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
+      @auth
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="#" class="nav-link">{{ Auth::user()->roles->pluck('name')->first() }}</a>
+        </li>
+      @endauth
+
+      @guest
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">{{ Auth::user()->roles->pluck('name')->first() }}</a>
+        <a href="#" class="nav-link">Guest</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{ route('homepage') }}" class="nav-link">Go to Homepage</a>
-      </li>
+      @endguest
+
+
       
       {{-- <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -94,7 +101,7 @@
   <!-- Main Sidebar Container -->
   <aside style="background-color: #264e2c;" class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link">
+    <a href="{{ route('homepage') }}" class="brand-link">
       <img src="{{ asset('images/BIS - Logo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">BIS</span>
     </a>
@@ -102,6 +109,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
+      @auth
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           <img src="{{ asset('images/users/' . Auth::user()->profilePath) }}" class="img-circle elevation-2" alt="User Image">
@@ -110,6 +118,17 @@
           <a href="#" class="d-block ">Welcome, {{ Auth::user()->firstName }}</a>
         </div>
       </div>
+        
+      @else
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{{ asset('images/users/default.png') }}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block ">Welcome, Guest</a>
+        </div>
+      </div>
+      @endauth
 
       <!-- SidebarSearch Form -->
       {{-- <div class="form-inline">
@@ -124,6 +143,8 @@
       </div> --}}
 
       <!-- Sidebar Menu -->
+
+      @auth
       <nav class="mt-2" >
         <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
@@ -312,6 +333,8 @@
           </li>
         </ul>
       </nav>
+      @endauth
+      
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->

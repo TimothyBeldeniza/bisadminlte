@@ -117,10 +117,11 @@ Route::post('/users/import/store', [UsersImportController::class,'store']);
 Route::get('/backup', [BarangayController::class, 'backup']);
 Route::get('/backup/confirmBackup', [BarangayController::class, 'confirmBackup']);
 
+Route::resource('documents', DocumentsController::class);
+
+Route::resource('users', UserController::class);
 Route::group(['middleware' => ['auth','verified']], function() {
-    Route::resource('users', UserController::class);
     Route::resource('profiles', ProfileController::class);
-    Route::resource('documents', DocumentsController::class);
     Route::resource('complaints', ComplaintsController::class);
     Route::resource('blotters', BlottersController::class);
     Route::resource('officials', BarangayOfficialsController::class);

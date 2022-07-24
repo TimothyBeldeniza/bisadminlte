@@ -9,6 +9,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
@@ -21,7 +22,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth','verified']);
+        // $this->middleware(['auth','verified']);
         $this->middleware('permission:module-usrmngmnt', ['only' => ['index']]);
         $this->middleware('permission:usrmngmnt-show', ['only' => ['show']]);
         $this->middleware('permission:usrmngmnt-edit', ['only' => ['edit','update']]);
@@ -81,6 +82,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        
+
         $this->validate($request, [
             'lastName' => ['required', 'regex:/^[a-zA-ZñÑ\s]+$/','string', 'max:255'],
             'firstName' => ['required','regex:/^[a-zA-ZñÑ\s]+$/', 'string', 'max:255'],
@@ -146,7 +149,14 @@ class UserController extends Controller
         // $input['password'] = Hash::make($input['password']);
         // dd($input);
         // $user = User::create($input);
-        $user->assignRole($request->input('roles'));
+        
+        if($request->input('roles'))
+        {
+            $user->assignRole($request->input('roles'));
+            
+        } else {
+            $user->assignRole('Resident');
+        }
 
         if($request->input('roles') == 'Councilor')
         {
@@ -251,7 +261,7 @@ class UserController extends Controller
                 'documents-scan-document',
             ]);
         }
-        else if($request->input('roles') == 'Resident')
+        else if($request->input('roles')  == 'Resident')
         {
             $user->syncPermissions([
                 'barangay-official-list',
@@ -267,7 +277,11 @@ class UserController extends Controller
     
             ]);
         }
-        return redirect()->route('users.index')->with('success','User created successfully');
+        if(Auth::check()){
+            return redirect()->route('users.index')->with('success','User created successfully');
+        } else{
+            return redirect()->route('login')->with('success','Registered successfully');
+        }
     }
 
     /**

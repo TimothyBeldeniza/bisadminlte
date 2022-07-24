@@ -179,5 +179,6 @@ function myFunction() {
 }
 
 </script>
+@include('sweetalert::alert')
 </body>
 </html>

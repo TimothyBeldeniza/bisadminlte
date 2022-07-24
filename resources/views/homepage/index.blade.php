@@ -32,13 +32,22 @@
           <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Home</a></li>
-              @auth
-              <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Dashboard</a></li>
-              @endauth
               <li class="nav-item"><a class="nav-link" href="#companies">About Us</a></li>
               <li class="nav-item"><a class="nav-link" href="#testimonials">Announcements & Events</a></li>
               <li class="nav-item"><a class="nav-link" href="#portfolio">Services</a></li>
+              @auth
+              <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Account</a></li>
+              <li class="nav-item">
+                  <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
+                  document.getElementById('logout-form').submit();">Logout
+                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                     </form>
+                  </a>
+              </li>
+              @endauth
               @guest
+                <li class="nav-item"><a class="nav-link" href="{{ route('users.create') }}">Sign Up</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li> 
               @endguest
               </li>
@@ -235,9 +244,9 @@
               <div class="card border-2 p-4 ">
                 <div class="card-body icon-box ">
                   <div class="icon">
-                    <a href="#" class=""><img src="{{ asset('homepage-assets/images/arts/scan.jpg') }}" class="img-fluid py-4 rounded"></a>
+                    <a href="{{ url('/documents/scan') }}" class=""><img src="{{ asset('homepage-assets/images/arts/scan.jpg') }}" class="img-fluid py-4 rounded"></a>
                   </div>
-                  <h4 class="mt-4 text-center "><a href="#" class="text-decoration-none">Scan Document</a></h4>
+                  <h4 class="mt-4 text-center "><a href="{{ url('/documents/scan') }}" class="text-decoration-none">Scan Document</a></h4>
                 </div>
               </div>
             </div>

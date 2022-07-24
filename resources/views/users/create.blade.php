@@ -111,7 +111,7 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data">
                             @csrf
-    
+                            <input type="hidden" name="role" value="{{ Auth::check() }}">
                             <div class="form-group row my-1">
                                 <label for="Image" class="col-sm-4 col-form-label text-md-right">{{ __('Profile Picture (2x2)') }}</label>
                                 
@@ -305,20 +305,26 @@
                                     @enderror
                                 </div>
                             </div>
-                            
-                            <div class="form-group row my-1">
-                                <label for="role" class="col-md-4 col-form-label text-md-right required">{{ __('Role') }}</label>
-                                
-                                <div class="col-md-6">
-                                    {{-- {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!} --}}
-                                    <select name="roles" class="form-control form-control-md mb-3">
-                                        @foreach ($roles as $role)
-                                            <option value="{{ $role }}">{{ $role }}</option>
-                                        @endforeach
-                                    </select>
+                            @auth
+                                <div class="form-group row my-1">
+                                    <label for="role" class="col-md-4 col-form-label text-md-right required">{{ __('Role') }}</label>
+                                    
+                                    <div class="col-md-6">
+                                        {{-- {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!} --}}
+                                        <select name="roles" class="form-control form-control-md mb-3">
+                                            @foreach ($roles as $role)
+                                                <option value="{{ $role }}">{{ $role }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    
                                 </div>
                                 
-                            </div>
+                            @else
+                                <input type="hidden" name="roles" value="">
+                                
+                            @endauth
+                            
     
                             <div class="form-group row my-1">
                                 <div class="col-md-6 offset-md-4 ">
@@ -338,6 +344,9 @@
     </div>
     {{-- @endrole --}}
     <script>
+
+        
+        
        function disableStatus() {
           if(document.getElementById('male').checked)
           {
