@@ -17,9 +17,9 @@ class News extends Model
     public $timestamps = 'true';
 
     protected $fillable = [
-        'typeOfNews',
-        'newsTitle',
-        'newsDescriptions',
+        'type',
+        'title',
+        'description',
         'userId',
     ];
 }

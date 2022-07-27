@@ -40,55 +40,47 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <table id="users" class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                      <th>No</th>
-                      <th>News Title</th>
-                      <th>Description</th>
-                      <th>Type</th>
-                      <th>Author</th>
-                      <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        @if ($news->count() > 0)
-                            @foreach ($news as $key => $new)
-                                <tr>
-                                    <td>1</td>
-                                    <td>{{ $new->newsTitle  }}</td>
-                                    <td>{{ $new->newsDescriptions }}</td>
-                                    <td>{{ $new->typeOfNews }}</td>
-                                    @foreach ($users as $user )
-                                        @if ($new->userId == $user->id)
-                                        <td>{{ $user->firstName . ' ' . $user->lastName }}</td>
-                                        @endif
-                                    @endforeach
-
-                                    <td class="d-flex ">
-                                        <a class="btn btn-link" title="edit"><i class="fas fa-edit fa-lg"></i></a>
-
-                                        <form action="#" method="post" style="display:inline">
-                                            @csrf
-                                            @method('delete')
-                                            <button  class="btn btn-link px-0" onclick="return confirm('Are you sure you want to delete this news?')" type="submit"><i class="fas fa-trash-alt text-danger fa-lg" ></i></button>
-                                        </form>
-                                    </td>
-                                    
-
-                          
-
-                             
-                               
-                                </tr>
-                            @endforeach
-                        @endif
-
-
-                    
-                    </tbody>
-                        
-                  </table>
+                  <div class="table-responsive">
+                     <table id="news" class="table table-bordered table-striped">
+                       <thead>
+                       <tr>
+                         <th>News Title</th>
+                         <th>Description</th>
+                         <th>Type</th>
+                         <th>Author</th>
+                         <th>Action</th>
+                       </tr>
+                       </thead>
+                       <tbody>
+                           @if ($news->count() > 0)
+                               @foreach ($news as $key => $new)
+                                   <tr>
+                                       <td>{{ $new->title  }}</td>
+                                       <td>{{ $new->description }}</td>
+                                       <td>{{ $new->type }}</td>
+                                       @foreach ($users as $user )
+                                           @if ($new->userId == $user->id)
+                                           <td>{{ $user->firstName . ' ' . $user->lastName }}</td>
+                                           @endif
+                                       @endforeach
+   
+                                       <td class="d-flex">
+                                           <a href="{{ route('news.edit', $new->id) }}" class="btn btn-link" title="edit"><i class="fas fa-edit fa-lg"></i></a>
+   
+                                           <form action="#" method="post" style="display:inline">
+                                               @csrf
+                                               @method('delete')
+                                               <button  class="btn btn-link px-0" onclick="return confirm('Are you sure you want to delete this news?')" type="submit"><i class="fas fa-trash-alt text-danger fa-lg" ></i></button>
+                                           </form>
+                                       </td>
+   
+                                   </tr>
+                               @endforeach
+                           @endif
+                       </tbody>
+                           
+                     </table>
+                  </div>
                 </div>
                 <!-- /.card-body -->
               </div>
@@ -100,4 +92,15 @@
         </div>
         <!-- /.container-fluid -->
       </section>
+      @section('custom-scripts')
+      <script>
+         $(function () {
+            $("#news").DataTable({
+               "responsive": true, 
+               "lengthChange": true, 
+               "autoWidth": false
+            });
+         });
+      </script>
+      @endsection
 </x-layout>

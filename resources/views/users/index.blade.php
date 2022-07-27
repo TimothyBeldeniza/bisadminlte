@@ -74,7 +74,7 @@
                         <th>Action</th>
                       @endrole
 
-                      @hasanyrole('Chairman|Secretary')
+                      @hasanyrole('Chairman|Councilor|Secretary|Treasurer|Clerk')
                         <th>Contact No.</th>
                         <th>Address</th>
                       @endhasanyrole
@@ -128,7 +128,7 @@
                                         </td>
                                     @endrole
 
-                                    @hasanyrole('Chairman|Secretary')
+                                    @hasanyrole('Chairman|Councilor|Secretary|Treasurer|Clerk')
                                         <td>+63{{ $user->contactNo }}</td>
                                         <td>{{ $user->houseNo . ' ' . $user->street }}</td>
                                     @endhasanyrole

@@ -16,7 +16,6 @@ class NewsPhoto extends Model
     public $timestamps = 'true';
 
     protected $fillable = [
-        'photoName',
         'path',
         'newsId',
        

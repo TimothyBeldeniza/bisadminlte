@@ -15,7 +15,6 @@ class CreateNewsPhotosTable extends Migration
     {
         Schema::create('news_photos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('photoName');
             $table->string('path');
             $table->unsignedInteger('newsId');
             $table->foreign('newsId')

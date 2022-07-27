@@ -29,7 +29,7 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-md-8">
-                    <a href="/home">
+                    <a href="{{ url()->previous() }}">
                         <button class="btn btn-secondary col-md-12 btn-lg mb-2">Go back</button>
                     </a>
                         <div class="card">

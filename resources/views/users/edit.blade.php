@@ -61,7 +61,7 @@
                 <h3 class="text-start ms-3" for="role" >{{ __('Role') }}</h3>
                 <div class="flex-box-container-1">
                     <div>
-                        <select multiple name="roles" class="form-control">
+                        <select name="roles" class="form-control">
                             @foreach ( $roles as $role )
                                 <option @if ($userRole[0] == $role) return selected @endif value="{{ $role }}">{{ $role }}</option>                                            
                             @endforeach
@@ -70,25 +70,10 @@
                 </div>
             </div>
             <hr>
-            <div class="container-2">
-                <h3 class="text-start ms-3" for="permission" >{{ __('Permissions') }}</h3>
-                <div class="flex-box-container-2">
-                    <div>
-                        <input name="permission[]" type="hidden" checked value="null">
-                        @foreach ( $permission as $permission )
-                            <label>
-                                <input @if(in_array($permission->name,$userPermissions)) return checked @endif value="{{$permission->name}}" name="permission[]" type="checkbox">
-                                <span>{{ $permission->name}}</span>
-                            </label>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-            <hr>
             <div class="container-3">
                 <div class="flex-box-container-3">
                     <div>
-                        <button  type="submit" class="btn btn-primary" >
+                        <button  type="submit" class="btn btn-primary font-weight-bold">
                             {{ __('Submit') }}
                         </button>
                     </div>
