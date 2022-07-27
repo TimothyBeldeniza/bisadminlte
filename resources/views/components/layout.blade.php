@@ -36,6 +36,8 @@
   {{-- Select 2 --}}
   <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.css') }}">
+  {{-- Image-Uploader --}}
+  <link rel="stylesheet" href="{{ asset('plugins/image-uploader/image-uploader.css') }}">
 
   @yield('scripts')
 
@@ -178,7 +180,7 @@
             </a>
           </li>
           @endcan   --}}
-          @can('module-document-records')
+          @can('module-requested-document')
           <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-folder-open"></i>
@@ -414,6 +416,8 @@
 <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+{{-- Image-Uploader Script --}}
+<script src="{{ asset('plugins/image-uploader/image-uploader.js') }}"></script>
 
 @yield('custom-scripts')
 

@@ -255,9 +255,17 @@
               <div class="card border-2 p-4 ">
                 <div class="card-body icon-box ">
                   <div class="icon">
-                    <a href="{{ route('documents.create') }}" class=""><img src="{{ asset('homepage-assets/images/arts/req-doc.jpg') }}" class="img-fluid py-4 rounded"></a>
+                     @auth
+                     <a href="{{ route('documents.create') }}" class=""><img src="{{ asset('homepage-assets/images/arts/req-doc.jpg') }}" class="img-fluid py-4 rounded"></a>
+                     @else
+                     <a href="{{ route('login') }}" class=""><img src="{{ asset('homepage-assets/images/arts/req-doc.jpg') }}" class="img-fluid py-4 rounded"></a>
+                     @endauth
                   </div>
+                  @auth
                   <h4 class="mt-4 text-center "><a href="{{ route('documents.create') }}" class="text-decoration-none">Request Document</a></h4>
+                  @else
+                  <h4 class="mt-4 text-center "><a href="{{ route('login') }}" class="text-decoration-none">Request Document</a></h4>   
+                  @endauth
                 </div>
               </div>
             </div>

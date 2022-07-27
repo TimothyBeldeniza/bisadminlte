@@ -83,7 +83,6 @@ class UserController extends Controller
     public function store(Request $request)
     {
         
-
         $this->validate($request, [
             'lastName' => ['required', 'regex:/^[a-zA-ZñÑ\s]+$/','string', 'max:255'],
             'firstName' => ['required','regex:/^[a-zA-ZñÑ\s]+$/', 'string', 'max:255'],
@@ -162,6 +161,7 @@ class UserController extends Controller
         if($request->input('roles') == 'Councilor')
         {
             $user->syncPermissions([
+                'module-usrmngmnt', 
                 'module-filed-complaints',
                 'module-file-complaint',
                 'complaint-show-details',
@@ -184,8 +184,9 @@ class UserController extends Controller
         else if($request->input('roles') == 'Secretary')
         {
             $user->syncPermissions([
+                'module-usrmngmnt',
                 'module-requested-appointments',
-                'module-document-records',
+                'module-requested-document',
                 'documents-show-ID',
                 'documents-process',
                 'documents-view',
@@ -214,24 +215,27 @@ class UserController extends Controller
                 'barangay-official-list',
                 'module-request-document',
                 'documents-scan-document',
+                'module-usrmngmnt',
             ]);
         }
         else if($request->input('roles') == 'Treasurer')
         {
             $user->syncPermissions([
-                'module-document-records',
-                // 'module-filed-complaints',
+                'module-usrmngmnt',
+                'module-requested-document',
                 'barangay-official-list',
                 'documents-scan-document',
                 'module-request-document',
+                'module-usrmngmnt',
             ]);
         }
 
         else if($request->input('roles') == 'Clerk')
         {
             $user->syncPermissions([
+                'module-usrmngmnt',
                 'module-requested-appointments',
-                'module-document-records',
+                'module-requested-document',
                 'documents-show-ID',
                 'documents-process',
                 'documents-view',
@@ -241,13 +245,14 @@ class UserController extends Controller
                 'documents-scan-request',
                 'barangay-official-list',
                 'module-request-document',
+                'module-usrmngmnt',
             ]);
         }
         else if($request->input('roles') == 'Chairman')
         {
             $user->syncPermissions([
-                
-                'module-document-records',
+                'module-usrmngmnt',
+                'module-requested-document',
                 'barangay-official-list',
                 'module-filed-complaints',
                 'complaint-show-details',
@@ -260,6 +265,7 @@ class UserController extends Controller
                 
                 'module-request-document',
                 'documents-scan-document',
+                'module-usrmngmnt',
             ]);
         }
         else
@@ -275,7 +281,6 @@ class UserController extends Controller
                 'complaint-save-complaint-form',
                 'complaint-view-escalation-form',
                 'complaint-save-escalation-form',
-    
             ]);
         }
 
@@ -313,15 +318,15 @@ class UserController extends Controller
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name')->all();
 
-        $permission = Permission::get();
-        // $userPermissions= DB::table("model_has_permissions")->where("model_has_permissions.model_id",$id)
-        // ->pluck('model_has_permissions.permission_id', 'model_has_permissions.permission_id')
-        // ->all();
-        $userPermissions = $user->getPermissionNames()->all();
-        // dd($userPermissions);
-        // exit();
+      //   $permission = Permission::get();
+      //   $userPermissions= DB::table("model_has_permissions")->where("model_has_permissions.model_id",$id)
+      //   ->pluck('model_has_permissions.permission_id', 'model_has_permissions.permission_id')
+      //   ->all();
+      //   $userPermissions = $user->getPermissionNames()->all();
+      //   dd($userPermissions);
+      //   exit();
 
-        return view('users.edit',compact('user','roles','userRole','permission', 'userPermissions'));
+        return view('users.edit',compact('user','roles','userRole'));
     }
 
     /**
@@ -334,64 +339,136 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-
             'roles' => 'required',
-            'permission' => 'required'
         ]);
     
         $user = User::find($id);
-        // $permission = Permission::get();
 
         DB::table('model_has_roles')->where('model_id',$id)->delete();
+        
         $user->assignRole($request->input('roles'));
+        if($request->input('roles') == 'Councilor')
+        {
+            $user->syncPermissions([
+                'module-usrmngmnt',
+                'module-filed-complaints',
+                'module-file-complaint',
+                'complaint-show-details',
+                'complaint-settle',
+                'complaint-view-settle-form',
+                'complaint-save-settle-form',
+                'complaint-escalate',
+                'complaint-view-complaint-form',
+                'complaint-save-complaint-form',
+                'complaint-view-escalation-form',
+                'complaint-save-escalation-form',
+                'complaint-reject',
 
-        // dd($request->input('roles'));
-        // if($request->input('roles')){
+                'barangay-official-list',
+                'module-request-document',
+                'documents-scan-document',
+            ]);
             
-        //     if($request->input('roles') == 'Admin'){
-        //         // $user->syncPermissions(Permission::pluck('name'));
-        //         dd(Permission::pluck('name'));
-        //     }
-        //     else if($request->input('roles')== 'User'){
-        //         // $user->syncPermissions(DB::table('permissions')->where('name', 'like', '%user%')->pluck('name'));
-        //         dd(DB::table('permissions')->where('name', 'like', '%user%')->pluck('name'));
-        //     }
-        // }
+        }
+        else if($request->input('roles') == 'Secretary')
+        {
+            $user->syncPermissions([
+                'module-usrmngmnt',
+                'module-requested-appointments',
+                'module-requested-document',
+                'documents-show-ID',
+                'documents-process',
+                'documents-view',
+                'documents-save-PDF',
+                'documents-disapprove',
+                'documents-types',
+                'documents-types-create',
+                'documents-types-edit',
+                'documents-types-delete',
+                'documents-types-delete',
+                'documents-walk-in',
 
+                'documents-scan-document',
+                'documents-scan-request',
 
-  
-        // $permissions = DB::table('permissions')->where('name', 'like', '%user%')->pluck('name');
-        // dd($permissions);
+                'module-file-complaint',
+                'module-filed-complaints',
+                'complaint-show-details',
+                'complaint-view-settle-form',
+                'complaint-save-settle-form',
+                'complaint-view-complaint-form',
+                'complaint-save-complaint-form',
+                'complaint-view-escalation-form',
+                'complaint-save-escalation-form',
 
-        // ->where('name','LIKE','%barangay%')
-        
-        // dd($request->input('permission'));
-        // exit();
-
-        // if(empty($request->input('permission'))){
-        //     $user->revokePermissionTo($permission);
-        // }
-
-        // dd(count($request->input('permission')));
-
-        $permissionsLength = count($request->input('permission'));
-
-    //    dd($permissionsLength);
-        
-        if($request->input('permission') && $permissionsLength > 1){
-            for($i=1; $i < $permissionsLength; $i++)
-            {   
-                // dd($request->input('permission[$i]'));
-                $perm[] = $request->input("permission.$i");
-
-            }
-            $user->syncPermissions($perm);
-            // dd($perm);
-        }else if($permissionsLength === 1){
-            $user->revokePermissionTo(Permission::pluck('name')->toArray());
+                'barangay-official-list',
+                'module-request-document',
+                'documents-scan-document',
+            ]);
+        }
+        else if($request->input('roles') == 'Treasurer')
+        {
+            $user->syncPermissions([
+                'module-usrmngmnt',
+                'module-requested-document',
+                'barangay-official-list',
+                'documents-scan-document',
+                'module-request-document',
+            ]);
         }
 
-        // dd($role[0]);
+        else if($request->input('roles') == 'Clerk')
+        {
+            $user->syncPermissions([
+                'module-usrmngmnt',
+                'module-requested-appointments',
+                'module-requested-document',
+                'documents-show-ID',
+                'documents-process',
+                'documents-view',
+                'documents-save-PDF',
+                'documents-disapprove',
+                'documents-scan-document',
+                'documents-scan-request',
+                'barangay-official-list',
+                'module-request-document',
+            ]);
+        }
+        else if($request->input('roles') == 'Chairman')
+        {
+            $user->syncPermissions([
+                'module-usrmngmnt',
+                'module-requested-document',
+                'barangay-official-list',
+                'module-filed-complaints',
+                'complaint-show-details',
+                'complaint-view-settle-form',
+                'complaint-save-settle-form',
+                'complaint-view-complaint-form',
+                'complaint-save-complaint-form',
+                'complaint-view-escalation-form',
+                'complaint-save-escalation-form',
+                
+                'module-request-document',
+                'documents-scan-document',
+            ]);
+        }
+        else
+        {
+            $user->syncPermissions([
+                'barangay-official-list',
+                'documents-scan-document',
+                'module-request-document',
+                'module-request-appointment',
+                'complaint-view-settle-form',
+                'complaint-save-settle-form',
+                'complaint-view-complaint-form',
+                'complaint-save-complaint-form',
+                'complaint-view-escalation-form',
+                'complaint-save-escalation-form',
+    
+            ]);
+        }
 
         return redirect()->route('users.index')->with('success','User updated successfully');
     }
